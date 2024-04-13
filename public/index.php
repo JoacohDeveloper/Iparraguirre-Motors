@@ -1,16 +1,23 @@
 <?php
 
+include "../includes/app.php";
 include_once "autoload.php";
 
-use \Models\User;
-use Controllers\Layout;
 
-$user = new User();
+// use Router\Router;
+use \Controllers\HomePageController;
+use \Router\Router;
 
-echo "<pre>";
-var_dump($_SERVER);
-echo "</pre>";
 
-echo $user->id;
+
+$router = new Router();
+
+
+$router->get("/", [HomePageController::class, "index"]);
+
+
+
+$router->comprobarRutas();
+
 
 
