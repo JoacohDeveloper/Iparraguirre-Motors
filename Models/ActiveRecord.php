@@ -3,6 +3,8 @@
 
 namespace Models;
 
+use PDO;
+
 class ActiveRecord
 {
     protected static $db;
@@ -29,20 +31,19 @@ class ActiveRecord
 
     public static function consultarSQL($query, $params = [])
     {
-        $stmt = self::$db->preare($query);
-        $resultado = $stmt->execute($params);
+        $stmt = static::$db->prepare($query);
+        $stmt->execute($params);
 
         $array = [];
-        while ($registro = $resultado->fetch()) {
+        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $array[] = static::crearObjeto($registro);
         }
 
-        //$resultado->free();
-        $resultado = null;
+        $stmt = null;
+
 
         return $array;
     }
-
 
     public function atributos()
     {
@@ -73,12 +74,4 @@ class ActiveRecord
             }
         }
     }
-
-
-
-
-
-    
-
-
 }

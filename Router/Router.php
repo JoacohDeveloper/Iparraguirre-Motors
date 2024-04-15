@@ -15,6 +15,8 @@ class Router {
 
     public function comprobarRutas() {
 
+
+        session_start();
         $rutasProtegidas = ["/admin/panel"];
 
         $method = $_SERVER["REQUEST_METHOD"];
@@ -29,9 +31,8 @@ class Router {
         if($fn) {
             call_user_func($fn, $this);
         } else {
-            echo "404";
             http_response_code(404);
-
+            return $this->not_found();
         }
     }
 
@@ -41,6 +42,14 @@ class Router {
         }
         ob_start();
         include_once str_replace("\\Router", "/", __DIR__ . "/views/$view.php");
+        $contenido = ob_get_clean();
+        include_once str_replace("\\Router", "/", __DIR__ . "/views/layout.php");
+    }
+
+    public function not_found() {
+        ob_start();
+        $title = "404 | NOT FOUND";
+        include_once str_replace("\\Router", "/", __DIR__ . "/views/not-found.php");
         $contenido = ob_get_clean();
         include_once str_replace("\\Router", "/", __DIR__ . "/views/layout.php");
     }

@@ -8,7 +8,8 @@ class HomePageController
 {
     public static function index(Router $router)
     {
-        echo "hello world";
+        $router->render("index");
     }
+
 
 }

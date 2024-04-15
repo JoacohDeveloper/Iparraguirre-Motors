@@ -1,8 +1,15 @@
 <?php
 
-function logg($code) {
+function logg($code)
+{
     echo "<pre>";
     var_dump($code);
     echo "</pre>";
     exit;
+}
+
+
+function sanitize($value)
+{
+    return htmlspecialchars($value);
 }

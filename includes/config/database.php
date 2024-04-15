@@ -1,10 +1,14 @@
 <?php
 
+putenv('PORT=3307');
+putenv('DB_NAME=db_utu2024');
+
+
 function dbConnection() {
     $db = null;
-    $port = "3307";
-    $dbname = "db_utu2024";
-    $host = "localhost";
+    $port = getenv("PORT");
+    $dbname = getenv("DB_NAME");
+    $host =  "localhost";
     $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4;port=$port";
 
     $options = [
@@ -14,13 +18,15 @@ function dbConnection() {
     
     ];
 
-    $user = 'root';
-    $password = '1248';
+    $user = "root";
+    $password = "1248";
 
     try {
       $db = new PDO($dsn, $user, $password, $options);
     } catch (PDOException $th) {
+        logg($th);
         logg("[MARIADB] ERROR AL CONECTAR LA BASE DE DATOS.");
+        
     } catch (Throwable $th) {
         logg("NO, ERROR.");
     }
