@@ -2,12 +2,13 @@
 
 namespace Models;
 
+use DateTime;
 use PDOException;
 
 class User extends ActiveRecord
 {
 
-    protected static $table = "User";
+    protected static $tabla = "User";
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "token", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
@@ -20,14 +21,27 @@ class User extends ActiveRecord
     protected $password;
     protected $re_password;
 
+    protected $createdAt;
+
+    protected $updatedAt;
+
+    protected $verify;
+    protected $slug;
+
     function __construct($args = [])
     {
-        $this->uuid = $args["uuid"] ?? "";
+        $this->uuid = $args["uuid"] ?? null;
         $this->username = $args["username"] ?? "";
         $this->full_name = $args["fullname"] ?? "";
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
+        $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
+        $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
+        $this->verify = 0;
+        $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 
     public function getEmail()
@@ -71,7 +85,7 @@ class User extends ActiveRecord
             $uuid['node'][5]
         );
 
-        return $uuid;
+        $this->uuid = $uuid;
     }
 
 
@@ -117,5 +131,16 @@ class User extends ActiveRecord
         } else {
             return "";
         }
+    }
+
+    public function passwordHash()
+    {
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    public function crearUsuario()
+    {
+        $this->gen_uuid();
+        return $this->crear();
     }
 }

@@ -49,7 +49,7 @@ class ActiveRecord
     {
         $atributos = [];
         foreach (static::$columnasdb as $columna) {
-            if ($columna === 'id' || $columna === "uuid") continue;
+            if ($columna === 'id') continue;
             $atributos[$columna] = $this->$columna;
         }
         return $atributos;
@@ -73,5 +73,42 @@ class ActiveRecord
                 $this->$key = $value;
             }
         }
+    }
+
+    public function crear()
+    {
+
+        // Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+
+        // Insertar en la base de datos
+        $query = " INSERT INTO " . static::$tabla . " ( ";
+        $query .= join(', ', array_keys($atributos));
+        $query .= " ) VALUES (";
+        $query .= join(", ", array_values($atributos));
+        $query .= ") ";
+
+
+        // logg($query);
+        // Resultado de la consulta
+        $resultado = self::$db->query($query);
+        return [
+            'resultado' =>  $resultado,
+            'uuid' => self::$db->insert_id
+        ];
+    }
+
+    public function guardar()
+    {
+        $resultado = '';
+        if (!is_null($this->uuid)) {
+            // actualizar
+            // $resultado = $this->actualizar();
+        } else {
+            // Creando un nuevo registro
+
+            $resultado = $this->crear();
+        }
+        return $resultado;
     }
 }

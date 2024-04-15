@@ -35,10 +35,17 @@ class AuthenticationController
                 if ($usuario->getEmail() == $result) {
                     $errores["already_register"] = "el email ingresado ya fue registrado";
                 } else {
-                    session_start();
-                    $_SESSION["usuario"] = $usuario;
-                    $_SESSION["loggedIn"] = true;
-                    header("location: /");
+
+                    $usuario->passwordHash();
+                    $usuario->gen_uuid();
+                    if ($usuario->crearUsuario()) {
+                        session_start();
+                        $_SESSION["usuario"] = $usuario;
+                        $_SESSION["loggedIn"] = true;
+                        header("location: /");
+                    } else {
+                        $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
+                    }
                 }
             } else {
                 $campos = $_POST;
