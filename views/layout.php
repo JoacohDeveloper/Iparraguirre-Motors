@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo isset($description) ? $description : 'Pagina automotora de vehiculos | Iparraguirre Motors'?>">
+    <meta name="description" content="<?php echo isset($description) ? $description : 'Pagina automotora de vehiculos | Iparraguirre Motors' ?>">
     <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <link rel="stylesheet" href="/build/css/normalize.css">
     <link rel="stylesheet" href="/build/css/globals.css">
     <?php
-        //styles loader
-        
-        if(isset($styles) && count($styles) != 0) {
-            foreach($styles as $style) {
-                $file = str_replace("\\views", "/public", dirname(__FILE__)) . "/build/css/$style.css";
+    //styles loader
 
-                $file = str_replace("\\", "/", $file);
+    if (isset($styles) && count($styles) != 0) {
+        foreach ($styles as $style) {
+            $file = str_replace("\\views", "/public", dirname(__FILE__)) . "/build/css/$style.css";
 
-               
-                if(file_exists($file)) {  
-                    echo "<link rel='stylesheet' href='$file'>";
-                }
+            $file = str_replace("\\", "/", $file);
+
+
+            if (file_exists($file)) {
+                echo "<link rel='stylesheet' href='$file'>";
             }
         }
+    }
     ?>
     <script defer src="/build/js/index.js"></script>
-    <title><?php echo isset($title) ? $title : "Iparraguirre Motors"?></title>
+    <title><?php echo isset($title) ? $title : "Iparraguirre Motors" ?></title>
 </head>
+
 <body>
-        <header>
-           header
-        </header>
+    <header>
+        header
+        <?php include __DIR__ . "/componentes/navegacion.php"; ?>
+    </header>
 
-        <?php echo $contenido;?>   
+    <?php echo $contenido; ?>
 
-        <footer>
-            footer
-        </footer>
+    <footer>
+        footer
+        <?php include __DIR__ . "/componentes/navegacion.php"; ?>
+    </footer>
 
-        <?php
-        //script loader
-        if(isset($scripts) && count($scripts) != 0) {
-            foreach($scripts as $script) {
-                
-                $file = "/build/js/$script.js";   
-                echo "<script src='$file'></script>";
-                
-            }
+    <?php
+    //script loader
+    if (isset($scripts) && count($scripts) != 0) {
+        foreach ($scripts as $script) {
+
+            $file = "/build/js/$script.js";
+            echo "<script src='$file'></script>";
         }
+    }
     ?>
 </body>
+
 </html>

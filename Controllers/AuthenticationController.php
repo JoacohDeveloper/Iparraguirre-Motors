@@ -55,7 +55,9 @@ class AuthenticationController
         $router->render("auth/register", [
             "scripts" => ["auth/index"],
             "errores" => $errores,
-            "campos" => $campos
+            "campos" => $campos,
+            "title" => "Iparraguirre Motors | Register",
+            "description" => "Registrate en Iparraguirre Motors!"
         ]);
     }
 
