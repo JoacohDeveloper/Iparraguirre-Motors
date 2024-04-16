@@ -11,22 +11,25 @@ class User extends ActiveRecord
     protected static $tabla = "User";
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "token", "verify", "createdAt", "updatedAt"];
 
-    protected $uuid;
+    private $uuid;
 
-    protected $full_name;
-    protected $username;
+    private $full_name;
 
-    protected $email;
+    private $username;
 
-    protected $password;
-    protected $re_password;
+    private $email;
 
-    protected $createdAt;
+    private $password;
 
-    protected $updatedAt;
+    private $re_password;
 
-    protected $verify;
-    protected $slug;
+    private $createdAt;
+
+    private $updatedAt;
+
+    private $verify;
+
+    private $slug;
 
     function __construct($args = [])
     {

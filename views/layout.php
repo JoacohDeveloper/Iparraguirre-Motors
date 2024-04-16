@@ -13,14 +13,8 @@
 
     if (isset($styles) && count($styles) != 0) {
         foreach ($styles as $style) {
-            $file = str_replace("\\views", "/public", dirname(__FILE__)) . "/build/css/$style.css";
-
-            $file = str_replace("\\", "/", $file);
-
-
-            if (file_exists($file)) {
-                echo "<link rel='stylesheet' href='$file'>";
-            }
+            $file = "/build/css/$style.css";
+            echo "<link rel='stylesheet' href='$file'>";
         }
     }
     ?>
@@ -29,16 +23,19 @@
 </head>
 
 <body>
-    <header>
-        header
-        <?php include __DIR__ . "/componentes/navegacion.php"; ?>
-    </header>
+
+    <?php include __DIR__ . "/componentes/header.php" ?>
 
     <?php echo $contenido; ?>
 
     <footer>
-        footer
-        <?php include __DIR__ . "/componentes/navegacion.php"; ?>
+
+        <?php include __DIR__ . "/componentes/navegacion.php";
+        ?>
+
+        <div class="img-container">
+            <img src="/build/src/images/LOGO.png" alt="Iparraguirre Logo">
+        </div>
     </footer>
 
     <?php

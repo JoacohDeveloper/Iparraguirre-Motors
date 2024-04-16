@@ -8,6 +8,7 @@ include_once "autoload.php";
 
 use Controllers\AuthenticationController;
 use \Controllers\HomePageController;
+use Controllers\TiendaController;
 use Controllers\VehiclesController;
 use \Router\Router;
 
@@ -39,5 +40,9 @@ $router->get("/logout", [AuthenticationController::class, "logout"]);
 
 $router->get("/api/vehicles", [VehiclesController::class, "listado"]);
 
+
+//tienda
+
+$router->get("/tienda", [TiendaController::class, "tienda"]);
 
 $router->comprobarRutas();

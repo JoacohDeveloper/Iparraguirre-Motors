@@ -15,3 +15,5 @@ create table User(
 	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(uuid)
 );
+
+--hay que agregar campos: telefono, imagen, etc.
