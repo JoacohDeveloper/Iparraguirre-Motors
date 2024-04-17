@@ -33,8 +33,12 @@ class ActiveRecord
 
     public static function consultarSQL($query, $params = [])
     {
-        $stmt = static::$db->prepare($query);
-        $stmt->execute($params);
+        try {
+            $stmt = static::$db->prepare($query);
+            $stmt->execute($params);
+        } catch (\Throwable $th) {
+            logg("[MARIA BECERRA] ERROR EN LA BASE DE DATOS!");
+        }
 
         $array = [];
         while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -42,7 +46,6 @@ class ActiveRecord
         }
 
         $stmt = null;
-
 
         return $array;
     }
@@ -90,8 +93,6 @@ class ActiveRecord
         $query .= join(", ", array_values($atributos));
         $query .= ") ";
 
-
-        // logg($query);
         // Resultado de la consulta
         $resultado = self::$db->query($query);
         return [
@@ -99,6 +100,7 @@ class ActiveRecord
             'uuid' => self::$db->insert_id
         ];
     }
+
 
     public function guardar()
     {

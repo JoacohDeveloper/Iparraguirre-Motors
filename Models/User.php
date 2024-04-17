@@ -14,25 +14,25 @@ class User extends ActiveRecord
     protected static $tabla = "User";
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "token", "verify", "createdAt", "updatedAt"];
 
-    private $uuid;
+    protected $uuid;
 
-    private $full_name;
+    protected $full_name;
 
-    private $username;
+    protected $username;
 
-    private $email;
+    protected $email;
 
-    private $password;
+    protected $password;
 
-    private $re_password;
+    protected $re_password;
 
-    private $createdAt;
+    protected $createdAt;
 
-    private $updatedAt;
+    protected $updatedAt;
 
-    private $verify;
+    protected $verify;
 
-    private $slug;
+    protected $slug;
 
     function __construct($args = [])
     {
@@ -120,24 +120,21 @@ class User extends ActiveRecord
         return $errors;
     }
 
-    public function validarEmail()
+    public static function getUser($dato) //dato puede ser email o username
     {
         $result = null;
-
         try {
-            $query = "SELECT * FROM User WHERE email = ?";
-
-            $result = User::consultarSQL($query, [$this->email]);
+            $query = "SELECT * FROM User WHERE email = ? or username = ? LIMIT 1";
+            $result = User::consultarSQL($query, [$dato, $dato]);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
         }
 
-        if (isset($result[0])) {
-            return $result[0]->email ?? "";
-        } else {
-            return "";
-        }
+        return $result[0] ?? null;
     }
+
+
+
 
     public function passwordHash()
     {
@@ -150,19 +147,21 @@ class User extends ActiveRecord
         return $this->crear();
     }
 
-    public function loguear($email, $password)
+    public static function validarCampos($email, $password)
     {
         $errores = [];
 
         if (empty($email)) {
-            $errors["email"] = "el campo email es obligatorio.";
+            $errores["email"] = "el campo email es obligatorio.";
         }
         if (empty($password)) {
-            $errors["password"] = "el campo password es obligatorio.";
-        }
-        if(!password_verify($password, $this->password)){
-            $errors["incorrect_password"] = "el email o contraseña son incorrectos";
+            $errores["password"] = "el campo password es obligatorio.";
         }
         return $errores;
+    }
+
+    public function validarPassword($password)
+    {
+        return password_verify($password, $this->password);
     }
 }

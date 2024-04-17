@@ -1,8 +1,14 @@
-<form action="/auth/login" method="POST" style="margin-top: 6rem;">
-    <input type="email" name="email" placeholder="Correo electronico">
-    <input type="password" name="password" placeholder="Contraseña">
-    <input type="submit" value="Ingresar">
-</form>
+<div class="container" style="justify-content: center; align-items: center;">
+    <?php
+    if (isset($errores)) {
+        foreach ($errores as $key => $value) {
+            echo "<div class='error'>$value</div>";
+        }
+    } ?>
 
-<style>
-</style>
+    <form action="/auth/login" method="POST">
+        <input type="text" name="email" placeholder="Correo electronico" value="<?php echo $campos["email"] ?>">
+        <input type="password" name="password" placeholder="Contraseña">
+        <input type="submit" value="Ingresar">
+    </form>
+</div>

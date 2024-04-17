@@ -6,8 +6,7 @@
         foreach ($errores as $key => $value) {
             echo "<div class='error'>$value</div>";
         }
-    }
-    ?>
+    } ?>
 
     <form action="/auth/register" method="post" id="f_login">
 

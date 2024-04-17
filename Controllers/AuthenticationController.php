@@ -13,32 +13,35 @@ class AuthenticationController
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             header("location: /");
-        }   
+        }
         $errores = [];
         $campos = [];
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST["email"];
             $password = $_POST["password"];
-            //$usuario = User::buscar($email);
-            
+            $campos = $_POST;
 
-            if(isset($usuario)){
-                $errores = $usuario->loguear($email, $password);
-                if(empty($errores)){
-                    session_start();
-                    $_SESSION["usuario"] = $usuario;
-                    $_SESSION["loggedIn"] = true;
-                    header("location: /");
-                } 
-            }else {
-                $errores["login"] = "Error al loguear usuario, intenta de nuevo más tarde.";
+            $errores = User::validarCampos($email, $password);
+            if (empty($errores)) {
+                $usuario = User::getUser($email); {
+                    if (isset($usuario)) {
+                        if ($usuario->validarPassword($password)) {
+                            $_SESSION["usuario"] = $usuario;
+                            $_SESSION["loggedIn"] = true;
+                            header("location: /");
+                        }
+                        $errores[] = "el usuario o contraseña es incorrecto.";
+                    } else {
+                        $errores[] = "el usuario o contraseña es incorrecto.";
+                    }
+                }
             }
-            $password = $_POST["password"];
-            //logg("$email and $password");
-            
         }
 
-        $router->render("auth/login");
+        $router->render("auth/login", [
+            "errores" => $errores,
+            "campos" => $campos
+        ]);
     }
 
     public static function register(Router $router)
@@ -54,10 +57,9 @@ class AuthenticationController
 
             if (empty($errores)) {
                 //no hay errores del servidor
-                $result = $usuario->validarEmail();
-                if ($usuario->getEmail() == $result) {
-                    $errores["already_register"] = "el email ingresado ya fue registrado";
-                } else {
+                $result = User::getUser($usuario->getEmail());
+                // logg($result);
+                if (!isset($result)) {
 
                     $usuario->passwordHash();
                     $usuario->gen_uuid();
@@ -69,6 +71,8 @@ class AuthenticationController
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                     }
+                } else {
+                    $errores["already_register"] = "el email ingresado ya fue registrado";
                 }
             } else {
                 $campos = $_POST;
