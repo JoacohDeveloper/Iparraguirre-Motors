@@ -1,4 +1,5 @@
 <div class="container" style="justify-content: center; align-items: center;">
+
     <?php
     if (isset($errores)) {
         foreach ($errores as $key => $value) {

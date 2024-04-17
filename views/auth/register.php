@@ -1,12 +1,13 @@
-<div>
+<div class="container" style="justify-content: center; align-items: center; flex-direction: column;">
     <h2>Hello world from register</h2>
-
-    <?php
-    if (isset($errores)) {
-        foreach ($errores as $key => $value) {
-            echo "<div class='error'>$value</div>";
-        }
-    } ?>
+    <div class="errores">
+        <?php
+        if (isset($errores)) {
+            foreach ($errores as $key => $value) {
+                echo "<div class='error'>$value</div>";
+            }
+        } ?>
+    </div>
 
     <form action="/auth/register" method="post" id="f_login">
 
