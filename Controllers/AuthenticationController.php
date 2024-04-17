@@ -13,6 +13,29 @@ class AuthenticationController
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             header("location: /");
+        }   
+        $errores = [];
+        $campos = [];
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            //$usuario = User::buscar($email);
+            
+
+            if(isset($usuario)){
+                $errores = $usuario->loguear($email, $password);
+                if(empty($errores)){
+                    session_start();
+                    $_SESSION["usuario"] = $usuario;
+                    $_SESSION["loggedIn"] = true;
+                    header("location: /");
+                } 
+            }else {
+                $errores["login"] = "Error al loguear usuario, intenta de nuevo más tarde.";
+            }
+            $password = $_POST["password"];
+            //logg("$email and $password");
+            
         }
 
         $router->render("auth/login");

@@ -149,4 +149,20 @@ class User extends ActiveRecord
         $this->gen_uuid();
         return $this->crear();
     }
+
+    public function loguear($email, $password)
+    {
+        $errores = [];
+
+        if (empty($email)) {
+            $errors["email"] = "el campo email es obligatorio.";
+        }
+        if (empty($password)) {
+            $errors["password"] = "el campo password es obligatorio.";
+        }
+        if(!password_verify($password, $this->password)){
+            $errors["incorrect_password"] = "el email o contraseña son incorrectos";
+        }
+        return $errores;
+    }
 }
