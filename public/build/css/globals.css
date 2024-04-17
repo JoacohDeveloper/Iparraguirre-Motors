@@ -22,6 +22,7 @@ html {
 header {
     color: #202020;
     background-color: transparent;
+    backdrop-filter: blur(5px);
     position: fixed;
     z-index: 100;
     color: #fff;

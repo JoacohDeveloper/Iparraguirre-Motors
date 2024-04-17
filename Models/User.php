@@ -5,6 +5,9 @@ namespace Models;
 use DateTime;
 use PDOException;
 
+//Este es un modelo que hereda a ActiveRecord dentro de este modelo se especifica el nombre de la tabla SQL y las columnas. Es importante que cuando agreguemos datos a columnasdb al momento de hacer una operacion de Active Record se utilicen todos los campos, sin haber ningun dato vacío.
+
+
 class User extends ActiveRecord
 {
 

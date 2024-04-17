@@ -1,5 +1,7 @@
 <?php
 
+//ActiveRecord es un antipatron de diseño
+// O patron de arquitectura que sirve para solucionar la relacion de modelos de la base de datos y clases y objetos, en este caso lo estamos usando en php, dentro de ella creamos los metodos que van a tener todas las clases que hereden de ActiveRecord llamados Modelos al usar el patron de arquitectura general Modelo Vista Controlador.
 
 namespace Models;
 
