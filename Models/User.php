@@ -99,7 +99,9 @@ class User extends ActiveRecord
     {
         $errors = [];
         if (empty($this->username)) {
-            $errors["username"] = "el campo username es obligatorio.";
+            $errors["username"] = "Debes ingresar un usuario.";
+        } else if(strlen($this->username) <= 4){
+            $errors["username"] = "El usuario debe tener minimo 5 caracteres.";
         }
         if (empty($this->full_name)) {
             $errors["fullname"] = "el campo nombre completo es obligatorio.";

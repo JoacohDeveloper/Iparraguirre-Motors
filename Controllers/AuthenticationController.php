@@ -30,15 +30,16 @@ class AuthenticationController
                             $_SESSION["loggedIn"] = true;
                             header("location: /");
                         }
-                        $errores[] = "el usuario o contraseña es incorrecto.";
+                        $errores[] = "El usuario o contraseña son incorrectos.";
                     } else {
-                        $errores[] = "el usuario o contraseña es incorrecto.";
+                        $errores[] = "El usuario o contraseña son incorrectos.";
                     }
                 }
             }
         }
 
         $router->render("auth/login", [
+            "scripts" => ["auth/index"],
             "errores" => $errores,
             "campos" => $campos
         ]);
@@ -72,7 +73,7 @@ class AuthenticationController
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                     }
                 } else {
-                    $errores["already_register"] = "el email ingresado ya fue registrado";
+                    $errores["already_register"] = "El email ingresado ya esta registrado";
                 }
             } else {
                 $campos = $_POST;
