@@ -1,2 +1,2 @@
 /node_modules
-/includes/config/**/*.php
+includes/config/database.php
