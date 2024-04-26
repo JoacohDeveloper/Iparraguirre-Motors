@@ -9,7 +9,7 @@
         } ?>
     </div>
 
-    <form action="/auth/register" method="post" id="f_login">
+    <form action="/auth/register" method="post" id="f_register">
 
         <input type="text" name="fullname" placeholder="Nombre Completo" value="<?php echo $campos["fullname"] ?>">
 

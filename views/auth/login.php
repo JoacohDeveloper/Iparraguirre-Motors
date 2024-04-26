@@ -7,7 +7,7 @@
         }
     } ?>
 
-    <form action="/auth/login" method="POST">
+    <form action="/auth/login" method="POST" id="f_login">
         <input type="text" name="email" placeholder="Correo electronico" value="<?php echo $campos["email"] ?>">
         <input type="password" name="password" placeholder="Contraseña">
         <input type="submit" value="Ingresar">
