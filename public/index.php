@@ -12,6 +12,7 @@ use Controllers\TiendaController;
 use Controllers\VehiclesController;
 use \Router\Router;
 
+// echo phpinfo();
 
 $router = new Router();
 

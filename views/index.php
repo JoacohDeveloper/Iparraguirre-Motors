@@ -9,6 +9,16 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque praesentium quam earum voluptate fugiat, vero placeat quos repudiandae.</p>
             <a href="#">Mostrar Catalogo</a>
         </div>
+
+        <div class="downside">
+            <div class="empty"></div>
+            <div class="down-arrow">
+                <img src=" /build/src/images/downArrow.svg" alt="inactive arrow">
+            </div>
+            <div class="pause-button">
+                <img id="btn_img" src="/build/src/images/pause.svg" alt="pause image">
+            </div>
+        </div>
     </div>
 
     <div class="content">
