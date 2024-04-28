@@ -25,16 +25,18 @@ if (home_vid) {
     })
 
     const arrow = document.querySelector(".down-arrow")
-    const Yaxis = window.scrollY;
+    let Yaxis = window.scrollY;
     const content = document.querySelector(".content");
-    if (Yaxis == 0) {
-        document.addEventListener("scroll", e => {
+    document.addEventListener("scroll", e => {
+        Yaxis = window.scrollY;
+        if (Yaxis > 0) {
+            arrow.classList.add("disabled")
+        }
 
-            if (Yaxis > 0) {
-                arrow.classList.add("disabled")
-            }
-        })
-    } else {
+
+    })
+
+    if (Yaxis > 0) {
         arrow.classList.add("disabled")
     }
 
@@ -44,4 +46,33 @@ if (home_vid) {
 
     })
 
+    const banner = document.querySelector(".banner");
+    const observer = new IntersectionObserver(items => {
+        items.forEach(item => {
+            if (!item.isIntersecting) {
+                home_vid.classList.add("banner_stopFixed")
+                home_vid.classList.remove("fixed")
+            } else {
+                home_vid.classList.remove("banner_stopFixed")
+                home_vid.classList.add("fixed")
+            }
+        })
+    })
+
+    observer.observe(banner);
+
 }
+
+
+
+
+//header
+
+const brgMenu = document.querySelectorAll(".brgMenuHandler");
+const mobileMenu = document.querySelector(".mobile-menu");
+
+brgMenu.forEach(item => {
+    item.addEventListener("click", () => {
+        mobileMenu.classList.toggle("menu-disabled")
+    })
+})
