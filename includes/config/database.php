@@ -20,7 +20,7 @@ function dbConnection()
     ];
 
     $user = "root";
-    $password = "";
+    $password = "1234";
 
     try {
         $db = new PDO($dsn, $user, $password, $options);
