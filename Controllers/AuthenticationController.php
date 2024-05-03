@@ -6,7 +6,7 @@ namespace Controllers;
 use Models\User;
 use \Router\Router;
 
-class AuthenticationController
+abstract class AuthenticationController
 {
 
     public static function login(Router $router)
@@ -108,6 +108,8 @@ class AuthenticationController
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             $_SESSION["loggedIn"] = null;
             $_SESSION["usuario"] = null;
+            header("location: /");
+        } else {
             header("location: /");
         }
     }

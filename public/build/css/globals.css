@@ -23,6 +23,9 @@ body {
     background-color: #fff;
 }
 
+
+
+
 header {
     color: #202020;
     background-color: transparent;
@@ -37,6 +40,7 @@ header {
     align-items: center;
     padding: 0 2rem;
     flex-wrap: wrap;
+    margin-top: 4rem;
 }
 
 
@@ -68,11 +72,15 @@ header {
 
 header .navegacion ul li .actual-index {
     border: 2px solid #fff;
+
 }
 
 header .navegacion ul li .actual {
     border: 2px solid #202020;
 }
+
+
+
 
 footer {
     display: flex;

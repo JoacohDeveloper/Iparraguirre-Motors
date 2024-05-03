@@ -26,7 +26,9 @@
 
     <?php include __DIR__ . "/componentes/header.php" ?>
 
-    <?php echo $contenido; ?>
+    <main>
+        <?php echo $contenido; ?>
+    </main>
 
     <footer>
 
