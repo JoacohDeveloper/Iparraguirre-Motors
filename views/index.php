@@ -7,9 +7,9 @@
         <div class="banner-content">
             <h1>Iparraguirre <br> <span>Motors</span></h1>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque praesentium quam earum voluptate fugiat, vero placeat quos repudiandae.</p>
-<<<<<<< HEAD
+
             <a href="#">Mostrar Catalogo</a>
-=======
+
             <a href="/tienda">Mostrar Catalogo</a>
         </div>
 
@@ -22,7 +22,7 @@
                 <img id="btn_img" src="/build/src/images/pause.svg" alt="pause image">
             </div>
         </div>
->>>>>>> b0827320df3304ad40336e0a40024229881819b3
+
     </div>
 
     <div class="content">
