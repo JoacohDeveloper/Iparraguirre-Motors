@@ -3,7 +3,6 @@ create database db_utu2024;
 use db_utu2024;
 
 create table User(
-
 	uuid VARCHAR(45) not null,
 	full_name VARCHAR(65),
 	username VARCHAR(25),
@@ -21,10 +20,7 @@ create table User(
 	PRIMARY KEY(uuid)
 );
 
-
-
 create table vehicle(
-
 	id int(11) not null auto_increment,
 	id_unidad int(11),
 	descripcion TEXT,
@@ -65,4 +61,3 @@ create table vehicle(
 	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(id)
 )
-

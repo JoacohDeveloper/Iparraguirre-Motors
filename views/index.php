@@ -9,8 +9,6 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque praesentium quam earum voluptate fugiat, vero placeat quos repudiandae.</p>
 
             <a href="#">Mostrar Catalogo</a>
-
-            <a href="/tienda">Mostrar Catalogo</a>
         </div>
         <div class="downside">
             <div class="empty"></div>
