@@ -23,11 +23,22 @@ class Router
 
 
         session_start();
-        $rutasProtegidas = ["/admin/panel"];
+        $rutasProtegidas = ["/admin/panel", "/tienda"];
 
         $method = $_SERVER["REQUEST_METHOD"];
         $urlActual = $_SERVER["PATH_INFO"] ?? "/";
 
+        //validar si el usuario se encuentra en una ruta protegida para ver si esta logeado
+        if (in_array($urlActual, $rutasProtegidas)) {
+
+            $loggedIn = $_SESSION["loggedIn"];
+
+            if (!isset($loggedIn) || !$loggedIn) {
+                //devuelve el usuario a la pagina de inicio con codigo 'Unauthorized'
+                header("HTTP/1.1 401 Unauthorized");
+                header("location: /");
+            }
+        }
 
         if ($method == "GET") {
             $fn = $this->GetRoutes[$urlActual] ?? null;

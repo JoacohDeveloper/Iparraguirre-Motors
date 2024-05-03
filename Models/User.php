@@ -12,7 +12,7 @@ class User extends ActiveRecord
 {
 
     protected static $tabla = "User";
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "token", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "telefono", "titulo_imagen", "imagen", "token", "isAdmin", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
@@ -25,6 +25,14 @@ class User extends ActiveRecord
     protected $password;
 
     protected $re_password;
+
+    protected $telefono;
+
+    protected $titulo_imagen;
+
+    protected $imagen;
+
+    protected $isAdmin;
 
     protected $createdAt;
 
@@ -42,11 +50,15 @@ class User extends ActiveRecord
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
+        $this->telefono = $args["telefono"] ?? "";
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
+        $this->isAdmin = 0;
+        $this->titulo_imagen = "imagen default de usuario";
+        $this->imagen = __DIR__ . "/build/src/users/default.jpg";
         $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 
@@ -100,7 +112,7 @@ class User extends ActiveRecord
         $errors = [];
         if (empty($this->username)) {
             $errors["username"] = "Debes ingresar un usuario.";
-        } else if(strlen($this->username) <= 4){
+        } else if (strlen($this->username) <= 4) {
             $errors["username"] = "El usuario debe tener minimo 5 caracteres.";
         }
         if (empty($this->full_name)) {

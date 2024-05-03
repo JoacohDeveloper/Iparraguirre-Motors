@@ -1,5 +1,5 @@
 <div class="container background-video">
-    <video autoplay muted loop id="bg_vid">
+    <video autoplay muted loop id="bg_vid" class="fixed">
         <source src="/build/src/videos/intro.mp4" type="video/mp4">
     </video>
 
@@ -7,7 +7,22 @@
         <div class="banner-content">
             <h1>Iparraguirre <br> <span>Motors</span></h1>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque praesentium quam earum voluptate fugiat, vero placeat quos repudiandae.</p>
+<<<<<<< HEAD
             <a href="#">Mostrar Catalogo</a>
+=======
+            <a href="/tienda">Mostrar Catalogo</a>
+        </div>
+
+        <div class="downside">
+            <div class="empty"></div>
+            <div class="down-arrow">
+                <img src=" /build/src/images/downArrow.svg" alt="inactive arrow">
+            </div>
+            <div class="pause-button">
+                <img id="btn_img" src="/build/src/images/pause.svg" alt="pause image">
+            </div>
+        </div>
+>>>>>>> b0827320df3304ad40336e0a40024229881819b3
     </div>
 
     <div class="content">
