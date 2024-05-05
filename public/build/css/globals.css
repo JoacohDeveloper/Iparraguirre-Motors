@@ -30,18 +30,19 @@ header {
     color: #202020;
     background-color: transparent;
     backdrop-filter: blur(5px);
+    border-bottom: 1px solid #f2f2f2;
     position: fixed;
     z-index: 100;
     color: #fff;
     width: 100%;
-    height: 3rem;
     justify-content: space-between;
     display: flex;
     align-items: center;
     padding: 0 2rem;
-    flex-wrap: wrap;
-    margin-top: 4rem;
+    flex-wrap: nowrap;
+    top: 0;
 }
+
 
 
 .logo {
@@ -52,7 +53,6 @@ header {
     width: 100%;
     object-fit: cover;
 }
-
 
 
 .navegacion ul li a {
@@ -80,7 +80,9 @@ header .navegacion ul li .actual {
 }
 
 
-
+main {
+    margin-top: 4rem;
+}
 
 footer {
     display: flex;

@@ -1,21 +1,32 @@
 <?php
 
 namespace Models;
-use Models\ActiveRecord;
 
-class Vehicle extends ActiveRecord {
+use Models\ActiveRecord;
+use JsonSerializable;
+
+class Vehicle extends ActiveRecord implements JsonSerializable
+{
     protected static $tabla = "Vehicle";
-    protected static $columnasdb = ["id", "id_unidad", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "titulo_imagen", "imagen", "matricula",
+    protected static $columnasdb = [
+        "id", "id_unidad", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "titulo_imagen", "imagen", "matricula",
         "numero_motor", "transmision", "tipo_carroceria", "frenos_abs", "airbag", "traccion", "tipo_vidrio", "direccion", "control_estabilidad", "puertas",
         "volumen_combustible", "tipo_combustible", "base_combustible", "voltaje", "vencimiento_seguro", "tipo_de_vehiculo", "precio", "velocidad_max", "zero_to_houndred",
-        "pais", "stock", "poliza_seguro", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"];
+        "pais", "stock", "poliza_seguro", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
+    ];
 
-    protected $id, $id_unidad, $descripcion, $nombre, $modelo, $fabricante, $year, $color, $titulo_imagen, $imagen, $matricula, $numero_motor,
+    public function jsonSerialize()
+    {
+        return (object) get_object_vars($this);
+    }
+
+    public $id, $id_unidad, $descripcion, $nombre, $modelo, $fabricante, $year, $color, $titulo_imagen, $imagen, $matricula, $numero_motor,
         $transmision, $tipo_carroceria, $frenos_abs, $airbag, $traccion, $tipo_vidrio, $direccion, $control_estabilidad, $puertas, $volumen_combustible, $tipo_combustible,
         $base_combustible, $voltaje, $vencimiento_seguro, $tipo_de_vehiculo, $precio, $velocidad_max, $zero_to_houndred, $pais, $stock, $poliza_seguro, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
-    function __construct($args = []) {
+    function __construct($args = [])
+    {
         $this->id = $args["id"] ?? null;
         $this->id_unidad = $args["id_unidad"] ?? "";
         $this->descripcion = $args["descripcion"] ?? "";
@@ -52,8 +63,13 @@ class Vehicle extends ActiveRecord {
         $this->peso = $args["peso"] ?? "";
         $this->kilometros = $args["kilometros"] ?? "";
         $this->caballos_potencia = $args["caballos_potencia"] ?? "";
-        $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
-        $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
-        $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
+        $this->createdAt = $this->createdAt ? $this->createdAt->format('Y-m-d H:i:s') : null;
+        $this->updatedAt = $this->updatedAt ? $this->updatedAt->format('Y-m-d H:i:s') : null;
+    }
+
+    public static function getAllVehicles()
+    {
+        $vehicle = new self();
+        return $vehicle->getAll();
     }
 }

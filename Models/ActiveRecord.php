@@ -101,6 +101,17 @@ class ActiveRecord
         ];
     }
 
+    public function getAll($limit = null)
+    {
+        $query = "SELECT * FROM " . static::$tabla;
+        if ($limit != null) {
+            $query = "SELECT * FROM " . static::$tabla . " LIMIT $limit";
+        }
+
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
 
     public function guardar()
     {

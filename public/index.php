@@ -7,10 +7,12 @@ include_once "autoload.php";
 // use Router\Router;
 
 use Controllers\AuthenticationController;
+use Controllers\DashboardController;
 use \Controllers\HomePageController;
 use Controllers\TiendaController;
 use Controllers\VehiclesController;
 use \Router\Router;
+use Controllers\VehicleRestController;
 
 // echo phpinfo();
 
@@ -39,11 +41,19 @@ $router->post("/auth/verificar", [AuthenticationController::class, "verificar"])
 
 $router->get("/logout", [AuthenticationController::class, "logout"]);
 
-$router->get("/api/vehicles", [VehiclesController::class, "listado"]);
+//dashboard 
+
+$router->get("/dashboard", [DashboardController::class, "index"]);
 
 
 //tienda
 
 $router->get("/tienda", [TiendaController::class, "tienda"]);
+
+
+//Rest Vehicles
+
+$router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
+
 
 $router->comprobarRutas();

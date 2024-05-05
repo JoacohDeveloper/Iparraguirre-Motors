@@ -175,6 +175,7 @@ header {
     color: #202020;
     /* background-color: rgba(0, 0, 0, 0.6); */
     backdrop-filter: none;
+    border-bottom: unset;
     position: absolute;
     z-index: 100;
     color: #fff;
@@ -248,6 +249,9 @@ header {
     40%, 60% {
         transform: translateY(0);
     }
+}
+main {
+    margin-top: 0;
 }
 
 .disabled {

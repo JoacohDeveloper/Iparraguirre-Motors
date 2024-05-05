@@ -23,10 +23,13 @@ class Router
 
 
         session_start();
-        $rutasProtegidas = ["/admin/panel", "/tienda"];
+        $rutasProtegidas = ["/dashboard"];
+        $adminRoutes = [];
+        $apiRoutes = ["/api/v1/vehicles"];
 
         $method = $_SERVER["REQUEST_METHOD"];
         $urlActual = $_SERVER["PATH_INFO"] ?? "/";
+
 
         //validar si el usuario se encuentra en una ruta protegida para ver si esta logeado
         if (in_array($urlActual, $rutasProtegidas)) {
@@ -37,6 +40,25 @@ class Router
                 //devuelve el usuario a la pagina de inicio con codigo 'Unauthorized'
                 header("HTTP/1.1 401 Unauthorized");
                 header("location: /");
+            }
+        } else if (in_array($urlActual, $adminRoutes)) {
+            $user = $_SESSION["usuario"] ?? null;
+            if (isset($user) && get_class($user) == "User" && !$user->isAdmin) {
+                header("HTTP/1.1 401 Unauthorized");
+                header("location: /");
+            }
+        } else if (in_array($urlActual, $apiRoutes)) {
+            $token = $_GET["token"] ?? "";
+            if ($token != "") {
+                if ($token != "9fd4e0080bc6edc9f3c3853b5b1b6ecf") {
+                    header("HTTP/1.1 401 Unauthorized");
+                    echo json_encode(["message" => "Unathorized"]);
+                    exit;
+                }
+            } else {
+                header("HTTP/1.1 401 Unauthorized");
+                echo json_encode(["message" => "Unathorized"]);
+                exit;
             }
         }
 

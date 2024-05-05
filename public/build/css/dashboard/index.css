@@ -1,0 +1,73 @@
+header {
+    z-index: 100;
+    position: fixed;
+    height: 3rem;
+    background-color: #fff;
+    border-bottom: unset;
+}
+main {
+    margin-top: 3rem;
+    background-color: #f2f2f2;
+}
+
+:root {
+    --loading-grey: #ededed;
+}
+
+footer {
+    display: none;
+}
+.container {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+
+.aside {
+    min-height: 100svh;
+    position: fixed;
+    border-right: 1px solid #f2f2f2;
+    height: 100%;
+    background-color: #fff;
+    width: 3rem;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 0 1rem;
+    gap: 2rem;
+    width: (100% - 3rem);
+    margin-left: 3rem;
+}
+
+.card {
+    width: 20rem;
+    height: 20rem;
+
+    border-radius: .3rem;
+    background-color: #ccc;
+
+}
+
+.loading {
+    background-color: var(--loading-grey);
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, .5) 50%,
+      rgba(255, 255, 255, 0) 60%
+    ) var(--loading-grey);
+    background-size: 200% 100%;
+    background-position-x: 180%;
+    animation: 1s loading ease-in-out infinite;
+  }
+
+@keyframes loading {
+    to {
+      background-position-x: -20%;
+    }
+}
