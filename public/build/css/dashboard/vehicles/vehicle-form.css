@@ -1,0 +1,8 @@
+h1{
+    color:red;
+}
+
+.container {
+    flex-direction: column;
+    align-items: center;
+}

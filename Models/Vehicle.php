@@ -72,4 +72,10 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         $vehicle = new self();
         return $vehicle->getAll();
     }
+
+
+    public static function validarCampos()
+    {
+        $errors = [];
+    }
 }

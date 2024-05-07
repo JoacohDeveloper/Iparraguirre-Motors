@@ -1,6 +1,5 @@
 <div class="container">
-
-<h1>Agregar vehiculo</h1>
+    <h1>Agregar vehiculo</h1>
     <form action="/tienda/index" method="POST" id="f_addvehicle" style="display:flex; flex-direction: column; max-width: 15rem; gap: 0.4rem;">
         <input type="text" name="nombre" placeholder="Nombre">
         <input type="text" name="modelo" placeholder="Modelo">

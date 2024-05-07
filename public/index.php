@@ -45,8 +45,10 @@ $router->get("/logout", [AuthenticationController::class, "logout"]);
 
 $router->get("/dashboard", [DashboardController::class, "index"]);
 
-$router->post("/dashboard/addvehicles", [DashboardController::class, "vehicle"]);
-$router->get("/dashboard/addvehicles", [DashboardController::class, "vehicle"]);
+
+$router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
+$router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
+
 
 
 //tienda

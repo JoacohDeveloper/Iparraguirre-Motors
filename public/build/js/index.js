@@ -1,5 +1,3 @@
-
-
 const home_vid = document.querySelector("#bg_vid");
 
 if (home_vid) {
@@ -52,9 +50,17 @@ if (home_vid) {
             if (!item.isIntersecting) {
                 home_vid.classList.add("banner_stopFixed")
                 home_vid.classList.remove("fixed")
+                home_vid?.pause();
             } else {
                 home_vid.classList.remove("banner_stopFixed")
                 home_vid.classList.add("fixed")
+                const img = document.querySelector("#btn_img")
+                const imgPath = img.currentSrc.split("/")
+
+                const imgName = imgPath[imgPath.length - 1];
+                if (imgName && imgName == "pause.svg") {
+                    home_vid?.play();
+                }
             }
         })
     })

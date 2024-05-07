@@ -7,7 +7,6 @@
         <div class="banner-content">
             <h1>Iparraguirre <br> <span>Motors</span></h1>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque praesentium quam earum voluptate fugiat, vero placeat quos repudiandae.</p>
-
             <a href="#">Mostrar Catalogo</a>
         </div>
         <div class="downside">

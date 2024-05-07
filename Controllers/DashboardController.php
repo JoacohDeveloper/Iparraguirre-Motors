@@ -17,10 +17,13 @@ abstract class DashboardController
         ]);
     }
 
-    public static function vehicle(Router $router) {
-        $router->render("dashboard/vehicle", [
-            "styles" => ["dashboard/vehicle"],
-            "title" => "Dashboard"
+    public static function agregarVehiculo(Router $router)
+    {
+        $router->render("dashboard/vehicles/add-vehicle", [
+            "styles" => ["dashboard/vehicles/vehicle-form"],
+            "title" => "Dashboard | Agregar Vehiculo",
+            "description" => "Pagina de dashboard Iparraguirre Motors",
+            "scripts" => ["lol"]
         ]);
     }
 }
