@@ -12,7 +12,15 @@ abstract class DashboardController
     {
 
         $router->render("dashboard/index", [
-            "styles" => ["dashboard/index"]
+            "styles" => ["dashboard/index"],
+            "title" => "Dashboard"
+        ]);
+    }
+
+    public static function vehicle(Router $router) {
+        $router->render("dashboard/vehicle", [
+            "styles" => ["dashboard/vehicle"],
+            "title" => "Dashboard"
         ]);
     }
 }
