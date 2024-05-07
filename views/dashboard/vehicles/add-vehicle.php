@@ -9,13 +9,20 @@
         <input type="text" name="matricula" placeholder="Matricula">
         <input type="text" name="numero_motor" placeholder="Numero serial del motor">
         <label>Tipo de transmision:</label>
-        <select id="transmision" name="Tipo_transmision">
+        <select id="transmision" name="tipo_transmision">
             <option value="transmision_null"></option>
             <option value="t_manual">Manual</option>
             <option value="t_automatica">Automatica</option>
             <option value="t_doble">Doble embreague</option>
         </select>
-        <input type="text" name="tipo_carroceria" placeholder="Tipo de carroceria">
+        <label>Tipo de carroceria:</label>
+        <select id="carroceria" name="tipo_carroceria">
+            <option value="carroceria_null"></option>
+            <option value="c_coupe">Coupe</option>
+            <option value="c_sedan">Sedan</option>
+            <option value="c_hatchpack">Iparraguirre</option>
+            <option value="c_cabrio">Cabrio</option>
+        </select>
         <label>Frenos ABS</label>
         <select id="sel_abs" name="FrenosABS">
             <option value="abs_null"></option>
