@@ -50,6 +50,8 @@ abstract class AuthenticationController
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             header("location: /");
         }
+
+
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

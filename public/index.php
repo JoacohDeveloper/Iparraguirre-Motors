@@ -31,6 +31,7 @@ $router->get("/auth/register", [AuthenticationController::class, "register"]);
 
 $router->post("/auth/register", [AuthenticationController::class, "register"]);
 
+
 $router->get("/auth/recuperar", [AuthenticationController::class, "recuperar"]);
 
 $router->post("/auth/recuperar", [AuthenticationController::class, "recuperar"]);

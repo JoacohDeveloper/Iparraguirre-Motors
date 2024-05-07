@@ -19,6 +19,12 @@ abstract class DashboardController
 
     public static function agregarVehiculo(Router $router)
     {
+
+
+
+
+
+
         $router->render("dashboard/vehicles/add-vehicle", [
             "styles" => ["dashboard/vehicles/vehicle-form"],
             "title" => "Dashboard | Agregar Vehiculo",

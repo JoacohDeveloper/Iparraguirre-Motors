@@ -74,8 +74,54 @@ class Vehicle extends ActiveRecord implements JsonSerializable
     }
 
 
-    public static function validarCampos()
+    public function validate()
     {
         $errors = [];
+
+        if (empty($this->nombre)) {
+            $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if (empty($this->descripcion)) {
+            $errors["descripcion"] = "El campo descripcion es obligatorio.";
+        }
+        if (empty($this->modelo)) {
+            $errors["modelo"] = "El campo modelo es obligatorio.";
+        }
+        if (empty($this->fabricante)) {
+            $errors["fabricante"] = "El campo fabricante es obligatorio.";
+        }
+        if (empty($this->year)) {
+            $errors["year"] = "El campo año es obligatorio.";
+        }
+        if (empty($this->color)) {
+            $errors["color"] = "El campo color es obligatorio.";
+        }
+        if (empty($this->matricula)) {
+            $errors["matricula"] = "El campo matricula es obligatorio.";
+        }
+        if (empty($this->numero_motor)) {
+            $errors["numero_motor"] = "El campo numero de motor es obligatorio.";
+        }
+        if (empty($this->transmision)) {
+            $errors["transmision"] = "El campo transmision es obligatorio.";
+        }
+        if (empty($this->tipo_carroceria)) {
+            $errors["tipo_carroceria"] = "El campo tipo de carroceria es obligatorio.";
+        }
+        if (empty($this->id_unidad)) {
+            $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if (empty($this->id_unidad)) {
+            $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if (empty($this->id_unidad)) {
+            $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if (empty($this->id_unidad)) {
+            $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if (empty($this->id_unidad)) {
+            $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
     }
 }
