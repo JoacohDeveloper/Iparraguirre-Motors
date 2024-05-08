@@ -1,7 +1,18 @@
 <div class="container">
     <h1>Agregar vehiculo</h1>
-    <form action="/tienda/index" method="POST" id="f_addvehicle" style="display:flex; flex-direction: column; max-width: 15rem; gap: 0.4rem;">
+
+    <div class="errores">
+        <?php
+        if (isset($errores)) {
+            foreach ($errores as $key => $value) {
+                echo "<div class='error'>$value</div>";
+            }
+        } ?>
+    </div>
+
+    <form action="/dashboard/agregar-vehiculo" method="POST" id="f_addvehicle" style="display:flex; flex-direction: column; max-width: 15rem; gap: 0.4rem;">
         <input type="text" name="nombre" placeholder="Nombre">
+        <textarea name="descripcion" placeholder="Descripcion"></textarea>
         <input type="text" name="modelo" placeholder="Modelo">
         <input type="text" name="fabricante" placeholder="Fabricante">
         <input type="text" name="año" placeholder="Año de fabricacion">
@@ -10,14 +21,14 @@
         <input type="text" name="numero_motor" placeholder="Numero serial del motor">
         <label>Tipo de transmision:</label>
         <select id="transmision" name="tipo_transmision">
-            <option value="transmision_null"></option>
+            <option value="none_selected" selected>-Seleccione-</option>
             <option value="t_manual">Manual</option>
             <option value="t_automatica">Automatica</option>
             <option value="t_doble">Doble embreague</option>
         </select>
         <label>Tipo de carroceria:</label>
         <select id="carroceria" name="tipo_carroceria">
-            <option value="carroceria_null"></option>
+            <option value="none_selected" selected></option>
             <option value="c_coupe">Coupe</option>
             <option value="c_sedan">Sedan</option>
             <option value="c_hatchpack">Iparraguirre</option>
@@ -25,13 +36,13 @@
         </select>
         <label>Frenos ABS</label>
         <select id="sel_abs" name="FrenosABS">
-            <option value="abs_null"></option>
+            <option value="none_selected" selected>-Seleccione-</option>
             <option value="abs_si">Si</option>
             <option value="abs_no">No</option>
         </select>
         <label>Airbag</label>
         <select id="sel_airbag" name="Airbag">
-            <option value="airbag_null"></option>
+            <option value="none_selected" selected>-Seleccione-</option>
             <option value="airbag_si">Si</option>
             <option value="airbag_no">No</option>
         </select>
@@ -40,14 +51,13 @@
         <input type="text" name="Direccion" placeholder="Tipo de direccion">
         <label>Control de estabilidad</label>
         <select id="sel_estabilidad" name="estabilidad">
-            <option value="est_null"></option>
+            <option value="none_selected" selected>-Seleccione-</option>
             <option value="est_si">Si</option>
             <option value="est_no">No</option>
         </select>
         <input type="text" name="puertas" placeholder="Numero de puertas">
         <input type="text" name="volumen_combustible" placeholder="Volumen del combustible">
         <input type="text" name="tipo_combustible" placeholder="Tipo de combustible">
-        <input type="text" name="base_combustible" placeholder="Base del combustible">
         <input type="text" name="voltaje" placeholder="Voltaje del vehiculo">
         <label>Fecha de vencimiento del seguro</label>
         <input type="date" name="seguro">

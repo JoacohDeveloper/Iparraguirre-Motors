@@ -22,7 +22,6 @@ create table User(
 
 create table vehicle(
 	id int(11) not null auto_increment,
-	id_unidad int(11),
 	descripcion TEXT,
 	nombre VARCHAR(255),
 	modelo VARCHAR(255),

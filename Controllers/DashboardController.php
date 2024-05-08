@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Router\Router;
+use Models\Vehicle;
 
 
 abstract class DashboardController {
@@ -19,24 +20,22 @@ abstract class DashboardController {
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $vehicle = new Vehicle($_POST);
-            $errores = $Vehicle->validate();
+            $errores = $vehicle->validate();
             if (empty($errores)) {
-                if ($vehicle->ingresarVehicle()) {
-                    
-                    header("location: /dashboard/index");
+                if ($vehicle->registrarVehicle()) {
+                    header("location: /dashboard");
                 } else {
                     $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                 }
             } else {
                 $campos = $_POST;
             }
-
-            $router->render("dashboard/vehicles/add-vehicle", [
-                "styles" => ["dashboard/vehicles/vehicle-form"],
-                "title" => "Dashboard | Agregar Vehiculo",
-                "description" => "Pagina de dashboard Iparraguirre Motors",
-                "scripts" => ["lol"]
-            ]);
         }
+        $router->render("dashboard/vehicles/add-vehicle", [
+            "styles" => ["dashboard/vehicles/vehicle-form"],
+            "title" => "Dashboard | Agregar Vehiculo",
+            "description" => "Pagina de dashboard Iparraguirre Motors",
+            "errores" => $errores,
+        ]);
     }
 }
