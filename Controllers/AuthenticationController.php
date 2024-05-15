@@ -40,8 +40,11 @@ abstract class AuthenticationController
 
         $router->render("auth/login", [
             "scripts" => ["auth/index"],
+            "styles" => ["auth/index"],
             "errores" => $errores,
-            "campos" => $campos
+            "campos" => $campos,
+            "title" => "Iparraguirre Motors | Login",
+            "description" => "Ingresa en Iparraguirre Motors!"
         ]);
     }
 

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Kadwa:wght@400;700&family=Linden+Hill:ital@0;1&display=swap');
+
+body{
+    position: relative;
+    width: 360px;
+    background: #FFFFFF;
+}
+
+h1{
+    left: calc(50% - 156.49px/2 + 0.24px);
+    color: #B10B0A;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.25));
+    font-family: "Kadwa", serif;
+}
+
+body > section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 55%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+#primera_linea{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 173px;
+    height: 1px;
+    background: #B10B0A;
+    box-shadow: 0px 0px 10.6px rgba(177, 11, 10, 0.52);
+}
+
+.inputs{
+    border: none;
+    font-family: "Istok Web", sans-serif;
+    font-style: italic;
+}
+
+#segunda_linea{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 173px;
+    height: 1px;
+    background: #B10B0A;
+    box-shadow: 0px 0px 10.6px rgba(177, 11, 10, 0.52);
+}
+
+#boton{
+    color: #FFFFFF;
+    background-color: #B10B0A;
+    border-radius: .7rem;
+    padding: .5rem .7rem;
+    border: none;
+}
+
+.remember{
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    height: 1.7rem;
+}
+
+#remember_txt{
+    font-family: "Istok Web", sans-serif;
+    margin-top: .3rem;
+    margin-left: .2rem;
+    font-size: .84rem;
+}
+
+#email_txt{
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    font-family: "Istok Web", sans-serif;
+    font-style: italic;
+    margin: .1rem; 
+}
+
+#password_txt{
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    font-family: "Istok Web", sans-serif;
+    font-style: italic;
+    margin: .1rem; 
+}
+
+#regist_txt{
+    margin: 0;
+    font-size: 14px;
+    font-family: "Istok Web", sans-serif;
+}
