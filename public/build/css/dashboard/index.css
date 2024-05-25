@@ -24,19 +24,6 @@ footer {
 }
 
 
-.aside {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    min-height: 100svh;
-    position: fixed;
-    border-right: 1px solid #f2f2f2;
-    height: 100%;
-    background-color: hsl(0, 0%, 100%);
-    width: 3rem;
-}
-
 .options {
     display: flex;
     flex-wrap: wrap;
@@ -44,17 +31,26 @@ footer {
     margin-top: 2rem;
     padding: 0 1rem;
     gap: 2rem;
-    width: (100% - 3rem);
     margin-left: 3rem;
+    width: 100%;
 }
 
 .card {
-    width: 20rem;
+    width: 40%;
     height: 20rem;
-
     border-radius: .3rem;
     background-color: #ccc;
 
+}
+
+@media screen and (max-width: 375px) {
+
+    .options {
+        width: 80%;
+    }
+    .card {
+        width: 100%;
+    }
 }
 
 .loading {
@@ -76,25 +72,6 @@ footer {
     }
 }
 
-.more-information {
-    margin-top: .4rem;
-    padding: .4rem;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: background-color .3s ease;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #f2f2f2;
-    }
-
-    img {
-        width: 100%;
-        transform: rotate(90deg);
-        height: 100%;
-        object-fit: contain;
-    }
-}   
+.dark .card {
+    background-color: #000;
+}

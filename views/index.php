@@ -1,4 +1,4 @@
-<div class="container background-video">
+<div class="background-video">
     <video autoplay muted loop id="bg_vid" class="fixed">
         <source src="/build/src/videos/intro.mp4" type="video/mp4">
     </video>

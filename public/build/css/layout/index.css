@@ -22,10 +22,18 @@ body {
     z-index: -1;
 }
 
+.background-video {
+    display: flex;
+    width: 100%;
+    min-height: 100svh;
+}
+
 
 .fixed {
     position: fixed;
 }
+
+
 
 .content {
     min-height: 100svh;
@@ -269,4 +277,9 @@ main {
 
 .brgMenu {
     filter: brightness(0) saturate(100%) invert(92%) sepia(100%) saturate(31%) hue-rotate(142deg) brightness(106%) contrast(108%);
+}
+
+.dark header {
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
 }

@@ -73,8 +73,6 @@ if (home_vid) {
 }
 
 
-
-
 //header
 
 const brgMenu = document.querySelectorAll(".brgMenuHandler");
@@ -83,5 +81,33 @@ const mobileMenu = document.querySelector(".mobile-menu");
 brgMenu.forEach(item => {
     item.addEventListener("click", () => {
         mobileMenu.classList.toggle("menu-disabled")
+        document.body.classList.toggle("body-fixed")
     })
+})
+
+
+//loadtheme
+
+const theme = JSON.parse(localStorage.getItem("theme"));
+const themeToggler = document.querySelector(".card__toggle")
+const themeSwitcher = document.querySelector("#themeSwitcher")
+
+if (theme) {
+    if (theme == 'dark') {
+        document.body.classList.add("dark")
+        themeSwitcher.checked = false;
+    } else {
+        document.body.classList.remove("dark")
+        themeSwitcher.checked = true;
+    }
+}
+
+themeToggler.addEventListener("click", e => {
+    if (!e?.target?.checked) {
+        localStorage.setItem("theme", JSON.stringify('dark'))
+        document.body.classList.add("dark")
+    } else {
+        localStorage.setItem("theme", JSON.stringify('light'))
+        document.body.classList.remove("dark")
+    }
 })
