@@ -87,6 +87,7 @@ abstract class AuthenticationController
 
         $router->render("auth/register", [
             "scripts" => ["auth/index"],
+            "styles" => ["auth/index"],
             "errores" => $errores,
             "campos" => $campos,
             "title" => "Iparraguirre Motors | Register",
