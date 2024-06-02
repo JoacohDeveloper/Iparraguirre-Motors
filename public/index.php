@@ -45,7 +45,7 @@ $router->get("/logout", [AuthenticationController::class, "logout"]);
 //dashboard 
 
 $router->get("/dashboard", [DashboardController::class, "index"]);
-
+$router->get("/dashboard/product-managment", [DashboardController::class, 'productManagment']);
 
 $router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 $router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
@@ -60,6 +60,8 @@ $router->get("/tienda", [TiendaController::class, "tienda"]);
 //Rest Vehicles
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
+
+
 
 
 $router->comprobarRutas();

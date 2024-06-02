@@ -178,4 +178,10 @@ class User extends ActiveRecord
     {
         return password_verify($password, $this->password);
     }
+
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
 }

@@ -444,7 +444,7 @@ header .brgMenu {
   outline: none;
   border: none;
   cursor: pointer;
-  background: var(--color-background-secondary);
+  background: #202020;
   transition: background-color ease 0.3s;
 }
 
@@ -460,7 +460,7 @@ header .brgMenu {
   top: 4px;
   border-radius: 50%;
   text-indent: 4px;
-  line-height: 32px;
+  line-height: 29px;
   word-spacing: 37px;
   color: #fff;
   white-space: nowrap;
@@ -476,4 +476,10 @@ header .brgMenu {
   left: 32px;
   content: url("https://shivanarrthine.com/public/images/icons/sun.svg");
   background: var(--color-background);
+}
+
+/* dashboard navegacion */
+
+.isDashboard {
+  display: none;
 }

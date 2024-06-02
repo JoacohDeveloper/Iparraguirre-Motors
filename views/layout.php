@@ -29,17 +29,6 @@
     <main>
         <?php echo $contenido; ?>
     </main>
-
-    <footer>
-
-        <?php include __DIR__ . "/componentes/navegacion.php";
-        ?>
-
-        <div class="img-container">
-            <img src="/build/src/images/LOGO.png" alt="Iparraguirre Logo">
-        </div>
-    </footer>
-
     <?php
     //script loader
     if (isset($scripts) && count($scripts) != 0) {
@@ -50,6 +39,12 @@
         }
     }
     ?>
+    <?php include __DIR__ . "/componentes/footer.php";
+    footer();
+    ?>
+
+
+
 </body>
 
 </html>
