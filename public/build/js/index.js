@@ -89,25 +89,31 @@ brgMenu.forEach(item => {
 //loadtheme
 
 const theme = JSON.parse(localStorage.getItem("theme"));
-const themeToggler = document.querySelector(".card__toggle")
-const themeSwitcher = document.querySelector("#themeSwitcher")
+const themeToggler = document.querySelectorAll(".card__toggle")
+const themeSwitcher = document.querySelectorAll("#themeSwitcher")
 
 if (theme) {
     if (theme == 'dark') {
         document.body.classList.add("dark")
-        themeSwitcher.checked = false;
+        themeSwitcher.forEach(el => el.checked = false)
     } else {
         document.body.classList.remove("dark")
-        themeSwitcher.checked = true;
+        themeSwitcher.forEach(el => el.checked = true)
     }
 }
 
-themeToggler.addEventListener("click", e => {
-    if (!e?.target?.checked) {
-        localStorage.setItem("theme", JSON.stringify('dark'))
-        document.body.classList.add("dark")
-    } else {
-        localStorage.setItem("theme", JSON.stringify('light'))
-        document.body.classList.remove("dark")
-    }
-})
+themeToggler.forEach(el => themeTogglerEvent(el))
+
+function themeTogglerEvent(el) {
+    el.addEventListener("click", e => {
+        if (!e?.target?.checked) {
+            localStorage.setItem("theme", JSON.stringify('dark'))
+            document.body.classList.add("dark")
+            themeSwitcher.forEach(el => el.checked = false)
+        } else {
+            localStorage.setItem("theme", JSON.stringify('light'))
+            document.body.classList.remove("dark")
+            themeSwitcher.forEach(el => el.checked = true)
+        }
+    })
+}

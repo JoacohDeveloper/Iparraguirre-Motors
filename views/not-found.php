@@ -4,10 +4,12 @@
         <h2>NOT FOUND</h2>
     </div>
     <div>
-        <a href="/">volver al inicio</a>
+        <a href="#" id="goback">volver atras</a>
         <div class="img-container">
             <img src="/build/src/images/LOGO.png" alt="Iparraguirre Logo">
         </div>
     </div>
-
+    <script>
+        document.querySelector("#goback").addEventListener("click", () => history.back())
+    </script>
 </div>
