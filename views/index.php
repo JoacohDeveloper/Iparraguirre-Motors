@@ -19,7 +19,8 @@
             </div>
         </div>
     </div>
+    
     <div class="content">
-        <h2>lol</h2>
+
     </div>
 </div>
