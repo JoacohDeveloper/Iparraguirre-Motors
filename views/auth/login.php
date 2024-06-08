@@ -1,30 +1,30 @@
-<div class="container" style="justify-content: center; align-items: center;">
+<div class="loader">
+</div>
+<div class="container">
 
-<section>
-    <h1>LOGIN</h1>
-    <form method="POST" action="">
-        <?php if (isset($errores)) {
-                foreach ($errores as $key => $value) {
-                    echo "<div class='error'>$value</div>";
-                }
-            } ?>
-        <div>
-            <p class="inputs_txt">Email</p>
-            <input class="inputs" type="text" name="email" placeholder="Usuario o Email">
-            <div id="primera_linea"></div>
-        </div>
-        <div>
-            <p class="inputs_txt">Password</p>
-            <input class="inputs" type="password" name="password" placeholder="Password">
-            <div id="segunda_linea"></div>
-        </div>
-        <div class="remember">
-            <input type="checkbox">
-            <p id="remember_txt">Remember me</p>
-        </div>
-        <input id="boton" type="submit" value="Ingresar">
-        <p id="regist_txt">Sign Up</p>
-    </form>
-</section>
+
+    <section class="login-section">
+        <h1>LOGIN</h1>
+        <form method="POST" action="/auth/login" id="loginForm">
+            <div class="errores"></div>
+            <div>
+                <label for="email" class="inputs_txt">Email</label>
+                <input class="inputs" id="email" type="text" name="email" placeholder="Usuario o Email">
+                <div class="input-underline"></div>
+            </div>
+            <div>
+                <label for="password" class="inputs_txt">Password</label>
+                <input class="inputs" id="password" type="password" name="password" placeholder="Password">
+                <div class="input-underline"></div>
+            </div>
+            <div class="remember">
+                <input id="remember" type="checkbox">
+                <label for="remember" id="remember_txt">Remember me</label>
+            </div>
+            <input id="boton" type="submit" value="Ingresar">
+            <a class="opposite" href="/auth/register">Sign Up</a>
+        </form>
+    </section>
+    <?php include str_replace("auth", "", __DIR__) . "componentes\\error_toast.php"; ?>
 
 </div>

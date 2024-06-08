@@ -169,7 +169,8 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return $errors;
     }
 
-    public function registrarVehicle() {
+    public function registrarVehicle()
+    {
         return $this->crear();
     }
 }

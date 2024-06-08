@@ -117,3 +117,72 @@ function themeTogglerEvent(el) {
         }
     })
 }
+
+
+
+const refreshToasts = (newToast) => {
+    const toastAll = document.querySelectorAll(".toast")
+    // const toast = toastAll[toastAll.length - 1]
+
+    // console.log(toast)
+    // const progress = toast.querySelector(".progress")
+
+    // setTimeout(() => {
+    //     toast.remove();
+    // }, 5000);
+
+    // setTimeout(() => {
+    //     progress.remove();
+    // }, 5300);
+
+    toastAll.forEach(toast => {
+
+        const progress = toast.querySelector(".progress")
+
+        setTimeout(() => {
+            toast.remove();
+        }, 5000);
+
+        setTimeout(() => {
+            progress.remove();
+        }, 5300);
+
+        toast.querySelector(".close").addEventListener("click", e => {
+            setTimeout(() => {
+                toast.querySelector(".progress").remove();
+            }, 300);
+
+            toast.remove();
+        })
+    })
+
+}
+
+const addToast = (errors) => {
+    const toasts = document.querySelector(".toasts");
+    toasts.innerHTML = "";
+
+    errors.forEach(error => {
+        const toastHTML = `
+    <div class="toast active">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
+
+            <div class="message">
+                <span class="text text-1">${error.title}</span>
+                <span class="text text-2">${error.error}</span>
+            </div>
+        </div>
+        <button class="fa-solid fa-xmark close">x</button>
+
+        <div class="progress active"></div>
+    </div>`
+
+        toasts.innerHTML += toastHTML
+    })
+
+
+    const newToast = toasts.childNodes[toasts.childNodes.length - 1]
+
+    refreshToasts(newToast)
+}

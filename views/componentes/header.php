@@ -5,7 +5,7 @@
 
     <?php $url = $_SERVER["REQUEST_URI"]; ?>
     <?php include __DIR__ . "/dashboard/navegacion.php"; ?>
-    <div class="hello-world <?php if ($url === '/auth/login') echo "oculto"; ?>">
+    <div class="hello-world">
 
         <?php include __DIR__ . "/navegacion.php"; ?>
 

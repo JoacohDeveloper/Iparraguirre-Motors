@@ -27,6 +27,7 @@ $router->get("/auth/login", [AuthenticationController::class, "login"]);
 
 $router->post("/auth/login", [AuthenticationController::class, "login"]);
 
+
 $router->get("/auth/register", [AuthenticationController::class, "register"]);
 
 $router->post("/auth/register", [AuthenticationController::class, "register"]);
