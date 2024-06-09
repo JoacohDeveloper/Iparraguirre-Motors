@@ -44,7 +44,7 @@
             <p>Welcome, <?php echo $username ? $username . "." : "..."; ?></p>
 
             <ul class="sub-dropdown account-dropdown">
-                <li><a href="/dashboard/user-settings">
+                <li><a href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">
                         <img src="/build/src/images/settings.svg" alt="Settings">
                         <p>Settings</p>
                     </a></li>
@@ -54,7 +54,7 @@
 
                 </li>
                 <li class="border-top">
-                    <a href="#">
+                    <a href="/logout">
                         <img src="/build/src/images/exit.svg" alt="Logout">
                         <p>Log Out</p>
                     </a>

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Controllers;
 
 use Models\User;
@@ -26,9 +25,9 @@ abstract class AuthenticationController
             $errores = User::validarCampos($email, $password);
 
             if (empty($errores)) {
+
                 $usuario = User::getUser($email);
                 if (isset($usuario)) {
-
                     if ($usuario->validarPassword($password)) {
                         $_SESSION["usuario"] = $usuario;
                         $_SESSION["loggedIn"] = true;
@@ -92,7 +91,6 @@ abstract class AuthenticationController
                     if ($usuario->crearUsuario()) {
                         $_SESSION["usuario"] = $usuario;
                         $_SESSION["loggedIn"] = true;
-                        // header("location: /");
                         $response = ["message" => "succesfuly"];
                         header('Content-Type: application/json; charset=utf-8');
                         echo json_encode($response);

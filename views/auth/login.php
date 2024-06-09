@@ -25,6 +25,6 @@
             <a class="opposite" href="/auth/register">Sign Up</a>
         </form>
     </section>
-    <?php include str_replace("auth", "", __DIR__) . "componentes\\error_toast.php"; ?>
+    <?php include implementComp("error_toast.php") ?>
 
 </div>

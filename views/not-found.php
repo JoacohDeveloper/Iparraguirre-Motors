@@ -9,6 +9,7 @@
             <img src="/build/src/images/LOGO.png" alt="Iparraguirre Logo">
         </div>
     </div>
+
     <script>
         document.querySelector("#goback").addEventListener("click", () => history.back())
     </script>

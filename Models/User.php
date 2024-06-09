@@ -67,6 +67,7 @@ class User extends ActiveRecord
         return $this->email;
     }
 
+
     public function gen_uuid()
     { //
         $uuid = array(
@@ -106,6 +107,11 @@ class User extends ActiveRecord
         $this->uuid = $uuid;
     }
 
+
+    public function getUUID()
+    {
+        return $this->uuid;
+    }
 
     public function validate()
     {
@@ -183,5 +189,10 @@ class User extends ActiveRecord
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function getFullName()
+    {
+        return $this->full_name;
     }
 }

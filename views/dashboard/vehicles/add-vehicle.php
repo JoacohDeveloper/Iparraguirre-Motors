@@ -1,5 +1,5 @@
 <div class="container">
-    <?php include str_replace("\dashboard\\vehicles", "", __DIR__) .  "\componentes\dashboard\aside.php"; ?>
+    <?php include implementComp("dashboard\aside.php"); ?>
 
     <div class="dashboard-content">
         <div class="dashboard-fit">
@@ -81,7 +81,7 @@
                 <input type="submit" value="Registrar">
             </form>
         </div>
-        <?php include str_replace("\dashboard\\vehicles", "", __DIR__) .  "\componentes\\footer.php";
+        <?php include implementComp("footer.php");
 
         footer("dashboard-footer");
         ?>

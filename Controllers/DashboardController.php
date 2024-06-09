@@ -54,4 +54,35 @@ abstract class DashboardController
 
         ]);
     }
+
+    public static function userSettings(Router $router)
+    {
+
+        $uuid = $_GET["u"];
+        $usuario = $_SESSION["usuario"];
+
+        $fullName = $usuario->getFullname();
+
+        $fullNameExplode = explode(" ", $fullName);
+        $firstName = $fullNameExplode[0];
+        $lastName = $fullNameExplode[1] ?? "";
+        $email = $usuario->getEmail();
+
+        if (!isset($uuid)) {
+            header("Location: /dashboard");
+        } else if (!isset($usuario)) {
+            header("Location: /");
+        } else if ($uuid != $usuario->getUUID()) header("Location: /dashboard");
+
+        $router->render("/dashboard/settings/index", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/index"],
+            "scripts" => ["dashboard/index", "dashboard/settings/index"],
+            "username" => $usuario->getUsername(),
+            "fullname" => $fullName,
+            "firstname" => $firstName,
+            "lastname" => $lastName,
+            "email" => $email
+
+        ]);
+    }
 }

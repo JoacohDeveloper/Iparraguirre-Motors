@@ -1,5 +1,5 @@
 <div class="container">
-    <?php include str_replace("\dashboard", "", __DIR__) .  "\componentes\dashboard\aside.php"; ?>
+    <?php include implementComp("dashboard/aside.php") ?>
 
     <div class="dashboard-content">
         <div class="dashboard-fit">
@@ -21,7 +21,7 @@
 
             </div>
         </div>
-        <?php include str_replace("\dashboard", "", __DIR__) .  "\componentes\\footer.php";
+        <?php include implementComp("footer.php");
 
         footer("dashboard-footer");
         ?>

@@ -1,9 +1,9 @@
+<?php $url = $_SERVER["REQUEST_URI"]; ?>
 <header>
-    <a href="/" class="logo">
+    <a href="<?php echo str_contains($url, "/dashboard") ? "/dashboard" : "/" ?>" class="logo">
         <img src="/build/src/images/LOGO2.png" alt="Logo Iparraguirre Motors">
     </a>
 
-    <?php $url = $_SERVER["REQUEST_URI"]; ?>
     <?php include __DIR__ . "/dashboard/navegacion.php"; ?>
     <div class="hello-world">
 

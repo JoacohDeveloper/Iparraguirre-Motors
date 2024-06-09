@@ -40,7 +40,7 @@
         </a>
 
     </div>
-    <a title="Settings" class="aside-element rounded" href="/dashboard/user-settings">
+    <a title="Settings" class="aside-element rounded" href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">
         <img src="/build/src/images/settings.svg" alt="Settings">
         <p>Settings</p>
     </a>

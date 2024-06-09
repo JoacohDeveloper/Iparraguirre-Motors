@@ -21,6 +21,10 @@ footer {
 .dashboard-footer {
   display: flex;
 }
+.dashboard-footer .navegacion {
+  display: none;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -43,10 +47,6 @@ footer {
 }
 
 @media screen and (max-width: 1024px) {
-  .options {
-    /* width: 100%; */
-    /* margin-left: 3rem; */
-  }
   .card {
     width: 100%;
   }
@@ -307,4 +307,19 @@ footer {
   .account > ul {
     right: 1rem;
   }
+}
+
+.dark .navegacion-dashboard img {
+  filter: invert(98%) sepia(7%) saturate(11%) hue-rotate(62deg) brightness(107%)
+    contrast(98%);
+}
+.dark .navegacion-dashboard .account > p {
+  color: #f2f2f2;
+}
+.dark .navegacion-dashboard ul li:hover {
+  background-color: #100f0f;
+}
+
+.dark .dashboard-title h3 {
+  color: #f2f2f2;
 }

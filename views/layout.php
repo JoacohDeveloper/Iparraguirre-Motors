@@ -24,7 +24,7 @@
 
 <body>
 
-    <?php include __DIR__ . "/componentes/header.php" ?>
+    <?php include implementComp("header.php"); ?>
 
     <main>
         <?php echo $contenido; ?>
@@ -39,7 +39,7 @@
         }
     }
     ?>
-    <?php include __DIR__ . "/componentes/footer.php";
+    <?php include implementComp("footer.php");
     footer();
     ?>
 
