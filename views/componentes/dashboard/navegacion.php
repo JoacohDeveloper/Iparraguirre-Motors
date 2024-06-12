@@ -38,8 +38,8 @@
                 </li>
             </ul>
         </li>
-        <li class="account" title="Your Profile"><a href="#" title="profile image" class="card loading profile-img rounded">
-
+        <li class="account" title="Your Profile"><a href="#" title="profile image" class="card profile-img rounded">
+                <img src="<?php echo $_SESSION["usuario"]->getImagen() ?>" alt="<?php echo $_SESSION["usuario"]->getNombreImagen() ?>">
             </a>
             <p>Welcome, <?php echo $username ? $username . "." : "..."; ?></p>
 

@@ -140,6 +140,11 @@ abstract class AuthenticationController
         $router->render("auth/verificar");
     }
 
+
+    public static function modificarUsuario()
+    {
+    }
+
     public static function logout()
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {

@@ -195,4 +195,19 @@ class User extends ActiveRecord
     {
         return $this->full_name;
     }
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function getNombreImagen()
+    {
+        return $this->titulo_imagen;
+    }
+
+    public function getNombreImagen_Url()
+    {
+        return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
+    }
 }

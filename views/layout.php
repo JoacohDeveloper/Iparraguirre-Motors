@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="/build/css/normalize.css">
     <link rel="stylesheet" href="/build/css/globals.css">
     <?php
+    //script loader
+    if (isset($scripts) && count($scripts) != 0) {
+        foreach ($scripts as $script) {
+
+            $file = "/build/js/$script.js";
+            echo "<script defer src='$file'></script>";
+        }
+    }
+    ?>
+    <?php
     //styles loader
 
     if (isset($styles) && count($styles) != 0) {
@@ -29,16 +39,7 @@
     <main>
         <?php echo $contenido; ?>
     </main>
-    <?php
-    //script loader
-    if (isset($scripts) && count($scripts) != 0) {
-        foreach ($scripts as $script) {
 
-            $file = "/build/js/$script.js";
-            echo "<script src='$file'></script>";
-        }
-    }
-    ?>
     <?php include implementComp("footer.php");
     footer();
     ?>

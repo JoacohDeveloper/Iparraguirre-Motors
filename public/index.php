@@ -57,6 +57,10 @@ $router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agreg
 
 $router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
 
+$router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);
+
+$router->get("/dashboard/user-settings/usuario", [DashboardController::class, "getSettingsFromUserJson"]);
+
 //tienda
 
 $router->get("/tienda", [TiendaController::class, "tienda"]);

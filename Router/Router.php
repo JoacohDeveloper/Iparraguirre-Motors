@@ -23,7 +23,7 @@ class Router
 
 
         session_start();
-        $rutasProtegidas = ["/dashboard"];
+        $rutasProtegidas = ["/dashboard", "/dashboard/user-settings", "/dashboard/user-settings/usuario/modificar", "/dashboard/user-settings/usuario"];
         $adminRoutes = [];
         $apiRoutes = ["/api/v1/vehicles"];
 
