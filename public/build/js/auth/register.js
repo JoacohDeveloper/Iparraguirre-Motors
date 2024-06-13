@@ -54,6 +54,10 @@ formularioRegister.addEventListener("submit", async e => {
             })
             const data = await response.json()
 
+            console.log(response)
+            console.log(data)
+
+
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -68,11 +72,11 @@ formularioRegister.addEventListener("submit", async e => {
 
             } else if (data?.message == "succesfuly") {
                 window.location.href = "/"
-
             }
 
 
         } catch (error) {
+            console.log(error)
             addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")

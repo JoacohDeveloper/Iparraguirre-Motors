@@ -38,5 +38,5 @@
             <a class="opposite" href="/auth/login">Log In</a>
         </form>
     </section>
-    <?php include str_replace("auth", "", __DIR__) . "componentes\\error_toast.php"; ?>
+    <?php implementComp("error_toast.php") ?>
 </div>

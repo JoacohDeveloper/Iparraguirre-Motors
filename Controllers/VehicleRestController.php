@@ -12,7 +12,7 @@ abstract class VehicleRestController
     public static function vehicles()
     {
 
-        $vehicleId = intval($_GET["id"]) ?? null;
+        $vehicleId = intval(isset($_GET["id"]) ? $_GET["id"] : 0) ?? null;
         $vehicleName = $_GET["name"] ?? null;
         $vehicles = Vehicle::getAllVehicles();
 

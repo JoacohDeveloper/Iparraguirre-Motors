@@ -54,4 +54,74 @@ abstract class DashboardController
 
         ]);
     }
+
+    public static function userSettings(Router $router)
+    {
+
+        $uuid = $_GET["u"];
+        $usuario = $_SESSION["usuario"];
+
+        $fullName = $usuario->getFullname();
+        $imagen = $usuario->getNombreImagen_Url();
+        $fullNameExplode = explode(" ", $fullName);
+        $firstName = $fullNameExplode[0];
+        $lastName = $fullNameExplode[1] ?? "";
+        $email = $usuario->getEmail();
+
+        if (!isset($uuid)) {
+            header("Location: /dashboard");
+        } else if (!isset($usuario)) {
+            header("Location: /");
+        } else if ($uuid != $usuario->getUUID()) header("Location: /dashboard");
+
+        $router->render("/dashboard/settings/index", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/index"],
+            "scripts" => ["dashboard/index", "dashboard/settings/index"],
+            "username" => $usuario->getUsername(),
+            "fullname" => $fullName,
+            "firstname" => $firstName,
+            "lastname" => $lastName,
+            "email" => $email,
+            "imagen" => $imagen,
+            "title" => "Iparraguirre Motors | Settings",
+            "description" => "User settings page for admins in Iparraguirre Motors"
+
+        ]);
+    }
+
+    public static function getSettingsFromUserJson()
+    {
+        $uuid = $_GET["u"];
+        $usuario = $_SESSION["usuario"];
+
+        $fullName = $usuario->getFullname();
+        $imagen = $usuario->getNombreImagen_Url();
+        $fullNameExplode = explode(" ", $fullName);
+        $firstName = $fullNameExplode[0];
+        $lastName = $fullNameExplode[1] ?? "";
+        $email = $usuario->getEmail();
+
+        if (!isset($uuid)) {
+            echo json_encode(["error" => "Unauthorized"]);
+            exit;
+        } else if (!isset($usuario)) {
+            echo json_encode(["error" => "Unauthorized"]);
+            exit;
+        } else if ($uuid != $usuario->getUUID()) {
+            echo json_encode(["error" => "Unauthorized"]);
+            exit;
+        }
+
+        $user = [
+            "username" => $usuario->getUsername(),
+            "fullname" => $fullName,
+            "firstname" => $firstName,
+            "lastname" => $lastName,
+            "email" => $email,
+            "imagen" => $imagen
+        ];
+
+        echo json_encode($user);
+        exit;
+    }
 }

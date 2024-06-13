@@ -23,13 +23,15 @@ class Router
 
 
         session_start();
-        $rutasProtegidas = ["/dashboard"];
+        $rutasProtegidas = ["/dashboard", "/dashboard/user-settings", "/dashboard/user-settings/usuario/modificar", "/dashboard/user-settings/usuario"];
         $adminRoutes = [];
         $apiRoutes = ["/api/v1/vehicles"];
 
         $method = $_SERVER["REQUEST_METHOD"];
         $urlActual = $_SERVER["PATH_INFO"] ?? "/";
-
+        if (str_ends_with($urlActual, "/") && $urlActual != "/") {
+            $urlActual = rtrim($urlActual, "/");
+        }
 
         //validar si el usuario se encuentra en una ruta protegida para ver si esta logeado
         if (in_array($urlActual, $rutasProtegidas)) {

@@ -7,9 +7,7 @@
             </div>
         </div>
 
-        <?php include str_replace("\dashboard\\product-managment", "", __DIR__) .  "\componentes\\footer.php";
-
-        footer("dashboard-footer");
+        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
         ?>
     </div>
 

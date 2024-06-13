@@ -147,6 +147,11 @@ footer {
   width: 60%;
 }
 
+.dark .not_found a {
+  color: #fff;
+  border: 1px solid #fff;
+}
+
 .not_found div {
   width: 60%;
   display: flex;
@@ -602,6 +607,10 @@ header .brgMenu {
   color: #333;
 }
 
+.dark .message .text.text-1 {
+  color: #fff;
+}
+
 .toast .close {
   position: absolute;
   top: 10px;
@@ -672,7 +681,7 @@ header .brgMenu {
   right: 0;
   gap: 0.2rem;
   /* left: 0; */
-  /* z-index: -1; */
+  z-index: 1000;
   bottom: 1rem;
   /* width: %; */
   height: calc(100svh - 3rem);
@@ -698,11 +707,15 @@ header .brgMenu {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 100;
+    /* z-index: 1000; */
     /* bottom: 1rem; */
     /* width: %; */
     bottom: unset;
     height: auto;
     margin-top: 4rem;
   }
+}
+
+.dark .text {
+  color: #fff;
 }

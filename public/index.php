@@ -14,7 +14,7 @@ use Controllers\VehiclesController;
 use \Router\Router;
 use Controllers\VehicleRestController;
 
-// echo phpinfo();
+//echo phpinfo();
 
 $router = new Router();
 
@@ -49,9 +49,17 @@ $router->get("/dashboard", [DashboardController::class, "index"]);
 $router->get("/dashboard/product-managment", [DashboardController::class, 'productManagment']);
 
 $router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
+
 $router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 
 
+//dashboard user settings
+
+$router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
+
+$router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);
+
+$router->get("/dashboard/user-settings/usuario", [DashboardController::class, "getSettingsFromUserJson"]);
 
 //tienda
 
@@ -61,6 +69,7 @@ $router->get("/tienda", [TiendaController::class, "tienda"]);
 //Rest Vehicles
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
+
 
 
 

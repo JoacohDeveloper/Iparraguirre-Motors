@@ -1,5 +1,5 @@
 <div class="container">
-    <?php include str_replace("\dashboard\\vehicles", "", __DIR__) .  "\componentes\dashboard\aside.php"; ?>
+    <?php implementComp("dashboard\aside.php"); ?>
 
     <div class="dashboard-content">
         <div class="dashboard-fit">
@@ -10,11 +10,11 @@
 
             <div class="errores">
                 <?php
-                if (isset($errores)) {
-                    foreach ($errores as $key => $value) {
-                        echo "<div class='error'>$value</div>";
-                    }
-                } ?>
+                // if (isset($errores)) {
+                //     foreach ($errores as $key => $value) {
+                //         echo "<div class='error'>$value</div>";
+                //     }
+                // } ?>
             </div>
 
             <form action="/dashboard/agregar-vehiculo" method="POST" id="f_addvehicle">
@@ -81,9 +81,7 @@
                 <input type="submit" value="Registrar">
             </form>
         </div>
-        <?php include str_replace("\dashboard\\vehicles", "", __DIR__) .  "\componentes\\footer.php";
-
-        footer("dashboard-footer");
+        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
         ?>
     </div>
 </div>

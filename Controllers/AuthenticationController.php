@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Controllers;
 
 use Models\User;
@@ -26,9 +25,9 @@ abstract class AuthenticationController
             $errores = User::validarCampos($email, $password);
 
             if (empty($errores)) {
+
                 $usuario = User::getUser($email);
                 if (isset($usuario)) {
-
                     if ($usuario->validarPassword($password)) {
                         $_SESSION["usuario"] = $usuario;
                         $_SESSION["loggedIn"] = true;
@@ -80,11 +79,9 @@ abstract class AuthenticationController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = new User($_POST);
             $errores = $usuario->validate();
-
             if (empty($errores)) {
                 //no hay errores del servidor
                 $result = User::getUser($usuario->getEmail());
-                // logg($result);
                 if (!isset($result)) {
 
                     $usuario->passwordHash();
@@ -92,30 +89,31 @@ abstract class AuthenticationController
                     if ($usuario->crearUsuario()) {
                         $_SESSION["usuario"] = $usuario;
                         $_SESSION["loggedIn"] = true;
-                        // header("location: /");
                         $response = ["message" => "succesfuly"];
-                        header('Content-Type: application/json; charset=utf-8');
-                        echo json_encode($response);
+                        // header('Content-Type: application/json; charset=utf-8');
+                        
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                         $response["errores"] = $errores;
-                        header('Content-Type: application/json; charset=utf-8');
-                        echo json_encode($response);
+                        // header('Content-Type: application/json; charset=utf-8');
+                        //echo json_encode($response);
                     }
                 } else {
                     $errores["already_register"] = "El email ingresado ya esta registrado";
-
                     $response["errores"] = $errores;
-                    header('Content-Type: application/json; charset=utf-8');
-                    echo json_encode($response);
+                    // header('Content-Type: application/json; charset=utf-8');
+                    //echo json_encode($response);
                 }
             } else {
                 $response["errores"] = $errores;
-                header('Content-Type: application/json; charset=utf-8');
-                echo json_encode($response);
+                // header('Content-Type: application/json; charset=utf-8');
+                //echo json_encode($response);
             }
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($response);
             exit;
-        } else {
+
+        } 
 
             $router->render("auth/register", [
                 "scripts" => ["auth/index", "auth/register"],
@@ -125,7 +123,10 @@ abstract class AuthenticationController
                 "title" => "Iparraguirre Motors | Register",
                 "description" => "Registrate en Iparraguirre Motors!"
             ]);
-        }
+        
+
+           
+        
     }
 
     public static function recuperar(Router $router)
@@ -142,6 +143,11 @@ abstract class AuthenticationController
         $router->render("auth/verificar");
     }
 
+
+    public static function modificarUsuario()
+    {
+    }
+
     public static function logout()
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
@@ -153,3 +159,5 @@ abstract class AuthenticationController
         }
     }
 }
+
+

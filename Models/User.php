@@ -22,6 +22,7 @@ class User extends ActiveRecord
 
     protected $email;
 
+    protected $token;
     protected $password;
 
     protected $re_password;
@@ -57,8 +58,9 @@ class User extends ActiveRecord
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
         $this->isAdmin = 0;
+        $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
-        $this->imagen = __DIR__ . "/build/src/users/default.jpg";
+        $this->imagen = "\build\src\images\defaultUser.png";
         $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 
@@ -66,6 +68,7 @@ class User extends ActiveRecord
     {
         return $this->email;
     }
+
 
     public function gen_uuid()
     { //
@@ -106,6 +109,11 @@ class User extends ActiveRecord
         $this->uuid = $uuid;
     }
 
+
+    public function getUUID()
+    {
+        return $this->uuid;
+    }
 
     public function validate()
     {
@@ -183,5 +191,25 @@ class User extends ActiveRecord
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function getFullName()
+    {
+        return $this->full_name;
+    }
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function getNombreImagen()
+    {
+        return $this->titulo_imagen;
+    }
+
+    public function getNombreImagen_Url()
+    {
+        return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
 }
