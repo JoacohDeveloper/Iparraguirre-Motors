@@ -1,4 +1,4 @@
-Integrantes: Joaquín Álvarez, Francisco Bergara, Agustin Banchero, Santiago Vázquez, Liam Brum, Pablo Rodriguez.
+Integrantes: Joaquín Álvarez, Francisco Bergara, Agustin Banchero, Santiago Vázquez, Liam Brun, Pablo Rodriguez, Lautaro Cancela.
 Temática: Se trabajara con una automotora de ventas de autos clásicos, de lujo y exóticos. La razón es debido a que en Uruguay no esta fomentado el uso de autos clásicos y se busca contribuir a dicha afición. Gracias a esto, hay muy poca competencia y un gran mercado.
 Objetivo: Se busca hacer un sistema de reserva de test drive para el cliente, de esta manera podrá probar el vehículo cuando el lo deseé.
 Se intentará incorporar un sistema en que los clientes puedan solicitar un auto que deseen, para que la automotora lo consiga.
