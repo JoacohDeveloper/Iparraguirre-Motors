@@ -281,6 +281,7 @@
 .settings_forms {
   position: absolute;
   display: flex;
+  height: calc(100vh + 6rem);
   z-index: 1100;
   justify-content: center;
   align-items: center;
@@ -292,35 +293,28 @@
 
 .form-container {
   min-width: 15rem;
-  position: relative;
+  /* position: relative; */
   width: 40%;
-  min-height: 60vh;
+  height: 70vh;
   background-color: #fff;
+  overflow-y: auto;
   border-radius: 0.4rem;
 }
 
 .close__settings_forms {
   position: absolute;
-  right: -0.5rem;
-  top: -0.5rem;
-  width: 2rem;
-  height: 2rem;
+  right: 1rem;
+  top: 4rem;
+  width: 1.3rem;
+  height: 1.3rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #202020;
   cursor: pointer;
-  background-color: #202020;
-  box-shadow: 0 0 5px #000;
-  transition: background-color 0.3s ease;
   p {
     color: #fff;
     text-transform: uppercase;
-  }
-
-  &:hover {
-    background-color: #000;
   }
 }
 
@@ -359,14 +353,21 @@
   .close__settings_forms {
     top: 0.5rem;
     right: 0.5rem;
+    box-shadow: 0 0 5px #000;
+    border: 1px solid #202020;
+    background-color: #202020;
+
+    &:hover {
+      background-color: #000;
+    }
   }
 }
 
 .form-container > form {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
-  align-items: center;
+  padding: 0 4rem;
   flex-direction: column;
 }
 
@@ -375,11 +376,10 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 5rem;
-
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
-  border: 1px solid #000;
+  border: 1px solid #ccc;
 
   * {
     cursor: pointer;
@@ -420,6 +420,15 @@
   }
 }
 
+.edit-resume__banner {
+  /* background-color: #f2f2f2; */
+  display: flex;
+  width: 100%;
+  padding: 0.4rem 0;
+  justify-content: center;
+  align-items: center;
+}
+
 /* aside bug */
 
 .dashboard-content {
@@ -429,4 +438,56 @@
 .aside {
   height: calc(100vh - 3rem);
   margin-top: 3rem;
+}
+
+.form-container > form > p {
+  margin: 1rem 0;
+  color: #202020;
+  font-weight: bold;
+}
+
+.form-container > form {
+  gap: 1rem;
+  border: 2px solid #f2f2f2;
+  padding: 1.5rem 4rem;
+}
+
+.form-container > form > label {
+  color: #ccc;
+  margin-bottom: -0.5rem;
+}
+
+.form-container > form > input:not(input[type="file"]),
+textarea {
+  outline: none;
+  padding: 0.4rem 0.3rem;
+  border-radius: 0.3rem;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.form-container > form > button {
+  all: unset;
+  text-align: center;
+  background-color: #202020;
+  color: #f2f2f2;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  border-radius: 0.3rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  &:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+  }
+}
+
+.toast {
+  z-index: 1000;
 }

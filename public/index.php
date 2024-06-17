@@ -72,6 +72,12 @@ $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
 
 
 
+//faq
+
+$router->get("/faq", function () {
+    header("Location: /faq.html");
+});
+
 
 
 $router->comprobarRutas();

@@ -82,6 +82,7 @@ brgMenu.forEach(item => {
     item.addEventListener("click", () => {
         mobileMenu.classList.toggle("menu-disabled")
         document.body.classList.toggle("body-fixed")
+        document.body.classList.toggle("blured")
     })
 })
 

@@ -7,7 +7,7 @@
         <form method="POST" action="" id="regForm">
             <div>
                 <label class="inputs_txt" id="fullname_txt">Fullname</label>
-                <input class="inputs" type="text" name="fullname" placeholder="Nombre Completo" value="<?php echo $campos["fullname"] ?? "" ?>">
+                <input class="inputs" type="text" name="full_name" placeholder="Nombre Completo" value="<?php echo $campos["full_name"] ?? "" ?>">
                 <div class="input-underline"></div>
             </div>
             <div>

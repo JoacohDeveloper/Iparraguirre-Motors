@@ -100,6 +100,32 @@ class ActiveRecord
         ];
     }
 
+    public function actualizar($uuid)
+    {
+        // Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+
+        // Iterar para ir agregando cada campo de la BD
+        $valores = [];
+        foreach ($atributos as $key => $value) {
+            $valores[] = "$key=$value";
+        }
+
+        // Consulta SQL
+        $query = "UPDATE " . static::$tabla . " SET ";
+        $query .=  join(', ', $valores);
+        $query .= " WHERE uuid = '$uuid'";
+        //$query .= " LIMIT 1";
+
+        // Actualizar BD
+        $resultado = self::$db->query($query);
+        // $resultado = $query;
+        return [
+            'resultado' =>  $resultado
+        ];
+    }
+
+
     public function getAll($limit = null)
     {
         $query = "SELECT * FROM " . static::$tabla;
@@ -117,7 +143,7 @@ class ActiveRecord
         $resultado = '';
         if (!is_null($this->uuid)) {
             // actualizar
-            // $resultado = $this->actualizar();
+            $resultado = $this->actualizar();
         } else {
             // Creando un nuevo registro
             $resultado = $this->crear();

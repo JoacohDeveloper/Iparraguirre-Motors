@@ -365,6 +365,14 @@ header .brgMenu {
     height: 100svh;
     overflow-y: hidden;
   }
+
+  .blured::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+  }
 }
 
 .fixed {

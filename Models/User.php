@@ -47,7 +47,7 @@ class User extends ActiveRecord
     {
         $this->uuid = $args["uuid"] ?? null;
         $this->username = $args["username"] ?? "";
-        $this->full_name = $args["fullname"] ?? "";
+        $this->full_name = $args["full_name"] ?? "";
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
@@ -60,7 +60,7 @@ class User extends ActiveRecord
         $this->isAdmin = 0;
         $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
-        $this->imagen = "\build\src\images\defaultUser.png";
+        $this->imagen = $args["imagen"] ?? "\build\src\images\defaultUser.png";
         $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 
@@ -124,7 +124,7 @@ class User extends ActiveRecord
             $errors["username"] = "El usuario debe tener minimo 5 caracteres.";
         }
         if (empty($this->full_name)) {
-            $errors["fullname"] = "el campo nombre completo es obligatorio.";
+            $errors["full_name"] = "el campo nombre completo es obligatorio.";
         }
         if (empty($this->email)) {
             $errors["email"] = "el campo email es obligatorio.";
@@ -132,11 +132,14 @@ class User extends ActiveRecord
         if (empty($this->password)) {
             $errors["password"] = "el campo password es obligatorio.";
         }
-        if (empty($this->re_password)) {
-            $errors["re_password"] = "el campo repetir password es obligatorio.";
-        }
-        if ($this->re_password != $this->password) {
-            $errors["not_equal"] = "las contraseñas no coinciden.";
+
+        if (!isset($this->uuid)) {
+            if (empty($this->re_password)) {
+                $errors["re_password"] = "el campo repetir password es obligatorio.";
+            }
+            if ($this->re_password != $this->password) {
+                $errors["not_equal"] = "las contraseñas no coinciden.";
+            }
         }
 
         return $errors;
@@ -167,6 +170,11 @@ class User extends ActiveRecord
     {
         $this->gen_uuid();
         return $this->crear();
+    }
+
+    public function actualizarUsuario()
+    {
+        return $this->actualizar($this->uuid);
     }
 
     public static function validarCampos($email, $password)

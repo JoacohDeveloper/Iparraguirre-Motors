@@ -91,7 +91,7 @@ abstract class AuthenticationController
                         $_SESSION["loggedIn"] = true;
                         $response = ["message" => "succesfuly"];
                         // header('Content-Type: application/json; charset=utf-8');
-                        
+
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                         $response["errores"] = $errores;
@@ -112,21 +112,16 @@ abstract class AuthenticationController
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode($response);
             exit;
+        }
 
-        } 
-
-            $router->render("auth/register", [
-                "scripts" => ["auth/index", "auth/register"],
-                "styles" => ["auth/index"],
-                "errores" => $errores,
-                "campos" => $campos,
-                "title" => "Iparraguirre Motors | Register",
-                "description" => "Registrate en Iparraguirre Motors!"
-            ]);
-        
-
-           
-        
+        $router->render("auth/register", [
+            "scripts" => ["auth/index", "auth/register"],
+            "styles" => ["auth/index"],
+            "errores" => $errores,
+            "campos" => $campos,
+            "title" => "Iparraguirre Motors | Register",
+            "description" => "Registrate en Iparraguirre Motors!"
+        ]);
     }
 
     public static function recuperar(Router $router)
@@ -146,6 +141,50 @@ abstract class AuthenticationController
 
     public static function modificarUsuario()
     {
+        $errores = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $usuario = $_SESSION["usuario"] ?? null;
+            $usuarioDB = User::getUser($usuario->getEmail());
+            if (!isset($usuario)) return;
+
+            $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
+            if (!file_exists($dirname)) {
+                mkdir($dirname);
+            }
+
+            $filename = $_FILES["image"]["name"];
+            $fileExt = explode(".", $_FILES["image"]["name"])[1];
+            $fileHash = md5($filename . rand(0, 50) . gmdate("dd-MM-YYYY"));
+
+
+            $nuevaImagen = $fileHash . ".$fileExt";
+            $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
+            $x = str_replace("\\", "/", $dirname . $nuevaImagen);
+            $_POST["imagen"] = "/build/src/images/users/" . $nuevaImagen;
+            $usuarioDB->sincronizar($_POST);
+
+            $errores = $usuarioDB->validate();
+
+
+            if (empty($errores)) {
+                //no hay errores del servidor
+                $resultado = $usuarioDB->actualizarUsuario();
+                if ($resultado) {
+
+                    unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $usuario->getImagen()));
+
+                    $res = move_uploaded_file($_FILES["image"]["tmp_name"], $x);
+
+                    $_SESSION["usuario"] = $usuarioDB;
+                    echo json_encode(["message" => "ok", "file_uploaded" => $res]);
+                    exit;
+                }
+            }
+        }
+        echo json_encode(["message" => "error", "errores" => $errores]);
+
+        exit;
     }
 
     public static function logout()
@@ -159,5 +198,3 @@ abstract class AuthenticationController
         }
     }
 }
-
-

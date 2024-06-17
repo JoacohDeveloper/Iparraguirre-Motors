@@ -1,6 +1,6 @@
 <?php
 
-putenv('PORT=3306');
+putenv('PORT=3307');
 putenv('DB_NAME=db_utu2024');
 
 function dbConnection()
@@ -17,7 +17,7 @@ function dbConnection()
     ];
 
     $user = "root";
-    $password = "";
+    $password = "1248";
 
     try {
         $db = new PDO($dsn, $user, $password, $options);

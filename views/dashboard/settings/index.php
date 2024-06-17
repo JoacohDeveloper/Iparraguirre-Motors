@@ -1,7 +1,6 @@
 <div class="container settingsContainer">
     <?php implementComp("dashboard/aside.php") ?>
 
-
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">

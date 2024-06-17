@@ -36,7 +36,7 @@ class Router
         //validar si el usuario se encuentra en una ruta protegida para ver si esta logeado
         if (in_array($urlActual, $rutasProtegidas)) {
 
-            $loggedIn = $_SESSION["loggedIn"];
+            $loggedIn = $_SESSION["loggedIn"] ?? null;
 
             if (!isset($loggedIn) || !$loggedIn) {
                 //devuelve el usuario a la pagina de inicio con codigo 'Unauthorized'
