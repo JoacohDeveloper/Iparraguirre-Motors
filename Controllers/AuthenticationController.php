@@ -187,6 +187,10 @@ abstract class AuthenticationController
         exit;
     }
 
+    public static function isDeleted() {
+        
+    }
+
     public static function logout()
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {

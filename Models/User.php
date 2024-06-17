@@ -195,6 +195,9 @@ class User extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
+    public function deleteUser(){
+        
+    }
 
     public function getUsername()
     {
