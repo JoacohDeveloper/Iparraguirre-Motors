@@ -25,7 +25,6 @@ abstract class AuthenticationController
             $errores = User::validarCampos($email, $password);
 
             if (empty($errores)) {
-
                 $usuario = User::getUser($email);
                 if (isset($usuario)) {
                     if ($usuario->validarPassword($password)) {
@@ -185,10 +184,6 @@ abstract class AuthenticationController
         echo json_encode(["message" => "error", "errores" => $errores]);
 
         exit;
-    }
-
-    public static function isDeleted() {
-        
     }
 
     public static function logout()

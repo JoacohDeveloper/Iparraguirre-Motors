@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Router\Router;
 use Models\Vehicle;
+use Models\User;
 
 abstract class DashboardController
 {
@@ -46,7 +47,7 @@ abstract class DashboardController
         }
         $router->render("dashboard/vehicles/add-vehicle", [
             "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index"],
+            "scripts" => ["dashboard/index", "dashboard/vehicle"],
             "title" => "Dashboard | Agregar Vehiculo",
             "description" => "Pagina de dashboard Iparraguirre Motors",
             "errors" => $errores,
@@ -55,7 +56,6 @@ abstract class DashboardController
 
     public static function userSettings(Router $router)
     {
-
         $uuid = $_GET["u"];
         $usuario = $_SESSION["usuario"];
         $fullName = $usuario->getFullname();
@@ -84,6 +84,36 @@ abstract class DashboardController
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
 
+        ]);
+    }
+
+    public static function userDeleting(Router $router) {
+        $errores = [];
+        $usuario = $_SESSION["usuario"];
+        $result =  ["Fail"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+            if (isset($usuario)){
+                if($usuario->getFullName() == $_POST["Nombre"]){
+                    if($usuario->validarPassword($_POST["Password"])){
+                        $result = $usuario->deleteUser();
+                        if($result){
+                            echo json_encode(["resultado" => "Eliminado correctamente"]);
+                            exit;
+                        } else {
+                            echo json_encode(["resultado" => "Ha ocurrido un error"]);
+                            exit;
+                        }
+                    }
+                }
+                echo json_encode(["resultado" => $result]);
+                exit;
+            }
+        }
+
+        $router->render("/dashboard/settings/user-delete", [
+            "scripts" => ["dashboard/settings/index", "dashboard/index"],
+            "title" => "Iparraguirre Motors | Settings",
+            "description" => "User settings page for admins in Iparraguirre Motors"
         ]);
     }
 

@@ -138,6 +138,23 @@ class ActiveRecord
     }
 
 
+    public function eliminar($uuid)
+    {
+        // Consulta SQL
+        $query = "UPDATE " . static::$tabla . " SET ";
+        $query .=  "isDeleted = 1";
+        $query .= " WHERE uuid = '$uuid'";
+        //$query .= " LIMIT 1";
+
+        // Actualizar BD
+        $resultado = self::$db->query($query);
+        // $resultado = $query;
+        return [
+            'resultado' =>  $resultado
+        ];
+    }
+
+
     public function guardar()
     {
         $resultado = '';
