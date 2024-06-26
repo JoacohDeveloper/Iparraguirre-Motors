@@ -11,6 +11,8 @@ abstract class DashboardController
 
     public static function index(Router $router)
     {
+        if(!isset($_SESSION["usuario"])) header("location: /auth/login");
+
         $router->render("dashboard/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],
             "scripts" => ["dashboard/index"],
@@ -25,32 +27,6 @@ abstract class DashboardController
             "styles" => ["dashboard/index", "dashboard/aside"],
             "scripts" => ["dashboard/index"],
             "title" => "Dashboard | Product Managment"
-        ]);
-    }
-
-    public static function agregarVehiculo(Router $router)
-    {
-        $errores = [];
-        $campos = [];
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $vehicle = new Vehicle($_POST);
-            $errores = $vehicle->validate();
-            if (empty($errores)) {
-                if ($vehicle->registrarVehicle()) {
-                    header("location: /dashboard/index");
-                } else {
-                    $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
-                }
-            } else {
-                $campos = $_POST;
-            }
-        }
-        $router->render("dashboard/vehicles/add-vehicle", [
-            "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index", "dashboard/vehicle"],
-            "title" => "Dashboard | Agregar Vehiculo",
-            "description" => "Pagina de dashboard Iparraguirre Motors",
-            "errors" => $errores,
         ]);
     }
 
@@ -85,6 +61,39 @@ abstract class DashboardController
             "description" => "User settings page for admins in Iparraguirre Motors"
 
         ]);
+    }
+
+    public static function agregarVehiculo(Router $router)
+    {
+        $errores = [];
+        $campos = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            header('Content-Type: application/json; charset=utf-8');
+            $vehicle = new vehicle($_POST);
+            $errores = $vehicle->validate();
+            if (empty($errores)) {
+                $result = $vehicle->registrarVehicle();
+                if($result){
+                    echo json_encode(["message" => "succesfuly"]);
+                    exit;
+                } else {
+                    echo json_encode(["error" => "Ha ocurrido un error"]);
+                    exit;
+                }
+            } else {
+                echo json_encode(["message" => "error", "errores" => $errores]);
+                exit;
+            }
+        }
+
+        $router->render("dashboard/vehicles/add-vehicle", [
+            "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
+            "scripts" => ["dashboard/index", "dashboard/vehicle"],
+            "title" => "Dashboard | Agregar Vehiculo",
+            "description" => "Pagina de dashboard Iparraguirre Motors",
+            "errors" => $errores,
+        ]);
+        
     }
 
     public static function userDeleting(Router $router) {

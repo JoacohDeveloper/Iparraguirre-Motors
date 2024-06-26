@@ -148,9 +148,11 @@ async function submitEventHandler(event) {
             title:"Failure",
             error:"El campo caballos de fuerza se encuentra vacio"
         })
+        
 
     }
-    
+
+        
     if(error.length != 0){
         addToast(error);
     } else {
@@ -160,6 +162,21 @@ async function submitEventHandler(event) {
                 body: formdata
             })
             const data = await response.json();
+            if (data?.errores) {
+                const errors = Object?.values(data?.errores).map(err => {
+                    const error = document.createElement("div");
+                    error.classList.add("error")
+                    error.textContent = err
+
+                    // errores.appendChild(error)
+
+                    return { title: "Failure", error: err }
+                })
+                addToast(errors);
+
+            } else if (data?.message == "succesfuly") {
+                window.location.href = "/dashboard"
+            }
         }
         catch(err){
             addToast([{
