@@ -138,8 +138,6 @@ class ActiveRecord
     }
 
 
-<<<<<<< HEAD
-=======
     public function eliminar($uuid)
     {
         // Consulta SQL
@@ -156,7 +154,6 @@ class ActiveRecord
         ];
     }
 
->>>>>>> origin/add-vehicle
 
     public function guardar()
     {
