@@ -66,7 +66,6 @@ abstract class AuthenticationController
     }
 
 
-
     public static function register(Router $router)
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
@@ -146,6 +145,7 @@ abstract class AuthenticationController
 
             $usuario = $_SESSION["usuario"] ?? null;
             $usuarioDB = User::getUser($usuario->getEmail());
+
             if (!isset($usuario)) return;
 
             $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
@@ -186,6 +186,10 @@ abstract class AuthenticationController
 
         exit;
     }
+
+
+
+
 
     public static function logout()
     {
