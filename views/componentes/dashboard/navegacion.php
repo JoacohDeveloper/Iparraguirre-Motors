@@ -39,12 +39,20 @@
             </ul>
         </li>
         <li class="account" title="Your Profile"><a href="#" title="profile image" class="card profile-img rounded">
+<<<<<<< HEAD
                 <img src="<?php echo isset($usuario) ? $usuario->getImagen() : "" ?>" alt="<?php echo isset($usuario) ? $usuario->getNombreImagen() : "" ?>">
+=======
+                <img src="<?php echo $_SESSION["usuario"]->getImagen() ?>" alt="<?php echo $_SESSION["usuario"]->getNombreImagen() ?>">
+>>>>>>> d_changes/add-settings-view
             </a>
             <p>Welcome, <?php echo $username ? $username . "." : "..."; ?></p>
 
             <ul class="sub-dropdown account-dropdown">
+<<<<<<< HEAD
                 <li><a href="/dashboard/user-settings?u=<?php echo isset($usuario) ? $usuario->getUUID() : "" ?>">
+=======
+                <li><a href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">
+>>>>>>> d_changes/add-settings-view
                         <img src="/build/src/images/settings.svg" alt="Settings">
                         <p>Settings</p>
                     </a></li>

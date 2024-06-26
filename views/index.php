@@ -20,6 +20,7 @@
         </div>
     </div>
     <div class="content">
+<<<<<<< HEAD
 
         <div class="content__title">
             <h2>Best Selled</h2>
@@ -44,5 +45,9 @@
             </div>
 
         </div>
+=======
+        <h2>lol</h2>
+
+>>>>>>> d_changes/add-settings-view
     </div>
 </div>

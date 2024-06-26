@@ -34,13 +34,22 @@
 
 <body>
 
+<<<<<<< HEAD
     <?php implementComp("header.php"); ?>
+=======
+    <?php include implementComp("header.php"); ?>
+>>>>>>> d_changes/add-settings-view
 
     <main>
         <?php echo $contenido; ?>
     </main>
 
+<<<<<<< HEAD
     <?php implementComp("footer.php");
+=======
+    <?php include implementComp("footer.php");
+    footer();
+>>>>>>> d_changes/add-settings-view
     ?>
 
 

@@ -281,7 +281,10 @@
 .settings_forms {
   position: absolute;
   display: flex;
+<<<<<<< HEAD
   height: calc(100vh + 6rem);
+=======
+>>>>>>> d_changes/add-settings-view
   z-index: 1100;
   justify-content: center;
   align-items: center;
@@ -293,29 +296,58 @@
 
 .form-container {
   min-width: 15rem;
+<<<<<<< HEAD
   /* position: relative; */
   width: 40%;
   height: 70vh;
   background-color: #fff;
   overflow-y: auto;
+=======
+  position: relative;
+  width: 40%;
+  min-height: 60vh;
+  background-color: #fff;
+>>>>>>> d_changes/add-settings-view
   border-radius: 0.4rem;
 }
 
 .close__settings_forms {
   position: absolute;
+<<<<<<< HEAD
   right: 1rem;
   top: 4rem;
   width: 1.3rem;
   height: 1.3rem;
+=======
+  right: -0.5rem;
+  top: -0.5rem;
+  width: 2rem;
+  height: 2rem;
+>>>>>>> d_changes/add-settings-view
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   cursor: pointer;
+=======
+  border: 1px solid #202020;
+  cursor: pointer;
+  background-color: #202020;
+  box-shadow: 0 0 5px #000;
+  transition: background-color 0.3s ease;
+>>>>>>> d_changes/add-settings-view
   p {
     color: #fff;
     text-transform: uppercase;
   }
+<<<<<<< HEAD
+=======
+
+  &:hover {
+    background-color: #000;
+  }
+>>>>>>> d_changes/add-settings-view
 }
 
 .removed__settings_forms {
@@ -353,6 +385,7 @@
   .close__settings_forms {
     top: 0.5rem;
     right: 0.5rem;
+<<<<<<< HEAD
     box-shadow: 0 0 5px #000;
     border: 1px solid #202020;
     background-color: #202020;
@@ -360,14 +393,22 @@
     &:hover {
       background-color: #000;
     }
+=======
+>>>>>>> d_changes/add-settings-view
   }
 }
 
 .form-container > form {
   width: 100%;
+<<<<<<< HEAD
   /* height: 100%; */
   display: flex;
   padding: 0 4rem;
+=======
+  height: 100%;
+  display: flex;
+  align-items: center;
+>>>>>>> d_changes/add-settings-view
   flex-direction: column;
 }
 
@@ -376,10 +417,18 @@
   justify-content: center;
   align-items: center;
   position: relative;
+<<<<<<< HEAD
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
   border: 1px solid #ccc;
+=======
+  width: 5rem;
+
+  height: 5rem;
+  border-radius: 50%;
+  border: 1px solid #000;
+>>>>>>> d_changes/add-settings-view
 
   * {
     cursor: pointer;
@@ -420,6 +469,7 @@
   }
 }
 
+<<<<<<< HEAD
 .edit-resume__banner {
   /* background-color: #f2f2f2; */
   display: flex;
@@ -429,6 +479,8 @@
   align-items: center;
 }
 
+=======
+>>>>>>> d_changes/add-settings-view
 /* aside bug */
 
 .dashboard-content {
@@ -436,6 +488,7 @@
 }
 
 .aside {
+<<<<<<< HEAD
   height: calc(100vh - 3rem);
   margin-top: 3rem;
 }
@@ -490,4 +543,7 @@ textarea {
 
 .toast {
   z-index: 1000;
+=======
+  height: 100vh;
+>>>>>>> d_changes/add-settings-view
 }

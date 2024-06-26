@@ -1,5 +1,9 @@
 <div class="container">
+<<<<<<< HEAD
     <?php implementComp("dashboard\aside.php"); ?>
+=======
+    <?php include implementComp("dashboard\aside.php"); ?>
+>>>>>>> d_changes/add-settings-view
 
     <div class="dashboard-content">
         <div class="dashboard-fit">
@@ -81,7 +85,13 @@
                 <input type="submit" value="Registrar">
             </form>
         </div>
+<<<<<<< HEAD
         <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
+=======
+        <?php include implementComp("footer.php");
+
+        footer("dashboard-footer");
+>>>>>>> d_changes/add-settings-view
         ?>
     </div>
 </div>
