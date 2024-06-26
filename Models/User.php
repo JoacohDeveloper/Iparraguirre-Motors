@@ -12,7 +12,7 @@ class User extends ActiveRecord
 {
 
     protected static $tabla = "User";
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "telefono", "titulo_imagen", "imagen", "token", "isAdmin", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "telefono", "titulo_imagen", "imagen", "token", "isAdmin"/*, "isDeleted"*/, "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
@@ -34,6 +34,8 @@ class User extends ActiveRecord
     protected $imagen;
 
     protected $isAdmin;
+
+    // protected $isDeleted;
 
     protected $createdAt;
 
@@ -58,6 +60,7 @@ class User extends ActiveRecord
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
         $this->isAdmin = 0;
+        // $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
         $this->imagen = $args["imagen"] ?? "\build\src\images\defaultUser.png";
@@ -195,11 +198,25 @@ class User extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
+    public function deleteUser(){
+        $result = null;
+        try {
+            return $this->eliminar($this->uuid);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+        return $result[0] ?? null;
+    }
 
     public function getUsername()
     {
         return $this->username;
     }
+
+    // public function getDeleted()
+    // {
+    //     return $this->isDeleted;
+    // }
 
     public function getFullName()
     {

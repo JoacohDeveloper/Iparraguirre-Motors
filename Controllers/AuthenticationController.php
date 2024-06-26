@@ -25,7 +25,6 @@ abstract class AuthenticationController
             $errores = User::validarCampos($email, $password);
 
             if (empty($errores)) {
-
                 $usuario = User::getUser($email);
                 if (isset($usuario)) {
                     if ($usuario->validarPassword($password)) {

@@ -4,12 +4,15 @@ namespace Controllers;
 
 use Router\Router;
 use Models\Vehicle;
+use Models\User;
 
 abstract class DashboardController
 {
 
     public static function index(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /auth/login");
+
         $router->render("dashboard/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],
             "scripts" => ["dashboard/index"],
@@ -89,7 +92,6 @@ abstract class DashboardController
 
     public static function userSettings(Router $router)
     {
-
         $uuid = $_GET["u"];
         $usuario = $_SESSION["usuario"];
 
@@ -118,6 +120,69 @@ abstract class DashboardController
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
 
+        ]);
+    }
+
+    public static function agregarVehiculo(Router $router)
+    {
+        $errores = [];
+        $campos = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            header('Content-Type: application/json; charset=utf-8');
+            $vehicle = new vehicle($_POST);
+            $errores = $vehicle->validate();
+            if (empty($errores)) {
+                $result = $vehicle->registrarVehicle();
+                if ($result) {
+                    echo json_encode(["message" => "succesfuly"]);
+                    exit;
+                } else {
+                    echo json_encode(["error" => "Ha ocurrido un error"]);
+                    exit;
+                }
+            } else {
+                echo json_encode(["message" => "error", "errores" => $errores]);
+                exit;
+            }
+        }
+
+        $router->render("dashboard/vehicles/add-vehicle", [
+            "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
+            "scripts" => ["dashboard/index", "dashboard/vehicle"],
+            "title" => "Dashboard | Agregar Vehiculo",
+            "description" => "Pagina de dashboard Iparraguirre Motors",
+            "errors" => $errores,
+        ]);
+    }
+
+    public static function userDeleting(Router $router)
+    {
+        $errores = [];
+        $usuario = $_SESSION["usuario"];
+        $result =  ["Fail"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($usuario)) {
+                if ($usuario->getFullName() == $_POST["Nombre"]) {
+                    if ($usuario->validarPassword($_POST["Password"])) {
+                        $result = $usuario->deleteUser();
+                        if ($result) {
+                            echo json_encode(["resultado" => "Eliminado correctamente"]);
+                            exit;
+                        } else {
+                            echo json_encode(["resultado" => "Ha ocurrido un error"]);
+                            exit;
+                        }
+                    }
+                }
+                echo json_encode(["resultado" => $result]);
+                exit;
+            }
+        }
+
+        $router->render("/dashboard/settings/user-delete", [
+            "scripts" => ["dashboard/settings/index", "dashboard/index"],
+            "title" => "Iparraguirre Motors | Settings",
+            "description" => "User settings page for admins in Iparraguirre Motors"
         ]);
     }
 

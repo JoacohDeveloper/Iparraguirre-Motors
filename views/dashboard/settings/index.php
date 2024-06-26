@@ -14,7 +14,7 @@
                             <li class="selected"><a href="#my_profile">My Profile</a></li>
                             <li><a href="#">Notifications</a></li>
                             <li><a href="#">Security</a></li>
-                            <li class="delete-account"><a href="#">Delete Account</a></li>
+                            <li class="delete-account"><a href="user-delete">Delete Account</a></li>
                         </ul>
                     </nav>
                 </aside>

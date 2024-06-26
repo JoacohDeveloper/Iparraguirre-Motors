@@ -8,11 +8,14 @@ const main = document.body.querySelector("main")
 
 const buttons = document.querySelectorAll(".button_settings");
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
 
 >>>>>>> d_changes/add-settings-view
+=======
+>>>>>>> origin/add-vehicle
 buttons.forEach(button => button.addEventListener("click", formMenu))
 
 
@@ -313,5 +316,52 @@ async function setFormEdit(target, formContainer) {
         console.log(error)
     }
 
+}
 
+//Delete-user
+
+const form_deleteAccount = document.querySelector(".form_deleteAccount");
+
+form_deleteAccount.addEventListener("submit", submitEventHandler)
+
+async function submitEventHandler(event) {
+    event.preventDefault()
+    const formdata = new FormData(form_deleteAccount)
+    const object = {};
+    const error = [];
+    formdata.forEach((value, key) => {
+        object[key] = value
+    });
+    console.log(object)
+    //Errores
+    if(object.Nombre.length == 0){
+        error.push({
+            title:"Failure",
+            error:"El campo nombre se encuentra vacio"
+        })
+    } else if(object.Password.length == 0){
+        error.push({
+            title:"Failure",
+            error:"El campo contraseña se encuentra vacio"
+        })
+    }
+    if(error.length != 0){
+        addToast(error);
+    } else {
+        confirm("¿Estas seguro de que quieres borrar tu cuenta?");
+        try{
+            const response = await fetch("http://localhost:3000/dashboard/user-delete", {
+                method: "POST",
+                body: formdata
+            })
+            const data = await response.json();
+        }
+        catch(err){
+            addToast([{
+                title:"Failure",
+                error:"Ha ocurrido un error"
+            }]);
+        }
+    }
+    
 }

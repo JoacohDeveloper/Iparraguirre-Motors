@@ -1,13 +1,51 @@
-#f_addvehicle {
-  margin-top: 3rem;
-  max-width: 100%;
-  width: 20rem;
-  background-color: #ccc;
-  padding: 1rem;
-  border-radius: 0.8rem;
+.f_addvehicle {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 1.5rem;
+  max-width: 40rem;
 
+  background-color: #cccc;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.grid{
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 2rem;
+  gap: .5rem;
+  height: 100%;
+}
+
+h3{
+  font-size: 2rem;
+}
+
+.grid > label{
+  font-size: 1.1rem;
+  margin-bottom: -.5em;
+}
+.grid > input{
+  padding: .2rem;
+}
+.grid > textarea{
+  height: 3.75rem;
+  resize: none;
+}
+
+#submit{
+  margin: 0 auto;
+  grid-column: span 2;
+  width: 35rem;
+  max-height: 35rem;
+  font-size: 1.5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  transition: ease, 1.2s;
+  &:hover{
+    font-size: 1.55rem;
+    border-radius: 0.8rem;
+    background-color: red;
+  }
 }
