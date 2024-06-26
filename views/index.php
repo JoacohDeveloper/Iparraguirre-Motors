@@ -19,7 +19,9 @@
             </div>
         </div>
     </div>
+    
     <div class="content">
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         <div class="content__title">
@@ -49,5 +51,8 @@
         <h2>lol</h2>
 
 >>>>>>> d_changes/add-settings-view
+=======
+
+>>>>>>> 83e2ccd4170e202ba360dc8464c9285301859dce
     </div>
 </div>
