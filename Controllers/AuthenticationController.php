@@ -140,7 +140,6 @@ abstract class AuthenticationController
 
     public static function modificarUsuario()
     {
-<<<<<<< HEAD
         $errores = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -192,10 +191,6 @@ abstract class AuthenticationController
 
 
 
-=======
-    }
-
->>>>>>> d_changes/add-settings-view
     public static function logout()
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {

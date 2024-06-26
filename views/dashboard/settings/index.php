@@ -1,11 +1,5 @@
 <div class="container settingsContainer">
-<<<<<<< HEAD
     <?php implementComp("dashboard/aside.php") ?>
-=======
-    <?php include implementComp("dashboard/aside.php") ?>
-
-
->>>>>>> d_changes/add-settings-view
 
     <div class="dashboard-content">
         <div class="dashboard-fit">
@@ -33,12 +27,11 @@
                             </div>
                             <div class="profile-resume__data">
                                 <h4><?php echo $fullname . " - " . $username; ?></h4>
-<<<<<<< HEAD
-                                <p><?php echo isset($isAdmin) ? "Admin" : "User"; ?></p>
-=======
-                                <p><?php echo $isAdmin ? "Admin" : "User"; ?></p>
->>>>>>> d_changes/add-settings-view
-                                <p>Lorem ipsum dolor sit.</p>
+                                <<<<<<< HEAD <p><?php echo isset($isAdmin) ? "Admin" : "User"; ?></p>
+                                    =======
+                                    <p><?php echo $isAdmin ? "Admin" : "User"; ?></p>
+                                    >>>>>>> d_changes/add-settings-view
+                                    <p>Lorem ipsum dolor sit.</p>
                             </div>
                         </div>
                         <button class="button_settings profile-resume-configuration__edit" id="edit-resume">
@@ -82,13 +75,7 @@
 
 
         </div>
-<<<<<<< HEAD
         <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
-=======
-        <?php include implementComp("footer.php");
-
-        footer("dashboard-footer");
->>>>>>> d_changes/add-settings-view
         ?>
 
     </div>

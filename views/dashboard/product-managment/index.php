@@ -7,13 +7,7 @@
             </div>
         </div>
 
-<<<<<<< HEAD
         <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
-=======
-        <?php include implementComp("footer.php");
-
-        footer("dashboard-footer");
->>>>>>> d_changes/add-settings-view
         ?>
     </div>
 
