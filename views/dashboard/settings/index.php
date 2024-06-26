@@ -27,11 +27,9 @@
                             </div>
                             <div class="profile-resume__data">
                                 <h4><?php echo $fullname . " - " . $username; ?></h4>
-                                <<<<<<< HEAD <p><?php echo isset($isAdmin) ? "Admin" : "User"; ?></p>
-                                    =======
-                                    <p><?php echo $isAdmin ? "Admin" : "User"; ?></p>
-                                    >>>>>>> d_changes/add-settings-view
-                                    <p>Lorem ipsum dolor sit.</p>
+                                <p><?php echo isset($isAdmin) ? "Admin" : "User"; ?></p>
+                                <p><?php echo $isAdmin ? "Admin" : "User"; ?></p>
+                                <p>Lorem ipsum dolor sit.</p>
                             </div>
                         </div>
                         <button class="button_settings profile-resume-configuration__edit" id="edit-resume">

@@ -1,21 +1,10 @@
 
-<<<<<<< HEAD
 localStorage.removeItem("edit-resume")
-=======
->>>>>>> d_changes/add-settings-view
 
 const main = document.body.querySelector("main")
 
 const buttons = document.querySelectorAll(".button_settings");
 
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-
->>>>>>> d_changes/add-settings-view
-=======
->>>>>>> origin/add-vehicle
 buttons.forEach(button => button.addEventListener("click", formMenu))
 
 
@@ -82,10 +71,7 @@ async function setFormEdit(target, formContainer) {
     const headingTitle = document.createElement("h4")
     formContainer.appendChild(headingTitle);
     const formHTML = document.createElement("form")
-<<<<<<< HEAD
     formHTML.enctype = "multipart/form-data";
-=======
->>>>>>> d_changes/add-settings-view
     // el usuario que esta en la pagina
     const urlParams = new URLSearchParams(window.location.search);
     const uuid = urlParams.get('u');
@@ -96,7 +82,6 @@ async function setFormEdit(target, formContainer) {
         const data = await response.json();
         if (data?.error) throw new Error(data?.error)
 
-<<<<<<< HEAD
         formContainer.appendChild(formHTML)
 
         function previewChanges(object) {
@@ -169,18 +154,10 @@ async function setFormEdit(target, formContainer) {
 
             const lastChanges = JSON.parse(localStorage.getItem("edit-resume"));
 
-=======
-
-        formContainer.appendChild(formHTML)
-
-        formHTML.addEventListener("submit", e => e.preventDefault())
-        if (target.id == 'edit-resume' || target.parentElement.id == 'edit-resume') {
->>>>>>> d_changes/add-settings-view
             headingTitle.textContent = "Resume";
             const inputImg = document.createElement("input")
 
             inputImg.type = "file"
-<<<<<<< HEAD
             inputImg.name = "image"
             inputImg.id = "image"
 
@@ -218,20 +195,10 @@ async function setFormEdit(target, formContainer) {
 
             profileImg.src = lastChanges?.image ?? data?.imagen?.url;
 
-=======
-
-
-            const profileImg = document.createElement("img")
-
-            profileImg.src = data?.imagen?.url;
-            profileImg.alt = data?.imagen?.alt;
-
->>>>>>> d_changes/add-settings-view
             const separator = document.createElement("div");
             separator.classList.add("edit-resume__sepearator")
             separator.appendChild(inputImg);
             separator.appendChild(profileImg);
-<<<<<<< HEAD
             const bannerUser = document.createElement("section");
             bannerUser.classList.add("edit-resume__banner")
             bannerUser.appendChild(separator);
@@ -296,12 +263,6 @@ async function setFormEdit(target, formContainer) {
 
             formHTML.appendChild(submitBTN)
 
-=======
-
-
-
-            formHTML.appendChild(separator)
->>>>>>> d_changes/add-settings-view
 
 
 
@@ -334,34 +295,34 @@ async function submitEventHandler(event) {
     });
     console.log(object)
     //Errores
-    if(object.Nombre.length == 0){
+    if (object.Nombre.length == 0) {
         error.push({
-            title:"Failure",
-            error:"El campo nombre se encuentra vacio"
+            title: "Failure",
+            error: "El campo nombre se encuentra vacio"
         })
-    } else if(object.Password.length == 0){
+    } else if (object.Password.length == 0) {
         error.push({
-            title:"Failure",
-            error:"El campo contraseña se encuentra vacio"
+            title: "Failure",
+            error: "El campo contraseña se encuentra vacio"
         })
     }
-    if(error.length != 0){
+    if (error.length != 0) {
         addToast(error);
     } else {
         confirm("¿Estas seguro de que quieres borrar tu cuenta?");
-        try{
+        try {
             const response = await fetch("http://localhost:3000/dashboard/user-delete", {
                 method: "POST",
                 body: formdata
             })
             const data = await response.json();
         }
-        catch(err){
+        catch (err) {
             addToast([{
-                title:"Failure",
-                error:"Ha ocurrido un error"
+                title: "Failure",
+                error: "Ha ocurrido un error"
             }]);
         }
     }
-    
+
 }

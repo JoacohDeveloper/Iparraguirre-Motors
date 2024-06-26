@@ -25,10 +25,6 @@
             <a class="opposite" href="/auth/register">Sign Up</a>
         </form>
     </section>
-<<<<<<< HEAD
     <?php implementComp("error_toast.php") ?>
-=======
-    <?php include implementComp("error_toast.php") ?>
->>>>>>> d_changes/add-settings-view
 
 </div>

@@ -143,6 +143,6 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
-        return $this->crear();  
+        return $this->crear();
     }
 }

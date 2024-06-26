@@ -38,9 +38,5 @@
             <a class="opposite" href="/auth/login">Log In</a>
         </form>
     </section>
-<<<<<<< HEAD
     <?php implementComp("error_toast.php") ?>
-=======
-    <?php include implementComp("error_toast.php") ?>
->>>>>>> d_changes/add-settings-view
 </div>

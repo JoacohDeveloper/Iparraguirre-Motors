@@ -198,7 +198,8 @@ class User extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
-    public function deleteUser(){
+    public function deleteUser()
+    {
         $result = null;
         try {
             return $this->eliminar($this->uuid);
