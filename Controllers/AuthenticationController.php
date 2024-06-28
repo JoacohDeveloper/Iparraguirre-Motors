@@ -26,28 +26,31 @@ abstract class AuthenticationController
 
             if (empty($errores)) {
                 $usuario = User::getUser($email);
+                header('Content-Type: application/json; charset=utf-8');
                 if (isset($usuario)) {
                     if ($usuario->validarPassword($password)) {
-                        $_SESSION["usuario"] = $usuario;
-                        $_SESSION["loggedIn"] = true;
-                        $response = ["message" => "succesfuly"];
-                        header('Content-Type: application/json; charset=utf-8');
-                        echo json_encode($response);
+                        if(!$usuario->getDeleted()) {
+                            $errores[] = "El usuario no esta registrado";
+                            $response["errores"] = $errores;
+                            echo json_encode($response);
+                        } else {
+                            $_SESSION["usuario"] = $usuario;
+                            $_SESSION["loggedIn"] = true;
+                            $response = ["message" => "succesfuly"];
+                            echo json_encode($response);
+                        }
                     } else {
                         $errores[] = "El usuario o contraseña son incorrectos.";
                         $response["errores"] = $errores;
-                        header('Content-Type: application/json; charset=utf-8');
                         echo json_encode($response);
                     }
                 } else {
                     $errores[] = "El usuario o contraseña son incorrectos.";
                     $response["errores"] = $errores;
-                    header('Content-Type: application/json; charset=utf-8');
                     echo json_encode($response);
                 }
             } else {
                 $response["errores"] = $errores;
-                header('Content-Type: application/json; charset=utf-8');
                 echo json_encode($response);
             }
             exit;

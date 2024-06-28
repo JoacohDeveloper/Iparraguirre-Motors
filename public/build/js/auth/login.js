@@ -47,7 +47,7 @@ formularioLogin.addEventListener("submit", async (e) => {
                 body: form_data
             })
             const data = await response.json()
-
+            console.log(data)
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -61,6 +61,7 @@ formularioLogin.addEventListener("submit", async (e) => {
                 addToast(errors);
 
             } else if (data?.message == "succesfuly") {
+                console.log(data)
                 window.location.href = "/"
 
             }

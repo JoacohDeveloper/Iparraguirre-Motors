@@ -28,7 +28,6 @@
                             <div class="profile-resume__data">
                                 <h4><?php echo $fullname . " - " . $username; ?></h4>
                                 <p><?php echo isset($isAdmin) ? "Admin" : "User"; ?></p>
-                                <p><?php echo $isAdmin ? "Admin" : "User"; ?></p>
                                 <p>Lorem ipsum dolor sit.</p>
                             </div>
                         </div>
