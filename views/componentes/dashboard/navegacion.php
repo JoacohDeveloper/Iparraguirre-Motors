@@ -40,9 +40,9 @@
         </li>
         <li class="account" title="Your Profile">
             <a href="#" title="profile image" class="card profile-img rounded">
-                <img src="<?php echo isset($usuario) ? $usuario->getImagen() : "" ?>" alt="<?php echo isset($usuario) ? $usuario->getNombreImagen() : "" ?>">
+                <img id="nav_profileImg__id" src="<?php echo isset($usuario) ? $usuario->getImagen() : "" ?>" alt="<?php echo isset($usuario) ? $usuario->getNombreImagen() : "" ?>">
             </a>
-            <p>Welcome, <?php echo $username ? $username . "." : "..."; ?></p>
+            <p id="nav_profileUsername__id">Welcome, <?php echo $username ? $username . "." : "..."; ?></p>
 
             <ul class="sub-dropdown account-dropdown">
 

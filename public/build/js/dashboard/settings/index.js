@@ -7,17 +7,42 @@ const buttons = document.querySelectorAll(".button_settings");
 
 buttons.forEach(button => button.addEventListener("click", formMenu))
 
+function toggleBackground() {
+    document.body.classList.toggle("fixed")
+    document.body.classList.toggle("blured")
+}
+const resumeProfileImgHandleClick = () => {
+    toggleBackground()
+
+    const container = document.querySelector(".settingsContainer")
+
+    const imgContainer = document.createElement("div")
+    imgContainer.classList.add("imgContainer__big")
+    const closeBtn = document.createElement("p")
+    closeBtn.classList.add("closeBtn")
+    closeBtn.textContent = "X"
+    imgContainer.appendChild(closeBtn)
+    container.appendChild(imgContainer)
+    const img = document.createElement("img")
+    img.src = resumeProfileImg.querySelector("img").src
+    imgContainer.append(img)
+    closeBtn.addEventListener("click", () => {
+        toggleBackground()
+        imgContainer.remove()
+
+    })
+
+
+
+}
+const resumeProfileImg = document.querySelector(".profile-resume__image")
+resumeProfileImg.addEventListener("click", resumeProfileImgHandleClick)
+
 
 async function formMenu({ target }) {
-
-    document.body.classList.add("fixed")
-
+    toggleBackground()
     const dashboardContent = document.querySelector(".dashboard-content")
-
     dashboardContent.classList.add("fixed")
-
-    document.body.classList.add("blured")
-
     const container = document.querySelector(".settingsContainer")
 
     const lastMenu = document.querySelector(".settings_forms")
@@ -43,12 +68,11 @@ async function formMenu({ target }) {
 
     const removeForm = () => {
         settings_formHTML.classList.add("removed__settings_forms")
-
         setTimeout(() => {
             const dashboardContent = document.querySelector(".dashboard-content")
             document.body.classList.remove("fixed")
-            dashboardContent.classList.remove("fixed")
             document.body.classList.remove("blured")
+            dashboardContent.classList.remove("fixed")
         }, 400);
     }
     form_close__settings_formHTML.addEventListener("click", removeForm)
@@ -62,6 +86,36 @@ async function formMenu({ target }) {
 
 }
 
+
+
+
+function setResumeChanges(formdata, imgURL) {
+    const fullnameField = document.querySelector("#fullname__id")
+    const imgProfile = document.querySelector("#profile-img__id")
+    const imgProfileNav = document.querySelector("#nav_profileImg__id")
+    const navUsermane = document.querySelector("#nav_profileUsername__id")
+    const firstNameField = document.querySelector("#firstname__id")
+    const lastNameField = document.querySelector("#lastname__id")
+
+    const object = {};
+    formdata.forEach((value, key) => {
+        if (key !== 'image') {
+            object[key] = value
+        }
+    });
+
+    const fullnameSplit = object.full_name.split(" ");
+    firstNameField.textContent = fullnameSplit[0];
+    const listOfSName = fullnameSplit.map((n, i) => {
+        if (i > 0) return n
+    })
+    lastNameField.textContent = fullnameSplit.length > 2 ? listOfSName.join(" ") : fullnameSplit[1]
+
+    fullnameField.textContent = `${object.full_name} - ${object.username}`
+    navUsermane.textContent = `Welcome, ${object.username}.`
+    imgProfile.src = imgURL.src;
+    imgProfileNav.src = imgURL.src;
+}
 
 
 async function setFormEdit(target, formContainer) {
@@ -101,14 +155,10 @@ async function setFormEdit(target, formContainer) {
                 localStorage.setItem("edit-resume", JSON.stringify({ ...lastLS, ...object }));
             }
 
-
-
         }
 
         formHTML.addEventListener("submit", async e => {
             e.preventDefault()
-
-
 
             try {
                 const formdata = new FormData(formHTML)
@@ -130,6 +180,8 @@ async function setFormEdit(target, formContainer) {
                     addToast(errores);
                 } else if (!data?.file_uploaded) addToast([{ title: "Failure", error: "Ocurrió un error al cargar su imagen, intenta de nuevo más tarde." }]);
                 else if (data?.message == "ok") {
+                    const previewImg = document.querySelector("#preview_edit_resume__img")
+                    setResumeChanges(formdata, previewImg);
                     document.querySelector(".close__settings_forms")?.click()
                 }
 
@@ -153,7 +205,6 @@ async function setFormEdit(target, formContainer) {
         if (target.id == 'edit-resume' || target.parentElement.id == 'edit-resume') {
 
             const lastChanges = JSON.parse(localStorage.getItem("edit-resume"));
-
             headingTitle.textContent = "Resume";
             const inputImg = document.createElement("input")
 
@@ -281,48 +332,77 @@ async function setFormEdit(target, formContainer) {
 
 //Delete-user
 
-const form_deleteAccount = document.querySelector(".form_deleteAccount");
+// const form_deleteAccount = document.querySelector(".form_deleteAccount");
 
-form_deleteAccount.addEventListener("submit", submitEventHandler)
+// form_deleteAccount.addEventListener("submit", submitEventHandler)
 
-async function submitEventHandler(event) {
-    event.preventDefault()
-    const formdata = new FormData(form_deleteAccount)
-    const object = {};
-    const error = [];
-    formdata.forEach((value, key) => {
-        object[key] = value
-    });
-    console.log(object)
-    //Errores
-    if (object.Nombre.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "El campo nombre se encuentra vacio"
-        })
-    } else if (object.Password.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "El campo contraseña se encuentra vacio"
-        })
+// async function submitEventHandler(event) {
+//     event.preventDefault()
+//     const formdata = new FormData(form_deleteAccount)
+//     const object = {};
+//     const error = [];
+//     formdata.forEach((value, key) => {
+//         object[key] = value
+//     });
+//     console.log(object)
+//     //Errores
+//     if (object.Nombre.length == 0) {
+//         error.push({
+//             title: "Failure",
+//             error: "El campo nombre se encuentra vacio"
+//         })
+//     } else if (object.Password.length == 0) {
+//         error.push({
+//             title: "Failure",
+//             error: "El campo contraseña se encuentra vacio"
+//         })
+//     }
+//     if (error.length != 0) {
+//         addToast(error);
+//     } else {
+//         confirm("¿Estas seguro de que quieres borrar tu cuenta?");
+//         try {
+//             const response = await fetch("http://localhost:3000/dashboard/user-delete", {
+//                 method: "POST",
+//                 body: formdata
+//             })
+//             const data = await response.json();
+//         }
+//         catch (err) {
+//             addToast([{
+//                 title: "Failure",
+//                 error: "Ha ocurrido un error"
+//             }]);
+//         }
+//     }
+
+// }
+
+
+
+
+const steps = document.querySelector(".steps")
+steps.addEventListener("click", e => {
+    if (e.target.parentElement?.ariaLabel) {
+        //console.log(e.target?.parentElement?.ariaLabel)
+        localStorage.setItem("step", JSON.stringify(e.target?.parentElement?.ariaLabel ?? "step-1"))
+        const step = e.target?.parentElement?.ariaLabel.split("-")[1];
+        setSettingSection(step)
     }
-    if (error.length != 0) {
-        addToast(error);
-    } else {
-        confirm("¿Estas seguro de que quieres borrar tu cuenta?");
-        try {
-            const response = await fetch("http://localhost:3000/dashboard/user-delete", {
-                method: "POST",
-                body: formdata
-            })
-            const data = await response.json();
-        }
-        catch (err) {
-            addToast([{
-                title: "Failure",
-                error: "Ha ocurrido un error"
-            }]);
-        }
-    }
+})
 
+function setSettingSection(step) {
+
+    const section = document.querySelector(`[aria-step="${step}"]`)
+    const previus = document.querySelector(".settingsStepVisible")
+    if (section) {
+        if (previus && section != previus) {
+            previus.classList.remove("settingsStepVisible")
+            section.classList.add("settingsStepVisible")
+        }
+
+    }
 }
+
+
+
