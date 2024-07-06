@@ -10,7 +10,9 @@ class TiendaController
     public static function tienda(Router $router)
     {
         $router->render("tienda/index", [
-            "title" => "Iparraguirre Motors | Tienda"
+            "title" => "Iparraguirre Motors | Tienda",
+            "scripts" => ["tienda/index"],
+            "styles" => ["tienda/index"]
         ]);
     }
 }

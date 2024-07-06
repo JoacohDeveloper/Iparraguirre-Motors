@@ -11,10 +11,21 @@ abstract class VehicleRestController
 
     public static function vehicles()
     {
+        header('Content-Type: application/json;');
 
         $vehicleId = intval(isset($_GET["id"]) ? $_GET["id"] : 0) ?? null;
+        $vehiclePage = intval(isset($_GET["page"]) ? $_GET["page"] : 1) ?? null;
+
+
         $vehicleName = $_GET["name"] ?? null;
-        $vehicles = Vehicle::getAllVehicles();
+
+        if ($vehiclePage) {
+            $vehicles = Vehicle::getAllVehiclesByPage($vehiclePage);
+        } else {
+            $vehicles = Vehicle::getAllVehicles();
+        }
+
+
 
         if ($vehicleId != null || $vehicleName != null) {
             foreach ($vehicles as $vehicle) {

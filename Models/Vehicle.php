@@ -61,6 +61,20 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return $vehicle->getAll();
     }
 
+    public static function getAllVehiclesByPage($page = 1)
+    {
+        $inicio = 0;
+        $fin = 10;
+        if ($page > 1) {
+            $inicio =  ($page - 1) * 10;
+        }
+        $query = "SELECT * FROM " . static::$tabla . " limit $inicio,$fin";
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+    }
+
 
     public function validate()
     {
