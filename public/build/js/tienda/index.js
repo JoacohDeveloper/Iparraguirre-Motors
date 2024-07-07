@@ -18,18 +18,27 @@ const Card = ({ nombre, precio, id }) => {
     return card
 }
 
-const nextPage = (page) => {
+const Spinner = () => {
 
+    const spinnerSquare = document.createElement("div")
+    spinnerSquare.classList.add("spinner-square")
+
+    for (let i = 1; i <= 3; i++) {
+        const square = document.createElement("div")
+        square.classList.add(`square-${i}`)
+        square.classList.add("square")
+        spinnerSquare.appendChild(square)
+    }
+
+    return spinnerSquare
 }
-
-
-
-
 
 async function init() {
     const cargarMasVehiculos = async (page) => {
+        const spinner = Spinner();
+        cardContainer.appendChild(spinner)
         const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&page=${page}`)
-
+        spinner.remove()
         const data = await response.json();
 
         data.forEach(v => {
