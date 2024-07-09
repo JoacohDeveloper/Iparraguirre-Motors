@@ -459,3 +459,29 @@ main {
     display: none;
   }
 }
+.slider{
+  width: 75vw;
+  margin: auto;
+  overflow: hidden;
+}
+.slider .slider-track {
+  display: flex;
+animation: scroll 45s  linear infinite;
+width: calc(200px * 40)
+}
+.slider .slide {
+  width: 200px;
+}
+.slider .slide img{
+  width: 200px;
+}
+@keyframes scroll {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(calc(-200px * 20));
+    transform: translateX(calc(-200px * 20));
+  }
+}
