@@ -51,6 +51,8 @@ $router->get("/dashboard/product-managment", [DashboardController::class, 'produ
 $router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 $router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 
+$router->post("/dashboard/eliminar-vehiculo", [DashboardController::class, "eliminarVehiculo"]);
+$router->get("/dashboard/eliminar-vehiculo", [DashboardController::class, "eliminarVehiculo"]);
 
 //dashboard user settings
 

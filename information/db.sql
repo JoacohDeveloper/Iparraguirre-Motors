@@ -23,6 +23,7 @@ create table User(
 
 create table vehicle(
 	id int(11) not null auto_increment,
+	isDeleted tinyint(1) DEFAULT 0,
 	nombre VARCHAR(255),
 	descripcion TEXT,
 	modelo VARCHAR(255),
@@ -44,6 +45,7 @@ create table vehicle(
 	precio float,
 	velocidad_max float,
 	zero_to_houndred float,
+	pais VARCHAR(100),
 	peso FLOAT,
 	kilometros int,
 	caballos_potencia int,

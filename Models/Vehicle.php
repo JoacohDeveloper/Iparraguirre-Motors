@@ -9,7 +9,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
 {
     protected static $tabla = "Vehicle";
     protected static $columnasdb = [
-        "id", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "titulo_imagen", "imagen", "matricula", "transmision",
+        "id", "isDeleted", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "titulo_imagen", "imagen", "matricula", "transmision",
         "tipo_carroceria", "frenos_abs", "airbag", "traccion", "direccion", "control_estabilidad", "puertas", "tipo_combustible",
         "precio", "velocidad_max", "zero_to_houndred", "pais", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
     ];
@@ -19,13 +19,14 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return (object) get_object_vars($this);
     }
 
-    public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, $titulo_imagen, $imagen, $matricula, $transmision, $tipo_carroceria, $frenos_abs,
+    public $id, $isDeleted, $nombre, $descripcion, $modelo, $fabricante, $year, $color, $titulo_imagen, $imagen, $matricula, $transmision, $tipo_carroceria, $frenos_abs,
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $pais, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
     function __construct($args = [])
     {
         $this->id = $args["id"] ?? null;
+        $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->nombre = $args["nombre"] ?? "";
         $this->descripcion = $args["descripcion"] ?? "";
         $this->modelo = $args["modelo"] ?? "";
@@ -138,11 +139,29 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return $errors;
     }
 
+    public function validateID() {
+        $errors = [];
+        if(empty($this->id)){
+            $errors["id"] = "El campo id es obligatorio";
+        }
+        return $errors;
+    }
+
     public function registrarVehicle()
     {
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
         return $this->crear();
+    }
+
+    public function eliminarVehicle() {
+        try {
+            $query = "UPDATE vehicle SET isDeleted = '1' WHERE id = $this->id";
+            Vehicle::consultarSQL($query);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+        return $result[0] ?? null;
     }
 }

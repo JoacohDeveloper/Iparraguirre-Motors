@@ -63,8 +63,7 @@ abstract class DashboardController
         ]);
     }
 
-    public static function agregarVehiculo(Router $router)
-    {
+    public static function agregarVehiculo(Router $router) {
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -76,6 +75,7 @@ abstract class DashboardController
                 if ($result) {
                     echo json_encode(["message" => "succesfuly"]);
                     exit;
+                    header("Location: /dashboard");
                 } else {
                     echo json_encode(["error" => "Ha ocurrido un error"]);
                     exit;
@@ -87,9 +87,36 @@ abstract class DashboardController
         }
 
         $router->render("dashboard/vehicles/add-vehicle", [
-            "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index", "dashboard/vehicle"],
+            "styles" => ["dashboard/vehicles/addvehicle-form", "dashboard/index", "dashboard/aside"],
+            "scripts" => ["dashboard/index", "dashboard/vehicle/addvehicle"],
             "title" => "Dashboard | Agregar Vehiculo",
+            "description" => "Pagina de dashboard Iparraguirre Motors",
+            "errors" => $errores,
+        ]);
+    }
+
+    public static function eliminarVehiculo(Router $router) {
+        $errores = [];
+        $campos = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            header('Content-Type: application/json; charset=utf-8');
+            $vehicle = new vehicle($_POST);
+            $errores = $vehicle->validateID();
+            if (empty($errores)) {
+                $result = $vehicle->eliminarVehicle();
+                echo json_encode(["message" => "succesfuly"]);
+                header("Location: /dashboard");
+                exit;
+            } else {
+                echo json_encode(["message" => "error", "errores" => $errores]);
+                exit;
+            }
+        }
+
+        $router->render("dashboard/vehicles/delete-vehicle", [
+            "styles" => ["dashboard/vehicles/removevehicle-form", "dashboard/index", "dashboard/aside"],
+            "scripts" => ["dashboard/index", "dashboard/vehicle/deleteVehicle"],
+            "title" => "Dashboard | Eliminar Vehiculo",
             "description" => "Pagina de dashboard Iparraguirre Motors",
             "errors" => $errores,
         ]);

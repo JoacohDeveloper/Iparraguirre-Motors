@@ -1,6 +1,6 @@
 <?php
 
-putenv('PORT=3306');
+putenv('PORT=3307');
 putenv('DB_NAME=db_utu2024');
 
 function dbConnection()
