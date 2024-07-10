@@ -29,14 +29,14 @@
         <div class="content__bestSelled">
 
             <div class="bestSelled__banner-image">
-                <img src="/build/src/images/vehicles/porscheMacan.png" alt="Porsche Macan">
+                <img src="/build/src/images/vehicles/Dodge-1968.png" alt="Charger 1968">
 
             </div>
-            <h3>macan</h3>
+            <h3>Charger</h3>
 
             <div class="bestSelled__modelIntro">
-                <h4>Porsche Macan 4 Electric</h4>
-                <p>From $ 78,800</p>
+                <h4>Dodge Charger 1969</h4>
+                <p>$ 78,800</p>
                 <div class="bestSelled__modelIntro-buttonGroup">
                     <button>Change Model</button>
                     <button>View More</button>
@@ -123,10 +123,6 @@
                 </div>
 
                 <div class="slide">
-                <img src="/build/src/images/Marcas/International.png" alt="">
-                </div>
-
-                <div class="slide">
                 <img src="/build/src/images/Marcas/Abarth.png" alt="">
                 </div>
 
@@ -196,10 +192,6 @@
 
                 <div class="slide">
                 <img src="/build/src/images/Marcas/Honda.png" alt="">
-                </div>
-
-                <div class="slide">
-                <img src="/build/src/images/Marcas/International.png" alt="">
                 </div>
         </div>
     </div>
