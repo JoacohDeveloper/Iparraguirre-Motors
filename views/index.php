@@ -43,11 +43,43 @@
                     <button>Test Drive</button>
                 </div>
             </div>
-
         </div>
 
+        <div class="slider">
+        <div class="list">
+            <div class="item">
+                <img src="/build/src/images/slider/1.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/build/src/images/slider/2.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/build/src/images/slider/3.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/build/src/images/slider/4.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/build/src/images/slider/1.png" alt="">
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+        <ul class="dots">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <script src="/build/js/slider.js"></script>
+
         <div>
-            <div class="slider">
+            <div class="slidermarcas">
             <div class="slider-track">
 
                 <div class="slide">
