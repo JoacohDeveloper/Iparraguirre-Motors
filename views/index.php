@@ -6,8 +6,8 @@
     <div class="banner">
         <div class="banner-content">
             <h1>Iparraguirre <br> <span>Motors</span></h1>
-         <p>Descubre el lujo en Iparraguirre Motors, tu agencia de autos exóticos.<br> Encuentra tu vehículo de ensueño entre nuestra selección exclusiva. <br> ¡Bienvenido a la excelencia automotriz!</p>
-            <a href="#">Mostrar Catalogo</a>
+            <p>Descubre el lujo en Iparraguirre Motors, tu agencia de autos exóticos.<br> Encuentra tu vehículo de ensueño entre nuestra selección exclusiva. <br> ¡Bienvenido a la excelencia automotriz!</p>
+            <a href="/tienda">Mostrar Catalogo</a>
         </div>
         <div class="downside">
             <div class="empty"></div>
@@ -46,185 +46,186 @@
         </div>
 
         <div class="slider">
-        <div class="list">
-            <div class="item">
-                <img src="/build/src/images/slider/1.png" alt="">
+            <div class="list">
+                <div class="item">
+                    <img src="/build/src/images/slider/1.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="/build/src/images/slider/2.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="/build/src/images/slider/3.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="/build/src/images/slider/4.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="/build/src/images/slider/1.png" alt="">
+                </div>
             </div>
-            <div class="item">
-                <img src="/build/src/images/slider/2.png" alt="">
+            <div class="buttons">
+                <button id="prev">
+                    << /button>
+                        <button id="next">></button>
             </div>
-            <div class="item">
-                <img src="/build/src/images/slider/3.png" alt="">
-            </div>
-            <div class="item">
-                <img src="/build/src/images/slider/4.png" alt="">
-            </div>
-            <div class="item">
-                <img src="/build/src/images/slider/1.png" alt="">
-            </div>
+            <ul class="dots">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
-        <div class="buttons">
-            <button id="prev"><</button>
-            <button id="next">></button>
-        </div>
-        <ul class="dots">
-            <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
 
-    <script src="/build/js/slider.js"></script>
+        <script src="/build/js/slider.js"></script>
 
         <div>
             <div class="slidermarcas">
-            <div class="slider-track">
+                <div class="slider-track">
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Abarth.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Abarth.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Acura.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Acura.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/AlfaRomeo.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/AlfaRomeo.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Alpine.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Alpine.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Aston Martin.png" alt="">
-                </div>
-            
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Audi.png" alt="">
-                </div>
-            
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Betnley.png" alt="">
-                </div>
-            
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Bmw.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Aston Martin.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Byd.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Audi.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Cadilac.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Betnley.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Chevrolet.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Bmw.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Chrysler.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Byd.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Dodge.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Cadilac.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Ferrari.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Chevrolet.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Fiat.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Chrysler.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Ford.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Dodge.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Genesis.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Ferrari.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Honda.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Fiat.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Abarth.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Ford.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Acura.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Genesis.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/AlfaRomeo.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Honda.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Alpine.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Abarth.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Aston Martin.png" alt="">
-                </div>
-            
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Audi.png" alt="">
-                </div>
-            
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Betnley.png" alt="">
-                </div>
-            
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Bmw.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Acura.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Byd.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/AlfaRomeo.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Cadilac.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Alpine.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Chevrolet.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Aston Martin.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Chrysler.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Audi.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Dodge.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Betnley.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Ferrari.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Bmw.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Fiat.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Byd.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Ford.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Cadilac.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Genesis.png" alt="">
-                </div>
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Chevrolet.png" alt="">
+                    </div>
 
-                <div class="slide">
-                <img src="/build/src/images/Marcas/Honda.png" alt="">
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Chrysler.png" alt="">
+                    </div>
+
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Dodge.png" alt="">
+                    </div>
+
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Ferrari.png" alt="">
+                    </div>
+
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Fiat.png" alt="">
+                    </div>
+
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Ford.png" alt="">
+                    </div>
+
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Genesis.png" alt="">
+                    </div>
+
+                    <div class="slide">
+                        <img src="/build/src/images/Marcas/Honda.png" alt="">
+                    </div>
                 </div>
+            </div>
         </div>
-    </div>
-</div>

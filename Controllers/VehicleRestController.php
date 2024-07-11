@@ -13,11 +13,11 @@ abstract class VehicleRestController
     {
         header('Content-Type: application/json;');
 
-        $vehicleId = intval(isset($_GET["id"]) ? $_GET["id"] : 0) ?? null;
-        $vehiclePage = intval(isset($_GET["page"]) ? $_GET["page"] : 1) ?? null;
+        $vehicleId = isset($_GET["id"]) ? intval($_GET["id"]) : null;
+        $vehiclePage = isset($_GET["page"]) ? intval($_GET["page"]) : null;
 
 
-        $vehicleName = $_GET["name"] ?? null;
+        $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
 
         if ($vehiclePage) {
             $vehicles = Vehicle::getAllVehiclesByPage($vehiclePage);
@@ -25,21 +25,39 @@ abstract class VehicleRestController
             $vehicles = Vehicle::getAllVehicles();
         }
 
-
-
-        if ($vehicleId != null || $vehicleName != null) {
+        if ($vehicleId) {
             foreach ($vehicles as $vehicle) {
                 if ($vehicle instanceof Vehicle) {
-                    if ($vehicle->id == $vehicleId || $vehicle->nombre == $vehicleName) {
-                        $json = json_encode($vehicle);
-                    } else {
-                        $json = json_encode(["message" => "404"]);
+                    if ($vehicle->id == $vehicleId) {
+                        echo json_encode($vehicle);
+                        exit;
                     }
                 }
             }
-        } else {
-            $json = json_encode($vehicles);
+            echo json_encode(["message" => "404"]);
+            exit;
+        } else if ($vehicleName) {
+            $resultado = array_filter($vehicles, function ($v) {
+                $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
+                if ($v instanceof Vehicle) {
+                    if (str_contains(trim(strtolower($v->nombre)), $vehicleName)) {
+                        return $v;
+                    }
+                }
+            });
+
+            if (count($resultado) > 0)
+                echo json_encode($resultado);
+            else
+                echo json_encode(["message" => "404"]);
+            exit;
         }
+
+
+        $json = json_encode($vehicles);
+
+
+
         echo $json;
         exit;
     }

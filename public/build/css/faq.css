@@ -165,3 +165,17 @@ main {
     transform: rotate(180deg);
   }
 }
+
+@media screen and (max-width: 475px) {
+  .dropDown-cards {
+    width: 90%;
+  }
+  .dropDown-card > .head {
+    padding: 0 1rem;
+  }
+  .dropDown-card > .content > p {
+    width: 100%;
+    padding-left: 0;
+    padding: 0 0.4rem;
+  }
+}
