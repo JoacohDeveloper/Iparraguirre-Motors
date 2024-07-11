@@ -45,3 +45,99 @@ if (account) {
 
 
 }
+
+
+//chart
+
+
+
+const chart1 = document.getElementById("chart1");
+chart1.style.height = '100%';
+chart1.style.width = '100%';
+chart1.parentElement.style.position = "relative";
+
+let typeChart = window.screen.width >= 1024 ? "line" : "bar"
+
+
+
+new Chart(chart1, {
+    type: typeChart,
+    data: {
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+        datasets: [
+            {
+                label: "Personas ingresadas en meses",
+                data: [1000, 452, 2000743, 5, 2, 3],
+                borderWidth: 1,
+            },
+            {
+                label: "Personas que compraron en meses",
+                data: [70, 2, 10, 5, 2, 3],
+                borderWidth: 1,
+            },
+        ],
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    },
+});
+
+
+const chart2 = document.getElementById("chart2");
+chart2.style.height = '100%';
+chart2.style.width = '100%';
+chart2.parentElement.style.position = "relative";
+
+
+new Chart(chart2, {
+    type: "doughnut",
+    data: {
+        labels: ["Escritorio", "Movil", "Otros"],
+        datasets: [
+            {
+                label: "Distribucion de dispositivos",
+                data: [48, 36, 16],
+                borderWidth: 1,
+            }
+        ],
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    },
+});
+
+
+const chart3 = document.getElementById("chart3");
+chart3.style.height = '100%';
+chart3.style.width = '100%';
+chart3.parentElement.style.position = "relative";
+
+
+new Chart(chart3, {
+    type: "bar",
+    data: {
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+        datasets: [
+            {
+                label: "Usuarios Registrados",
+                data: [1000, 452, 20, 5, 2, 3],
+                borderWidth: 1,
+            }
+        ],
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    },
+});

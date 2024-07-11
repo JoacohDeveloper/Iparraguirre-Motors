@@ -330,3 +330,36 @@ footer {
 .dark .dashboard-title h3 {
   color: #f2f2f2;
 }
+
+/* chartjs */
+
+#chart1 {
+  width: 100%;
+}
+
+.analytics {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  border: 2px solid #ccc;
+  align-items: center;
+}
+
+.options > article {
+  display: flex;
+
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid #ccc;
+}
+
+.options > article {
+  justify-content: center;
+  padding: 0 0.5rem;
+}
+.options > article:first-child {
+  padding: 0 2rem;
+  /* flex-wrap: wrap; */
+  text-align: center;
+  justify-content: space-between;
+}

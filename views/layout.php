@@ -18,7 +18,19 @@
         }
     }
     ?>
+
     <?php
+    //nodefer script loader
+    if (isset($nodefer) && count($nodefer) != 0) {
+        foreach ($nodefer as $script) {
+
+            echo "<script src='$script'></script>";
+        }
+    }
+    ?>
+    <?php
+
+
     //styles loader
 
     if (isset($styles) && count($styles) != 0) {

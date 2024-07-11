@@ -39,6 +39,7 @@ abstract class VehicleRestController
         } else if ($vehicleName) {
             $resultado = array_filter($vehicles, function ($v) {
                 $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
+
                 if ($v instanceof Vehicle) {
                     if (str_contains(trim(strtolower($v->nombre)), $vehicleName)) {
                         return $v;

@@ -87,7 +87,7 @@ async function init() {
         observer.observe(lastEl)
 }
 
-//init()
+// init()
 
 
 
@@ -101,6 +101,19 @@ const buscador = document.querySelector("#id_product-search__input")
 const resultadoBusqueda = document.querySelector(".result-list")
 const contenedorBuscador = document.querySelector(".search__input")
 
+contenedorBuscador.addEventListener("submit", e => {
+    e.preventDefault()
+
+    const form_data = new FormData(contenedorBuscador)
+
+    console.log([...form_data])
+
+    const url = new URL(location.href);
+
+    url.searchParams.set('search', buscador?.value);
+
+    history.replaceState(null, null, url.toString());
+})
 
 const ItemBusqueda = (text) => {
     const item = document.createElement("div")
@@ -113,7 +126,14 @@ const ItemBusqueda = (text) => {
 
     item.appendChild(img)
     item.appendChild(p)
+    const url = new URL(location.origin + "/tienda");
 
+    url.searchParams.set("search", text)
+
+    item.addEventListener("click", e => {
+        history.replaceState(null, null, url.toString());
+        ocultarBusqueda()
+    })
     return item
 }
 let timer;
@@ -134,8 +154,6 @@ async function buscar() {
     timer = setTimeout(async () => {
         resultadoBusqueda.innerHTML = null
         if (buscador?.value?.length > 0) {
-
-            history.replaceState(null, null, "/tienda" + `?search=${buscador?.value}`);
 
             try {
                 const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
@@ -160,7 +178,9 @@ async function buscar() {
             }
         } else {
             ocultarBusqueda()
-            history.replaceState(null, null, "/tienda")
+            // const url = new URL(location.href);
+            // url.searchParams.delete("search")
+            // history.replaceState(null, null, url.toString());
         }
     }, 300)
 
@@ -170,22 +190,25 @@ async function buscar() {
 
 
 
-
-buscador.addEventListener("focusout", e => {
-    ocultarBusqueda()
+const contenedorInputListado = document.querySelector(".product-search__input")
 
 
+document.addEventListener("click", e => {
 
+    if (!contenedorInputListado.contains(e.target))
+        ocultarBusqueda()
 })
+
+
+
 buscador.addEventListener("focus", e => {
 
     const items = document.querySelectorAll(".search-item")
 
     if (items.length > 0)
         resultadoBusqueda.classList.remove("hidden")
+
 })
-
-
 
 
 
@@ -193,3 +216,5 @@ buscador.addEventListener("focus", e => {
 function ocultarBusqueda() {
     resultadoBusqueda.classList.add("hidden")
 }
+
+
