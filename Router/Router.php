@@ -29,6 +29,7 @@ class Router
 
         $method = $_SERVER["REQUEST_METHOD"];
         $urlActual = $_SERVER["PATH_INFO"] ?? "/";
+
         if (str_ends_with($urlActual, "/") && $urlActual != "/") {
             $urlActual = rtrim($urlActual, "/");
         }

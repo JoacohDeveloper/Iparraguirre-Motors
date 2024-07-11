@@ -39,7 +39,11 @@ async function init() {
         cardContainer.appendChild(spinner)
         const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&page=${page}`)
         spinner.remove()
+
         const data = await response.json();
+        const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
+        const newData = [...oldData, ...data]
+        //localStorage.setItem("tiendaItems", JSON.stringify(newData))
 
         data.forEach(v => {
             const customV = {
@@ -72,6 +76,7 @@ async function init() {
             if (entrie.isIntersecting) {
                 observer.unobserve(lastEl)
                 page++;
+                localStorage.setItem("tiendaPage", JSON.stringify(page))
                 lastEl = await cargarMasVehiculos(page)
                 if (lastEl) observer.observe(lastEl)
             }

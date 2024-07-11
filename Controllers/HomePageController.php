@@ -13,4 +13,10 @@ abstract class HomePageController
             "styles" => ["layout/index"]
         ]);
     }
+
+
+    public static function droute()
+    {
+        echo "hello world from a dynamic route";
+    }
 }
