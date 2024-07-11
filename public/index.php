@@ -10,7 +10,8 @@ use Controllers\AuthenticationController;
 use Controllers\DashboardController;
 use \Controllers\HomePageController;
 use Controllers\TiendaController;
-//use Controllers\VehiclesController;
+use Controllers\VehiclesController;
+use Controllers\InformationController;
 use \Router\Router;
 use Controllers\VehicleRestController;
 
@@ -21,6 +22,11 @@ $router = new Router();
 
 //Index
 $router->get("/", [HomePageController::class, "index"]);
+
+//ContactUs
+
+$router->post("/contact", [InformationController::class, "contactUs"]);
+$router->get("/contact", [InformationController::class, "contactUs"]);
 
 //Auth
 $router->get("/auth/login", [AuthenticationController::class, "login"]);
@@ -88,3 +94,4 @@ $router->get("/faq", function () {
 
 
 $router->comprobarRutas();
+
