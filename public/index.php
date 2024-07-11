@@ -10,7 +10,7 @@ use Controllers\AuthenticationController;
 use Controllers\DashboardController;
 use \Controllers\HomePageController;
 use Controllers\TiendaController;
-use Controllers\VehiclesController;
+//use Controllers\VehiclesController;
 use \Router\Router;
 use Controllers\VehicleRestController;
 
@@ -79,6 +79,10 @@ $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
 $router->get("/faq", function () {
     header("Location: /faq.html");
 });
+
+
+
+
 
 
 

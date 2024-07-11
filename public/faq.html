@@ -3,9 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/build/css/normalize.css" />
+    <link rel="stylesheet" href="/build/css/globals.css" />
+    <link rel="stylesheet" href="/build/css/faq.css" />
+    <script defer src="/build/js/index.js"></script>
+    <script defer src="/build/js/faq/index.js"></script>
     <title>Iparraguire Motors FAQ</title>
   </head>
   <body>
-    <h2>FAQ</h2>
+    <header>
+      <a href="/" class="logo">
+        <img src="/build/src/images/LOGO2.png" alt="Logo Iparraguirre Motors" />
+      </a>
+
+      <div class="hello-world">
+        <nav class="navegacion">
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/tienda">Tienda</a>
+            </li>
+            <li>
+              <a href="/trade">Trade</a>
+            </li>
+            <li>
+              <a href="/portfolio">Portfolio</a>
+            </li>
+            <li>
+              <a href="/faq">cuenta</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="brgMenu brgMenuHandler">
+          <img src="/build/src/images/brgMenu.svg" alt="Hamburger Menu" />
+        </div>
+
+        <div class="mobile-menu menu-disabled">
+          <section class="mobile-menu-header">
+            <div class="quit-menu-img brgMenuHandler">
+              <img
+                src="/build/src/images/arrowLeft.svg"
+                alt="quit menu left arrow"
+              />
+            </div>
+            <div class="card__toggle">
+              <input
+                id="themeSwitcher"
+                class="ThemeToggle"
+                type="checkbox"
+                checked
+              />
+            </div>
+          </section>
+          <section class="mobile-menu-content">
+            <nav class="navegacion">
+              <ul>
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/tienda">Tienda</a>
+                </li>
+                <li>
+                  <a href="/trade">Trade</a>
+                </li>
+                <li>
+                  <a href="/portfolio">Portfolio</a>
+                </li>
+                <li>
+                  <a href="/faq">cuenta</a>
+                </li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+      </div>
+    </header>
+    <section class="background-banner">
+      <div class="faq-title">
+        <h2>FAQ</h2>
+        <p>
+          Aquí podras ver las preguntas más frecuentes acerca de este sitio.
+        </p>
+      </div>
+      <div class="rounded-clippath"></div>
+    </section>
+    <main>
+      <div class="dropDown-cards">
+        <div class="dropDown-card">
+          <div class="head">
+            <p>Lorem ipsum dolor sit.</p>
+            <button>
+              <img
+                src="/build/src/images/chevronDown.svg"
+                alt="desplegar contenido"
+              />
+            </button>
+          </div>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              quasi, ipsa dignissimos aspernatur, vitae rerum incidunt repellat
+              nisi consequatur sint porro amet magnam eius eos officia
+              perspiciatis fugiat dicta voluptas.
+            </p>
+          </div>
+        </div>
+
+        <div class="dropDown-card">
+          <div class="head">
+            <p>Lorem ipsum dolor sit.</p>
+            <button>
+              <img
+                src="/build/src/images/chevronDown.svg"
+                alt="desplegar contenido"
+              />
+            </button>
+          </div>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              quasi, ipsa dignissimos aspernatur, vitae rerum incidunt repellat
+              nisi consequatur sint porro amet magnam eius eos officia
+              perspiciatis fugiat dicta voluptas.
+            </p>
+          </div>
+        </div>
+
+        <div class="dropDown-card">
+          <div class="head">
+            <p>Lorem ipsum dolor sit.</p>
+            <button>
+              <img
+                src="/build/src/images/chevronDown.svg"
+                alt="desplegar contenido"
+              />
+            </button>
+          </div>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              quasi, ipsa dignissimos aspernatur, vitae rerum incidunt repellat
+              nisi consequatur sint porro amet magnam eius eos officia
+              perspiciatis fugiat dicta voluptas.
+            </p>
+          </div>
+        </div>
+
+        <div class="dropDown-card">
+          <div class="head">
+            <p>Lorem ipsum dolor sit.</p>
+            <button>
+              <img
+                src="/build/src/images/chevronDown.svg"
+                alt="desplegar contenido"
+              />
+            </button>
+          </div>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              quasi, ipsa dignissimos aspernatur, vitae rerum incidunt repellat
+              nisi consequatur sint porro amet magnam eius eos officia
+              perspiciatis fugiat dicta voluptas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <nav class="navegacion">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/tienda">Tienda</a>
+          </li>
+          <li>
+            <a href="/trade">Trade</a>
+          </li>
+          <li>
+            <a href="/portfolio">Portfolio</a>
+          </li>
+          <li>
+            <a href="/faq">cuenta</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="img-container">
+        <img src="/build/src/images/LOGO.png" alt="Iparraguirre Logo" />
+      </div>
+
+      <div class="card__toggle">
+        <input id="themeSwitcher" class="ThemeToggle" type="checkbox" checked />
+      </div>
+      <p id="copy">Iparraguire Motors &copy;</p>
+    </footer>
   </body>
+  <script>
+    const copy = document.querySelector("#copy");
+    copy.textContent += new Date().getFullYear();
+  </script>
 </html>
