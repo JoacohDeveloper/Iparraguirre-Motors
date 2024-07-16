@@ -727,3 +727,12 @@ header .brgMenu {
 .dark .text {
   color: #fff;
 }
+
+/*  
+.dark/* .header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  width: 100%;
+} */

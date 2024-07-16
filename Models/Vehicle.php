@@ -61,7 +61,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return $vehicle->getAll();
     }
 
-    public static function getAllVehiclesByPage($page = 1)
+    public static function getAllVehiclesByPage($page = 1, $vehicleName = null)
     {
         $inicio = 0;
         $fin = 10;
@@ -69,6 +69,10 @@ class Vehicle extends ActiveRecord implements JsonSerializable
             $inicio =  ($page - 1) * 10;
         }
         $query = "SELECT * FROM " . static::$tabla . " limit $inicio,$fin";
+
+        if ($vehicleName) {
+            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$vehicleName%' limit $inicio,$fin";
+        }
 
         $resultado = self::consultarSQL($query);
 

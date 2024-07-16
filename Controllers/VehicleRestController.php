@@ -19,7 +19,11 @@ abstract class VehicleRestController
 
         $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
 
-        if ($vehiclePage) {
+        if ($vehiclePage && $vehicleName) {
+            $vehicles = Vehicle::getAllVehiclesByPage($vehiclePage, $vehicleName);
+            echo json_encode($vehicles);
+            exit;
+        } else if ($vehiclePage) {
             $vehicles = Vehicle::getAllVehiclesByPage($vehiclePage);
         } else {
             $vehicles = Vehicle::getAllVehicles();

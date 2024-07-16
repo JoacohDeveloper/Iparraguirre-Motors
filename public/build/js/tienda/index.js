@@ -33,11 +33,13 @@ const Spinner = () => {
     return spinnerSquare
 }
 
-async function init() {
+async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
-        cardContainer.appendChild(spinner)
-        const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&page=${page}`)
+        if (cardContainer) cardContainer.appendChild(spinner)
+        const url = `http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
+
+        const response = await fetch(url)
         spinner.remove()
 
         const data = await response.json();
@@ -51,16 +53,18 @@ async function init() {
                 precio: 100,
                 id: v.id
             }
-            cardContainer.appendChild(Card(customV))
+            if (cardContainer) cardContainer.appendChild(Card(customV))
         })
 
         if (data.length > 0) {
 
             const lastId = data[data.length - 1].id
 
-            const lastEl = cardContainer.querySelector(`[aria-label='${lastId}']`)
+            const lastEl = cardContainer?.querySelector(`[aria-label='${lastId}']`)
 
-            return lastEl
+
+            if (cardContainer)
+                return lastEl
         }
 
         return
@@ -87,7 +91,7 @@ async function init() {
         observer.observe(lastEl)
 }
 
-// init()
+
 
 
 
@@ -101,19 +105,41 @@ const buscador = document.querySelector("#id_product-search__input")
 const resultadoBusqueda = document.querySelector(".result-list")
 const contenedorBuscador = document.querySelector(".search__input")
 
-contenedorBuscador.addEventListener("submit", e => {
+contenedorBuscador.addEventListener("submit", async e => {
     e.preventDefault()
+    ocultarBusqueda()
 
-    const form_data = new FormData(contenedorBuscador)
+    if (cardContainer) {
+        cardContainer.innerHTML = null
+    }
 
-    console.log([...form_data])
 
-    const url = new URL(location.href);
 
-    url.searchParams.set('search', buscador?.value);
+    if (location.pathname.includes("/tienda/results")) {
 
-    history.replaceState(null, null, url.toString());
+        await handlerBusqueda(buscador?.value)
+        const url = new URL(location.origin + "/tienda/results");
+        url.searchParams.set('search', buscador?.value);
+        history.replaceState(null, null, url.toString());
+    }
+    else {
+        const url = new URL(location.origin + "/tienda/results");
+        url.searchParams.set('search', buscador?.value);
+        location.assign(url.toString())
+    }
+
+
 })
+
+async function handlerBusqueda(search) {
+    await init(search)
+    const resultados = cardContainer?.querySelector(".card")
+    if (!resultados) {
+        const nfound = document.createElement("p")
+        nfound.textContent = "Not found"
+        if (cardContainer) cardContainer.appendChild(nfound)
+    }
+}
 
 const ItemBusqueda = (text) => {
     const item = document.createElement("div")
@@ -130,9 +156,11 @@ const ItemBusqueda = (text) => {
 
     url.searchParams.set("search", text)
 
-    item.addEventListener("click", e => {
+    item.addEventListener("click", async e => {
         history.replaceState(null, null, url.toString());
         ocultarBusqueda()
+        buscador.value = text
+        contenedorBuscador.querySelector("button").click()
     })
     return item
 }
@@ -143,7 +171,8 @@ const querySearch = urlParams.get('search');
 
 if (querySearch) {
     buscador.value = querySearch
-    buscar()
+    handlerBusqueda(querySearch)
+
 }
 
 

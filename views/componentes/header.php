@@ -1,5 +1,5 @@
 <?php $url = $_SERVER["REQUEST_URI"]; ?>
-<?php if (str_contains($url, "/tienda")) include __DIR__ . "/tienda/header.php";
+<?php if (str_contains($url, "/tienda") && http_response_code() != 404) include __DIR__ . "/tienda/header.php";
 
 else { ?>
     <header>

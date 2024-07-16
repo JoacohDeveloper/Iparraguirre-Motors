@@ -15,4 +15,16 @@ class TiendaController
             "styles" => ["tienda/index"]
         ]);
     }
+
+    public static function results(Router $router)
+    {
+
+        $busqueda = $_GET["search"] ?? null;
+
+        $router->render("tienda/results", [
+            "title" => "Iparraguirre Motors | $busqueda",
+            "scripts" => ["tienda/index"],
+            "styles" => ["tienda/index", "tienda/results"]
+        ]);
+    }
 }
