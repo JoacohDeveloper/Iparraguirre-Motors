@@ -11,7 +11,7 @@ abstract class DashboardController
 
     public static function index(Router $router)
     {
-        if (!isset($_SESSION["usuario"])) header("location: /auth/login");
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
 
         $router->render("dashboard/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],

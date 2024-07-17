@@ -12,7 +12,7 @@ class User extends ActiveRecord
 {
 
     protected static $tabla = "User";
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "telefono", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
@@ -23,11 +23,10 @@ class User extends ActiveRecord
     protected $email;
 
     protected $token;
+    
     protected $password;
 
     protected $re_password;
-
-    protected $telefono;
 
     protected $titulo_imagen;
 
@@ -53,13 +52,12 @@ class User extends ActiveRecord
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
-        $this->telefono = $args["telefono"] ?? "";
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
-        $this->isAdmin = 0;
+        $this->isAdmin = 1;
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
@@ -74,7 +72,7 @@ class User extends ActiveRecord
 
 
     public function gen_uuid()
-    { //
+    {
         $uuid = array(
             'time_low' => 0,
             'time_mid' => 0,

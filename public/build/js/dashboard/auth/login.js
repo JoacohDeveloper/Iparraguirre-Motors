@@ -1,11 +1,17 @@
+
+// aqui haremos un logueo client side usando login como rest
+
 const formularioLogin = document.querySelector("#loginForm")
 
 formularioLogin.addEventListener("submit", async (e) => {
+
+
     e.preventDefault()
+
     const dato = e.target[0].value; //Dato puede ser username o email
     const pass = e.target[1].value;
     const erroresClient = [];
-    
+
     if (dato.length == 0) {
         erroresClient.push("Debes ingresar un usuario o correo electronico.");
     }
@@ -36,7 +42,7 @@ formularioLogin.addEventListener("submit", async (e) => {
 
 
         try {
-            const response = await fetch("http://localhost:3000/login", {
+            const response = await fetch("http://localhost:3000/dashboard/login", {
                 method: "POST",
                 body: form_data
             })
@@ -47,20 +53,13 @@ formularioLogin.addEventListener("submit", async (e) => {
                     const error = document.createElement("div");
                     error.classList.add("error")
                     error.textContent = err
-
-                    // errores.appendChild(error)
-
                     return { title: "Failure", error: err }
                 })
                 addToast(errors);
-
             } else if (data?.message == "succesfuly") {
                 console.log(data)
-                window.location.href = "/"
-
+                window.location.href = "/dashboard"
             }
-
-
         } catch (error) {
             addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
@@ -70,3 +69,8 @@ formularioLogin.addEventListener("submit", async (e) => {
     }
 
 })
+
+
+//funcion encargada de postear los datos del usuario en el servidor.
+
+

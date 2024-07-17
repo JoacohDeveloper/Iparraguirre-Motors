@@ -9,7 +9,25 @@ create table User(
 	slug VARCHAR(25),
 	email VARCHAR(255),
 	password VARCHAR(61),
-	telefono VARCHAR(45),
+	titulo_imagen VARCHAR(255),
+	imagen VARCHAR(255),
+	token VARCHAR(100),
+	isAdmin tinyint(1) DEFAULT 1,
+	isDeleted tinyint(1) DEFAULT 0,
+	verify tinyInt(1) DEFAULT 0,
+	createdAt datetime default CURRENT_TIMESTAMP,
+	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(uuid)
+);
+
+create table Customer(
+	uuid VARCHAR(45) not null,
+	full_name VARCHAR(65),
+	username VARCHAR(25),
+	slug VARCHAR(25),
+	email VARCHAR(255),
+	phone VARCHAR(45),
+	password VARCHAR(61),
 	titulo_imagen VARCHAR(255),
 	imagen VARCHAR(255),
 	token VARCHAR(100),
@@ -19,6 +37,20 @@ create table User(
 	createdAt datetime default CURRENT_TIMESTAMP,
 	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(uuid)
+);
+
+create table Cart(
+	cart_id VARCHAR(40) not null,
+	user_uuid VARCHAR(45),
+	item_id VARCHAR(65),
+	quanity VARCHAR(25),
+	PRIMARY KEY(cart_id)
+);
+create table Wishlist(
+	wish_id VARCHAR(40) not null,
+	user_uuid VARCHAR(45),
+	item_id VARCHAR(65),
+	PRIMARY KEY(wish_id)
 );
 
 create table vehicle(
