@@ -172,14 +172,13 @@ abstract class AuthenticationController
 
 
 
-    public static function logout()
-    {
+    public static function logout() {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             $_SESSION["loggedIn"] = null;
             $_SESSION["usuario"] = null;
-            header("location: /");
+            header("location: /dashboard/login");
         } else {
-            header("location: /");
+            header("location: /dashboard/login");
         }
     }
 }

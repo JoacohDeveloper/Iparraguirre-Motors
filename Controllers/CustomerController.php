@@ -17,7 +17,6 @@ abstract class CustomerController
             $password = $_POST["password"];
             $response = ["message" => "error"];
             $errores = Customer::validarCampos($email, $password);
-
             if (empty($errores)) {
                 $customer = Customer::getCustomer($email);
                 header('Content-Type: application/json; charset=utf-8');
@@ -100,8 +99,7 @@ abstract class CustomerController
         ]);
     }
 
-    public static function logout()
-    {
+    public static function logout() {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             $_SESSION["loggedIn"] = null;
             $_SESSION["usuario"] = null;

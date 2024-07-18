@@ -129,6 +129,21 @@ class Customer extends ActiveRecord {
         return $this->email;
     }
 
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function getImagen() {
+        return $this->imagen;
+    }
+
+    public function getNombreImagen() {
+        return $this->titulo_imagen;
+    }
+
+    public function getNombreImagen_Url() {
+        return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
+    }
 
     public static function getCustomer($dato) {
         $result = null;
