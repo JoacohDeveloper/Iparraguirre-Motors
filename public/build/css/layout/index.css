@@ -44,21 +44,6 @@ body {
   width: 100%;
 }
 
-footer {
-  position: relative;
-  background-color: #fff;
-
-  .navegacion {
-    ul {
-      li {
-        a {
-          color: #000;
-        }
-      }
-    }
-  }
-}
-
 .index-links {
   color: #fff;
 

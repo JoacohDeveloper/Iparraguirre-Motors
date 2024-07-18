@@ -85,25 +85,6 @@ main {
   margin-top: 4rem;
 }
 
-footer {
-  display: flex;
-  background: linear-gradient(
-    to bottom,
-    rgba(204, 204, 204, 0),
-    rgba(204, 204, 204, 1)
-  );
-  height: 24rem;
-  flex-direction: column;
-  justify-content: center;
-  color: #202020;
-  align-items: center;
-  position: relative;
-}
-
-.dark footer {
-  background: linear-gradient(to bottom, #202020, rgba(0, 0, 0, 1));
-}
-
 .navegacion ul {
   display: flex;
   list-style: none;
@@ -181,21 +162,6 @@ footer {
 }
 
 .not_found .img-container,
-footer .img-container {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-footer .img-container {
-  width: 100%;
-  margin-top: 2rem;
-}
-
-footer img {
-  width: 150px;
-}
 
 .navegacion {
   height: 100%;
@@ -216,24 +182,6 @@ footer img {
   }
 }
 
-footer .navegacion {
-  height: 100%;
-  display: flex;
-  align-items: center;
-
-  ul {
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    li {
-      height: auto;
-      display: flex;
-      align-items: center;
-    }
-  }
-}
 
 header .brgMenu {
   display: none;
@@ -435,9 +383,10 @@ header .brgMenu {
   background-color: #202020;
 }
 
-.dark * {
-  color: #f2f2f2;
+/* .dark * {
+  color: #f2f2f2;    trae problemas con el footer
 }
+*/
 
 .card__toggle {
   display: flex;
@@ -726,4 +675,70 @@ header .brgMenu {
 
 .dark .text {
   color: #fff;
+}
+
+/* Footer */
+
+footer{
+    color: white;
+    background-color: #202020;
+    margin: 2rem 0 2rem 0;
+
+}
+
+.dark footer{
+  color: #202020;
+  background-color: white;
+}
+
+.footer_menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15rem;
+    font-size: 24px;
+    font-family: "Kadwa", serif;
+}
+
+.footer_menu > .lista > ul{
+    list-style: none;
+    
+}
+
+.footer_menu >  ul > li{
+    margin: 0.5rem;
+    
+    font-family: "Istok Web", sans-serif;
+}
+
+.iconos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8rem;
+    font-size: 40px;
+}
+
+.copy{
+    display: flex;
+    justify-content: center;
+    font-family: "Kadwa", serif;
+    margin-top: 2rem;
+}
+
+.footer_menu > .lista > h3{
+  padding-bottom: 1rem;
+}
+
+.footer_menu > .lista > ul > li{
+  transition: ease .5s color;
+  cursor: pointer;
+  &:hover {
+    color:#333;
+
+  }
+}
+
+@media screen and (max-width: 475px) {
+
 }
