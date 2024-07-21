@@ -236,4 +236,8 @@ class User extends ActiveRecord
     {
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
+
+    public function isAdmin() {
+        return boolval($this->isAdmin);
+    }
 }

@@ -23,30 +23,31 @@ abstract class AuthenticationController
                 header('Content-Type: application/json; charset=utf-8');
                 if (isset($usuario)) {
                     if ($usuario->validarPassword($password)) {
-                        if($usuario->getDeleted()) {
+                        if(!$usuario->getDeleted()) {
+                            if($usuario->isAdmin()) {
+                                $_SESSION["usuario"] = $usuario;
+                                $_SESSION["loggedIn"] = true;
+                                $response = ["message" => "succesfuly"];
+                            } else {
+                                $errores[] = "Ha ocurrido un error";
+                                $response["errores"] = $errores;
+                            }
+                        } else {
                             $errores[] = "El usuario no esta registrado";
                             $response["errores"] = $errores;
-                            echo json_encode($response);
-                        } else {
-                            $_SESSION["usuario"] = $usuario;
-                            $_SESSION["loggedIn"] = true;
-                            $response = ["message" => "succesfuly"];
-                            echo json_encode($response);
                         }
                     } else {
                         $errores[] = "El usuario o contraseña son incorrectos.";
                         $response["errores"] = $errores;
-                        echo json_encode($response);
                     }
                 } else {
                     $errores[] = "El usuario o contraseña son incorrectos.";
                     $response["errores"] = $errores;
-                    echo json_encode($response);
                 }
             } else {
                 $response["errores"] = $errores;
-                echo json_encode($response);
             }
+            echo json_encode($response);
             exit;
         }
 

@@ -149,11 +149,23 @@ class Customer extends ActiveRecord {
         $result = null;
         try {
             $query = "SELECT * FROM Customer WHERE email = ? or username = ? LIMIT 1";
-            $result = User::consultarSQL($query, [$dato, $dato]);
+            $result = Customer::consultarSQL($query, [$dato, $dato]);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
         }
 
         return $result[0] ?? null;
+    }
+
+    public function validarPassword($password) {
+        return password_verify($password, $this->password);
+    }
+
+    public function isAdmin() {
+        return boolval($this->isAdmin);
+    }
+
+    public function getDeleted() {
+        return boolval($this->isDeleted);
     }
 }

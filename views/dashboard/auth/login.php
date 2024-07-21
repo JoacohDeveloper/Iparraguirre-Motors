@@ -5,7 +5,7 @@
 
     <section class="login-section">
         <h1>LOGIN</h1>
-        <form method="" action="" id="loginForm">
+        <form method="POST" action="/dashboard/login" id="loginForm">
             <div class="errores"></div>
             <div>
                 <label for="email" class="inputs_txt">Email</label>

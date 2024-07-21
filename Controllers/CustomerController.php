@@ -22,13 +22,18 @@ abstract class CustomerController
                 header('Content-Type: application/json; charset=utf-8');
                 if (isset($customer)) {
                     if ($customer->validarPassword($password)) {
-                        if($customer->getDeleted()) {
+                        if(!$customer->getDeleted()) {
+                            if (!$customer->isAdmin()) {
+                                $_SESSION["usuario"] = $customer;
+                                $_SESSION["loggedIn"] = true;
+                                $response = ["message" => "succesfuly"];
+                            } else {
+                                $errores[] = "Ha ocurrido un error";
+                                $response["errores"] = $errores;
+                            }
+                        } else {
                             $errores[] = "El usuario no esta registrado";
                             $response["errores"] = $errores;
-                        } else {
-                            $_SESSION["usuario"] = $customer;
-                            $_SESSION["loggedIn"] = true;
-                            $response = ["message" => "succesfuly"];
                         }
                     } else {
                         $errores[] = "El usuario o contraseña son incorrectos.";
