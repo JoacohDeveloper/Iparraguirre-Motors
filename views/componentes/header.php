@@ -1,7 +1,5 @@
 <?php $url = $_SERVER["REQUEST_URI"]; ?>
-<?php if (str_contains($url, "/tienda")) include __DIR__ . "/tienda/header.php";
 
-else { ?>
     <header>
         <a href="<?php echo str_contains($url, "/dashboard") ? "/dashboard" : "/" ?>" class="logo">
             <img src="/build/src/images/LOGO2.png" alt="Logo Iparraguirre Motors">
@@ -30,5 +28,3 @@ else { ?>
             </div>
         </div>
     </header>
-
-<?php } ?>

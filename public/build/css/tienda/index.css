@@ -76,28 +76,6 @@ header {
   position: relative;
 }
 
-/* navegacion */
-
-.navegacion > ul > li > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.2rem;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.navegacion > ul > li > a > div {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-}
-
 #cart-items {
   position: absolute;
   padding: 0.2rem;
