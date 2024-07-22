@@ -12,6 +12,6 @@ include dirname(__FILE__) . "/config/database.php";
 
 use \Models\ActiveRecord;
 
-//$db = dbConnection();
+$db = dbConnection();
 
-//ActiveRecord::setdb($db);
+ActiveRecord::setdb($db);
