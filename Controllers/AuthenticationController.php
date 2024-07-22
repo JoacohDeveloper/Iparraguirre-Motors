@@ -10,56 +10,53 @@ abstract class AuthenticationController
 
     public static function login(Router $router)
     {
-        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
-            header("location: /");
-        }
-
+        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /dashboard");
         $errores = [];
         $campos = [];
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
             $email = $_POST["email"];
             $password = $_POST["password"];
             $response = ["message" => "error"];
             $errores = User::validarCampos($email, $password);
-
             if (empty($errores)) {
                 $usuario = User::getUser($email);
+                header('Content-Type: application/json; charset=utf-8');
                 if (isset($usuario)) {
                     if ($usuario->validarPassword($password)) {
-                        $_SESSION["usuario"] = $usuario;
-                        $_SESSION["loggedIn"] = true;
-                        $response = ["message" => "succesfuly"];
-                        header('Content-Type: application/json; charset=utf-8');
-                        echo json_encode($response);
+                        if(!$usuario->getDeleted()) {
+                            if($usuario->isAdmin()) {
+                                $_SESSION["usuario"] = $usuario;
+                                $_SESSION["loggedIn"] = true;
+                                $response = ["message" => "succesfuly"];
+                            } else {
+                                $errores[] = "Ha ocurrido un error";
+                                $response["errores"] = $errores;
+                            }
+                        } else {
+                            $errores[] = "El usuario no esta registrado";
+                            $response["errores"] = $errores;
+                        }
                     } else {
                         $errores[] = "El usuario o contraseña son incorrectos.";
                         $response["errores"] = $errores;
-                        header('Content-Type: application/json; charset=utf-8');
-                        echo json_encode($response);
                     }
                 } else {
                     $errores[] = "El usuario o contraseña son incorrectos.";
                     $response["errores"] = $errores;
-                    header('Content-Type: application/json; charset=utf-8');
-                    echo json_encode($response);
                 }
             } else {
                 $response["errores"] = $errores;
-                header('Content-Type: application/json; charset=utf-8');
-                echo json_encode($response);
             }
+            echo json_encode($response);
             exit;
         }
 
-
-        $router->render("auth/login", [
-            "scripts" => ["auth/index", "auth/login"],
-            "styles" => ["auth/index"],
+        $router->render("dashboard/auth/login", [
+            "scripts" => ["dashboard/auth/index", "dashboard/auth/login"],
+            "styles" => ["dashboard/auth/index"],
             "errores" => $errores,
             "campos" => $campos,
-            "title" => "Iparraguirre Motors | Login",
+            "title" => "Iparraguirre Motors | Dashboard Login",
             "description" => "Ingresa en Iparraguirre Motors!"
         ]);
     }
@@ -67,57 +64,43 @@ abstract class AuthenticationController
 
     public static function register(Router $router)
     {
-        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
-            header("location: /");
-        }
-
-
+        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /dashboard");
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = new User($_POST);
             $errores = $usuario->validate();
             if (empty($errores)) {
-                //no hay errores del servidor
                 $result = User::getUser($usuario->getEmail());
                 if (!isset($result)) {
-
                     $usuario->passwordHash();
                     $usuario->gen_uuid();
                     if ($usuario->crearUsuario()) {
                         $_SESSION["usuario"] = $usuario;
                         $_SESSION["loggedIn"] = true;
                         $response = ["message" => "succesfuly"];
-                        // header('Content-Type: application/json; charset=utf-8');
-
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                         $response["errores"] = $errores;
-                        // header('Content-Type: application/json; charset=utf-8');
-                        //echo json_encode($response);
                     }
                 } else {
                     $errores["already_register"] = "El email ingresado ya esta registrado";
                     $response["errores"] = $errores;
-                    // header('Content-Type: application/json; charset=utf-8');
-                    //echo json_encode($response);
                 }
             } else {
                 $response["errores"] = $errores;
-                // header('Content-Type: application/json; charset=utf-8');
-                //echo json_encode($response);
             }
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode($response);
             exit;
         }
 
-        $router->render("auth/register", [
-            "scripts" => ["auth/index", "auth/register"],
-            "styles" => ["auth/index"],
+        $router->render("dashboard/auth/register", [
+            "scripts" => ["dashboard/auth/index", "dashboard/auth/register"],
+            "styles" => ["dashboard/auth/index"],
             "errores" => $errores,
             "campos" => $campos,
-            "title" => "Iparraguirre Motors | Register",
+            "title" => "Iparraguirre Motors | Dashboard Register",
             "description" => "Registrate en Iparraguirre Motors!"
         ]);
     }
@@ -190,14 +173,13 @@ abstract class AuthenticationController
 
 
 
-    public static function logout()
-    {
+    public static function logout() {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             $_SESSION["loggedIn"] = null;
             $_SESSION["usuario"] = null;
-            header("location: /");
+            header("location: /dashboard/login");
         } else {
-            header("location: /");
+            header("location: /dashboard/login");
         }
     }
 }

@@ -7,9 +7,8 @@ formularioRegister.addEventListener("submit", async e => {
     const fullname = e.target[0].value;
     const username = e.target[1].value;
     const email = e.target[2].value;
-    const phone = e.target[3].value;
-    const pass = e.target[4].value;
-    const rePass = e.target[5].value;
+    const pass = e.target[3].value;
+    const rePass = e.target[4].value;
     const errores = [];
 
     if (fullname.length <= 2) {
@@ -20,11 +19,7 @@ formularioRegister.addEventListener("submit", async e => {
         errores.push("Debes ingresar un usuario mayor a 4 caracteres.");
     } else if (email.length == 0) {
         errores.push("Debes ingresar un email.");
-    } else if (phone.length == 0) {
-            errores.push("Debes ingresar un numero de celular.");
-    } else if (phone.length <= 8) {
-        errores.push("Debes ingresar un numero de celular valido.");
-    }else if (pass.length == 0) {
+    } else if (pass.length == 0) {
         errores.push("Debes ingresar una contraseña.");
     } else if (pass.length <= 3 || rePass.length <= 3) {
         errores.push("La contraseña debe tener minimo 4 caracteres.");
@@ -53,13 +48,16 @@ formularioRegister.addEventListener("submit", async e => {
 
 
         try {
-            const response = await fetch("http://localhost:3000/register", {
+            const response = await fetch("http://localhost:3000/dashboard/register", {
                 method: "POST",
                 body: form_data
             })
             const data = await response.json()
+
             console.log(response)
             console.log(data)
+            
+
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -68,11 +66,9 @@ formularioRegister.addEventListener("submit", async e => {
                     return { title: "Failure", error: err }
                 })
                 addToast(errors);
-
             } else if (data?.message == "succesfuly") {
-                window.location.href = "/"
+                window.location.href = "/dashboard"
             }
-
         } catch (error) {
             console.log(error)
             addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);

@@ -5,7 +5,7 @@
 
     <section class="login-section">
         <h1>LOGIN</h1>
-        <form method="POST" action="/login" id="loginForm">
+        <form method="POST" action="/dashboard/login" id="loginForm">
             <div class="errores"></div>
             <div>
                 <label for="email" class="inputs_txt">Email</label>
@@ -22,9 +22,9 @@
                 <label for="remember" id="remember_txt">Remember me</label>
             </div>
             <input id="boton" type="submit" value="Ingresar">
-            <a class="opposite" href="/register">Sign Up</a>
+            <a class="opposite" href="/dashboard/register">Sign Up</a>
         </form>
     </section>
-    <?php implementComp("error_toast.php") ?>       
+    <?php implementComp("error_toast.php") ?>
 
 </div>

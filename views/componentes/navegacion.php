@@ -12,7 +12,7 @@
                 <li><a href="/carrito" class="<?php echo $url === '/carrito' ? 'actual' : '' ?>">Carrito</a></li>
                 <li><a href="/Lista de Deseos" class="<?php echo $url === '/Lista de Deseos' ? 'actual' : '' ?>">Lista de Deseos</a></li>
                 <li><a href="/Ajustes" class="<?php echo $url === '/Ajustes' ? 'actual' : '' ?>">Ajustes</a></li>
-                <li><a href="/Cerrar Sesion" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
+                <li><a href="/logout" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
             </ul>
         </li>
         <li><a href="/faq" class="<?php echo $url === '/faq' ? 'actual' : '' ?>">Ayuda</a></li>

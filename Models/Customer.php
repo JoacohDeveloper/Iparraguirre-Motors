@@ -1,79 +1,36 @@
 <?php
-
 namespace Models;
-
 use DateTime;
 use PDOException;
 
-//Este es un modelo que hereda a ActiveRecord dentro de este modelo se especifica el nombre de la tabla SQL y las columnas. Es importante que cuando agreguemos datos a columnasdb al momento de hacer una operacion de Active Record se utilicen todos los campos, sin haber ningun dato vacío.
+class Customer extends ActiveRecord {
 
+    protected static $tabla = "Customer";
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "phone", "password", "token", "isAdmin",
+        "isDeleted", "verify", "createdAt", "updatedAt"];
 
-class User extends ActiveRecord
-{
+    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $isAdmin, $isDeleted, $verify, $createdAt, $updatedAt;
 
-    protected static $tabla = "User";
-    
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
-
-    protected $uuid;
-
-    protected $full_name;
-
-    protected $username;
-
-    protected $email;
-
-    protected $token;
-    
-    protected $password;
-
-    protected $re_password;
-
-    protected $titulo_imagen;
-
-    protected $imagen;
-
-    protected $isAdmin;
-
-    protected $isDeleted;
-
-    protected $createdAt;
-
-    protected $updatedAt;
-
-    protected $verify;
-
-    protected $slug;
-
-    function __construct($args = [])
-    {
+    function __construct($args = []) {
         $this->uuid = $args["uuid"] ?? null;
-        $this->username = $args["username"] ?? "";
         $this->full_name = $args["full_name"] ?? "";
+        $this->username = $args["username"] ?? "";
+        $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
         $this->email = $args["email"] ?? "";
+        $this->phone = $args["phone"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
+        $this->token = null;
+        $this->isAdmin = 0;
+        $this->isDeleted = $args["isDeleted"] ?? 0;
+        $this->verify = 0;
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
-        $this->verify = 0;
-        $this->isAdmin = 1;
-        $this->isDeleted = $args["isDeleted"] ?? 0;
-        $this->token = null;
-        $this->titulo_imagen = "imagen default de usuario";
-        $this->imagen = $args["imagen"] ?? "\build\src\users\default.jpg";
-        $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-
-    public function gen_uuid()
-    {
+    public function gen_uuid() {
         $uuid = array(
             'time_low' => 0,
             'time_mid' => 0,
@@ -112,13 +69,11 @@ class User extends ActiveRecord
     }
 
 
-    public function getUUID()
-    {
+    public function getUUID() {
         return $this->uuid;
     }
 
-    public function validate()
-    {
+    public function validate() {
         $errors = [];
         if (empty($this->username)) {
             $errors["username"] = "Debes ingresar un usuario.";
@@ -130,6 +85,9 @@ class User extends ActiveRecord
         }
         if (empty($this->email)) {
             $errors["email"] = "el campo email es obligatorio.";
+        }
+        if (empty($this->phone)) {
+            $errors["phone"] = "el campo numero de celular es obligatorio.";
         }
         if (empty($this->password)) {
             $errors["password"] = "el campo password es obligatorio.";
@@ -147,42 +105,8 @@ class User extends ActiveRecord
         return $errors;
     }
 
-    public static function getUser($dato) //dato puede ser email o username
-    {
-        $result = null;
-        try {
-            $query = "SELECT * FROM User WHERE email = ? or username = ? LIMIT 1";
-            $result = User::consultarSQL($query, [$dato, $dato]);
-        } catch (PDOException $th) {
-            logg("[MARIADB] Error al consultar.");
-        }
-
-        return $result[0] ?? null;
-    }
-
-
-
-
-    public function passwordHash()
-    {
-        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
-    }
-
-    public function crearUsuario()
-    {
-        $this->gen_uuid();
-        return $this->crear();
-    }
-
-    public function actualizarUsuario()
-    {
-        return $this->actualizar($this->uuid);
-    }
-
-    public static function validarCampos($email, $password)
-    {
+    public static function validarCampos($email, $password) {
         $errores = [];
-
         if (empty($email)) {
             $errores["email"] = "el campo email es obligatorio.";
         }
@@ -192,53 +116,56 @@ class User extends ActiveRecord
         return $errores;
     }
 
-    public function validarPassword($password)
-    {
-        return password_verify($password, $this->password);
+    public function passwordHash() {
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function deleteUser()
-    {
-        $result = null;
-        try {
-            return $this->eliminar($this->uuid);
-        } catch (PDOException $th) {
-            logg("[MARIADB] Error al consultar.");
-        }
-        return $result[0] ?? null;
+    public function crearCustomer() {
+        $this->gen_uuid();
+        return $this->crear();
     }
 
-    public function getUsername()
-    {
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getUsername() {
         return $this->username;
     }
 
-    public function getDeleted()
-    {
-        return boolval($this->isDeleted);
-    }
-
-    public function getFullName()
-    {
-        return $this->full_name;
-    }
-
-    public function getImagen()
-    {
+    public function getImagen() {
         return $this->imagen;
     }
 
-    public function getNombreImagen()
-    {
+    public function getNombreImagen() {
         return $this->titulo_imagen;
     }
 
-    public function getNombreImagen_Url()
-    {
+    public function getNombreImagen_Url() {
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
+    }
+
+    public static function getCustomer($dato) {
+        $result = null;
+        try {
+            $query = "SELECT * FROM Customer WHERE email = ? or username = ? LIMIT 1";
+            $result = Customer::consultarSQL($query, [$dato, $dato]);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+
+        return $result[0] ?? null;
+    }
+
+    public function validarPassword($password) {
+        return password_verify($password, $this->password);
     }
 
     public function isAdmin() {
         return boolval($this->isAdmin);
+    }
+
+    public function getDeleted() {
+        return boolval($this->isDeleted);
     }
 }

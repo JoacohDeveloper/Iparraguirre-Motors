@@ -11,6 +11,7 @@ use Controllers\DashboardController;
 use \Controllers\HomePageController;
 use Controllers\TiendaController;
 use Controllers\VehiclesController;
+use Controllers\CustomerController;
 use Controllers\InformationController;
 use \Router\Router;
 use Controllers\VehicleRestController;
@@ -28,26 +29,33 @@ $router->get("/", [HomePageController::class, "index"]);
 $router->post("/contact", [InformationController::class, "contactUs"]);
 $router->get("/contact", [InformationController::class, "contactUs"]);
 
-//Auth
-$router->get("/auth/login", [AuthenticationController::class, "login"]);
+//Customer auth
+$router->get("/login", [CustomerController::class, "login"]);
+$router->post("/login", [CustomerController::class, "login"]);
+$router->get("/register", [CustomerController::class, "register"]);
+$router->post("/register", [CustomerController::class, "register"]);
 
-$router->post("/auth/login", [AuthenticationController::class, "login"]);
+//Admin auth
+$router->get("/dashboard/login", [AuthenticationController::class, "login"]);
+
+$router->post("/dashboard/login", [AuthenticationController::class, "login"]);
 
 
-$router->get("/auth/register", [AuthenticationController::class, "register"]);
+$router->get("/dashboard/register", [AuthenticationController::class, "register"]);
 
-$router->post("/auth/register", [AuthenticationController::class, "register"]);
+$router->post("/dashboard/register", [AuthenticationController::class, "register"]);
 
 
-$router->get("/auth/recuperar", [AuthenticationController::class, "recuperar"]);
+$router->get("/dashboard/recuperar", [AuthenticationController::class, "recuperar"]);
 
-$router->post("/auth/recuperar", [AuthenticationController::class, "recuperar"]);
+$router->post("/dashboard/recuperar", [AuthenticationController::class, "recuperar"]);
 
-$router->get("/auth/verificar", [AuthenticationController::class, "verificar"]);
+$router->get("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
-$router->post("/auth/verificar", [AuthenticationController::class, "verificar"]);
+$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
-$router->get("/logout", [AuthenticationController::class, "logout"]);
+$router->get("/logout", [CustomerController::class, "logout"]);
+$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 
 //dashboard 
 
