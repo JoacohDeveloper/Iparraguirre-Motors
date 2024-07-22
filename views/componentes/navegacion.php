@@ -1,11 +1,20 @@
 <?php $url = $_SERVER["REQUEST_URI"]; ?>
 
+
 <nav class="navegacion">
     <ul>
-        <li><a href="/" class="<?php echo $url === '/' ? 'actual-index' : '' ?>">Home</a></li>
+        <li><a href="/" class="<?php echo $url === '/' ? 'actual-index' : '' ?>">Inicio</a></li>
+        <li><a href="/catalogo" class="<?php echo $url === '/catalogo' ? 'actual' : '' ?>">Catalogo</a></li>
         <li><a href="/tienda" class="<?php echo $url === '/tienda' ? 'actual' : '' ?>">Tienda</a></li>
-        <li><a href="/trade" class="<?php echo $url === '/trade' ? 'actual' : '' ?>">Trade</a></li>
-        <li><a href="/portfolio" class="<?php echo $url === '/portfolio' ? 'actual' : '' ?>">Portfolio</a></li>
-        <li><a href="/faq" class="<?php echo $url === '/cuenta' ? 'actual' : '' ?>">cuenta</a></li>
+        <li>
+        <a href="/cuenta" class="<?php echo $url === '/cuenta' ? 'actual' : '' ?>">Cuenta</a>
+            <ul class="dropdown-content">
+                <li><a href="/carrito" class="<?php echo $url === '/carrito' ? 'actual' : '' ?>">Carrito</a></li>
+                <li><a href="/Lista de Deseos" class="<?php echo $url === '/Lista de Deseos' ? 'actual' : '' ?>">Lista de Deseos</a></li>
+                <li><a href="/Ajustes" class="<?php echo $url === '/Ajustes' ? 'actual' : '' ?>">Ajustes</a></li>
+                <li><a href="/Cerrar Sesion" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
+            </ul>
+        </li>
+        <li><a href="/faq" class="<?php echo $url === '/faq' ? 'actual' : '' ?>">Ayuda</a></li>
     </ul>
 </nav>

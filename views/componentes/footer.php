@@ -33,7 +33,7 @@
                 </ul>
             </div>
         </div>
-            <div class="iconos">
+            <div class="footer_iconos">
                 <i class='bx bxl-facebook'></i>
                 <i class='bx bxl-instagram'></i>
                 <i class='bx bxl-linkedin'></i>

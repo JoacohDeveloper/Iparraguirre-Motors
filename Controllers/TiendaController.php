@@ -12,7 +12,7 @@ class TiendaController
         $router->render("tienda/index", [
             "title" => "Iparraguirre Motors | Tienda",
             "scripts" => ["tienda/index"],
-            "styles" => ["tienda/index"]
+            "styles" => ["tienda/index", "globals"]
         ]);
     }
 }
