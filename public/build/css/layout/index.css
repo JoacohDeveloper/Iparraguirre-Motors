@@ -618,6 +618,8 @@ main {
   padding-bottom: 1.5em;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+
 }
 .dark .slider .dots li{
   list-style: none;
@@ -627,9 +629,12 @@ main {
   margin: 10px;
   border-radius: 20px;
   transition: 0.5s;
+  cursor: pointer;
 }
 .dark .slider .dots li.active{
   width: 30px;
+  cursor: pointer;
+
 }
 .slider > .list > .item > .slider_p{
   position: absolute;
