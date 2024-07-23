@@ -76,15 +76,13 @@ abstract class DashboardController
                 $result = $vehicle->registrarVehicle();
                 if ($result) {
                     echo json_encode(["message" => "succesfuly"]);
-                    exit;
                 } else {
                     echo json_encode(["error" => "Ha ocurrido un error"]);
-                    exit;
                 }
             } else {
                 echo json_encode(["message" => "error", "errores" => $errores]);
-                exit;
             }
+            exit;
         }
 
         $router->render("dashboard/vehicles/add-vehicle", [

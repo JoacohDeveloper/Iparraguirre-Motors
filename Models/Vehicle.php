@@ -11,7 +11,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
     protected static $columnasdb = [
         "id", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "titulo_imagen", "imagen", "matricula", "transmision",
         "tipo_carroceria", "frenos_abs", "airbag", "traccion", "direccion", "control_estabilidad", "puertas", "tipo_combustible",
-        "precio", "velocidad_max", "zero_to_houndred", "pais", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
+        "precio", "velocidad_max", "zero_to_houndred", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
     ];
 
     public function jsonSerialize()
@@ -20,7 +20,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
     }
 
     public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, $titulo_imagen, $imagen, $matricula, $transmision, $tipo_carroceria, $frenos_abs,
-        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $pais, $peso, $kilometros,
+        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
     function __construct($args = [])
@@ -47,7 +47,6 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         $this->precio = $args["precio"] ?? "";
         $this->velocidad_max = $args["velocidad_max"] ?? "";
         $this->zero_to_houndred = $args["zero_to_houndred"] ?? "";
-        $this->pais = $args["pais"] ?? "";
         $this->peso = $args["peso"] ?? "";
         $this->kilometros = $args["kilometros"] ?? "";
         $this->caballos_potencia = $args["caballos_fuerza"] ?? "";
@@ -136,9 +135,6 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         }
         if (empty($this->zero_to_houndred)) {
             $errors["nombre"] = "El campo nombre es obligatorio.";
-        }
-        if (empty($this->pais)) {
-            $errors["pais"] = "El campo pais es obligatorio.";
         }
         if (empty($this->peso)) {
             $errors["peso"] = "El campo peso del vehiculo es obligatorio.";

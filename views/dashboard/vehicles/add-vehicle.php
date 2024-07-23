@@ -9,7 +9,7 @@
 
             <h3>Agregar Vehiculo</h3>
 
-            <form class="f_addvehicle">
+            <form method="POST" action="/dashboard/agregar-vehiculo" class="f_addvehicle">
                 <div class="grid">
                     <input type="text" name="nombre" placeholder="Nombre">
                     <textarea name="descripcion" placeholder="Descripcion"></textarea>
@@ -88,7 +88,6 @@
                     <input type="text" name="precio" placeholder="Precio del vehiculo">
                     <input type="text" name="velocidad_max" placeholder="Velocidad maxima">
                     <input type="text" name="zero_to_houndred" placeholder="De 0 a 100 km/h">
-                    <input type="text" name="pais" placeholder="Pais">
                     <input type="text" name="peso" placeholder="Peso del vehiculo">
                     <input type="text" name="kilometros" placeholder="Kilometraje del vehiculo">
                     <input type="text" name="caballos_fuerza" placeholder="Caballos de fuerza">
