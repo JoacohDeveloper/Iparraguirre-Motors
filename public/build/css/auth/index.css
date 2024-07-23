@@ -1,1 +1,7 @@
 /*Este es el css del register y login de los clientes*/
+header{
+    display: none;
+}
+footer{
+    display: none;
+}
