@@ -1,5 +1,7 @@
 <?php
 
+
+
 define("ROOT", str_replace("\\public", "/", dirname(__FILE__)));
 
 spl_autoload_register(function ($className) {

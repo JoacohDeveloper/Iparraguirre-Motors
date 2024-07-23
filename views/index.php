@@ -5,6 +5,7 @@
 
     <div class="banner">
         <div class="banner-content">
+
             <h1>Iparraguirre <br> <span>Motors</span></h1>
             <p>Descubre el lujo en Iparraguirre Motors, tu agencia de autos exóticos.<br> Encuentra tu vehículo de ensueño entre nuestra selección exclusiva. <br> ¡Bienvenido a la excelencia automotriz!</p>
             <a href="/tienda">Mostrar Catalogo</a>

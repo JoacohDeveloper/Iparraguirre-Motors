@@ -1,3 +1,5 @@
+
+
 <?php
 
 include "../includes/app.php";
@@ -5,20 +7,20 @@ include_once "autoload.php";
 
 
 
-$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-socket_bind($socket, 'localhost');
+// $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+// socket_bind($socket, 'localhost', 3000);
 
-socket_listen($socket);
+// socket_listen($socket);
 
-$newc = socket_accept($socket);
+// $newc = socket_accept($socket);
 
-$st = "Hello world";
-socket_write($newc, $st, strlen($st));
+// $st = "Hello world";
+// socket_write($newc, $st, strlen($st));
 
-socket_close($newc);
-socket_close($socket);
+// socket_close($newc);
+// socket_close($socket);
 
-// use Router\Router;
+
 
 use Controllers\AuthenticationController;
 use Controllers\DashboardController;
@@ -37,6 +39,8 @@ $router = new Router();
 
 //Index
 $router->get("/", [HomePageController::class, "index"]);
+
+
 
 //ContactUs
 
