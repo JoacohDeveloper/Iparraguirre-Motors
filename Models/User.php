@@ -130,6 +130,11 @@ class User extends ActiveRecord
         }
         if (empty($this->email)) {
             $errors["email"] = "el campo email es obligatorio.";
+        } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors["email"] = "formato de email invalido";
+        }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors["email"] = "formato de email invalido";
         }
         if (empty($this->password)) {
             $errors["password"] = "el campo password es obligatorio.";

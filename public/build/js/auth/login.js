@@ -5,11 +5,12 @@ formularioLogin.addEventListener("submit", async (e) => {
     const dato = e.target[0].value; //Dato puede ser username o email
     const pass = e.target[1].value;
     const erroresClient = [];
+    const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     
     if (dato.length == 0) {
         erroresClient.push("Debes ingresar un usuario o correo electronico.");
-    }
-    if (pass.length == 0) {
+    } else if (pass.length == 0) {
         erroresClient.push("Debes ingresar una contraseña.");
     }
 

@@ -196,6 +196,9 @@ input[type="password"] {
   width: 100%;
 }
 
-.hello-world {
+nav{
+  display: none;
+}
+footer{
   display: none;
 }
