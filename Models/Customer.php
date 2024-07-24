@@ -83,11 +83,18 @@ class Customer extends ActiveRecord {
         if (empty($this->full_name)) {
             $errors["full_name"] = "el campo nombre completo es obligatorio.";
         }
+        if (strpos($this->full_name, ' ') == false) {
+            $errors["full_name"] = "debes ingresar nombre y apellido.";
+        }
         if (empty($this->email)) {
             $errors["email"] = "el campo email es obligatorio.";
+        } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors["email"] = "formato de email invalido";
         }
         if (empty($this->phone)) {
             $errors["phone"] = "el campo numero de celular es obligatorio.";
+        } else if (strlen($this->phone) != 9) {
+            $errors["phone"] = "ingrese un numero de celular valido.";
         }
         if (empty($this->password)) {
             $errors["password"] = "el campo password es obligatorio.";

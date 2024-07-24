@@ -14,8 +14,7 @@ formularioLogin.addEventListener("submit", async (e) => {
 
     if (dato.length == 0) {
         erroresClient.push("Debes ingresar un usuario o correo electronico.");
-    }
-    if (pass.length == 0) {
+    } else if (pass.length == 0) {
         erroresClient.push("Debes ingresar una contraseña.");
     }
 

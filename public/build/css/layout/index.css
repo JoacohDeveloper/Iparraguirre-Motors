@@ -530,6 +530,7 @@ main {
   width: 100%;
   max-width: 100vw;
   height: 700px;
+  padding-top: 1em;
   margin: auto;
   position: relative;
   overflow: hidden;
@@ -537,6 +538,7 @@ main {
 .slider .list{
   position: absolute;
   width: max-content;
+  padding-top: 1em;
   height: 100%;
   left: 0;
   top: 0;
@@ -551,6 +553,7 @@ main {
 }
 .slider .buttons{
   position: absolute;
+  padding-top: 1em;
   top: 45%;
   left: 5%;
   width: 90%;

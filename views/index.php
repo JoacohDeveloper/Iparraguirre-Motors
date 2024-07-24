@@ -20,7 +20,31 @@
         </div>
     </div>
 
+    
     <div class="content">
+
+    <div class="content__title">
+            <h2>Best Selled</h2>
+        </div>
+    <div class="content__bestSelled">
+
+    <div class="bestSelled__banner-image">
+        <img src="/build/src/images/vehicles/Dodge-1968.png" alt="Charger 1968">
+
+    </div>
+    <h3>Charger</h3>
+
+    <div class="bestSelled__modelIntro">
+        <h4>Dodge Charger 1968</h4>
+        <p>$ 78,800</p>
+        <div class="bestSelled__modelIntro-buttonGroup">
+            <button>Change Model</button>
+            <button>View More</button>
+            <button>Test Drive</button>
+        </div>
+    </div>
+    </div>
+
     <div class="slider">
             <div class="list">
                 <div class="item">
@@ -53,28 +77,8 @@
         </div>
 
         <script src="/build/js/slider.js"></script>       
-        <div class="content__title">
-            <h2>Best Selled</h2>
-        </div>
 
-        <div class="content__bestSelled">
 
-            <div class="bestSelled__banner-image">
-                <img src="/build/src/images/vehicles/Dodge-1968.png" alt="Charger 1968">
-
-            </div>
-            <h3>Charger</h3>
-
-            <div class="bestSelled__modelIntro">
-                <h4>Dodge Charger 1968</h4>
-                <p>$ 78,800</p>
-                <div class="bestSelled__modelIntro-buttonGroup">
-                    <button>Change Model</button>
-                    <button>View More</button>
-                    <button>Test Drive</button>
-                </div>
-            </div>
-        </div>
       <!--   <div>
             <div class="slidermarcas">
                 <div class="slider-track">

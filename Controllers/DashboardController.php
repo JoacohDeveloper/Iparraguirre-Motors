@@ -12,6 +12,10 @@ abstract class DashboardController
     public static function index(Router $router)
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if(!$user->isAdmin()){
+            header("location: /");
+        }
 
         $router->render("dashboard/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],
@@ -23,6 +27,11 @@ abstract class DashboardController
 
     public static function productManagment(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if(!$user->isAdmin()){
+            header("location: /");
+        }
 
         $router->render("dashboard/product-managment/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],
@@ -33,8 +42,12 @@ abstract class DashboardController
 
     public static function userSettings(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $uuid = $_GET["u"];
         $usuario = $_SESSION["usuario"];
+        if(!$usuario->isAdmin()){
+            header("location: /");
+        }
 
         $fullName = $usuario->getFullname();
         $imagen = $usuario->getNombreImagen_Url();
@@ -66,6 +79,12 @@ abstract class DashboardController
 
     public static function agregarVehiculo(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if(!$user->isAdmin()){
+            header("location: /");
+        }
+
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -96,6 +115,12 @@ abstract class DashboardController
 
     public static function userDeleting(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if(!$user->isAdmin()){
+            header("location: /");
+        }
+        
         $errores = [];
         $usuario = $_SESSION["usuario"];
         $result =  ["Fail"];

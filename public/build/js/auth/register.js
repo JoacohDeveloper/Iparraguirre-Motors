@@ -11,20 +11,26 @@ formularioRegister.addEventListener("submit", async e => {
     const pass = e.target[4].value;
     const rePass = e.target[5].value;
     const errores = [];
+    const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (fullname.length <= 2) {
         errores.push("Debes ingresar tu nombre completo.");
+    }  else if (!nameRegex.test(fullname)) {
+        errores.push("Debes ingresar nombre y apellido.");
     } else if (username.length == 0) {
         errores.push("Debes ingresar un usuario.");
     } else if (username.length <= 4) {
         errores.push("Debes ingresar un usuario mayor a 4 caracteres.");
     } else if (email.length == 0) {
         errores.push("Debes ingresar un email.");
+    } else if (!emailRegex.test(email)) {
+        errores.push("Formato de email inválido.");
     } else if (phone.length == 0) {
-            errores.push("Debes ingresar un numero de celular.");
-    } else if (phone.length <= 8) {
+        errores.push("Debes ingresar un numero de celular.");
+    } else if (phone.length != 9) {
         errores.push("Debes ingresar un numero de celular valido.");
-    }else if (pass.length == 0) {
+    } else if (pass.length == 0) {
         errores.push("Debes ingresar una contraseña.");
     } else if (pass.length <= 3 || rePass.length <= 3) {
         errores.push("La contraseña debe tener minimo 4 caracteres.");
