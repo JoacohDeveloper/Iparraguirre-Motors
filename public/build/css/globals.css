@@ -704,14 +704,12 @@ footer{
 
 .footer_menu{
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
     gap: 15rem;
-    font-size: 24px;
+    font-size: 1.3em;
 }
 
-.footer_menu > .lista > ul{
+.footer_menu  > ul{
     list-style: none;
     
 }
@@ -731,43 +729,42 @@ footer{
     justify-content: center;
     margin-top: 2em;
 }
-
-.footer_menu > .lista > h3{
-  padding-bottom: 1em;
-  align-items: center;
-  justify-content: center;
-}
-
-  .footer_menu > .lista > ul > li{
-    padding: 10px;
+  .footer_menu > ul > li{
     transition: ease .1s;
     cursor: pointer;
     transition: color 0.3s ease;
       color: #ffffff;
-      border: 2px solid transparent;
       padding: 0.5rem 0.8rem;
-      border-radius: 0.2em;
-      transition: border 0.3s ease;
       &:hover {
+        border-radius: 0.2em;
         box-shadow: 0px 0px 16px 2px rgba(190,0,0,0.14);
         border: 2px solid #be0000;
-        transform: translateY(-3px);
       }
     }
-.dark .footer_menu > .lista > ul > li{
-  padding: 10px;
+.dark .footer_menu > ul > li{
   transition: ease .1s;
   cursor: pointer;
   transition: color 0.3s ease;
     color: #000000;
-    border: 2px solid transparent;
     padding: 0.5rem 0.8rem;
-    border-radius: 0.2em;
-    transition: border 0.3s ease;
     &:hover {
+      border-radius: 0.2em;
       box-shadow: 0px 0px 16px 2px rgba(190,0,0,0.14);
       border: 2px solid #be0000;
-      transform: translateY(-3px);
+    }
+  }
+  .footer_menu  > ul > li.footer_h3{
+    text-decoration: none;
+    padding-bottom: 1em;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: none;
+    &:hover{
+      cursor:auto;
+      box-shadow: none;
+      border: none;
+      transform: none;
     }
   }
 @media screen and (max-width: 475px) {
