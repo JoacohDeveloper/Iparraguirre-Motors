@@ -11,7 +11,7 @@
 
         <ul aria-label="ddl_1" class="dropDown-list">
             <li>
-                <a title="Product Managment" class="aside-element rounded" href="/dashboard/product-managment">
+                <a title="Product Managment" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/archive.svg" alt="Product Managment">
                         <p>Product Managment</p>
@@ -21,14 +21,14 @@
             </li>
             <li>
                 <ul class="dropDown-links dropDownNotDeployed">
-                    <li><a href="#">Agregar Vehiculo</a></li>
+                    <li><a href="/dashboard/agregar-vehiculo">Agregar Vehiculo</a></li>
                     <li><a href="#">Agregar Producto</a></li>
                 </ul>
             </li>
         </ul>
         <ul aria-label="ddl_2" class="dropDown-list">
             <li>
-                <a title="Coupons" class="aside-element rounded" href="/dashboard/coupons">
+                <a title="Coupons" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/card.svg" alt="Coupons">
                         <p>Coupons</p>
@@ -52,7 +52,7 @@
         </a>
         <ul aria-label="ddl_3" class="dropDown-list">
             <li>
-                <a title="Analytics" class="aside-element rounded" href="/dashboard/analytics">
+                <a title="Analytics" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/analytics.svg" alt="Analytics">
                         <p>Analytics</p>

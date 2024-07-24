@@ -52,7 +52,9 @@ if (account) {
 
 
 const chart1 = document.getElementById("chart1");
-chart1.style.height = '100%';
+
+if(chart1) {
+    chart1.style.height = '100%';
 chart1.style.width = '100%';
 chart1.parentElement.style.position = "relative";
 
@@ -141,3 +143,26 @@ new Chart(chart3, {
         },
     },
 });
+}
+
+
+
+// Aside Ddl
+
+
+
+const dropDownLists = document.querySelectorAll(".dropDown-list")
+
+
+
+dropDownLists.forEach(ele => {
+    ele.addEventListener("click", e => {
+        const x = ele.querySelector(".dropDown-links")
+        x.classList.toggle("dropDownNotDeployed")
+       
+        const data = JSON.parse(localStorage.getItem("ddl")) || []
+
+        localStorage.setItem("ddl", JSON.stringify([...data, {element: ele.ariaLabel, deployed: !x.classList.contains("dropDownNotDeployed")}]))
+
+    })
+})
