@@ -14,17 +14,6 @@ main {
   --loading-grey: #ededed;
 }
 
-footer {
-  display: none;
-}
-
-.dashboard-footer {
-  display: flex;
-}
-.dashboard-footer .navegacion {
-  display: none;
-}
-
 .container {
   position: relative;
   display: flex;
@@ -36,6 +25,7 @@ footer {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 2rem;
+  margin-bottom: 4rem;
   gap: 2rem;
 }
 

@@ -62,7 +62,7 @@ class User extends ActiveRecord
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
-        $this->imagen = $args["imagen"] ?? "\build\src\users\default.jpg";
+        $this->imagen = $args["imagen"] ?? "\build\src\images\users\default.jpg";
         $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 

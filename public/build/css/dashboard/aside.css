@@ -133,3 +133,60 @@
 .dark .aside-element p {
   color: #f2f2f2;
 }
+
+
+
+
+.dropDown-links {
+  display: none;
+  list-style: none;
+  padding-left: 3rem;
+  margin-top: .4rem;
+  margin-bottom: 1rem;
+  gap: .6rem;
+  li > a {
+    text-decoration: none;
+    color: #59595a;
+    font-size: .8rem;
+    padding: .3rem .8rem;
+    border-radius: .3rem;
+
+    &:hover {
+      background-color: #f2f2f29f;
+    }
+  }
+}
+
+
+
+
+.stretch {
+  .dropDown-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dropDown-list {
+    align-items: start;
+
+    li {
+      width: 100%;
+    }
+  }
+}
+
+
+
+.dropDown-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+
+
+}
+
+.dropDownNotDeployed {
+  display: none !important;
+}
