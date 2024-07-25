@@ -5,8 +5,7 @@
   grid-template-rows: repeat(1, 1fr);
   gap: 1.5rem;
   max-width: 40rem;
-
-  background-color: #cccc;
+  background: none;
   padding: 1rem;
   border-radius: 1rem;
 }
@@ -21,10 +20,17 @@
 h3{
   font-size: 2rem;
 }
+.dark h3{
+  color:rgb(255, 255, 255);
+  font-size: 2rem;
+}
 
 .grid > label{
   font-size: 1.1rem;
   margin-bottom: -.5em;
+}
+.dark .grid >  label{
+  color: #fff;
 }
 .grid > input{
   padding: .2rem;
@@ -35,17 +41,133 @@ h3{
 }
 
 #submit{
-  margin: 0 auto;
   grid-column: span 2;
-  width: 35rem;
-  max-height: 35rem;
+  width: 40rem;
   font-size: 1.5rem;
-  height: 2rem;
-  border-radius: 0.5rem;
-  transition: ease, 1.2s;
-  &:hover{
-    font-size: 1.55rem;
-    border-radius: 0.8rem;
-    background-color: red;
-  }
+  height: 2.7rem;
+  transition: ease .1s;
+  cursor: pointer;
+  border-radius: 0.2em;
+  transition: color 0.3s ease;
+    color: #000000;
+    &:hover {
+      box-shadow: 0px 0px 5px 2px rgba(190, 0, 0, 0.479);
+      border: 2px solid #be0000;
+    }
+}
+.dark #submit{
+  color: #fff;
+}
+.input-underline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 1px;
+  background: #b10b0a;
+  box-shadow: 0px 0px 10.6px rgba(177, 11, 10, 0.52);
+}
+.inputs {
+  border: none;
+  font-style: italic
+}
+#transmision{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#carroceria{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#sel_abs{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#sel_airbag{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#traccion{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#direccion{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#sel_estabilidad{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+#num_puertas{
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+input:not([type="button"]) {
+  background: none;
+}
+textarea:not([type="button"]) {
+  border-radius: 0.4em;
+  background:#61616167;
+  border: none;
+  font-style: italic
+}
+.dark input{
+  color: #fff;
+}
+.dark textarea{
+  color: #fff;
+  background:#616161e8;
+}
+input[type="text" i] {
+  padding-block: 1px;
+  padding-inline: 2px;
+}
+.dark #transmision{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #carroceria{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #sel_abs{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #sel_airbag{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #traccion{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #direccion{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #sel_estabilidad{
+  color: #fff;
+  background:#616161e8;
+}
+.dark #num_puertas{
+  color: #fff;
+  background:#616161e8;
 }
