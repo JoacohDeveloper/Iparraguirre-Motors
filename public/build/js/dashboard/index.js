@@ -69,12 +69,12 @@ new Chart(chart1, {
         datasets: [
             {
                 label: "Personas ingresadas en meses",
-                data: [1000, 452, 2000743, 5, 2, 3],
+                data: [193, 73, 311, 143, 201, 177],
                 borderWidth: 1,
             },
             {
                 label: "Personas que compraron en meses",
-                data: [70, 2, 10, 5, 2, 3],
+                data: [87, 109, 136, 123, 168, 182],
                 borderWidth: 1,
             },
         ],
@@ -130,7 +130,7 @@ new Chart(chart3, {
         datasets: [
             {
                 label: "Usuarios Registrados",
-                data: [1000, 452, 20, 5, 2, 3],
+                data: [56, 23, 140, 85, 97, 73],
                 borderWidth: 1,
             }
         ],

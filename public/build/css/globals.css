@@ -753,6 +753,14 @@ footer{
       border: 2px solid #be0000;
     }
   }
+  .footer_menu > ul > li > a{
+    text-decoration: none;
+    color: #ffffff;
+  }
+  .dark .footer_menu > ul > li > a{
+    text-decoration: none;
+    color: #000000;
+  }
   .footer_menu  > ul > li.footer_h3{
     text-decoration: none;
     padding-bottom: 1em;

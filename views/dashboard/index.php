@@ -13,13 +13,9 @@
             <div class="options">
                 <article class="card">
                     <canvas id="chart2"></canvas>
-                    <div class="doughnout_info">
-                        <h4>Distribucion de dispositivos</h4>
-                    </div>
                 </article>
                 <article class="card">
                     <canvas id="chart3"></canvas>
-
                 </article>
 
 

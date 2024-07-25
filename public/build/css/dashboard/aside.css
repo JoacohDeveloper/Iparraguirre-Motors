@@ -190,3 +190,10 @@
 .dropDownNotDeployed {
   display: none !important;
 }
+
+.dark .dropDown-links li a{
+  color: #ffffff;
+  &:hover {
+    background-color: #100f0f;
+  }
+}
