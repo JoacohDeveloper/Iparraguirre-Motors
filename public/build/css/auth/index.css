@@ -54,6 +54,13 @@ footer{
     font-size: 0.75rem;
     font-family: "Istok Web", sans-serif;
   }
+  .dark .inputs_txt {
+    color: fff;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    font-family: "Istok Web", sans-serif;
+  }
   
   .inputs {
     border: none;
@@ -89,7 +96,13 @@ footer{
   .remember > input {
     cursor: pointer;
   }
-  
+  .dark .remember {
+    color: fff;
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    height: 1.7rem;
+  }
   .terms {
     width: 100%;
     flex-direction: row;
