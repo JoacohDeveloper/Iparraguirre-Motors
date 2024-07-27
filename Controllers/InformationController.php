@@ -2,17 +2,18 @@
 
 namespace Controllers;
 
-use \Router\Router;
+use MVC\Router;
 
 
-class InformationController {
+class InformationController
+{
 
-    public static function contactUs(Router $router) {
+    public static function contactUs(Router $router)
+    {
         $router->render("information/contact", [
             "title" => "Iparraguirre Motors | Contactanos",
             "styles" => ["information/contactUs"],
             "description" => "Informacion de contacto de Iparraguirre-Motors"
         ]);
     }
-
 }

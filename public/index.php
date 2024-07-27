@@ -2,24 +2,13 @@
 
 <?php
 
+
+include_once "../vendor/autoload.php";
+
+$dotenv = Dotenv\Dotenv::createImmutable(str_replace("\public", "", __DIR__));
+$dotenv->safeLoad();
+
 include "../includes/app.php";
-include_once "autoload.php";
-
-
-
-// $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-// socket_bind($socket, 'localhost', 3000);
-
-// socket_listen($socket);
-
-// $newc = socket_accept($socket);
-
-// $st = "Hello world";
-// socket_write($newc, $st, strlen($st));
-
-// socket_close($newc);
-// socket_close($socket);
-
 
 
 use Controllers\AuthenticationController;
@@ -98,7 +87,6 @@ $router->get("/dashboard/user-settings/usuario", [DashboardController::class, "g
 //tienda
 
 $router->get("/tienda", [TiendaController::class, "tienda"]);
-
 
 $router->get("/tienda/results", [TiendaController::class,  "results"]);
 
