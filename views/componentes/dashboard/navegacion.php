@@ -56,7 +56,7 @@
 
                 </li>
                 <li class="border-top">
-                    <a href="/logout">
+                    <a href="/dashboard/logout">
                         <img src="/build/src/images/exit.svg" alt="Logout">
                         <p>Log Out</p>
                     </a>

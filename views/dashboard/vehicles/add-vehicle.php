@@ -9,15 +9,21 @@
 
             <h3>Agregar Vehiculo</h3>
 
-            <form class="f_addvehicle">
+            <form method="POST" action="/dashboard/agregar-vehiculo" class="f_addvehicle">
                 <div class="grid">
-                    <input type="text" name="nombre" placeholder="Nombre">
-                    <textarea name="descripcion" placeholder="Descripcion"></textarea>
-                    <input type="text" name="modelo" placeholder="Modelo">
-                    <input type="text" name="fabricante" placeholder="Fabricante">
-                    <input type="text" name="year" placeholder="Año de fabricacion">
-                    <input type="text" name="color" placeholder="Color del vehiculo">
-                    <input type="text" name="matricula" placeholder="Matricula">
+                    <input class="inputs" type="text" name="nombre" placeholder="Nombre">
+                    <div class="input-underline"></div>
+                    <textarea class="inputs" name="descripcion" placeholder="Descripcion"></textarea>
+                    <input class="inputs" type="text" name="modelo" placeholder="Modelo">
+                    <div class="input-underline"></div>
+                    <input class="inputs"type="text" name="fabricante" placeholder="Fabricante">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="year" placeholder="Año de fabricacion">
+                    <div class="input-underline"></div>
+                    <input class="inputs"type="text" name="color" placeholder="Color del vehiculo">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="matricula" placeholder="Matricula">
+                    <div class="input-underline"></div>
 
                     <label>Tipo de transmision:</label>
                     <select id="transmision" name="tipo_transmision">
@@ -84,14 +90,20 @@
                         <option value="5">5</option>
                     </select>
 
-                    <input type="text" name="tipo_combustible" placeholder="Tipo de combustible">
-                    <input type="text" name="precio" placeholder="Precio del vehiculo">
-                    <input type="text" name="velocidad_max" placeholder="Velocidad maxima">
-                    <input type="text" name="zero_to_houndred" placeholder="De 0 a 100 km/h">
-                    <input type="text" name="pais" placeholder="Pais">
-                    <input type="text" name="peso" placeholder="Peso del vehiculo">
-                    <input type="text" name="kilometros" placeholder="Kilometraje del vehiculo">
-                    <input type="text" name="caballos_fuerza" placeholder="Caballos de fuerza">
+                    <input class="inputs" type="text" name="tipo_combustible" placeholder="Tipo de combustible">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="precio" placeholder="Precio del vehiculo">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="velocidad_max" placeholder="Velocidad maxima">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="zero_to_houndred" placeholder="De 0 a 100 km/h">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="peso" placeholder="Peso del vehiculo">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="kilometros" placeholder="Kilometraje del vehiculo">
+                    <div class="input-underline"></div>
+                    <input class="inputs" type="text" name="caballos_fuerza" placeholder="Caballos de fuerza">
+                    <div class="input-underline"></div>
                 </div>
                 <input id="submit" type="submit" value="Registrar">
             </form>

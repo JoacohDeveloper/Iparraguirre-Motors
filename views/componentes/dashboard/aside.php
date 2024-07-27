@@ -9,20 +9,39 @@
             <p>Dashboard</p>
         </a>
 
-        <a title="Product Managment" class="aside-element rounded" href="/dashboard/product-managment">
-            <div class="dropDown-spacer">
-                <img src="/build/src/images/archive.svg" alt="Product Managment">
-                <p>Product Managment</p>
-            </div>
-            <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
-        </a>
-        <a title="Coupons" class="aside-element rounded" href="/dashboard/coupons">
-            <div class="dropDown-spacer">
-                <img src="/build/src/images/card.svg" alt="Coupons">
-                <p>Coupons</p>
-            </div>
-            <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
-        </a>
+        <ul aria-label="ddl_1" class="dropDown-list">
+            <li>
+                <a title="Product Managment" class="aside-element rounded" href="#">
+                    <div class="dropDown-spacer">
+                        <img src="/build/src/images/archive.svg" alt="Product Managment">
+                        <p>Product Managment</p>
+                    </div>
+                    <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
+                </a>
+            </li>
+            <li>
+                <ul class="dropDown-links dropDownNotDeployed">
+                    <li><a href="/dashboard/agregar-vehiculo">Agregar Vehiculo</a></li>
+                    <li><a href="#">Agregar Producto</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul aria-label="ddl_2" class="dropDown-list">
+            <li>
+                <a title="Coupons" class="aside-element rounded" href="#">
+                    <div class="dropDown-spacer">
+                        <img src="/build/src/images/card.svg" alt="Coupons">
+                        <p>Coupons</p>
+                    </div>
+                    <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
+                </a>
+            </li>
+            <li>
+                <ul class="dropDown-links dropDownNotDeployed">
+                    <li><a href="#">Agregar Cupon</a></li>
+                </ul>
+            </li>
+        </ul>
         <a title="Orders" class="aside-element rounded" href="/dashboard/orders">
             <img src="/build/src/images/rocket.svg" alt="Orders">
             <p>Orders</p>
@@ -31,13 +50,24 @@
             <img src="/build/src/images/pencil.svg" alt="Feedback">
             <p>Feedback</p>
         </a>
-        <a title="Analytics" class="aside-element rounded" href="/dashboard/analytics">
-            <div class="dropDown-spacer">
-                <img src="/build/src/images/analytics.svg" alt="Analytics">
-                <p>Analytics</p>
-            </div>
-            <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
-        </a>
+        <ul aria-label="ddl_3" class="dropDown-list">
+            <li>
+                <a title="Analytics" class="aside-element rounded" href="#">
+                    <div class="dropDown-spacer">
+                        <img src="/build/src/images/analytics.svg" alt="Analytics">
+                        <p>Analytics</p>
+                    </div>
+                    <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
+                </a>
+            </li>
+            <li>
+                <ul class="dropDown-links dropDownNotDeployed">
+                    <li><a href="#">Analiticas Clientes</a></li>
+                    <li><a href="#">Analiticas Ventas</a></li>
+                    <li><a href="#">Analiticas Productos</a></li>
+                </ul>
+            </li>
+        </ul>
 
     </div>
     <a title="Settings" class="aside-element rounded" href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">

@@ -21,32 +21,32 @@
         </div>
     </div>
 
+    
     <div class="content">
 
-        <div class="content__title">
+    <div class="content__title">
             <h2>Best Selled</h2>
         </div>
+    <div class="content__bestSelled">
 
-        <div class="content__bestSelled">
+    <div class="bestSelled__banner-image">
+        <img src="/build/src/images/vehicles/Dodge-1968.png" alt="Charger 1968">
 
-            <div class="bestSelled__banner-image">
-                <img src="/build/src/images/vehicles/Dodge-1968.png" alt="Charger 1968">
+    </div>
+    <h3>Charger</h3>
 
-            </div>
-            <h3>Charger</h3>
-
-            <div class="bestSelled__modelIntro">
-                <h4>Dodge Charger 1969</h4>
-                <p>$ 78,800</p>
-                <div class="bestSelled__modelIntro-buttonGroup">
-                    <button>Change Model</button>
-                    <button>View More</button>
-                    <button>Test Drive</button>
-                </div>
-            </div>
+    <div class="bestSelled__modelIntro">
+        <h4>Dodge Charger 1968</h4>
+        <p>$ 78,800</p>
+        <div class="bestSelled__modelIntro-buttonGroup">
+            <button>Change Model</button>
+            <button>View More</button>
+            <button>Test Drive</button>
         </div>
+    </div>
+    </div>
 
-        <div class="slider">
+    <div class="slider">
             <div class="list">
                 <div class="item">
                     <img src="/build/src/images/slider/1.png" alt="">
@@ -61,12 +61,11 @@
                     <img src="/build/src/images/slider/4.png" alt="">
                 </div>
                 <div class="item">
-                    <img src="/build/src/images/slider/1.png" alt="">
+                    <img src="/build/src/images/slider/5.png" alt="">
                 </div>
             </div>
             <div class="buttons">
-                <button id="prev">
-                    << /button>
+                <button id="prev"><</button>
                         <button id="next">></button>
             </div>
             <ul class="dots">
@@ -78,9 +77,10 @@
             </ul>
         </div>
 
-        <script src="/build/js/slider.js"></script>
+        <script src="/build/js/slider.js"></script>       
 
-        <div>
+
+      <!--   <div>
             <div class="slidermarcas">
                 <div class="slider-track">
 
@@ -228,5 +228,5 @@
                         <img src="/build/src/images/Marcas/Honda.png" alt="">
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>

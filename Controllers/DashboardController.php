@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Router\Router;
+use MVC\Router;
 use Models\Vehicle;
 use Models\User;
 
@@ -11,7 +11,11 @@ abstract class DashboardController
 
     public static function index(Router $router)
     {
-        if (!isset($_SESSION["usuario"])) header("location: /auth/login");
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
 
         $router->render("dashboard/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],
@@ -23,6 +27,11 @@ abstract class DashboardController
 
     public static function productManagment(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
 
         $router->render("dashboard/product-managment/index", [
             "styles" => ["dashboard/index", "dashboard/aside"],
@@ -31,45 +40,14 @@ abstract class DashboardController
         ]);
     }
 
-
-    // public static function userSettings(Router $router)
-    // {
-
-    //     $uuid = $_GET["u"];
-    //     $usuario = $_SESSION["usuario"];
-    //     $fullName = $usuario->getFullname();
-    //     $imagen = $usuario->getNombreImagen_Url();
-    //     $fullNameExplode = explode(" ", $fullName);
-    //     $firstName = $fullNameExplode[0];
-    //     unset($fullNameExplode[0]);
-    //     $lastName = join(" ", $fullNameExplode) ?? "";
-    //     $email = $usuario->getEmail();
-
-    //     if (!isset($uuid)) {
-    //         header("Location: /dashboard");
-    //     } else if (!isset($usuario)) {
-    //         header("Location: /");
-    //     } else if ($uuid != $usuario->getUUID()) header("Location: /dashboard");
-
-    //     $router->render("/dashboard/settings/index", [
-    //         "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/index"],
-    //         "scripts" => ["dashboard/index", "dashboard/settings/index"],
-    //         "username" => $usuario->getUsername(),
-    //         "fullname" => $fullName,
-    //         "firstname" => $firstName,
-    //         "lastname" => $lastName,
-    //         "email" => $email,
-    //         "imagen" => $imagen,
-    //         "title" => "Iparraguirre Motors | Settings",
-    //         "description" => "User settings page for admins in Iparraguirre Motors"
-
-    //     ]);
-    // }
-
     public static function userSettings(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $uuid = $_GET["u"];
         $usuario = $_SESSION["usuario"];
+        if (!$usuario->isAdmin()) {
+            header("location: /");
+        }
 
         $fullName = $usuario->getFullname();
         $imagen = $usuario->getNombreImagen_Url();
@@ -101,6 +79,12 @@ abstract class DashboardController
 
     public static function agregarVehiculo(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
+
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -111,15 +95,13 @@ abstract class DashboardController
                 $result = $vehicle->registrarVehicle();
                 if ($result) {
                     echo json_encode(["message" => "succesfuly"]);
-                    exit;
                 } else {
                     echo json_encode(["error" => "Ha ocurrido un error"]);
-                    exit;
                 }
             } else {
                 echo json_encode(["message" => "error", "errores" => $errores]);
-                exit;
             }
+            exit;
         }
 
         $router->render("dashboard/vehicles/add-vehicle", [
@@ -133,6 +115,12 @@ abstract class DashboardController
 
     public static function userDeleting(Router $router)
     {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
+
         $errores = [];
         $usuario = $_SESSION["usuario"];
         $result =  ["Fail"];

@@ -1,21 +1,16 @@
-
-// aqui haremos un logueo client side usando login como rest
-
 const formularioLogin = document.querySelector("#loginForm")
 
 formularioLogin.addEventListener("submit", async (e) => {
-
-
     e.preventDefault()
-
     const dato = e.target[0].value; //Dato puede ser username o email
     const pass = e.target[1].value;
     const erroresClient = [];
-
+    const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
     if (dato.length == 0) {
         erroresClient.push("Debes ingresar un usuario o correo electronico.");
-    }
-    if (pass.length == 0) {
+    } else if (pass.length == 0) {
         erroresClient.push("Debes ingresar una contraseña.");
     }
 
@@ -42,12 +37,12 @@ formularioLogin.addEventListener("submit", async (e) => {
 
 
         try {
-            const response = await fetch("http://localhost:3000/auth/login", {
+            const response = await fetch("http://localhost:3000/login", {
                 method: "POST",
                 body: form_data
             })
             const data = await response.json()
-
+            console.log(data)
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -61,6 +56,7 @@ formularioLogin.addEventListener("submit", async (e) => {
                 addToast(errors);
 
             } else if (data?.message == "succesfuly") {
+                console.log(data)
                 window.location.href = "/"
 
             }
@@ -75,8 +71,3 @@ formularioLogin.addEventListener("submit", async (e) => {
     }
 
 })
-
-
-//funcion encargada de postear los datos del usuario en el servidor.
-
-

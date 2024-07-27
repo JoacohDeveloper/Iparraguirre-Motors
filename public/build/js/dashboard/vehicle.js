@@ -125,12 +125,6 @@ async function submitEventHandler(event) {
             error:"El campo de 0 a 100 km/h se encuentra vacio"
         })
 
-    } else if(object.pais.length == 0){
-        error.push({
-            title:"Failure",
-            error:"El campo pais se encuentra vacio"
-        })
-
     } else if(object.peso.length == 0){
         error.push({
             title:"Failure",

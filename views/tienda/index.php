@@ -1,6 +1,5 @@
 <div class="container">
 
-
     <div class="banner__information">
 
         <div class="articles_container">

@@ -81,6 +81,7 @@ header {
   flex-direction: column;
 }
 
+<<<<<<< HEAD
 .header__top {
   display: flex;
   justify-content: space-between;
@@ -158,6 +159,8 @@ header {
   width: 100%;
 }
 
+=======
+>>>>>>> cd11aeda57c2f1e7b895085e40f9e99af4290d30
 #cart-items {
   position: absolute;
   padding: 0.2rem;

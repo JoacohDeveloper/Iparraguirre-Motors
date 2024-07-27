@@ -8,11 +8,10 @@ if (form_register) {
         const fullname = e.target[0].value;
         const username = e.target[1].value;
         const email = e.target[2].value;
-        const pass = e.target[3].value;
-        const rePass = e.target[4].value;
+        const phone = e.target[3].value;
+        const pass = e.target[4].value;
+        const rePass = e.target[5].value;
         const errores = [];
-
-
     })
 }
 

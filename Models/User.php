@@ -12,7 +12,8 @@ class User extends ActiveRecord
 {
 
     protected static $tabla = "User";
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "telefono", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
+    
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
@@ -23,11 +24,10 @@ class User extends ActiveRecord
     protected $email;
 
     protected $token;
+    
     protected $password;
 
     protected $re_password;
-
-    protected $telefono;
 
     protected $titulo_imagen;
 
@@ -53,17 +53,16 @@ class User extends ActiveRecord
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
-        $this->telefono = $args["telefono"] ?? "";
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
-        $this->isAdmin = 0;
+        $this->isAdmin = 1;
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
-        $this->imagen = $args["imagen"] ?? "\build\src\users\default.jpg";
+        $this->imagen = $args["imagen"] ?? "\build\src\images\users\default.jpg";
         $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
     }
 
@@ -74,7 +73,7 @@ class User extends ActiveRecord
 
 
     public function gen_uuid()
-    { //
+    {
         $uuid = array(
             'time_low' => 0,
             'time_mid' => 0,
@@ -131,6 +130,11 @@ class User extends ActiveRecord
         }
         if (empty($this->email)) {
             $errors["email"] = "el campo email es obligatorio.";
+        } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors["email"] = "formato de email invalido";
+        }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors["email"] = "formato de email invalido";
         }
         if (empty($this->password)) {
             $errors["password"] = "el campo password es obligatorio.";
@@ -214,10 +218,10 @@ class User extends ActiveRecord
         return $this->username;
     }
 
-    // public function getDeleted()
-    // {
-    //     return $this->isDeleted;
-    // }
+    public function getDeleted()
+    {
+        return boolval($this->isDeleted);
+    }
 
     public function getFullName()
     {
@@ -237,5 +241,9 @@ class User extends ActiveRecord
     public function getNombreImagen_Url()
     {
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
+    }
+
+    public function isAdmin() {
+        return boolval($this->isAdmin);
     }
 }
