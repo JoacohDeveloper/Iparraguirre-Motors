@@ -35,6 +35,7 @@ class Router
         }
 
         //validar si el usuario se encuentra en una ruta protegida para ver si esta logeado
+        $user = $_SESSION["usuario"] ?? null;
         if (in_array($urlActual, $rutasProtegidas)) {
 
             $loggedIn = $_SESSION["loggedIn"] ?? null;
@@ -43,9 +44,12 @@ class Router
                 //devuelve el usuario a la pagina de inicio con codigo 'Unauthorized'
                 header("HTTP/1.1 401 Unauthorized");
                 header("location: /");
+            } else if (!$user->isVerified()) {
+                header("HTTP/1.1 401 Unauthorized");
+                header("location: /dashboard/verificar");
             }
         } else if (in_array($urlActual, $adminRoutes)) {
-            $user = $_SESSION["usuario"] ?? null;
+
             if (isset($user) && get_class($user) == "User" && !$user->isAdmin) {
                 header("HTTP/1.1 401 Unauthorized");
                 header("location: /");

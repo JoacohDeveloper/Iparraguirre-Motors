@@ -33,18 +33,26 @@ class Mail
     {
 
 
-
         $mailtrapURL = $_ENV['MAILTRAP_API_URL'] ?? "";
         $mailtrapPASS = $_ENV['MAILTRAP_PASSWORD'] ?? "";
 
+
+
         $ch = curl_init($mailtrapURL);
 
+
+
         curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Authorization: Bearer $mailtrapPASS",
             'Content-Type: application/json'
         ]);
+
+
+
 
         $data = [
             "from" => [
@@ -54,17 +62,19 @@ class Mail
             "to" => [["email" => $this->toAddres]],
             "subject" => $this->subject,
             "text" => $this->content,
+            "html" => $this->content,
             "category" => $this->category
         ];
+
 
         $raw = json_encode($data);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, $raw);
 
-        $response = curl_exec($ch);
-        logg($response);
+        $res = curl_exec($ch);
+
         curl_close($ch);
 
-        return $response;
+        return $res;
     }
 }

@@ -15,7 +15,7 @@ formularioRegister.addEventListener("submit", async e => {
 
     if (fullname.length <= 2) {
         errores.push("Debes ingresar tu nombre completo.");
-    }  else if (!nameRegex.test(fullname)) {
+    } else if (!nameRegex.test(fullname)) {
         errores.push("Debes ingresar nombre y apellido.");
     } else if (username.length == 0) {
         errores.push("Debes ingresar un usuario.");
@@ -59,11 +59,6 @@ formularioRegister.addEventListener("submit", async e => {
                 body: form_data
             })
             const data = await response.json()
-
-            console.log(response)
-            console.log(data)
-            
-
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -72,8 +67,8 @@ formularioRegister.addEventListener("submit", async e => {
                     return { title: "Failure", error: err }
                 })
                 addToast(errors);
-            } else if (data?.message == "succesfuly") {
-                window.location.href = "/dashboard"
+            } else if (data?.success) {
+                window.location.href = "/dashboard/verificar"
             }
         } catch (error) {
             console.log(error)

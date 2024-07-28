@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\Mail;
 use Models\User;
 use MVC\Router;
 
@@ -65,9 +66,13 @@ abstract class AuthenticationController
     public static function register(Router $router)
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /dashboard");
+
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            header('Content-Type: application/json; charset=utf-8');
+            $codigo = substr(md5(rand(rand(10000, 1000000000), rand(10000, 1000000000)) . strtotime(date("dd-mm-YYYY"))), 0, 10);
+            $_POST["token"] = $codigo;
             $usuario = new User($_POST);
             $errores = $usuario->validate();
             if (empty($errores)) {
@@ -75,24 +80,53 @@ abstract class AuthenticationController
                 if (!isset($result)) {
                     $usuario->passwordHash();
                     $usuario->gen_uuid();
+
                     if ($usuario->crearUsuario()) {
+                        $body = "
+                            <h2>Hola " . $usuario->getFullName() . ".</h2>
+                            <p>Gracias por registrarte en Iparraguirre Motors!</p>
+                            <h3>Tu código de verificación es <strong>$codigo</strong></h3>
+                        ";
+
+                        $mail = new Mail(
+                            "contact@iparraguirremotors.com",
+                            "Iparraguirre Founder",
+                            $usuario->getEmail(),
+                            "Verificacion de Correo",
+                            $body,
+                            "auth"
+                        );
+
+                        $mailSend = $mail->send();
+
+                        if (!$mailSend) {
+                            $errores["register"] = "Error, correo de verificacion no enviado.";
+                            $response["errores"] = $errores;
+
+                            echo json_encode($response);
+                            exit;
+                        }
+
                         $_SESSION["usuario"] = $usuario;
                         $_SESSION["loggedIn"] = true;
-                        $response = ["message" => "succesfuly"];
+                        exit;
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                         $response["errores"] = $errores;
+                        echo json_encode($response);
+                        exit;
                     }
                 } else {
                     $errores["already_register"] = "El email ingresado ya esta registrado";
                     $response["errores"] = $errores;
+                    echo json_encode($response);
+                    exit;
                 }
             } else {
                 $response["errores"] = $errores;
+                echo json_encode($response);
+                exit;
             }
-            header('Content-Type: application/json; charset=utf-8');
-            echo json_encode($response);
-            exit;
         }
 
         $router->render("dashboard/auth/register", [
@@ -114,9 +148,58 @@ abstract class AuthenticationController
 
     public static function verificar(Router $router)
     {
+        $user = $_SESSION["usuario"] ?? null;
+        if ($user && $user->isVerified()) {
+            header("Location: /");
+        }
         //acá verificamos el correo electronico del usuario
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            header('Content-Type: application/json; charset=utf-8');
 
-        $router->render("auth/verificar");
+
+
+            $userDB = User::getUser($user->getEmail());
+
+
+            if ($userDB) {
+
+                $codigo = $_POST["codigo"] ?? null;
+
+                if (!$codigo) {
+                    echo json_encode(["error" => "el codigo es un campo obligatorio."]);
+                    exit;
+                }
+
+                if ($userDB->getToken() === $codigo) {
+
+                    $userDB->setToken("");
+                    $userDB->setVerified(true);
+
+
+                    if ($userDB->actualizar($userDB->getUUID())) {
+                        $_SESSION["usuario"] = $userDB;
+                        echo json_encode(["successfully" => true]);
+                        exit;
+                    } else {
+                        echo json_encode(["successfully" => false]);
+                        exit;
+                    }
+                } else {
+                    echo json_encode(["error" => "El codigo de verificacion no es correcto."]);
+                    exit;
+                }
+            } else {
+                header("HTTP/1.1 401 Unauthorized");
+                echo json_encode(["error" => "unauthorized"]);
+                exit;
+            }
+        }
+        $router->render("auth/verification", [
+            "title" => "Verificar Cuenta | Iparraguirre Motors",
+            "description" => "Pagina para verificar el correo electronico de los usuarios de Iparraguirre Motors.",
+            "styles" => ["dashboard/auth/verificar"],
+            "scripts" => ["dashboard/auth/verificar"]
+        ]);
     }
 
 

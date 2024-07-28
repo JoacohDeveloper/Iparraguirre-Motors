@@ -12,7 +12,7 @@ class User extends ActiveRecord
 {
 
     protected static $tabla = "User";
-    
+
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
@@ -24,7 +24,7 @@ class User extends ActiveRecord
     protected $email;
 
     protected $token;
-    
+
     protected $password;
 
     protected $re_password;
@@ -60,7 +60,7 @@ class User extends ActiveRecord
         $this->verify = 0;
         $this->isAdmin = 1;
         $this->isDeleted = $args["isDeleted"] ?? 0;
-        $this->token = null;
+        $this->token = $args["token"] ?? null;
         $this->titulo_imagen = "imagen default de usuario";
         $this->imagen = $args["imagen"] ?? "\build\src\images\users\default.jpg";
         $this->slug = sanitize(str_replace(" ", "-", trim(strtolower($this->username))));
@@ -243,7 +243,27 @@ class User extends ActiveRecord
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
 
-    public function isAdmin() {
+    public function isVerified()
+    {
+        return $this->verify;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+    public function setVerified($verify)
+    {
+        $this->verify = $verify;
+    }
+    public function isAdmin()
+    {
         return boolval($this->isAdmin);
     }
 }

@@ -61,6 +61,9 @@ $router->get("/dashboard/verificar", [AuthenticationController::class, "verifica
 
 $router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
+
+
+
 $router->get("/logout", [CustomerController::class, "logout"]);
 $router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 
