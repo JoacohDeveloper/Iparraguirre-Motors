@@ -53,96 +53,96 @@ if (account) {
 
 const chart1 = document.getElementById("chart1");
 
-if(chart1) {
+if (chart1) {
     chart1.style.height = '100%';
-chart1.style.width = '100%';
-chart1.parentElement.style.position = "relative";
+    chart1.style.width = '100%';
+    chart1.parentElement.style.position = "relative";
 
-let typeChart = window.screen.width >= 1024 ? "line" : "bar"
+    let typeChart = window.screen.width >= 1024 ? "line" : "bar"
 
 
 
-new Chart(chart1, {
-    type: typeChart,
-    data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-        datasets: [
-            {
-                label: "Personas ingresadas en meses",
-                data: [193, 73, 311, 143, 201, 177],
-                borderWidth: 1,
-            },
-            {
-                label: "Personas que compraron en meses",
-                data: [87, 109, 136, 123, 168, 182],
-                borderWidth: 1,
-            },
-        ],
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
+    new Chart(chart1, {
+        type: typeChart,
+        data: {
+            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+            datasets: [
+                {
+                    label: "Personas ingresadas en meses",
+                    data: [193, 73, 311, 143, 201, 177],
+                    borderWidth: 1,
+                },
+                {
+                    label: "Personas que compraron en meses",
+                    data: [87, 109, 136, 123, 168, 182],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
             },
         },
-    },
-});
+    });
 
 
-const chart2 = document.getElementById("chart2");
-chart2.style.height = '100%';
-chart2.style.width = '100%';
-chart2.parentElement.style.position = "relative";
+    const chart2 = document.getElementById("chart2");
+    chart2.style.height = '100%';
+    chart2.style.width = '100%';
+    chart2.parentElement.style.position = "relative";
 
 
-new Chart(chart2, {
-    type: "doughnut",
-    data: {
-        labels: ["Escritorio", "Movil", "Otros"],
-        datasets: [
-            {
-                label: "Distribucion de dispositivos",
-                data: [48, 36, 16],
-                borderWidth: 1,
-            }
-        ],
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
+    new Chart(chart2, {
+        type: "doughnut",
+        data: {
+            labels: ["Escritorio", "Movil", "Otros"],
+            datasets: [
+                {
+                    label: "Distribucion de dispositivos",
+                    data: [48, 36, 16],
+                    borderWidth: 1,
+                }
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
             },
         },
-    },
-});
+    });
 
 
-const chart3 = document.getElementById("chart3");
-chart3.style.height = '100%';
-chart3.style.width = '100%';
-chart3.parentElement.style.position = "relative";
+    const chart3 = document.getElementById("chart3");
+    chart3.style.height = '100%';
+    chart3.style.width = '100%';
+    chart3.parentElement.style.position = "relative";
 
 
-new Chart(chart3, {
-    type: "bar",
-    data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-        datasets: [
-            {
-                label: "Usuarios Registrados",
-                data: [56, 23, 140, 85, 97, 73],
-                borderWidth: 1,
-            }
-        ],
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
+    new Chart(chart3, {
+        type: "bar",
+        data: {
+            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+            datasets: [
+                {
+                    label: "Usuarios Registrados",
+                    data: [56, 23, 140, 85, 97, 73],
+                    borderWidth: 1,
+                }
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
             },
         },
-    },
-});
+    });
 }
 
 
@@ -159,10 +159,10 @@ dropDownLists.forEach(ele => {
     ele.addEventListener("click", e => {
         const x = ele.querySelector(".dropDown-links")
         x.classList.toggle("dropDownNotDeployed")
-       
+
         const data = JSON.parse(localStorage.getItem("ddl")) || []
 
-        localStorage.setItem("ddl", JSON.stringify([...data, {element: ele.ariaLabel, deployed: !x.classList.contains("dropDownNotDeployed")}]))
+        localStorage.setItem("ddl", JSON.stringify([...data, { element: ele.ariaLabel, deployed: !x.classList.contains("dropDownNotDeployed") }]))
 
     })
 })

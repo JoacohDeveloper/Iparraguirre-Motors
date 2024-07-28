@@ -4,6 +4,8 @@ namespace Controllers;
 
 use Models\User;
 use MVC\Router;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 abstract class AuthenticationController
 {
@@ -136,7 +138,13 @@ abstract class AuthenticationController
             }
 
             $filename = $_FILES["image"]["name"];
-            $fileExt = explode(".", $_FILES["image"]["name"])[1];
+            $fileExtArray = explode(".", $_FILES["image"]["name"]);
+            $fileExt = $fileExtArray[count($fileExtArray) - 1];
+
+
+
+
+
             $fileHash = md5($filename . rand(0, 50) . gmdate("dd-MM-YYYY"));
 
 
@@ -155,8 +163,15 @@ abstract class AuthenticationController
                 if ($resultado) {
 
                     unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $usuario->getImagen()));
+                    $manager = new ImageManager(new Driver());
+
 
                     $res = move_uploaded_file($_FILES["image"]["tmp_name"], $x);
+
+                    $imagen = $manager->read($x);
+                    $imagen->resize(600, 600);
+                    $imagen->toWebp();
+                    $imagen->save(quality: 10);
 
                     $_SESSION["usuario"] = $usuarioDB;
                     echo json_encode(["message" => "ok", "file_uploaded" => $res]);

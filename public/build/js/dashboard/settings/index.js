@@ -139,7 +139,28 @@ async function setFormEdit(target, formContainer) {
         formContainer.appendChild(formHTML)
 
         function previewChanges(object) {
+
             const imgFile = formHTML.querySelector("#image").files[0];
+
+            const fileExtA = imgFile?.name.split(".")
+
+            const fileExt = fileExtA[fileExtA?.length - 1]
+            const MAX_SIZE = 1024 * 5 * 1024
+
+            const validExt = ["jpg", "png", "webp", "jpeg"]
+            const errors = document.createElement("div")
+            errors.classList.add("toasts")
+            formContainer.appendChild(errors);
+
+            if (!validExt.includes(fileExt)) {
+
+                addToast([{ title: "Failure", error: "El formato de archivo no es valido" }])
+                return;
+            } else if (imgFile.size >= MAX_SIZE) {
+                addToast([{ title: "Failure", error: "El archivo es muy grande" }])
+                return;
+            }
+
             const preview = formHTML.querySelector("#preview_edit_resume__img")
             const reader = new FileReader();
 
@@ -194,6 +215,7 @@ async function setFormEdit(target, formContainer) {
 
         formHTML.addEventListener("change", e => {
             const formdata = new FormData(formHTML);
+
             const object = {};
             formdata.forEach((value, key) => {
                 if (key !== 'image') {
@@ -202,6 +224,8 @@ async function setFormEdit(target, formContainer) {
             });
             previewChanges(object);
         })
+
+
         if (target.id == 'edit-resume' || target.parentElement.id == 'edit-resume') {
 
             const lastChanges = JSON.parse(localStorage.getItem("edit-resume"));
@@ -329,6 +353,8 @@ async function setFormEdit(target, formContainer) {
     }
 
 }
+
+
 
 //Delete-user
 

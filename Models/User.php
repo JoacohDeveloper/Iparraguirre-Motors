@@ -12,7 +12,7 @@ class User extends ActiveRecord
 {
 
     protected static $tabla = "User";
-    
+
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
@@ -24,7 +24,7 @@ class User extends ActiveRecord
     protected $email;
 
     protected $token;
-    
+
     protected $password;
 
     protected $re_password;
@@ -149,6 +149,17 @@ class User extends ActiveRecord
             }
         }
 
+        if ($this->imagen) {
+            $fileExtArray = explode(".", $this->imagen);
+            $fileExt = $fileExtArray[count($fileExtArray) - 1];
+
+            $extensiones = ["jpg", "png", "webp", "jpeg"];
+
+            if (!in_array($fileExt, $extensiones)) {
+                $errors["tipo_imagen"] = "el archivo no es de formato imagen";
+            }
+        }
+
         return $errors;
     }
 
@@ -243,7 +254,8 @@ class User extends ActiveRecord
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return boolval($this->isAdmin);
     }
 }

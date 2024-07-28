@@ -28,6 +28,11 @@ class ComposerStaticInite1910d4634eb8dd60ff99a35a92b2a92
             'Models\\' => 7,
             'MVC\\' => 4,
         ),
+        'I' => 
+        array (
+            'Intervention\\Image\\' => 19,
+            'Intervention\\Gif\\' => 17,
+        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -70,6 +75,14 @@ class ComposerStaticInite1910d4634eb8dd60ff99a35a92b2a92
         'MVC\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',
+        ),
+        'Intervention\\Image\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/image/src',
+        ),
+        'Intervention\\Gif\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/gif/src',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
