@@ -6,6 +6,7 @@
             "Alumno\\IparraguirreMotors\\": "src/",
             "Models\\" : "./Models",
             "Controllers\\" : "./Controllers",
+
             "MVC\\" : "./"
 
         }

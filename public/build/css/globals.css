@@ -66,12 +66,11 @@ main {
   text-decoration: none;
   color: #000000;
 }
-.dark .navegacion ul{
+.dark .navegacion ul {
   list-style: none;
   gap: 1rem;
   text-decoration: none;
   color: #000000;
-
 }
 .dark .navegacion ul li a {
   display: inline-block;
@@ -207,8 +206,6 @@ ul li:hover ul.dropdown-content {
 }
 
 .not_found .img-container,
-
-
 header .brgMenu {
   display: none;
   cursor: pointer;
@@ -384,7 +381,6 @@ header .brgMenu {
   filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(45deg)
     brightness(111%) contrast(101%);
 }
-
 
 .dark .container {
   background-color: #202020;
@@ -688,103 +684,92 @@ header .brgMenu {
   color: #fff;
 }
 
-<<<<<<< HEAD
-/*  
-.dark/* .header__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-  width: 100%;
-} */
-=======
 /* Footer */
 
-footer{
-    color: white;
-    background-color: #202020;
-    padding: 2rem 0 2rem 0;
-
+footer {
+  color: white;
+  background-color: #202020;
+  padding: 2rem 0 2rem 0;
 }
 
-.dark footer{
+.dark footer {
   color: #202020;
   background-color: white;
 }
 
-.footer_menu{
-    display: flex;
-    justify-content: center;
-    gap: 15rem;
-    font-size: 1.3em;
+.footer_menu {
+  display: flex;
+  justify-content: center;
+  gap: 15rem;
+  font-size: 1.3em;
 }
 
-.footer_menu  > ul{
-    list-style: none;
-    
+.footer_menu > ul {
+  list-style: none;
 }
 
-.footer_iconos{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8rem;
-    font-size: 40px;
+.footer_iconos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem;
+  font-size: 40px;
 }
 
-.copy{
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
+.copy {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
 }
-  .footer_menu > ul > li{
-    transition: ease .1s;
-    cursor: pointer;
-    transition: color 0.3s ease;
-      color: #ffffff;
-      padding: 0.5rem 0.8rem;
-      &:hover {
-        border-radius: 0.2em;
-        box-shadow: 0px 0px 16px 2px rgba(190,0,0,0.14);
-        border: 2px solid #be0000;
-      }
-    }
-.dark .footer_menu > ul > li{
-  transition: ease .1s;
+.footer_menu > ul > li {
+  transition: ease 0.1s;
   cursor: pointer;
   transition: color 0.3s ease;
-    color: #000000;
-    padding: 0.5rem 0.8rem;
-    &:hover {
-      border-radius: 0.2em;
-      box-shadow: 0px 0px 16px 2px rgba(190,0,0,0.14);
-      border: 2px solid #be0000;
-    }
+  color: #ffffff;
+  padding: 0.5rem 0.8rem;
+  &:hover {
+    border-radius: 0.2em;
+    box-shadow: 0px 0px 16px 2px rgba(190, 0, 0, 0.14);
+    border: 2px solid #be0000;
   }
-  .footer_menu > ul > li > a{
-    text-decoration: none;
-    color: #ffffff;
-  }
-  .dark .footer_menu > ul > li > a{
-    text-decoration: none;
-    color: #000000;
-  }
-  .footer_menu  > ul > li.footer_h3{
-    text-decoration: none;
-    padding-bottom: 1em;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    transition: none;
-    &:hover{
-      cursor:auto;
-      box-shadow: none;
-      border: none;
-      transform: none;
-    }
-  }
-@media screen and (max-width: 475px) {
-
 }
->>>>>>> cd11aeda57c2f1e7b895085e40f9e99af4290d30
+.dark .footer_menu > ul > li {
+  transition: ease 0.1s;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: #000000;
+  padding: 0.5rem 0.8rem;
+  &:hover {
+    border-radius: 0.2em;
+    box-shadow: 0px 0px 16px 2px rgba(190, 0, 0, 0.14);
+    border: 2px solid #be0000;
+  }
+}
+.footer_menu > ul > li > a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.dark .footer_menu > ul > li > a {
+  text-decoration: none;
+  color: #000000;
+}
+.footer_menu > ul > li.footer_h3 {
+  text-decoration: none;
+  padding-bottom: 1em;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: none;
+  &:hover {
+    cursor: auto;
+    box-shadow: none;
+    border: none;
+    transform: none;
+  }
+}
+
+/* Por el bien de mis ojos xd */
+footer {
+  display: none;
+}

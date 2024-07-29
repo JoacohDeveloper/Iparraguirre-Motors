@@ -1,6 +1,6 @@
 const aside = document.querySelector(".aside")
 
-if (aside)
+if (aside) {
     aside.addEventListener("click", e => {
         const viewMoreBtn = aside.querySelector(".more-information")
 
@@ -11,6 +11,36 @@ if (aside)
         }
     })
 
+    const data = JSON.parse(localStorage.getItem("ddl"))
+
+    const ddls = document.querySelectorAll(".dropDown-list")
+
+
+    ddls.forEach(ddl => {
+        const lsDdl = data.find(el => el?.element == ddl.ariaLabel)
+
+        if (lsDdl) {
+            const links = ddl.querySelector(".dropDown-links")
+
+            if (!lsDdl?.isDeployed) {
+                links.classList.add("dropDownNotDeployed")
+            } else {
+                links.classList.remove("dropDownNotDeployed")
+            }
+
+        }
+    })
+
+
+    const links = document.querySelectorAll(".dropDown-links")
+
+    links.forEach(link => {
+        if (!link.classList.contains("dropDownNotDeployed")) {
+            aside.classList.add("stretch")
+        }
+    })
+
+}
 
 const account = document.querySelector(".account")
 const notifications = document.querySelector(".notifications")
@@ -160,9 +190,36 @@ dropDownLists.forEach(ele => {
         const x = ele.querySelector(".dropDown-links")
         x.classList.toggle("dropDownNotDeployed")
 
-        const data = JSON.parse(localStorage.getItem("ddl")) || []
 
-        localStorage.setItem("ddl", JSON.stringify([...data, { element: ele.ariaLabel, deployed: !x.classList.contains("dropDownNotDeployed") }]))
+        const ls = JSON.parse(localStorage.getItem("ddl")) || []
+
+        const ddlObject = {
+            element: ele.ariaLabel,
+            isDeployed: !x.classList.contains("dropDownNotDeployed")
+        };
+
+
+        const ddlsModificado = ls.map(ddl => {
+            if (ddl.element === ddlObject.element) {
+                return ddlObject;
+            } else {
+                return ddl;
+            }
+        });
+
+
+        if (!ls.some(ddl => ddl.element === ddlObject.element)) {
+
+            const newData = [...ddlsModificado, ddlObject]
+            localStorage.setItem("ddl", JSON.stringify(newData));
+        } else {
+            localStorage.setItem("ddl", JSON.stringify(ddlsModificado));
+        }
+
+
+
+
+
 
     })
 })

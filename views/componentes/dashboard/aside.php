@@ -11,7 +11,7 @@
 
         <ul aria-label="ddl_1" class="dropDown-list">
             <li>
-                <a title="Product Managment" class="aside-element rounded" href="#">
+                <a title="Product Managment" class="aside-element rounded" href="/dashboard/products">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/archive.svg" alt="Product Managment">
                         <p>Product Managment</p>
@@ -28,7 +28,7 @@
         </ul>
         <ul aria-label="ddl_2" class="dropDown-list">
             <li>
-                <a title="Coupons" class="aside-element rounded" href="#">
+                <a title="Coupons" class="aside-element rounded" href="/dashboard/coupons">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/card.svg" alt="Coupons">
                         <p>Coupons</p>
@@ -52,7 +52,7 @@
         </a>
         <ul aria-label="ddl_3" class="dropDown-list">
             <li>
-                <a title="Analytics" class="aside-element rounded" href="#">
+                <a title="Analytics" class="aside-element rounded" href="/dashboard/analytics">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/analytics.svg" alt="Analytics">
                         <p>Analytics</p>

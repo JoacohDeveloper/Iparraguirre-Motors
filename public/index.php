@@ -16,8 +16,10 @@ use Controllers\DashboardController;
 use Controllers\HomePageController;
 use Controllers\TiendaController;
 // use Controllers\VehiclesController;
+use Controllers\Products\ProductController;
 use Controllers\CustomerController;
 use Controllers\InformationController;
+
 use MVC\Router;
 use Controllers\VehicleRestController;
 
@@ -71,6 +73,16 @@ $router->get("/dashboard/product-managment", [DashboardController::class, 'produ
 
 $router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 $router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
+
+
+$router->get("/dashboard/products", [ProductController::class, "index"]);
+
+
+
+
+
+
+
 
 
 //dashboard user settings
