@@ -29,4 +29,6 @@
             <div class="card-container"></div>
         </div>
     </div>
+
+    <?php implementComp("error_toast.php") ?>
 </div>

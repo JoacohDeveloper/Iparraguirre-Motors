@@ -30,6 +30,12 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
     btnEliminar.appendChild(btnEliminarImg)
     btnModificar.appendChild(modificarImg)
 
+
+    btnEliminar.addEventListener("click", handlerEliminar)
+
+    btnModificar.addEventListener("click", handlerModificar)
+
+
     contenedorControllers.appendChild(btnModificar)
     contenedorControllers.appendChild(btnEliminar)
 
@@ -84,6 +90,9 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
     })
 
     observer.observe(card)
+
+
+
     return card
 }
 
