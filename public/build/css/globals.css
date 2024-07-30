@@ -30,22 +30,6 @@ body {
   background-color: #fff;
 }
 
-header {
-  background-color: transparent;
-  backdrop-filter: blur(5px);
-  border-bottom: 1px solid #f2f2f2;
-  position: fixed;
-  z-index: 100;
-  color: #000000;
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-  padding: 0 2rem;
-  flex-wrap: nowrap;
-  top: 0;
-}
-
 .logo {
   min-width: 64px;
   width: 64px;
@@ -56,9 +40,6 @@ header {
   object-fit: cover;
 }
 
-main {
-  margin-top: 4rem;
-}
 .navegacion ul {
   display: flex;
   list-style: none;
@@ -88,6 +69,50 @@ main {
     border: 2px solid #fff;
   }
 }
+
+header {
+  color: #202020;
+  backdrop-filter: none;
+  border-bottom: unset;
+  position: absolute;
+  z-index: 100;
+  color: #fff;
+  width: 100%;
+  height: auto;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  flex-wrap: wrap;
+}
+.dark header {
+  border-bottom: 1px solid transparent;
+  background-color: transparent;
+}
+
+header .navegacion ul li a {
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  color: #ffffff;
+  border: 2px solid transparent;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.2rem;
+  transition: border 0.3s ease;
+  &:hover {
+    border: 2px solid #fff;
+  }
+}
+.logo {
+  min-width: 64px;
+  width: 64px;
+}
+
+.logo img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .navegacion ul li a {
   display: inline-block;
   position: relative;
@@ -126,7 +151,7 @@ ul li ul.dropdown-content li {
 }
 
 ul li ul.dropdown-content {
-  width: 100%;
+  width: 160px;
   position: absolute;
   z-index: 999;
   display: none;
@@ -356,11 +381,6 @@ header .brgMenu {
 }
 
 .dark {
-  background-color: #202020;
-}
-
-.dark header {
-  border-bottom: 1px solid #000;
   background-color: #202020;
 }
 
@@ -771,9 +791,4 @@ footer {
     border: none;
     transform: none;
   }
-}
-
-/* Por el bien de mis ojos xd */
-footer {
-  display: none;
 }

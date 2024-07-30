@@ -70,113 +70,11 @@
   }
 }
 
-/* tienda */
-
-header {
-  position: relative;
-  background-color: #f2f2f2;
-  width: 100%;
-  display: flex;
-  padding: 0;
-  flex-direction: column;
-}
-
-<<<<<<< HEAD .header__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-  width: 100%;
-}
-
-.category {
-  padding: 0.3rem 2rem;
-  width: 100%;
-  background-color: #f2f2f2;
-}
-
-.list__category {
-  display: flex;
-  width: 6.5rem;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #202020;
-  padding: 0.4rem 0.6rem;
-  color: #202020;
-  border-radius: 0.3rem;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: translateY(-2px);
-  }
-  cursor: pointer;
-}
-
-.list-category__title {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  font-size: 0.6em;
-  font-weight: bold;
-  /* gap: 0.2rem; */
-
-  img {
-    height: 100%;
-    width: 15px;
-  }
-}
-/* navegacion */
-
-.navegacion > ul {
-  gap: 0.8rem;
-}
-
-.navegacion > ul > li > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.2rem;
-  gap: 0.2rem;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-
-  &:hover {
-    border: 2px solid transparent;
-  }
-}
-
-.navegacion > ul > li > a > div {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-}
-
-=======>>>>>>>cd11aeda57c2f1e7b895085e40f9e99af4290d30 #cart-items {
-  position: absolute;
-  padding: 0.2rem;
-  z-index: -1;
-  width: 20px;
-  text-align: center;
-  height: 20px;
-  top: -0.5rem;
-  left: -0.5rem;
-  border-radius: 50%;
-  background-color: #ff4d00;
-  color: #fff;
-}
-
 /* buscador */
 .product-search__input {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 35%;
   position: relative;
 }
 
@@ -257,22 +155,17 @@ main {
   margin-top: 0;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Banner */
 
 .banner__information {
   display: flex;
+  padding-top: 3rem;
   height: 60vh;
   min-height: 60vh;
   background-color: #202020;
   width: 100%;
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0)),
     url("/build/src/images/endless-road-mountain.webp");
-
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -280,7 +173,6 @@ main {
   justify-content: center;
   align-items: center;
 
-  margin-bottom: 2rem;
 }
 
 /* articles */
@@ -397,12 +289,4 @@ main {
   .articles_container {
     padding: 0;
   }
-}
-
-.contenedor__header__buscador {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
 }
