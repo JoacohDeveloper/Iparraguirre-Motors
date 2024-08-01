@@ -74,7 +74,6 @@ header {
   color: #202020;
   backdrop-filter: none;
   border-bottom: unset;
-  position: absolute;
   z-index: 100;
   color: #fff;
   width: 100%;
