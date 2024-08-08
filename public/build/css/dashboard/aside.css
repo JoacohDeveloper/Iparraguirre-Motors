@@ -2,15 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  /* position: fixed; */
+  /* bottom: 0; */
   padding: 0.8rem 0rem;
+  /* top: 3rem; */
   justify-content: space-between;
   border-right: 1px solid #f2f2f2;
   background-color: hsl(0, 0%, 100%);
   width: 3rem;
   transition: width 0.3s ease;
   height: calc(100svh - 3rem);
-  overflow-y: auto;
 }
 .aside-element {
   text-decoration: none;
@@ -23,6 +24,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  /* gap: 0.4rem; */
 }
 
 .dropDown-spacer {
@@ -45,7 +47,8 @@
 
 .stretch {
   width: 16rem;
-  border-right: 1px solid #d2d2d2;
+  /* align-items: flex-start; */
+  /* padding: 0.8rem 0.4rem; */
 }
 
 .stretch .dropDown-spacer {
@@ -131,25 +134,31 @@
   color: #f2f2f2;
 }
 
+
+
+
 .dropDown-links {
   display: none;
   list-style: none;
   padding-left: 3rem;
-  margin-top: 0.4rem;
+  margin-top: .4rem;
   margin-bottom: 1rem;
-  gap: 0.6rem;
+  gap: .6rem;
   li > a {
     text-decoration: none;
     color: #59595a;
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-    border-radius: 0.3rem;
+    font-size: .8rem;
+    padding: .3rem .8rem;
+    border-radius: .3rem;
 
     &:hover {
       background-color: #f2f2f29f;
     }
   }
 }
+
+
+
 
 .stretch {
   .dropDown-links {
@@ -166,19 +175,23 @@
   }
 }
 
+
+
 .dropDown-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   list-style: none;
   width: 100%;
+
+
 }
 
 .dropDownNotDeployed {
   display: none !important;
 }
 
-.dark .dropDown-links li a {
+.dark .dropDown-links li a{
   color: #ffffff;
   &:hover {
     background-color: #100f0f;

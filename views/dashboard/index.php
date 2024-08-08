@@ -18,12 +18,11 @@
                     <canvas id="chart3"></canvas>
                 </article>
 
-
             </div>
-        </div>
-        <?php implementComp("footer.php");
-        ?>
 
+        </div>
+        
+        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);?>
     </div>
 
 

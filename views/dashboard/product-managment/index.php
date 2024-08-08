@@ -7,8 +7,7 @@
             </div>
         </div>
 
-        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
-        ?>
+        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);?>
     </div>
 
 </div>

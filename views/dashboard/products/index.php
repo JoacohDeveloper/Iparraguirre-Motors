@@ -1,12 +1,3 @@
-<?php
-/*
-* author Joaquín Álvarez
-* created on 29-07-2024-00h-30m
-* github: https://github.com/JoacohDeveloper
-*/
-?>
-
-
 <div class="container">
     <?php implementComp("dashboard/aside.php") ?>
 
@@ -28,6 +19,7 @@
         <div class="products-managment">
             <div class="card-container"></div>
         </div>
+        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);?>
     </div>
 
     <?php implementComp("error_toast.php") ?>

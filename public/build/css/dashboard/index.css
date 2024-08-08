@@ -6,6 +6,7 @@ header {
   border-bottom: unset;
 }
 main {
+  margin-top: 3rem;
   background-color: #f2f2f2;
 }
 
@@ -330,7 +331,6 @@ main {
   background-color: transparent;
   display: flex;
   justify-content: center;
-  padding: 0 0.5rem;
   border: 2px solid #ccc;
   align-items: center;
 }

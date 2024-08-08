@@ -11,7 +11,7 @@
 
         <ul aria-label="ddl_1" class="dropDown-list">
             <li>
-                <a title="Product Managment" class="aside-element rounded" href="/dashboard/products">
+                <a title="Product Managment" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/archive.svg" alt="Product Managment">
                         <p>Product Managment</p>
@@ -21,8 +21,8 @@
             </li>
             <li>
                 <ul class="dropDown-links dropDownNotDeployed">
+                    <li><a href="/dashboard/products">Administrar vehiculos</a></li>
                     <li><a href="/dashboard/agregar-vehiculo">Agregar Vehiculo</a></li>
-                    <li><a href="#">Agregar Producto</a></li>
                 </ul>
             </li>
         </ul>
