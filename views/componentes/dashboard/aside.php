@@ -28,7 +28,7 @@
         </ul>
         <ul aria-label="ddl_2" class="dropDown-list">
             <li>
-                <a title="Coupons" class="aside-element rounded" href="/dashboard/coupons">
+                <a title="Coupons" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/card.svg" alt="Coupons">
                         <p>Coupons</p>
@@ -38,7 +38,7 @@
             </li>
             <li>
                 <ul class="dropDown-links dropDownNotDeployed">
-                    <li><a href="#">Agregar Cupon</a></li>
+                    <li><a href="/dashboard/coupons">Administrar cupones</a></li>
                 </ul>
             </li>
         </ul>
@@ -52,7 +52,7 @@
         </a>
         <ul aria-label="ddl_3" class="dropDown-list">
             <li>
-                <a title="Analytics" class="aside-element rounded" href="/dashboard/analytics">
+                <a title="Analytics" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
                         <img src="/build/src/images/analytics.svg" alt="Analytics">
                         <p>Analytics</p>
@@ -62,9 +62,9 @@
             </li>
             <li>
                 <ul class="dropDown-links dropDownNotDeployed">
-                    <li><a href="#">Analiticas Clientes</a></li>
-                    <li><a href="#">Analiticas Ventas</a></li>
-                    <li><a href="#">Analiticas Productos</a></li>
+                    <li><a href="/dashboard/analytics/client">Analiticas Clientes</a></li>
+                    <li><a href="/dashboard/analytics/sells">Analiticas Ventas</a></li>
+                    <li><a href="/dashboard/analytics/products">Analiticas Productos</a></li>
                 </ul>
             </li>
         </ul>

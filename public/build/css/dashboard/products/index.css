@@ -204,7 +204,7 @@
 .contenedor-controllers {
   display: flex;
   position: absolute;
-  z-index: 200;
+  z-index: 120;
   top: 1rem;
   gap: 1rem;
   right: 1rem;

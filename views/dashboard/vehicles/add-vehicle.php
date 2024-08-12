@@ -108,8 +108,6 @@
                 <input id="submit" type="submit" value="Registrar">
             </form>
         </div>
-        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);
-        ?>
     </div>
 </div>
 

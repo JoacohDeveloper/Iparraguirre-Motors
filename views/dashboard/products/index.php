@@ -19,7 +19,6 @@
         <div class="products-managment">
             <div class="card-container"></div>
         </div>
-        <?php implementComp("footer.php", ["class" => "dashboard-footer"]);?>
     </div>
 
     <?php implementComp("error_toast.php") ?>
