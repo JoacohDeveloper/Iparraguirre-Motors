@@ -325,16 +325,16 @@
 }
 
 .modal > .modal-body > label {
-  margin-top: 1rem;
-  margin-bottom: 0.3rem;
+
+  margin-bottom: 1rem;
   color: #ccc;
 }
 
-.modal > .modal-body > input {
+.modal > .modal-body > label > input {
   background: none;
   border: none;
   padding: 0.3rem 0.2rem;
-  margin-bottom: 1rem;
+  margin-top: .5rem;
   border-bottom: 2px solid #ccc;
   outline: none;
 }
@@ -366,4 +366,72 @@
   .modal > .modal-body {
     justify-content: center;
   }
+}
+
+
+/*Boton de agregar producto*/
+
+.product-add__input{
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 130;
+}
+.product-add__input > button{
+  background-color: #fff;
+  box-shadow: 0 0 17px #202020;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: right;
+  position: relative;
+  align-items: center;
+  &:hover{
+    width: 11rem;
+    transform: translateY(-1.8px);
+    p{
+      visibility: visible;
+    }
+  }
+}
+.product-add__input > button > img{
+  height: 2.2em;
+  width: 2.2em;
+}
+
+.product-add__input > button > p{
+  position: absolute;
+  visibility: hidden;
+  width: 100%;
+  right: .8rem;
+}
+
+/*Contenedor de agregar vehiculo*/
+.modal-container > .modal_add {
+  width: 75%;
+}
+
+/*Formulario emergente de agregar vehiculo*/
+.form_addvehicle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.form_addvehicle > button{
+  grid-column: span 2;
+  width: 20rem;
+  font-size: 1.5rem;
+  height: 2.7rem;
+  transition: ease .1s;
+  cursor: pointer;
+  border-radius: 0.2em;
+  transition: color 0.3s ease;
+    color: #000000;
+    &:hover {
+      box-shadow: 0px 0px 5px 2px rgba(190, 0, 0, 0.479);
+      border: 2px solid #be0000;
+    }
 }

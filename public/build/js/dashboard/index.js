@@ -11,7 +11,7 @@ if (aside) {
         }
     })
 
-    const data = JSON.parse(localStorage.getItem("ddl"))
+    const data = JSON.parse(localStorage.getItem("ddl")) || []
 
     const ddls = document.querySelectorAll(".dropDown-list")
 

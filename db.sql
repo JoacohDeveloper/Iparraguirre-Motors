@@ -61,8 +61,6 @@ create table vehicle(
 	fabricante VARCHAR(255),
 	year VARCHAR(45),
 	color VARCHAR(45),
-	titulo_imagen VARCHAR(255),
-	imagen VARCHAR(255),
 	matricula VARCHAR(45),
 	transmision VARCHAR(45),
 	tipo_carroceria VARCHAR(244),
@@ -82,4 +80,12 @@ create table vehicle(
 	createdAt datetime default CURRENT_TIMESTAMP,
 	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(id)
+);
+
+create table vehicle_img(
+	vehicle_id int(11) not null,
+	url VARCHAR(255),
+	alt VARCHAR(150),
+    constraint fk_vehicle_id foreign key(vehicle_id) references vehicle(id),
+	PRIMARY key(vehicle_id, url, description)
 );

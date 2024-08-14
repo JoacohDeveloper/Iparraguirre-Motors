@@ -32,9 +32,9 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
 
 
     btnEliminar.addEventListener("click", handlerEliminar)
-
+    
     btnModificar.addEventListener("click", handlerModificar)
-
+    
 
     contenedorControllers.appendChild(btnModificar)
     contenedorControllers.appendChild(btnEliminar)

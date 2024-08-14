@@ -20,6 +20,6 @@
             <div class="card-container"></div>
         </div>
     </div>
-
+    <?php implementComp("dashboard/addProductos.php") ?>
     <?php implementComp("error_toast.php") ?>
 </div>
