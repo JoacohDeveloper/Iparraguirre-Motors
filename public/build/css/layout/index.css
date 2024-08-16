@@ -527,7 +527,7 @@ main {
 }*/
 
 .slider{
-  width: 100%;
+  width: 80%;
   max-width: 100vw;
   height: 700px;
   padding-top: 1em;
@@ -538,27 +538,27 @@ main {
 .slider .list{
   position: absolute;
   width: max-content;
-  padding-top: 1em;
-  height: 100%;
-  left: 0;
-  top: 0;
+  padding-top: 3em;
+  height: max-content;
   display: flex;
   transition: 1s;
 }
 .slider .list img{
-  width: 1920px;
-  max-width: 100vw;
+  image-rendering: optimizeSpeed;
+  width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
 }
 .slider .buttons{
   position: absolute;
-  padding-top: 1em;
+  padding-top: 3em;
   top: 45%;
   left: 5%;
   width: 90%;
   display: flex;
   justify-content: space-between;
+  z-index: 2;
 }
 .slider .buttons button{
   width: 50px;
@@ -570,6 +570,7 @@ main {
   font-family: monospace;
   font-weight: bold;
   cursor: pointer;
+  z-index: 2;
 }
 .slider .dots{
   position: absolute;
@@ -581,6 +582,7 @@ main {
   padding: 0;
   display: flex;
   justify-content: center;
+  z-index: 2;
 }
 .slider .dots li{
   list-style: none;
@@ -594,11 +596,6 @@ main {
 .slider .dots li.active{
   width: 30px;
 }
-@media screen and (max-width: 768px){
-  .slider{
-      height: 400px;
-  }
-}
 .dark .slider .buttons button{
   width: 50px;
   height: 50px;
@@ -609,6 +606,7 @@ main {
   font-family: monospace;
   font-weight: bold;
   cursor: pointer;
+  z-index: 2;
 }
 .dark .slider .dots{
   position: absolute;
@@ -622,7 +620,7 @@ main {
   display: flex;
   justify-content: center;
   cursor: pointer;
-
+  z-index: 2;
 }
 .dark .slider .dots li{
   list-style: none;
@@ -639,13 +637,56 @@ main {
   cursor: pointer;
 
 }
-.slider > .list > .item > .slider_p{
+.car_name{
+  font-style: inherit;
+  font-size: 2em;
+  text-align: center;
+  position: relative;
+  top: 15%;
+  z-index: 1;
+  color: #000000;
+}
+.slider > .list > .item > .car_background{
   position: absolute;
-  font-size: 1em;
-  color: #ff0000;
+  background-color: #cccccc79;
+  backdrop-filter: blur(5px);
+  z-index: 1;
+  height: 100%;
+  width: 5%;
 }
-@media screen and (max-width: 768px){
+.car_description{
+  text-align: center;
+  position: relative;
+  top: 30%;
+  z-index: 1;
+  color: #000000;
+}
+.dark .car_name{
+  font-style: inherit;
+  font-size: 2em;
+  text-align: center;
+  position: relative;
+  top: 15%;
+  z-index: 1;
+  color: #ffffff;
+}
+.dark .slider > .list > .item > .car_background{
+  position: absolute;
+  background-color: #0000008a;
+  backdrop-filter: blur(5px);
+  z-index: 1;
+  height: 100%;
+  width: 5%;
+}
+.dark .car_description{
+  text-align: center;
+  position: relative;
+  top: 30%;
+  z-index: 1;
+  color: #ffffff;
+}
+/*@media screen and (max-width: 768px){
     .slider{
-        height: 400px;
+        display: none;
     }
-}
+}*/

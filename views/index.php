@@ -49,19 +49,39 @@
     <div class="slider">
             <div class="list">
                 <div class="item">
-                    <img src="/build/src/images/slider/1.png" alt="">
+                    <div class="car_background">
+                          <div class="car_name">Chevrolet Chevelle</div>
+                          <div class="car_description">El Chevrolet Chevelle, un muscle car icónico, ofrece un diseño agresivo y rendimiento impresionante, evocando la era dorada del automovilismo.</div>
+                    </div>
+                    <img src="/build/src/images/slider/1.svg" alt="">
                 </div>
                 <div class="item">
-                    <img src="/build/src/images/slider/2.png" alt="">
+                    <div class="car_background">
+                          <div class="car_name">Porsche</div>
+                          <div class="car_description">El Porsche 911, un ícono de la ingeniería alemana, ofrece rendimiento excepcional y diseño atemporal, cautivando a entusiastas del automovilismo.</div>
+                    </div>
+                    <img src="/build/src/images/slider/2.svg" alt="">
                 </div>
                 <div class="item">
-                    <img src="/build/src/images/slider/3.png" alt="">
+                    <div class="car_background">
+                          <div class="car_name">Jaguar Mark V</div>
+                          <div class="car_description">El Jaguar Mark V Drophead Coupe combina elegancia y sofisticación clásica, destacando por su diseño vintage y lujo excepcional.</div>
+                    </div>
+                    <img src="/build/src/images/slider/3.svg" alt="">
                 </div>
                 <div class="item">
-                    <img src="/build/src/images/slider/4.png" alt="">
+                     <div class="car_background">
+                          <div class="car_name">Volkswagen Beetle</div>
+                          <div class="car_description">El Volkswagen Beetle, un ícono alemán, destaca por su diseño atemporal y fiabilidad, amado por generaciones de conductores en todo el mundo.</div>
+                    </div>
+                    <img src="/build/src/images/slider/4.svg" alt="">
                 </div>
                 <div class="item">
-                    <img src="/build/src/images/slider/5.png" alt="">
+                     <div class="car_background">
+                          <div class="car_name">Opel GT</div>
+                          <div class="car_description">El Opel GT, un clásico deportivo alemán, destaca por su diseño aerodinámico y su potente motor, ideal para coleccionistas</div>
+                    </div>
+                    <img src="/build/src/images/slider/5.svg" alt="">
                 </div>
             </div>
             <div class="buttons">
