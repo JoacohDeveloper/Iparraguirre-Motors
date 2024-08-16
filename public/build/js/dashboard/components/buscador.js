@@ -288,9 +288,15 @@ async function buscar() {
                     if (!data?.message || data?.message !== "404") {
                         resultadoBusqueda.classList.remove("hidden")
 
-                        Object.values(data).forEach(vehicle => {
-                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle?.nombre))
+                        const vehicles = Object.values(data)
+                        const vehiclesName = vehicles.map(vehicles => vehicles?.nombre)
+                        const vehiclesNomUnicos = new Set(vehiclesName)
+                        const arregloNoRepetido = [...vehiclesNomUnicos]
+
+                        arregloNoRepetido.forEach(vehicle => {
+                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
                         })
+                        
                         if (Object.values(data).length == 0) ocultarBusqueda()
                     } else {
                         ocultarBusqueda()

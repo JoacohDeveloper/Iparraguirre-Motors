@@ -19,8 +19,8 @@ class ProductController
         $router->render("/dashboard/products/index", [
             "title" => "Products | Iparraguirre Motors",
             "description" => "Pagina de products del dashboard de Iparraguirre Motors",
-            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/products/index", "dashboard/components/buscador"],
-            "scripts" => ["dashboard/index", "dashboard/components/buscador", "dashboard/products/index"],
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/products/index", "dashboard/components/buscador", "dashboard/components/index"],
+            "scripts" => ["dashboard/index", "dashboard/components/buscador", "dashboard/products/index", "dashboard/components/imageUploader"],
         ]);
     }
 }

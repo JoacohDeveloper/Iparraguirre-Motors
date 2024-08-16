@@ -192,10 +192,15 @@ async function buscar() {
                     const data = await response.json()
                     if (!data?.message || data?.message !== "404") {
                         resultadoBusqueda.classList.remove("hidden")
+                        const vehicles = Object.values(data)
+                        const vehiclesName = vehicles.map(vehicles => vehicles?.nombre)
+                        const vehiclesNomUnicos = new Set(vehiclesName)
+                        const arregloNoRepetido = [...vehiclesNomUnicos]
 
-                        Object.values(data).forEach(vehicle => {
-                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle?.nombre))
+                        arregloNoRepetido.forEach(vehicle => {
+                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
                         })
+                        
                         if (Object.values(data).length == 0) ocultarBusqueda()
                     } else {
                         ocultarBusqueda()
