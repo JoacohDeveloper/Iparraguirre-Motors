@@ -1,4 +1,4 @@
-const form_addVehicle = document.querySelector(".f_addvehicle");
+const form_addVehicle = document.querySelector(".form_addvehicle");
 
 form_addVehicle.addEventListener("submit", submitEventHandler)
 

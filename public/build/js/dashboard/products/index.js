@@ -67,12 +67,11 @@ const ModalDelete = () => {
 //Estas 3 const sirven para generar label que contienen las casillas del formulario agregar vehiculo. El primero
 //genera las casillas en las que el administrador debe escribir y las otras dos generan los select y options
 //del select en donde en administrador selecciona la opcion en base al vehiculo que se esta agregando
-const InputText = (type, label, placeholder, id) => {
+const InputText = (type, label, placeholder, name) => {
     const inputLabel = document.createElement('label')
     const input = document.createElement('input')
     input.type = type
-    input.id = id
-    inputLabel.htmlFor = input.id
+    input.name = name
 
     inputLabel.textContent = label
     input.placeholder = placeholder
@@ -81,23 +80,30 @@ const InputText = (type, label, placeholder, id) => {
 
     return inputLabel
 }
-const InputSelect = (label, id, values) => {
+const TextArea = (label, placeholder, name) => {
+    const inputLabel = document.createElement('label');
+    const textarea = document.createElement('textarea');
+    textarea.name = name;
+
+    inputLabel.textContent = label;
+    textarea.placeholder = placeholder;
+
+    inputLabel.appendChild(textarea);
+
+    return inputLabel;
+}
+const InputSelect = (label, name, values) => {
     const inputSelectLabel = document.createElement('label');
     const inputSelect = document.createElement('select');
-    inputSelect.id = id;
-
-    inputSelectLabel.htmlFor = id; 
+    inputSelect.name = name;
     inputSelectLabel.textContent = label;
-    
-    // Añadir el select al label
     inputSelectLabel.appendChild(inputSelect);
 
-    // Crear una opción para el valor "-Seleccione-"
+    // Crear una opción para el valor por defecto
     const defaultOption = document.createElement('option');
     defaultOption.textContent = '-Seleccione-';
     inputSelect.appendChild(defaultOption);
 
-    // Añadir las opciones proporcionadas
     values.forEach(value => {
         const optionElement = document.createElement('option');
         optionElement.value = value;
@@ -138,28 +144,28 @@ const ModalAdd = () => {
     const vehicleform = document.createElement("form")
     vehicleform.classList.add("form_addvehicle")
     const inputs = [
-        InputText("text", "Nombre", "Nombre", ""),
-        InputText("text", "Descripcion", "Descripcion", ""),
-        InputText("text", "Modelo", "Modelo", ""),
-        InputText("text", "Fabricante", "Fabricante", ""),
-        InputText("number", "Año de fabricacion", "Año de fabricacion", ""),
-        InputText("text", "Color del vehiculo", "Color del vehiculo", ""),
-        InputText("text", "Matricula", "Matricula", ""),
-        InputSelect('Tipo de transmision', '', ['Manual', 'Automatica', 'Secuencial']),
-        InputSelect('Tipo de carroceria', '', ['Coupe', 'Sedan', 'Hatchback', 'Cabrio', 'Pick-up']),
-        InputSelect('Frenos ABS', '', ['Si', 'No']),
-        InputSelect('Airbag', '', ['Si', 'No']),
-        InputSelect('Tipo de traccion', '', ['Integral', 'Trasera', 'Delantera']),
-        InputSelect('Tipo de direccion', '', ['Manual', 'Hidraulica', 'Electrica']),
-        InputSelect('Control de estabilidad', '', ['Si', 'No']),
-        InputSelect('Numero de puertas', '', ['2', '3', '4', '5']),
-        InputText("text", "Tipo de combustible", "Tipo de combustible", ""),
-        InputText("number", "Precio", "Precio", ""),
-        InputText("number", "Velocidad maxima", "Velocidad maxima", ""),
-        InputText("text", "De 0 a 100", "De 0 a 100", ""),
-        InputText("number", "Peso del vehiculo (kg)", "Peso del vehiculo (kg)", ""),
-        InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", ""),
-        InputText("number", "Caballos de fuerza", "Caballos de fuerza", "")
+        InputText("text", "Nombre", "Nombre", "nombre"),
+        TextArea('Descripcion', 'Escribe una descripcion sobre el vehiculo', 'descripcion'),
+        InputText("text", "Modelo", "Modelo", "modelo"),
+        InputText("text", "Fabricante", "Fabricante", "fabricante"),
+        InputText("number", "Año de fabricacion", "Año de fabricacion", "year"),
+        InputText("text", "Color del vehiculo", "Color del vehiculo", "color"),
+        InputText("text", "Matricula", "Matricula", "matricula"),
+        InputSelect("Tipo de transmision", "tipo_transmision", ["Manual", "Automatica", "Secuencial"]),
+        InputSelect("Tipo de carroceria", "tipo_carroceria", ["Coupe", "Sedan", "Hatchback", "Cabrio", "Pick-up"]),
+        InputSelect("Frenos ABS", "frenos_abs", ["Si", "No"]),
+        InputSelect("Airbag", "airbag", ["Si", "No"]),
+        InputSelect("Tipo de traccion", "traccion", ["Integral", "Trasera", "Delantera"]),
+        InputSelect("Tipo de direccion", "direccion", ["Manual", "Hidraulica", "Electrica"]),
+        InputSelect("Control de estabilidad", "control_estabilidad", ["Si", "No"]),
+        InputSelect("Numero de puertas", "puertas", ["2", "3", "4", "5"]),
+        InputText("text", "Tipo de combustible", "Tipo de combustible", "tipo_combustible"),
+        InputText("number", "Precio", "Precio", "precio"),
+        InputText("number", "Velocidad maxima", "Velocidad maxima", "velocidad_max"),
+        InputText("text", "De 0 a 100", "De 0 a 100", "zero_to_houndred"),
+        InputText("number", "Peso del vehiculo (kg)", "Peso del vehiculo (kg)", "peso"),
+        InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros"),
+        InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza")
     ];
 
     
@@ -237,6 +243,7 @@ const AgregarBtn = document.querySelector(".product-add__input")
 
 if(AgregarBtn) {
     AgregarBtn.addEventListener("click", handlerAgregar)
+    
 }
 
 

@@ -447,7 +447,8 @@
   border-radius: 0.4em;
   background:#61616167;
   border: none;
-  font-style: italic
+  font-style: italic;
+  width: 100%;
 }
 .dark .form_addvehicle > label > label > select{
   color: #fff;
@@ -455,7 +456,13 @@
 }
 .form_addvehicle > label > label > input{
   border: none;
-  font-style: italic
+  font-style: italic;
+  width: 100%;
+}
+.form_addvehicle > label > label > textarea{
+  height: 3.75rem;
+  resize: none;
+  width: 100%;
 }
 .input-underline {
   display: flex;

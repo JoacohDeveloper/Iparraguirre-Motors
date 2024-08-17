@@ -20,7 +20,7 @@ class ProductController
             "title" => "Products | Iparraguirre Motors",
             "description" => "Pagina de products del dashboard de Iparraguirre Motors",
             "styles" => ["dashboard/index", "dashboard/aside", "dashboard/products/index", "dashboard/components/buscador", "dashboard/components/index"],
-            "scripts" => ["dashboard/index", "dashboard/components/buscador", "dashboard/products/index", "dashboard/components/imageUploader"],
+            "scripts" => ["dashboard/index", "dashboard/components/buscador", "dashboard/products/index", "dashboard/components/imageUploader", "dashboard/vehicle"],
         ]);
     }
 }
