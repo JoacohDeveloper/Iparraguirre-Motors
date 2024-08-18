@@ -69,13 +69,11 @@ $router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 //dashboard 
 
 $router->get("/dashboard", [DashboardController::class, "index"]);
-$router->get("/dashboard/product-managment", [DashboardController::class, 'productManagment']);
 
-$router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 $router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
 
-
-$router->get("/dashboard/products", [ProductController::class, "index"]);
+$router->get("/dashboard/products/vehicle", [ProductController::class, "vehicle"]);
+$router->get("/dashboard/products/repuestos", [ProductController::class, "repuestos"]);
 
 
 
