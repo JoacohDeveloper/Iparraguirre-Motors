@@ -9,7 +9,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
 {
     protected static $tabla = "Vehicle";
     protected static $columnasdb = [
-        "id", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "url_img", "description_img", "matricula", "transmision",
+        "id", "descripcion", "nombre", "modelo", "fabricante", "year", "color", /*"url_img", "description_img",*/ "matricula", "transmision",
         "tipo_carroceria", "frenos_abs", "airbag", "traccion", "direccion", "control_estabilidad", "puertas", "tipo_combustible",
         "precio", "velocidad_max", "zero_to_houndred", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
     ];
@@ -19,7 +19,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return (object) get_object_vars($this);
     }
 
-    public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, $url_img, $description_img, $matricula, $transmision, $tipo_carroceria, $frenos_abs,
+    public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
@@ -32,8 +32,8 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         $this->fabricante = $args["fabricante"] ?? "";
         $this->year = $args["year"] ?? "";
         $this->color = $args["color"] ?? "";
-        $this->url_img = $args["url_img"] ?? "";
-        $this->description_img = $args["description_img"] ?? "";
+        /*$this->url_img = $args["url_img"] ?? "";
+        $this->description_img = $args["description_img"] ?? "";*/
         $this->matricula = $args["matricula"] ?? "";
         $this->transmision = $args["tipo_transmision"] ?? "";
         $this->tipo_carroceria = $args["tipo_carroceria"] ?? "";

@@ -81,10 +81,8 @@ abstract class DashboardController
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-
+        if (!$user->isAdmin()) header("location: /");
+        
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -103,14 +101,6 @@ abstract class DashboardController
             }
             exit;
         }
-
-        $router->render("dashboard/vehicles/add-vehicle", [
-            "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index", "dashboard/vehicle"],
-            "title" => "Dashboard | Agregar Vehiculo",
-            "description" => "Pagina de dashboard Iparraguirre Motors",
-            "errors" => $errores,
-        ]);
     }
 
     public static function userDeleting(Router $router)
