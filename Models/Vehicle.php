@@ -9,7 +9,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
 {
     protected static $tabla = "Vehicle";
     protected static $columnasdb = [
-        "id", "descripcion", "nombre", "modelo", "fabricante", "year", "color", /*"url_img", "description_img",*/ "matricula", "transmision",
+        "id", "descripcion", "nombre", "categoria", "modelo", "fabricante", "year", "color", /*"url_img", "description_img",*/ "matricula", "transmision",
         "tipo_carroceria", "frenos_abs", "airbag", "traccion", "direccion", "control_estabilidad", "puertas", "tipo_combustible",
         "precio", "velocidad_max", "zero_to_houndred", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
     ];
@@ -19,7 +19,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return (object) get_object_vars($this);
     }
 
-    public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
+    public $id, $nombre, $categoria, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
@@ -27,6 +27,7 @@ class Vehicle extends ActiveRecord implements JsonSerializable
     {
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
+        $this->categoria = $args["categoria"] ?? "";
         $this->descripcion = $args["descripcion"] ?? "";
         $this->modelo = $args["modelo"] ?? "";
         $this->fabricante = $args["fabricante"] ?? "";
@@ -85,6 +86,9 @@ class Vehicle extends ActiveRecord implements JsonSerializable
 
         if (empty($this->nombre)) {
             $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if (empty($this->categoria)) {
+            $errors["nombre"] = "El campo categoria es obligatorio.";
         }
         if (empty($this->descripcion)) {
             $errors["descripcion"] = "El campo descripcion es obligatorio.";

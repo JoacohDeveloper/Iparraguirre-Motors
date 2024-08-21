@@ -152,6 +152,7 @@ const ModalAdd = () => {
     vehicleform.classList.add("form_addvehicle")
     const inputs = [
         InputText("text", "Nombre", "Nombre", "nombre", "name"),
+        InputSelect("Categoria", "categoria", ["Origins", "Deluxo"], "categoria"),
         TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc"),
         InputText("text", "Modelo", "Modelo", "modelo", ""),
         InputText("text", "Fabricante", "Fabricante", "fabricante", ""),
