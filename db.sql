@@ -64,7 +64,7 @@ create table vehicle(
 	color VARCHAR(45),
 	matricula VARCHAR(45),
 	transmision VARCHAR(45),
-	tipo_carroceria VARCHAR(244),
+	tipo_carroceria VARCHAR(255),
 	frenos_abs tinyint(1),
 	airbag tinyint(1),
 	traccion VARCHAR(45),

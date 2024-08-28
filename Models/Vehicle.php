@@ -87,8 +87,8 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         if (empty($this->nombre)) {
             $errors["nombre"] = "El campo nombre es obligatorio.";
         }
-        if (empty($this->categoria)) {
-            $errors["nombre"] = "El campo categoria es obligatorio.";
+        if ($this->categoria == "") {
+            $errors["categoria"] = "El campo categoria es obligatorio.";
         }
         if (empty($this->descripcion)) {
             $errors["descripcion"] = "El campo descripcion es obligatorio.";

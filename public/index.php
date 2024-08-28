@@ -39,10 +39,10 @@ $router->post("/contact", [InformationController::class, "contactUs"]);
 $router->get("/contact", [InformationController::class, "contactUs"]);
 
 //Customer auth
-$router->get("/login", [CustomerController::class, "login"]);
-$router->post("/login", [CustomerController::class, "login"]);
-$router->get("/register", [CustomerController::class, "register"]);
-$router->post("/register", [CustomerController::class, "register"]);
+$router->get("/auth", [CustomerController::class, "auth"]);
+
+$router->post("/auth/login", [CustomerController::class, "login"]);
+$router->post("/auth/register", [CustomerController::class, "register"]);
 
 //Admin auth
 $router->get("/dashboard/login", [AuthenticationController::class, "login"]);

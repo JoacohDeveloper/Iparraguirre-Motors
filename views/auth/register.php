@@ -4,7 +4,7 @@
 
     <section class="form-section">
         <h1>Register</h1>
-        <form method="POST" action="/register" id="regForm">
+        <form method="POST" action="/auth/register" id="regForm">
             <div>
                 <label class="inputs_txt" id="fullname_txt">Fullname</label>
                 <input class="inputs" type="text" name="full_name" placeholder="Nombre Completo" value="<?php echo $campos["full_name"] ?? "" ?>">

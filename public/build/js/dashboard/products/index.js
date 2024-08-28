@@ -170,7 +170,7 @@ const ModalAdd = () => {
         InputText("text", "Tipo de combustible", "Tipo de combustible", "tipo_combustible", ""),
         InputText("number", "Precio", "Precio", "precio", ""),
         InputText("number", "Velocidad maxima", "Velocidad maxima", "velocidad_max", ""),
-        InputText("text", "De 0 a 100", "De 0 a 100", "zero_to_houndred", ""),
+        InputText("number", "De 0 a 100", "De 0 a 100", "zero_to_houndred", ""),
         InputText("number", "Peso del vehiculo (kg)", "Peso del vehiculo (kg)", "peso", ""),
         InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros", ""),
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza", "")
@@ -214,6 +214,11 @@ const ModalAdd = () => {
             error.push({
                 title:"Failure",
                 error:"El campo nombre se encuentra vacio"
+            })
+        } else if(object.categoria == "-Seleccione-"){
+            error.push({
+                title:"Failure",
+                error:"El campo categoria es obligatorio"
             })
         } else if(object.descripcion.length == 0){
             error.push({
@@ -340,7 +345,8 @@ const ModalAdd = () => {
                     })
                     addToast(errors);
                 } else if (data?.message == "succesfuly") {
-                    window.location.href = "/dashboard"
+                    toggleBackground()
+                    contenedor.remove()
                 }
             }
             catch(err){
