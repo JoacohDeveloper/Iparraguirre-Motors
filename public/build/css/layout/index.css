@@ -685,6 +685,10 @@ main {
   z-index: 1;
   color: #ffffff;
 }
+
+.slider{ /* Display none de mientras que no tenemos las fotos optimizadas del slider */
+  display: none;
+}
 /*@media screen and (max-width: 768px){
     .slider{
         display: none;

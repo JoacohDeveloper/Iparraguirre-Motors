@@ -8,7 +8,11 @@
     <?php include __DIR__ . "/dashboard/navegacion.php"; ?>
     <div class="hello-world">
 
-        <?php include __DIR__ . "/navegacion.php"; ?>
+        <?php if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
+            include __DIR__ . "/navegacionLogged.php";
+        } else {
+            include __DIR__ . "/navegacion.php";
+        }?>
 
         <div class="brgMenu brgMenuHandler">
             <img src="/build/src/images/brgMenu.svg" alt="Hamburger Menu">

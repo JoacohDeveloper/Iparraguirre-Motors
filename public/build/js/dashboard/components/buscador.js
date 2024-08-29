@@ -1,13 +1,3 @@
-/**
- * author Joaquín Álvarez
- * created on 29-07-2024-00h-59m
- * github: https://github.com/JoacohDeveloper
-*/
-
-//Prueba de infinite scroll
-
-
-
 const cardContainer = document.querySelector(".card-container")
 
 const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
@@ -21,10 +11,12 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
     contenedorControllers.classList.add("contenedor-controllers")
     const btnModificar = document.createElement("button")
     const modificarImg = document.createElement("img")
+    btnModificar.id = id;
     modificarImg.src = "/build/src/images/pencil.svg"
 
     const btnEliminar = document.createElement("button")
     const btnEliminarImg = document.createElement("img")
+    btnEliminar.id = id;
     btnEliminarImg.src = "/build/src/images/trash.svg"
 
     btnEliminar.appendChild(btnEliminarImg)
@@ -111,6 +103,7 @@ const Spinner = () => {
     return spinnerSquare
 }
 
+
 async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
@@ -147,7 +140,6 @@ async function init(search = null) {
             if (cardContainer)
                 return lastEl
         }
-
         return
 
     }
@@ -219,7 +211,6 @@ contenedorBuscador.addEventListener("submit", async e => {
 })
 
 async function cargarDefault() {
-
     await init()
 }
 

@@ -77,32 +77,6 @@ abstract class DashboardController
         ]);
     }
 
-    public static function agregarVehiculo(Router $router)
-    {
-        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
-        $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) header("location: /");
-        
-        $errores = [];
-        $campos = [];
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            header('Content-Type: application/json; charset=utf-8');
-            $vehicle = new vehicle($_POST);
-            $errores = $vehicle->validate();
-            if (empty($errores)) {
-                $result = $vehicle->registrarVehicle();
-                if ($result) {
-                    echo json_encode(["message" => "succesfuly"]);
-                } else {
-                    echo json_encode(["error" => "Ha ocurrido un error"]);
-                }
-            } else {
-                echo json_encode(["message" => "error", "errores" => $errores]);
-            }
-            exit;
-        }
-    }
-
     public static function userDeleting(Router $router)
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");

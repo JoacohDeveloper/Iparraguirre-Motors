@@ -415,13 +415,19 @@
 .modal-container > .modal_add {
   width: 75%;
 }
+.modal-container > .modal_modificar {
+  width: 75%;
+}
+
 
 /*Formulario emergente de agregar vehiculo*/
 .form_addvehicle{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
+  max-height: 35rem;
 }
 .form_addvehicle > button{
   grid-column: span 2;
@@ -467,6 +473,9 @@
   background:#61616167;
   border: none;
   font-style: italic
+}
+.form_addvehicle > .imageUploader-container{
+  width: 30rem;
 }
 .dark .form_addvehicle > label > textarea{
   color: #fff;

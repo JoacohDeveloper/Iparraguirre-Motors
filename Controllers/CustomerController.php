@@ -15,8 +15,6 @@ abstract class CustomerController
         $router->render("auth/index", [
             "scripts" => ["auth/index"],
             "styles" => ["auth/index"],
-            "errores" => $errores,
-            "campos" => $campos,
             "title" => "Iparraguirre Motors | Authentication",
             "description" => "Ingresa en Iparraguirre Motors!"
         ]);
@@ -24,6 +22,7 @@ abstract class CustomerController
 
     public static function login(Router $router)
     {
+        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /");
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -68,6 +67,7 @@ abstract class CustomerController
 
     public static function register(Router $router)
     {
+        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /");
         $errores = [];
         $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

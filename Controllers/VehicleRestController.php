@@ -16,7 +16,6 @@ abstract class VehicleRestController
         $vehicleId = isset($_GET["id"]) ? intval($_GET["id"]) : null;
         $vehiclePage = isset($_GET["page"]) ? intval($_GET["page"]) : null;
 
-
         $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
 
         if ($vehiclePage && $vehicleName) {
