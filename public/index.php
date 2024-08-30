@@ -89,7 +89,6 @@ $router->get("/dashboard/products/repuestos", [ProductController::class, "repues
 
 $router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
 
-$router->get("/dashboard/user-delete", [DashboardController::class, "userDeleting"]);
 $router->post("/dashboard/user-delete", [DashboardController::class, "userDeleting"]);
 
 $router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);

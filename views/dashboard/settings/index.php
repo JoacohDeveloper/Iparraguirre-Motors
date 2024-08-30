@@ -11,10 +11,10 @@
                 <aside class="dashboard-fit__content_aside">
                     <nav>
                         <ul class="steps">
-                            <li aria-label="step-1" class="selected"><a href="#my_profile">My Profile</a></li>
-                            <li aria-label="step-2"><a href="#">Notifications</a></li>
-                            <li aria-label="step-3"><a href="#">Security</a></li>
-                            <li aria-label="step-4" class="delete-account"><a href="#">Delete Account</a></li>
+                            <li aria-label="step-1" id="my_profile" class="selected"><a href="#my_profile">My Profile</a></li>
+                            <li aria-label="step-2" id="notifications" ><a href="#">Notifications</a></li>
+                            <li aria-label="step-3" id="security" ><a href="#">Security</a></li>
+                            <li aria-label="step-4" id="delete-account"><a href="#">Delete Account</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -59,12 +59,20 @@
                                 <p id="email__id"><?php echo $email; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Phone</label>
-                                <p id="pNumber__id">+598 098 561 082</p>
+                                <label>Registered on</label>
+                                <p id="created__id"><?php echo $createdAt; ?></p>
                             </div>
                             <div class="saved-fields__field">
                                 <label>Bio</label>
-                                <p id="bio__id">My names is Joaquin</p>
+                                <p id="bio__id">
+                                    <?php
+                                    if (is_null($bio)) {
+                                        echo "My name is " . htmlspecialchars($firstname);
+                                    } else {
+                                        echo htmlspecialchars($bio);
+                                    }
+                                    ?>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -77,7 +85,20 @@
                 </section>
 
                 <section class="dashboard-fit__content__delelteAcc" aria-step="4">
-                    <h4>Delete Account</h4>
+                <h4>Eliminar mi cuenta</h4>
+                <h6>¿Estas seguro?</h6>
+                <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>
+                <form class="form_deleteAccount" action="">
+                    <label for="fullname">
+                        Nombre completo
+                        <input type="text" name="Nombre">
+                    </label>
+                    <label for="password">
+                        Contraseña
+                        <input type="password" name="Password">
+                    </label>
+                    <input type="submit" value="Eliminar">
+                </form>
                 </section>
             </div>
 

@@ -157,7 +157,7 @@ const ModalAdd = () => {
         InputText("text", "Nombre", "Nombre", "nombre", "name", ""),
         InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", ""),
         TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", ""),
-        InputText("text", "Modelo", "Modelo", "modelo", ""),
+        InputText("text", "Modelo", "Modelo", "modelo", "", ""),
         InputText("text", "Fabricante", "Fabricante", "fabricante", "", ""),
         InputText("number", "Año de fabricacion", "Año de fabricacion", "year", ""),
         InputText("text", "Color del vehiculo", "Color del vehiculo", "color", "", ""),
@@ -440,7 +440,7 @@ const ModalModificar = (data) => {
     inputs.forEach(input => modvehicleform.appendChild(input))
     
     const submitInput = document.createElement("button")
-    submitInput.textContent = "Agregar"
+    submitInput.textContent = "Actualizar"
 
     modvehicleform.appendChild(ImageUploader())
     modvehicleform.appendChild(submitInput)

@@ -55,6 +55,8 @@ abstract class DashboardController
         $firstName = $fullNameExplode[0];
         $lastName = $fullNameExplode[1] ?? "";
         $email = $usuario->getEmail();
+        $bio = "Soy backend y me encanta programar en HTML";
+        $createdAt = $usuario->getCreated()->format('d-m-Y H:i');
 
         if (!isset($uuid)) {
             header("Location: /dashboard");
@@ -71,47 +73,33 @@ abstract class DashboardController
             "lastname" => $lastName,
             "email" => $email,
             "imagen" => $imagen,
+            "bio" => $bio,
+            "createdAt" => $createdAt,
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
 
         ]);
     }
 
-    public static function userDeleting(Router $router)
-    {
-        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
-        $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-
-        $errores = [];
+    public static function userDeleting(){
         $usuario = $_SESSION["usuario"];
         $result =  ["Fail"];
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (isset($usuario)) {
-                if ($usuario->getFullName() == $_POST["Nombre"]) {
-                    if ($usuario->validarPassword($_POST["Password"])) {
-                        $result = $usuario->deleteUser();
-                        if ($result) {
-                            echo json_encode(["resultado" => "Eliminado correctamente"]);
-                            exit;
-                        } else {
-                            echo json_encode(["resultado" => "Ha ocurrido un error"]);
-                            exit;
-                        }
+    
+        if (isset($usuario)) {
+            if ($usuario->getFullName() == $_POST["Nombre"]) {
+                if ($usuario->validarPassword($_POST["Password"])) {
+                    $result = $usuario->deleteUser();
+                    if ($result) {
+                        echo json_encode(["message" => "Eliminado correctamente", "resultado" => $result]);
+                        exit;
+                    } else {
+                        echo json_encode(["message" => "Ha ocurrido un error"]);
+                        exit;
                     }
                 }
-                echo json_encode(["resultado" => $result]);
-                exit;
             }
         }
-
-        $router->render("/dashboard/settings/user-delete", [
-            "scripts" => ["dashboard/settings/index", "dashboard/index"],
-            "title" => "Iparraguirre Motors | Settings",
-            "description" => "User settings page for admins in Iparraguirre Motors"
-        ]);
+        exit;
     }
 
     public static function getSettingsFromUserJson()

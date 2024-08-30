@@ -431,4 +431,11 @@ function setSettingSection(step) {
 }
 
 
-
+/* Admin settings li selected */
+const menuItems = document.querySelectorAll("#my_profile, #notifications, #security, #delete-account");
+menuItems.forEach(item => {
+    item.addEventListener("click", () => {
+        menuItems.forEach(el => el.classList.remove("selected"));
+        item.classList.add("selected");
+    });
+});

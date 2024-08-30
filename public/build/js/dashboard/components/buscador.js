@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
+const Card = ({ nombre, precio, id, imageUrl, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -47,15 +47,19 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
     const contenedorNombre = document.createElement("div")
     contenedorNombre.classList.add("contenedor-datos")
     const nombreHTML = document.createElement("p")
-    nombreHTML.textContent = nombre ?? "Dodge"
+    nombreHTML.textContent = nombre ?? "Dodge Charger 69"
+
+    const fabricanteHTML = document.createElement("p")
+    fabricanteHTML.textContent = fabricante ?? "Dodge"
 
     const modeloHTML = document.createElement("p")
-    modeloHTML.textContent = modelo ?? "Dodge"
+    modeloHTML.textContent = modelo ?? "Charger"
 
     const añoHTML = document.createElement("p")
     añoHTML.textContent = año ?? "1969"
 
     contenedorNombre.appendChild(nombreHTML)
+    contenedorNombre.appendChild(fabricanteHTML)
     contenedorNombre.appendChild(modeloHTML)
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
@@ -116,14 +120,16 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
+        console.log(data)
         //localStorage.setItem("tiendaItems", JSON.stringify(newData))
 
         data.forEach(v => {
             const customV = {
                 nombre: v.nombre,
-                precio: 100,
+                precio: v.precio,
                 id: v.id,
                 imageUrl: v.imagen,
+                fabricante: v.fabricante,
                 modelo: v.modelo,
                 año: v.year
             }

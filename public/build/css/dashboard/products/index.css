@@ -128,7 +128,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem;
   justify-content: space-between;
 }
 
@@ -140,7 +140,7 @@
   border-radius: 0.5rem;
   /* max-width: fit-content; */
   padding: 0.6rem 0.8rem;
-  width: 70%;
+  width: 50%;
   align-self: flex-end;
   border: 1px solid #fff;
 
@@ -153,12 +153,15 @@
     color: transparent;
     -webkit-text-stroke: 1px #fff;
   }
-
   p:nth-child(2) {
     font-size: 0.8rem;
     color: #fff;
   }
   p:nth-child(3) {
+    font-size: 0.8rem;
+    color: #fff;
+  }
+  p:nth-child(4) {
     font-size: 0.8rem;
     color: #fff;
     padding: 0.3rem;

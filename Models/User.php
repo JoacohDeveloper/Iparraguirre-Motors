@@ -234,6 +234,15 @@ class User extends ActiveRecord
         return boolval($this->isDeleted);
     }
 
+    public function getCreated(){
+    if ($this->createdAt instanceof \DateTime) {
+        return $this->createdAt;
+    } else {
+        return new \DateTime($this->createdAt);
+    }
+}
+
+
     public function getFullName()
     {
         return $this->full_name;
