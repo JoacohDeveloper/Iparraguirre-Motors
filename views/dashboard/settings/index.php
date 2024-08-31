@@ -88,7 +88,7 @@
                 <h4>Eliminar mi cuenta</h4>
                 <h6>¿Estas seguro?</h6>
                 <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>
-                <form class="form_deleteAccount" action="">
+                <form class="form_deleteAccount">
                     <label for="fullname">
                         Nombre completo
                         <input type="text" name="Nombre">

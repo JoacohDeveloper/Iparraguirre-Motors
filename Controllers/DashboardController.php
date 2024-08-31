@@ -83,25 +83,31 @@ abstract class DashboardController
 
     public static function userDeleting(){
         $usuario = $_SESSION["usuario"];
-        $result =  ["Fail"];
+        $result = null;
     
         if (isset($usuario)) {
             if ($usuario->getFullName() == $_POST["Nombre"]) {
                 if ($usuario->validarPassword($_POST["Password"])) {
                     $result = $usuario->deleteUser();
                     if ($result) {
-                        echo json_encode(["message" => "Eliminado correctamente", "resultado" => $result]);
-                        exit;
+                        $_SESSION["loggedIn"] = null;
+                        $_SESSION["usuario"] = null;
+                        echo json_encode(["message" => "successfuly"]);
                     } else {
                         echo json_encode(["message" => "Ha ocurrido un error"]);
-                        exit;
                     }
+                } else {
+                    echo json_encode(["message" => "La contraseña es incorrecta"]);
                 }
+            } else {
+                echo json_encode(["message" => "El nombre no coincide"]);
             }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
         }
         exit;
     }
-
+    
     public static function getSettingsFromUserJson()
     {
         $uuid = $_GET["u"];

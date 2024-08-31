@@ -213,15 +213,14 @@ class User extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
-    public function deleteUser()
-    {
+    public function deleteUser(){
         $result = null;
         try {
-            return $this->eliminar($this->uuid);
+            $result = $this->eliminar($this->uuid);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
         }
-        return $result[0] ?? null;
+        return $result;
     }
 
     public function getUsername()
