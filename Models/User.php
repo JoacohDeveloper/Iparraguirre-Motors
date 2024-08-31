@@ -56,6 +56,7 @@ class User extends ActiveRecord
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
+        date_default_timezone_set('America/Montevideo');
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
@@ -195,6 +196,9 @@ class User extends ActiveRecord
 
     public function actualizarUsuario()
     {
+        date_default_timezone_set('America/Montevideo');
+        $this->updatedAt = new DateTime();
+        $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
         return $this->actualizar($this->uuid);
     }
 
@@ -237,13 +241,19 @@ class User extends ActiveRecord
     }
 
     public function getCreated(){
-    if ($this->createdAt instanceof \DateTime) {
-        return $this->createdAt;
-    } else {
-        return new \DateTime($this->createdAt);
+        if ($this->createdAt instanceof \DateTime) {
+            return $this->createdAt;
+        } else {
+            return new \DateTime($this->createdAt);
+        }
     }
-}
-
+    public function getUpdated(){
+        if ($this->updatedAt instanceof \DateTime) {
+            return $this->updatedAt;
+        } else {
+            return new \DateTime($this->updatedAt);
+        }
+    }
 
     public function getFullName()
     {

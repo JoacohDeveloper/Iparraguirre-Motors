@@ -136,7 +136,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border-radius: 0.4rem;
   border: 2px solid #f2f2f2;
 }
@@ -177,8 +177,10 @@
 }
 
 .profile-resume-configuration__edit {
-  all: unset;
   display: flex;
+  align-self: flex-end;
+  position: absolute;
+  width: 8rem;
   justify-content: center;
   align-items: center;
   background: none;
@@ -190,6 +192,28 @@
   gap: 0.2rem;
   padding: 0.4rem 0.5rem;
   font-size: 0.8rem;
+  margin-right: 1.5rem;
+}
+
+.delete-picture-configuration__edit {
+  display: flex;
+  width: 10.5rem;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  height: auto;
+  border: 1px solid #202020;
+  gap: 0.2rem;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease, transform 0.3s ease-in-out;
+  &:hover {
+    background-color: #f2f2f2;
+    transform: translateY(-2px);
+  }
 }
 
 .profile-resume__data {
@@ -213,7 +237,7 @@
 .dashboard-fit__content__personal-information {
   border: 2px solid #f2f2f2;
   border-radius: 0.4rem;
-  margin-top: 2rem;
+  margin-top: .4rem;
   padding: 1rem 0;
 }
 

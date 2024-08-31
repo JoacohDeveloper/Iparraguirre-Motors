@@ -57,13 +57,15 @@ abstract class DashboardController
         $email = $usuario->getEmail();
         $bio = $usuario->getBio() ?? "";
         $createdAt = $usuario->getCreated()->format('d-m-Y H:i');
+        $updatedAt = $usuario->getUpdated()->format('d-m-Y H:i');
+        if ($updatedAt == $createdAt) $updatedAt = "Never updated";
 
         if (!isset($uuid)) {
             header("Location: /dashboard");
         } else if (!isset($usuario)) {
             header("Location: /");
         } else if ($uuid != $usuario->getUUID()) header("Location: /dashboard");
-
+        
         $router->render("/dashboard/settings/index", [
             "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/index"],
             "scripts" => ["dashboard/index", "dashboard/settings/index"],
@@ -75,6 +77,7 @@ abstract class DashboardController
             "imagen" => $imagen,
             "bio" => $bio,
             "createdAt" => $createdAt,
+            "updatedAt" => $updatedAt,
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
 

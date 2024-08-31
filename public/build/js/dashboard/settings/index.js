@@ -312,6 +312,17 @@ async function setFormEdit(target, formContainer) {
             fullNameInput.placeholder = "Full Name"
             fullNameInput.value = lastChanges?.fullname ?? data?.fullname;
 
+            const emailInputLabel = document.createElement("label");
+            const emailInput = document.createElement("input")
+            emailInputLabel.textContent = "Email"
+            emailInputLabel.htmlFor = "email"
+
+            emailInput.type = "text"
+            emailInput.name = "email"
+            emailInput.id = "email"
+            emailInput.placeholder = "Email"
+            emailInput.value = data.email;
+
             const summaryTextAreaLabel = document.createElement("label");
 
             const summaryTextArea = document.createElement("textarea")
@@ -328,11 +339,14 @@ async function setFormEdit(target, formContainer) {
             formHTML.appendChild(bannerUser)
             formHTML.appendChild(subtitle)
 
+            formHTML.appendChild(fullNameInputLabel)
+            formHTML.appendChild(fullNameInput)
+
             formHTML.appendChild(usernameInputLabel)
             formHTML.appendChild(usernameInput)
 
-            formHTML.appendChild(fullNameInputLabel)
-            formHTML.appendChild(fullNameInput)
+            formHTML.appendChild(emailInputLabel)
+            formHTML.appendChild(emailInput)
 
             formHTML.appendChild(summaryTextAreaLabel)
             formHTML.appendChild(summaryTextArea)
