@@ -13,13 +13,15 @@ class User extends ActiveRecord
 
     protected static $tabla = "User";
 
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
     protected $full_name;
 
     protected $username;
+
+    protected $bio;
 
     protected $email;
 
@@ -50,6 +52,7 @@ class User extends ActiveRecord
         $this->uuid = $args["uuid"] ?? null;
         $this->username = $args["username"] ?? "";
         $this->full_name = $args["full_name"] ?? "";
+        $this->bio = $args["bio"] ?? "";
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
@@ -250,6 +253,10 @@ class User extends ActiveRecord
     public function getImagen()
     {
         return $this->imagen;
+    }
+
+    public function getBio(){
+        return $this->bio;
     }
 
     public function getNombreImagen()

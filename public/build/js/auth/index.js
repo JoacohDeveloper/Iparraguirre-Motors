@@ -160,7 +160,7 @@ function anchoPage(){
         caja_trasera_register.style.display = "block";
         caja_trasera_register.style.opacity = "1";
         caja_trasera_login.style.display = "none";
-        formularioLogin.style.display = "block";
+        formularioLogin.style.display = "flex";
         contenedor_login_register.style.left = "0px";
         formularioRegister.style.display = "none";   
     }
@@ -171,13 +171,13 @@ anchoPage();
 
     function iniciarSesion(){
         if (window.innerWidth > 850){
-            formularioLogin.style.display = "block";
+            formularioLogin.style.display = "flex";
             contenedor_login_register.style.left = "10px";
             formularioRegister.style.display = "none";
             caja_trasera_register.style.opacity = "1";
             caja_trasera_login.style.opacity = "0";
         }else{
-            formularioLogin.style.display = "block";
+            formularioLogin.style.display = "flex";
             contenedor_login_register.style.left = "0px";
             formularioRegister.style.display = "none";
             caja_trasera_register.style.display = "block";
@@ -187,13 +187,13 @@ anchoPage();
 
     function register(){
         if (window.innerWidth > 850){
-            formularioRegister.style.display = "block";
+            formularioRegister.style.display = "flex";
             contenedor_login_register.style.left = "410px";
             formularioLogin.style.display = "none";
             caja_trasera_register.style.opacity = "0";
             caja_trasera_login.style.opacity = "1";
         }else{
-            formularioRegister.style.display = "block";
+            formularioRegister.style.display = "flex";
             contenedor_login_register.style.left = "0px";
             formularioLogin.style.display = "none";
             caja_trasera_register.style.display = "none";

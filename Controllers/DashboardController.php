@@ -55,7 +55,7 @@ abstract class DashboardController
         $firstName = $fullNameExplode[0];
         $lastName = $fullNameExplode[1] ?? "";
         $email = $usuario->getEmail();
-        $bio = "Soy backend y me encanta programar en HTML";
+        $bio = $usuario->getBio() ?? "";
         $createdAt = $usuario->getCreated()->format('d-m-Y H:i');
 
         if (!isset($uuid)) {
@@ -120,6 +120,7 @@ abstract class DashboardController
         unset($fullNameExplode[0]);
         $lastName = join(" ", $fullNameExplode) ?? "";
         $lastName = $fullNameExplode[1] ?? "";
+        $bio = $usuario->getBio() ?? "";
         $email = $usuario->getEmail();
 
         if (!isset($uuid)) {
@@ -139,7 +140,8 @@ abstract class DashboardController
             "firstname" => $firstName,
             "lastname" => $lastName,
             "email" => $email,
-            "imagen" => $imagen
+            "imagen" => $imagen,
+            "bio" => $bio
         ];
 
         echo json_encode($user);

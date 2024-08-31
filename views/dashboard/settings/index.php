@@ -11,7 +11,7 @@
                 <aside class="dashboard-fit__content_aside">
                     <nav>
                         <ul class="steps">
-                            <li aria-label="step-1" id="my_profile" class="selected"><a href="#my_profile">My Profile</a></li>
+                            <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">My Profile</a></li>
                             <li aria-label="step-2" id="notifications" ><a href="#">Notifications</a></li>
                             <li aria-label="step-3" id="security" ><a href="#">Security</a></li>
                             <li aria-label="step-4" id="delete-account"><a href="#">Delete Account</a></li>
@@ -66,7 +66,7 @@
                                 <label>Bio</label>
                                 <p id="bio__id">
                                     <?php
-                                    if (is_null($bio)) {
+                                    if ($bio == "" || $bio == null) {
                                         echo "My name is " . htmlspecialchars($firstname);
                                     } else {
                                         echo htmlspecialchars($bio);

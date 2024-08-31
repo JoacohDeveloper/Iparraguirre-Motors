@@ -424,6 +424,21 @@
 
 
 /*Formulario emergente de agregar vehiculo*/
+
+/* Separaciones para el formulario
+
+Seccion 1 - Datos del vehiculo:
+  Nombre, Fabricante, Modelo, Año, Matricula, Precio,
+  Categoria, Descripcion, Color (Ordenalas distinto hdp)
+
+Seccion 2 - Caracteristicas del vehiculo
+  (El resto y ordenalas bien)
+
+Seccion 3 - Drag & Drop
+  Dejar el drag & drop fixed con las preview de las imagenes debajo.
+
+*/
+
 .form_addvehicle{
   display: flex;
   flex-direction: column;
@@ -450,11 +465,13 @@
 .form_addvehicle > label{
   display: flex;
   flex-direction: column;
+  gap: .3rem;
   width: 12rem
 }
 .form_addvehicle > label > select{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#fff;
+  padding-left: .3rem;
   border: none;
   font-style: italic;
   width: 100%;
@@ -466,6 +483,7 @@
 .form_addvehicle > label > input{
   border: none;
   font-style: italic;
+  padding-left: .3rem;
   width: 100%;
 }
 .form_addvehicle > label > textarea{
@@ -473,7 +491,8 @@
   resize: none;
   width: 100%;
   border-radius: 0.4em;
-  background:#61616167;
+  padding-left: .3rem;
+  background:#fff;
   border: none;
   font-style: italic
 }

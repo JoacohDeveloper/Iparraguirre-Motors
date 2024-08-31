@@ -315,13 +315,14 @@ async function setFormEdit(target, formContainer) {
             const summaryTextAreaLabel = document.createElement("label");
 
             const summaryTextArea = document.createElement("textarea")
-            summaryTextAreaLabel.textContent = "Summary"
-            summaryTextAreaLabel.htmlFor = "summary"
+            summaryTextAreaLabel.textContent = "Biografia"
+            summaryTextAreaLabel.htmlFor = "Biografia"
 
-            summaryTextArea.name = "summary"
-            summaryTextArea.id = "summary"
-            summaryTextArea.placeholder = "Summary"
-            summaryTextArea.textContent = lastChanges?.summary ?? data?.fullname + " aca va el summary";
+            summaryTextArea.name = "bio"
+            summaryTextArea.id = "bio"
+            console.log(data)
+            summaryTextArea.placeholder = "Escribe aqui tu biografia"
+            summaryTextArea.textContent = data.bio;
 
 
             formHTML.appendChild(bannerUser)
@@ -379,14 +380,13 @@ function setSettingSection(step) {
 
 
 /* Admin settings li selected */
-const menuItems = document.querySelectorAll("#my_profile, #notifications, #security, #delete-account");
+const menuItems = document.querySelectorAll("#profile, #notifications, #security, #delete-account");
 menuItems.forEach(item => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", (event) => {
         menuItems.forEach(el => el.classList.remove("selected"));
         item.classList.add("selected");
     });
 });
-
 
 /* Delete user form */
 document.querySelector('input[name="Nombre"]').setAttribute('autocomplete', 'new-name');
