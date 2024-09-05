@@ -37,6 +37,8 @@ $router->get("/", [HomePageController::class, "index"]);
 
 $router->post("/contact", [InformationController::class, "contactUs"]);
 $router->get("/contact", [InformationController::class, "contactUs"]);
+$router->post("/lasFAQ", [InformationController::class, "preguntasFrecuentes"]);
+$router->get("/lasFAQ", [InformationController::class, "preguntasFrecuentes"]);
 
 //Customer auth
 $router->get("/auth", [CustomerController::class, "auth"]);
@@ -106,13 +108,6 @@ $router->get("/tienda/results", [TiendaController::class,  "results"]);
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
 
-
-
-//faq
-
-$router->get("/faq", function () {
-    header("Location: /faq.html");
-});
 
 
 //Pruebas Randoms

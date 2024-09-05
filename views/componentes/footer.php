@@ -1,40 +1,45 @@
-
 <footer class="<?php echo isset($class) ? $class : "" ?>">
 
-    <?php include __DIR__ . "/themeSwitcher.php"; ?>
-
-        <div class="footer_menu">
-                <ul>
-                    <li class="footer_h3">Navegacion</li>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/tienda">Tienda</a></li>
-                    <li><a href="/cuenta">Cuenta</a></li>
-                    <li><a href="/faq">Ayuda</a></li>
-                </ul>     
-
-                 <ul>
-                    <li class="footer_h3">Cuenta</li>
-                    <li><a href="/cuenta/carrito">Carrito</a></li>
-                    <li><a href="/cuenta/deseos">Lista de deseos</a></li>
-                    <li><a href="/cuenta">Ajustes</a></li>
-                    <li><a href="/logout">Cerrar sesion</a></li>
-                </ul>
-
-                <ul>
-                    <li class="footer_h3">Informacion</a></li>
-                    <li><a href="/contact">Contactanos</a></li>
-                    <li><a href="/faq">Preguntas frecuentes</a></li>
-                    <li><a href="/politicas">Politicas</a></li>
-                </ul>
-        </div>
-            <div class="footer_iconos">
-                <i class='bx bxl-facebook'></i>
-                <i class='bx bxl-instagram'></i>
-                <i class='bx bxl-linkedin'></i>
-                <i class='bx bxl-twitter'></i>
-            </div>
-
-    <div class="copy">
-        <h3>2024 &copy; Copyright Iparraguirre Motores</h3>
+<div class="footer">
+    <div class="footer-section">
+      <h3>Iparraguirre-Motors</h3>
+      <p>Descubre el lujo en Iparraguirre Motors, tu agencia de autos exóticos.
+        Encuentra tu vehículo de ensueño entre nuestra selección exclusiva.
+        ¡Bienvenido a la excelencia automotriz!</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
     </div>
+
+    <div class="footer-section">
+      <h3>Navegación</h3>
+      <ul class="nav-links">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Tienda</a></li>
+        <li><a href="#">Cuenta</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Información</h3>
+      <ul class="info-links">
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Términos y Condiciones</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Redes sociales</h3>
+      <img src="" alt="Métodos de Pago">
+      <?php include __DIR__ . "/themeSwitcher.php"; ?>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2024 Iparraguirre-Motors. Todos los derechos reservados.</p>
+  </div>
 </footer>

@@ -7,9 +7,9 @@ class Customer extends ActiveRecord {
 
     protected static $tabla = "Customer";
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "phone", "password", "token", "isAdmin",
-        "isDeleted", "verify", "createdAt", "updatedAt"];
+        "isDeleted", "verify", "titulo_imagen", "imagen", "createdAt", "updatedAt"];
 
-    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $isAdmin, $isDeleted, $verify, $createdAt, $updatedAt;
+    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $isAdmin, $isDeleted, $verify, $titulo_imagen, $imagen, $createdAt, $updatedAt;
 
     function __construct($args = []) {
         $this->uuid = $args["uuid"] ?? null;
@@ -24,6 +24,8 @@ class Customer extends ActiveRecord {
         $this->isAdmin = 0;
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->verify = 0;
+        $this->titulo_imagen = "imagen default de usuario";
+        $this->imagen = $args["imagen"] ?? "\build\src\images\users\default.jpg";
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');

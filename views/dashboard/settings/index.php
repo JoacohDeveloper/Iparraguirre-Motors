@@ -84,6 +84,8 @@
                                     ?>
                                 </p>
                             </div>
+                            <br>
+                            <p id="changePassword">Cambiar contraseña</p>
                         </div>
                     </div>
                 </section>

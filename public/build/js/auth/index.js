@@ -72,7 +72,7 @@ formularioRegister.addEventListener("submit", async e => {
 
     if (reg_fullname.length <= 2) {
         errores.push("Debes ingresar tu nombre completo.");
-    }  else if (!nameRegex.test(fullname)) {
+    }  else if (!nameRegex.test(reg_fullname)) {
         errores.push("Debes ingresar nombre y apellido.");
     } else if (reg_username.length == 0) {
         errores.push("Debes ingresar un usuario.");
@@ -80,7 +80,7 @@ formularioRegister.addEventListener("submit", async e => {
         errores.push("Debes ingresar un usuario mayor a 4 caracteres.");
     } else if (reg_email.length == 0) {
         errores.push("Debes ingresar un email.");
-    } else if (!emailRegex.test(email)) {
+    } else if (!emailRegex.test(reg_email)) {
         errores.push("Formato de email inválido.");
     } else if (reg_phone.length == 0) {
         errores.push("Debes ingresar un numero de celular.");
