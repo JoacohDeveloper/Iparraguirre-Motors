@@ -8,7 +8,14 @@ use Models\Vehicle;
 abstract class VehicleRestController
 {
 
+    public static function create()
+    {
+        header('Content-Type: application/json;');
 
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        }
+    }
     public static function vehicles()
     {
         header('Content-Type: application/json;');

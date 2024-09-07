@@ -164,6 +164,8 @@ abstract class AuthenticationController
                 if ($resultado) {
 
                     unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $usuario->getImagen()));
+
+
                     $manager = new ImageManager(new Driver());
 
 

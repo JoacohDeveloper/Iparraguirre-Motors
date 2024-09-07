@@ -87,5 +87,5 @@ create table vehicle_img(
 	url VARCHAR(255),
 	alt VARCHAR(150),
     constraint fk_vehicle_id foreign key(vehicle_id) references vehicle(id),
-	PRIMARY key(vehicle_id, url, description)
+	PRIMARY key(vehicle_id, url, alt)
 );

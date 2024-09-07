@@ -1,9 +1,8 @@
-
 <footer class="<?php echo isset($class) ? $class : "" ?>">
 
     <?php include __DIR__ . "/themeSwitcher.php"; ?>
 
-        <div class="footer_menu">
+    <!-- <div class="footer_menu">
                 <ul>
                     <li class="footer_h3">Navegacion</li>
                     <li><a href="/">Inicio</a></li>
@@ -36,5 +35,5 @@
 
     <div class="copy">
         <h3>2024 &copy; Copyright Iparraguirre Motores</h3>
-    </div>
+    </div> -->
 </footer>

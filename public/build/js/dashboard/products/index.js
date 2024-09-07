@@ -92,6 +92,7 @@ const TextArea = (label, placeholder, name) => {
 
     return inputLabel;
 }
+
 const InputSelect = (label, name, values) => {
     const inputSelectLabel = document.createElement('label');
     const inputSelect = document.createElement('select');
@@ -168,7 +169,7 @@ const ModalAdd = () => {
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza")
     ];
 
-    
+
     modalHeader.appendChild(divSpacer)
     modalHeader.appendChild(modalTitle)
     modalHeader.appendChild(btnClose)
@@ -189,20 +190,30 @@ const ModalAdd = () => {
         inputLabel.appendChild(div);
         vehicleform.appendChild(inputLabel);
     });
-    
-    
-    
-    
+
+
+
+
 
     const submitInput = document.createElement("button")
     submitInput.textContent = "Agregar"
 
     vehicleform.appendChild(ImageUploader())
     vehicleform.appendChild(submitInput)
+
+    vehicleform.addEventListener("submit", e => {
+        e.preventDefault();
+        const form_data = new FormData(vehicleform)
+
+        console.log([...form_data])
+
+        addToast([{ Title: "error", error: "Message" }])
+    })
+
     modalBody.appendChild(vehicleform)
 
     contenedor.appendChild(modal)
-    
+
     modal.appendChild(modalHeader)
     modal.appendChild(modalBody)
     return contenedor;
@@ -241,9 +252,9 @@ const handlerAgregar = (e) => {
 
 const AgregarBtn = document.querySelector(".product-add__input")
 
-if(AgregarBtn) {
+if (AgregarBtn) {
     AgregarBtn.addEventListener("click", handlerAgregar)
-    
+
 }
 
 

@@ -3,25 +3,51 @@
 namespace Models;
 
 use Models\ActiveRecord;
-use JsonSerializable;
+// use JsonSerializable;
 
-class Vehicle extends ActiveRecord implements JsonSerializable
+class Vehicle extends ActiveRecord
 {
     protected static $tabla = "Vehicle";
     protected static $columnasdb = [
-        "id", "descripcion", "nombre", "modelo", "fabricante", "year", "color", "url_img", "description_img", "matricula", "transmision",
-        "tipo_carroceria", "frenos_abs", "airbag", "traccion", "direccion", "control_estabilidad", "puertas", "tipo_combustible",
-        "precio", "velocidad_max", "zero_to_houndred", "peso", "kilometros", "caballos_potencia", "createdAt", "updatedAt"
+        "id",
+        "descripcion",
+        "nombre",
+        "modelo",
+        "fabricante",
+        "year",
+        "color",
+        "url_img",
+        "description_img",
+        "matricula",
+        "transmision",
+        "tipo_carroceria",
+        "frenos_abs",
+        "airbag",
+        "traccion",
+        "direccion",
+        "control_estabilidad",
+        "puertas",
+        "tipo_combustible",
+        "precio",
+        "velocidad_max",
+        "zero_to_houndred",
+        "peso",
+        "kilometros",
+        "caballos_potencia",
+        "createdAt",
+        "updatedAt"
     ];
 
-    public function jsonSerialize()
-    {
-        return (object) get_object_vars($this);
-    }
+    // public function jsonSerialize()
+    // {
+    //     return (object) get_object_vars($this);
+    // }
 
     public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, $url_img, $description_img, $matricula, $transmision, $tipo_carroceria, $frenos_abs,
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
+
+    public $vehicleImages;
 
     function __construct($args = [])
     {
@@ -78,6 +104,23 @@ class Vehicle extends ActiveRecord implements JsonSerializable
         return $resultado;
     }
 
+    public function create()
+    {
+
+        try {
+            $this->db->beginTransaction();
+
+
+
+
+
+
+            //fin de la transaction
+            $this->db->commit();
+        } catch (\Throwable $th) {
+            $this->db->rollBack();
+        }
+    }
 
     public function validate()
     {
