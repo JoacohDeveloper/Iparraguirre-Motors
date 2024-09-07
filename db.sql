@@ -7,6 +7,7 @@ create table User(
 	full_name VARCHAR(65),
 	username VARCHAR(25),
 	slug VARCHAR(25),
+	bio text,
 	email VARCHAR(255),
 	password VARCHAR(61),
 	titulo_imagen VARCHAR(255),
@@ -25,6 +26,7 @@ create table Customer(
 	full_name VARCHAR(65),
 	username VARCHAR(25),
 	slug VARCHAR(25),
+	bio text,
 	email VARCHAR(255),
 	phone VARCHAR(45),
 	password VARCHAR(61),
@@ -56,6 +58,7 @@ create table Wishlist(
 create table vehicle(
 	id int(11) not null auto_increment,
 	nombre VARCHAR(255),
+	categoria VARCHAR(255),
 	descripcion TEXT,
 	modelo VARCHAR(255),
 	fabricante VARCHAR(255),
@@ -63,7 +66,7 @@ create table vehicle(
 	color VARCHAR(45),
 	matricula VARCHAR(45),
 	transmision VARCHAR(45),
-	tipo_carroceria VARCHAR(244),
+	tipo_carroceria VARCHAR(255),
 	frenos_abs tinyint(1),
 	airbag tinyint(1),
 	traccion VARCHAR(45),
@@ -88,4 +91,20 @@ create table vehicle_img(
 	alt VARCHAR(150),
     constraint fk_vehicle_id foreign key(vehicle_id) references vehicle(id),
 	PRIMARY key(vehicle_id, url, alt)
+);
+
+create table refractions(
+	id int(11) not null auto_increment,
+	nombre VARCHAR(255),
+	descripcion TEXT,
+	fabricante VARCHAR(255),
+	precio float,
+	stock int(11),
+	peso FLOAT,
+	origen VARCHAR(255),
+	url_img VARCHAR(255),
+	alt_img VARCHAR(150),
+	createdAt datetime default CURRENT_TIMESTAMP,
+	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(id)
 );

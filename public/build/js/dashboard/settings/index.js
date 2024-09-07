@@ -312,26 +312,41 @@ async function setFormEdit(target, formContainer) {
             fullNameInput.placeholder = "Full Name"
             fullNameInput.value = lastChanges?.fullname ?? data?.fullname;
 
+            const emailInputLabel = document.createElement("label");
+            const emailInput = document.createElement("input")
+            emailInputLabel.textContent = "Email"
+            emailInputLabel.htmlFor = "email"
+
+            emailInput.type = "text"
+            emailInput.name = "email"
+            emailInput.id = "email"
+            emailInput.placeholder = "Email"
+            emailInput.value = data.email;
+
             const summaryTextAreaLabel = document.createElement("label");
 
             const summaryTextArea = document.createElement("textarea")
-            summaryTextAreaLabel.textContent = "Summary"
-            summaryTextAreaLabel.htmlFor = "summary"
+            summaryTextAreaLabel.textContent = "Biografia"
+            summaryTextAreaLabel.htmlFor = "Biografia"
 
-            summaryTextArea.name = "summary"
-            summaryTextArea.id = "summary"
-            summaryTextArea.placeholder = "Summary"
-            summaryTextArea.textContent = lastChanges?.summary ?? data?.fullname + " aca va el summary";
+            summaryTextArea.name = "bio"
+            summaryTextArea.id = "bio"
+            console.log(data)
+            summaryTextArea.placeholder = "Escribe aqui tu biografia"
+            summaryTextArea.textContent = data.bio;
 
 
             formHTML.appendChild(bannerUser)
             formHTML.appendChild(subtitle)
 
+            formHTML.appendChild(fullNameInputLabel)
+            formHTML.appendChild(fullNameInput)
+
             formHTML.appendChild(usernameInputLabel)
             formHTML.appendChild(usernameInput)
 
-            formHTML.appendChild(fullNameInputLabel)
-            formHTML.appendChild(fullNameInput)
+            formHTML.appendChild(emailInputLabel)
+            formHTML.appendChild(emailInput)
 
             formHTML.appendChild(summaryTextAreaLabel)
             formHTML.appendChild(summaryTextArea)
@@ -353,59 +368,6 @@ async function setFormEdit(target, formContainer) {
     }
 
 }
-
-
-
-//Delete-user
-
-// const form_deleteAccount = document.querySelector(".form_deleteAccount");
-
-// form_deleteAccount.addEventListener("submit", submitEventHandler)
-
-// async function submitEventHandler(event) {
-//     event.preventDefault()
-//     const formdata = new FormData(form_deleteAccount)
-//     const object = {};
-//     const error = [];
-//     formdata.forEach((value, key) => {
-//         object[key] = value
-//     });
-//     console.log(object)
-//     //Errores
-//     if (object.Nombre.length == 0) {
-//         error.push({
-//             title: "Failure",
-//             error: "El campo nombre se encuentra vacio"
-//         })
-//     } else if (object.Password.length == 0) {
-//         error.push({
-//             title: "Failure",
-//             error: "El campo contraseña se encuentra vacio"
-//         })
-//     }
-//     if (error.length != 0) {
-//         addToast(error);
-//     } else {
-//         confirm("¿Estas seguro de que quieres borrar tu cuenta?");
-//         try {
-//             const response = await fetch("http://localhost:3000/dashboard/user-delete", {
-//                 method: "POST",
-//                 body: formdata
-//             })
-//             const data = await response.json();
-//         }
-//         catch (err) {
-//             addToast([{
-//                 title: "Failure",
-//                 error: "Ha ocurrido un error"
-//             }]);
-//         }
-//     }
-
-// }
-
-
-
 
 const steps = document.querySelector(".steps")
 steps.addEventListener("click", e => {
@@ -431,4 +393,72 @@ function setSettingSection(step) {
 }
 
 
+/* Admin settings li selected */
+const menuItems = document.querySelectorAll("#profile, #notifications, #security, #delete-account");
+menuItems.forEach(item => {
+    item.addEventListener("click", (event) => {
+        menuItems.forEach(el => el.classList.remove("selected"));
+        item.classList.add("selected");
+    });
+});
 
+/* Delete user form */
+document.querySelector('input[name="Nombre"]').setAttribute('autocomplete', 'new-name');
+document.querySelector('input[name="Password"]').setAttribute('autocomplete', 'new-password');
+
+const form_deleteAccount = document.querySelector(".form_deleteAccount");
+
+form_deleteAccount.addEventListener("submit", submitEventHandler)
+
+async function submitEventHandler(event) {
+    event.preventDefault()
+    const formdata = new FormData(form_deleteAccount)
+    const object = {};
+    const error = [];
+    formdata.forEach((value, key) => {
+        object[key] = value
+    });
+    console.log(object)
+    //Errores
+    if (object.Nombre.length == 0) {
+        error.push({
+            title: "Failure",
+            error: "El campo nombre se encuentra vacio"
+        })
+    } else if (object.Password.length == 0) {
+        error.push({
+            title: "Failure",
+            error: "El campo contraseña se encuentra vacio"
+        })
+    }
+    if (error.length != 0) {
+        addToast(error);
+    } else {
+        confirm("¿Estás seguro de que quieres borrar tu cuenta?");
+        try {
+            const response = await fetch("http://localhost:3000/dashboard/user-delete", {
+                method: "POST",
+                body: formdata
+            });
+            const data = await response.json();
+            if (data?.errores) {
+                const errors = Object?.values(data?.errores).map(err => {
+                    const error = document.createElement("div");
+                    error.classList.add("error");
+                    error.textContent = err;
+                    return { title: "Failure", error: err };
+                });
+                addToast(errors);
+            } else if (data?.message == "successfuly") {
+                setTimeout(function() {
+                    window.location.href = 'http://localhost:3000/dashboard/login';
+                }, 3000);
+            }
+        } catch (err) {
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error"
+            }]);
+        }
+    }
+}

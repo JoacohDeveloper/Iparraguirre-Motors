@@ -163,9 +163,10 @@ abstract class AuthenticationController
                 $resultado = $usuarioDB->actualizarUsuario();
                 if ($resultado) {
 
-                    unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $usuario->getImagen()));
-
-
+                    $imagen = $usuario->getImagen();
+                    if ($imagen != "/build/src/images/users/default.jpg" || $imagen != "\build\src\images\users\default.jpg") {
+                        unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $imagen));
+                    }
                     $manager = new ImageManager(new Driver());
 
 
@@ -186,10 +187,6 @@ abstract class AuthenticationController
 
         exit;
     }
-
-
-
-
 
     public static function logout()
     {

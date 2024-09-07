@@ -21,8 +21,8 @@
             </li>
             <li>
                 <ul class="dropDown-links dropDownNotDeployed">
-                    <li><a href="/dashboard/products">Administrar vehiculos</a></li>
-                    <li><a href="/dashboard/agregar-vehiculo">Agregar Vehiculo</a></li>
+                    <li><a href="/dashboard/products/vehicle">Administrar vehiculos</a></li>
+                    <li><a href="/dashboard/products/repuestos">Administrar repuestos</a></li>
                 </ul>
             </li>
         </ul>

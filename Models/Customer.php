@@ -1,17 +1,36 @@
 <?php
+
 namespace Models;
+
 use DateTime;
 use PDOException;
 
-class Customer extends ActiveRecord {
+class Customer extends ActiveRecord
+{
 
     protected static $tabla = "Customer";
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "phone", "password", "token", "isAdmin",
-        "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = [
+        "uuid",
+        "full_name",
+        "username",
+        "slug",
+        "email",
+        "phone",
+        "password",
+        "token",
+        "isAdmin",
+        "isDeleted",
+        "verify",
+        "titulo_imagen",
+        "imagen",
+        "createdAt",
+        "updatedAt"
+    ];
 
-    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $isAdmin, $isDeleted, $verify, $createdAt, $updatedAt;
+    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $isAdmin, $isDeleted, $verify, $titulo_imagen, $imagen, $createdAt, $updatedAt;
 
-    function __construct($args = []) {
+    function __construct($args = [])
+    {
         $this->uuid = $args["uuid"] ?? null;
         $this->full_name = $args["full_name"] ?? "";
         $this->username = $args["username"] ?? "";
@@ -24,13 +43,16 @@ class Customer extends ActiveRecord {
         $this->isAdmin = 0;
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->verify = 0;
+        $this->titulo_imagen = "imagen default de usuario";
+        $this->imagen = $args["imagen"] ?? "\build\src\images\users\default.jpg";
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
     }
 
-    public function gen_uuid() {
+    public function gen_uuid()
+    {
         $uuid = array(
             'time_low' => 0,
             'time_mid' => 0,
@@ -69,11 +91,13 @@ class Customer extends ActiveRecord {
     }
 
 
-    public function getUUID() {
+    public function getUUID()
+    {
         return $this->uuid;
     }
 
-    public function validate() {
+    public function validate()
+    {
         $errors = [];
         if (empty($this->username)) {
             $errors["username"] = "Debes ingresar un usuario.";
@@ -112,7 +136,8 @@ class Customer extends ActiveRecord {
         return $errors;
     }
 
-    public static function validarCampos($email, $password) {
+    public static function validarCampos($email, $password)
+    {
         $errores = [];
         if (empty($email)) {
             $errores["email"] = "el campo email es obligatorio.";
@@ -123,36 +148,44 @@ class Customer extends ActiveRecord {
         return $errores;
     }
 
-    public function passwordHash() {
+    public function passwordHash()
+    {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function crearCustomer() {
+    public function crearCustomer()
+    {
         $this->gen_uuid();
         return $this->crear();
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
 
-    public function getImagen() {
+    public function getImagen()
+    {
         return $this->imagen;
     }
 
-    public function getNombreImagen() {
+    public function getNombreImagen()
+    {
         return $this->titulo_imagen;
     }
 
-    public function getNombreImagen_Url() {
+    public function getNombreImagen_Url()
+    {
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
 
-    public static function getCustomer($dato) {
+    public static function getCustomer($dato)
+    {
         $result = null;
         try {
             $query = "SELECT * FROM Customer WHERE email = ? or username = ? LIMIT 1";
@@ -164,15 +197,18 @@ class Customer extends ActiveRecord {
         return $result[0] ?? null;
     }
 
-    public function validarPassword($password) {
+    public function validarPassword($password)
+    {
         return password_verify($password, $this->password);
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return boolval($this->isAdmin);
     }
 
-    public function getDeleted() {
+    public function getDeleted()
+    {
         return boolval($this->isDeleted);
     }
 }

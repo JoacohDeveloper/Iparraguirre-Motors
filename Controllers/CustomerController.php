@@ -8,6 +8,18 @@ use MVC\Router;
 abstract class CustomerController
 {
 
+    public static function auth(Router $router){
+        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /");
+
+
+        $router->render("auth/index", [
+            "scripts" => ["auth/index"],
+            "styles" => ["auth/index"],
+            "title" => "Iparraguirre Motors | Authentication",
+            "description" => "Ingresa en Iparraguirre Motors!"
+        ]);
+    }
+
     public static function login(Router $router)
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /");
@@ -50,16 +62,6 @@ abstract class CustomerController
             echo json_encode($response);
             exit;
         }
-
-
-        $router->render("auth/login", [
-            "scripts" => ["auth/index", "auth/login"],
-            "styles" => ["auth/index"],
-            "errores" => $errores,
-            "campos" => $campos,
-            "title" => "Iparraguirre Motors | Login",
-            "description" => "Ingresa en Iparraguirre Motors!"
-        ]);
     }
 
 
@@ -95,15 +97,6 @@ abstract class CustomerController
             echo json_encode($response);
             exit;
         }
-
-        $router->render("auth/register", [
-            "scripts" => ["auth/index", "auth/register"],
-            "styles" => ["auth/index"],
-            "errores" => $errores,
-            "campos" => $campos,
-            "title" => "Iparraguirre Motors | Register",
-            "description" => "Registrate en Iparraguirre Motors!"
-        ]);
     }
 
     public static function logout()
@@ -111,9 +104,9 @@ abstract class CustomerController
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             $_SESSION["loggedIn"] = null;
             $_SESSION["usuario"] = null;
-            header("location: /login");
+            header("location: /auth");
         } else {
-            header("location: /login");
+            header("location: /auth");
         }
     }
 }

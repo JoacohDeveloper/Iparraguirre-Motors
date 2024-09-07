@@ -13,13 +13,15 @@ class User extends ActiveRecord
 
     protected static $tabla = "User";
 
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
     protected $full_name;
 
     protected $username;
+
+    protected $bio;
 
     protected $email;
 
@@ -50,9 +52,11 @@ class User extends ActiveRecord
         $this->uuid = $args["uuid"] ?? null;
         $this->username = $args["username"] ?? "";
         $this->full_name = $args["full_name"] ?? "";
+        $this->bio = $args["bio"] ?? "";
         $this->email = $args["email"] ?? "";
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
+        date_default_timezone_set('America/Montevideo');
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
@@ -192,6 +196,9 @@ class User extends ActiveRecord
 
     public function actualizarUsuario()
     {
+        date_default_timezone_set('America/Montevideo');
+        $this->updatedAt = new DateTime();
+        $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
         return $this->actualizar($this->uuid);
     }
 
@@ -213,15 +220,14 @@ class User extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
-    public function deleteUser()
-    {
+    public function deleteUser(){
         $result = null;
         try {
-            return $this->eliminar($this->uuid);
+            $result = $this->eliminar($this->uuid);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
         }
-        return $result[0] ?? null;
+        return $result;
     }
 
     public function getUsername()
@@ -234,6 +240,21 @@ class User extends ActiveRecord
         return boolval($this->isDeleted);
     }
 
+    public function getCreated(){
+        if ($this->createdAt instanceof \DateTime) {
+            return $this->createdAt;
+        } else {
+            return new \DateTime($this->createdAt);
+        }
+    }
+    public function getUpdated(){
+        if ($this->updatedAt instanceof \DateTime) {
+            return $this->updatedAt;
+        } else {
+            return new \DateTime($this->updatedAt);
+        }
+    }
+
     public function getFullName()
     {
         return $this->full_name;
@@ -242,6 +263,10 @@ class User extends ActiveRecord
     public function getImagen()
     {
         return $this->imagen;
+    }
+
+    public function getBio(){
+        return $this->bio;
     }
 
     public function getNombreImagen()

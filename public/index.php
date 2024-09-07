@@ -15,7 +15,7 @@ use Controllers\AuthenticationController;
 use Controllers\DashboardController;
 use Controllers\HomePageController;
 use Controllers\TiendaController;
-// use Controllers\VehiclesController;
+use Controllers\VehiclesController;
 use Controllers\Products\ProductController;
 use Controllers\CustomerController;
 use Controllers\InformationController;
@@ -37,12 +37,14 @@ $router->get("/", [HomePageController::class, "index"]);
 
 $router->post("/contact", [InformationController::class, "contactUs"]);
 $router->get("/contact", [InformationController::class, "contactUs"]);
+$router->post("/lasFAQ", [InformationController::class, "preguntasFrecuentes"]);
+$router->get("/lasFAQ", [InformationController::class, "preguntasFrecuentes"]);
 
 //Customer auth
-$router->get("/login", [CustomerController::class, "login"]);
-$router->post("/login", [CustomerController::class, "login"]);
-$router->get("/register", [CustomerController::class, "register"]);
-$router->post("/register", [CustomerController::class, "register"]);
+$router->get("/auth", [CustomerController::class, "auth"]);
+
+$router->post("/auth/login", [CustomerController::class, "login"]);
+$router->post("/auth/register", [CustomerController::class, "register"]);
 
 //Admin auth
 $router->get("/dashboard/login", [AuthenticationController::class, "login"]);
@@ -69,13 +71,13 @@ $router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 //dashboard 
 
 $router->get("/dashboard", [DashboardController::class, "index"]);
-$router->get("/dashboard/product-managment", [DashboardController::class, 'productManagment']);
 
-$router->get("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
-$router->post("/dashboard/agregar-vehiculo", [DashboardController::class, "agregarVehiculo"]);
+$router->post("/dashboard/agregar-vehiculo", [VehiclesController::class, "agregarVehiculo"]);
+$router->post("/dashboard/obtener-vehiculo", [VehiclesController::class, "getOneVehicle"]);
+$router->post("/dashboard/modificar-vehiculo", [VehiclesController::class, "modificarVehicle"]);
 
-
-$router->get("/dashboard/products", [ProductController::class, "index"]);
+$router->get("/dashboard/products/vehicle", [ProductController::class, "vehicle"]);
+$router->get("/dashboard/products/repuestos", [ProductController::class, "repuestos"]);
 
 
 
@@ -89,7 +91,6 @@ $router->get("/dashboard/products", [ProductController::class, "index"]);
 
 $router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
 
-$router->get("/dashboard/user-delete", [DashboardController::class, "userDeleting"]);
 $router->post("/dashboard/user-delete", [DashboardController::class, "userDeleting"]);
 
 $router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);
@@ -107,13 +108,6 @@ $router->get("/tienda/results", [TiendaController::class,  "results"]);
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
 
-
-
-//faq
-
-$router->get("/faq", function () {
-    header("Location: /faq.html");
-});
 
 
 //Pruebas Randoms

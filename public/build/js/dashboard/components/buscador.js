@@ -1,16 +1,6 @@
-/**
- * author Joaquín Álvarez
- * created on 29-07-2024-00h-59m
- * github: https://github.com/JoacohDeveloper
-*/
-
-//Prueba de infinite scroll
-
-
-
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
+const Card = ({ nombre, precio, id, imageUrl, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -21,10 +11,12 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
     contenedorControllers.classList.add("contenedor-controllers")
     const btnModificar = document.createElement("button")
     const modificarImg = document.createElement("img")
+    btnModificar.id = id;
     modificarImg.src = "/build/src/images/pencil.svg"
 
     const btnEliminar = document.createElement("button")
     const btnEliminarImg = document.createElement("img")
+    btnEliminar.id = id;
     btnEliminarImg.src = "/build/src/images/trash.svg"
 
     btnEliminar.appendChild(btnEliminarImg)
@@ -55,15 +47,19 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo }) => {
     const contenedorNombre = document.createElement("div")
     contenedorNombre.classList.add("contenedor-datos")
     const nombreHTML = document.createElement("p")
-    nombreHTML.textContent = nombre ?? "Dodge"
+    nombreHTML.textContent = nombre ?? "Dodge Charger 69"
+
+    const fabricanteHTML = document.createElement("p")
+    fabricanteHTML.textContent = fabricante ?? "Dodge"
 
     const modeloHTML = document.createElement("p")
-    modeloHTML.textContent = modelo ?? "Dodge"
+    modeloHTML.textContent = modelo ?? "Charger"
 
     const añoHTML = document.createElement("p")
     añoHTML.textContent = año ?? "1969"
 
     contenedorNombre.appendChild(nombreHTML)
+    contenedorNombre.appendChild(fabricanteHTML)
     contenedorNombre.appendChild(modeloHTML)
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
@@ -111,6 +107,7 @@ const Spinner = () => {
     return spinnerSquare
 }
 
+
 async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
@@ -123,14 +120,16 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
+        console.log(data)
         //localStorage.setItem("tiendaItems", JSON.stringify(newData))
 
         data.forEach(v => {
             const customV = {
                 nombre: v.nombre,
-                precio: 100,
+                precio: v.precio,
                 id: v.id,
                 imageUrl: v.imagen,
+                fabricante: v.fabricante,
                 modelo: v.modelo,
                 año: v.year
             }
@@ -147,7 +146,6 @@ async function init(search = null) {
             if (cardContainer)
                 return lastEl
         }
-
         return
 
     }
@@ -219,7 +217,6 @@ contenedorBuscador.addEventListener("submit", async e => {
 })
 
 async function cargarDefault() {
-
     await init()
 }
 

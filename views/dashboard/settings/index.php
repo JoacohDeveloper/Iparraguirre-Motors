@@ -11,39 +11,41 @@
                 <aside class="dashboard-fit__content_aside">
                     <nav>
                         <ul class="steps">
-                            <li aria-label="step-1" class="selected"><a href="#my_profile">My Profile</a></li>
-                            <li aria-label="step-2"><a href="#">Notifications</a></li>
-                            <li aria-label="step-3"><a href="#">Security</a></li>
-                            <li aria-label="step-4" class="delete-account"><a href="#">Delete Account</a></li>
+                            <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">My Profile</a></li>
+                            <li aria-label="step-2" id="notifications" ><a href="#">Notifications</a></li>
+                            <li aria-label="step-3" id="security" ><a href="#">Security</a></li>
+                            <li aria-label="step-4" id="delete-account"><a href="#">Delete Account</a></li>
                         </ul>
                     </nav>
                 </aside>
                 <section class="dashboard-fit__content__profile settingsStepVisible" aria-step="1" id="my_profile">
                     <h4>My Profile</h4>
+                    <button class="button_settings profile-resume-configuration__edit" id="edit-resume">
+                        <p>Edit profile</p>
+                        <img src="/build/src/images/pencil.svg" alt="edit profile resume">
+                    </button>
                     <div class="dashboard-profile__resume">
                         <div class="profile-resume-configuration">
                             <div class="profile-resume__image">
                                 <img id="profile-img__id" src="<?php echo $imagen["url"] ?>" alt="<?php echo $imagen["alt"] ?>">
                             </div>
                             <div class="profile-resume__data">
-                                <h4 id="fullname__id"><?php echo $fullname . " - " . $username; ?></h4>
-                                <p><?php echo isset($isAdmin) ? "Admin" : "User"; ?></p>
-
-                                <p id="summary__id">Lorem ipsum dolor sit.</p>
+                                <h4 id="fullname__id"><?php echo $fullname;?></h4>
+                                <p><?php echo $username;?></p>
                             </div>
                         </div>
-                        <button class="button_settings profile-resume-configuration__edit" id="edit-resume">
-                            <p>edit</p>
-                            <img src="/build/src/images/pencil.svg" alt="edit profile resume">
-                        </button>
+                        <?php
+                            if ($imagen["url"] != "\build\src\images\users\default.jpg") {
+                            echo '<button class="delete-picture-configuration__edit" id="delete-image">
+                                    <p>Delete profile picture</p>
+                                    <img src="/build/src/images/trash.svg" alt="delete profile picture">
+                                </button>';
+                            }
+                        ?>
                     </div>
                     <div class="dashboard-fit__content__personal-information">
                         <div class="personal-information__head">
                             <h5>Personal Information</h5>
-                            <button class="button_settings profile-resume-configuration__edit" id="edit-p-information">
-                                <p>edit</p>
-                                <img src="/build/src/images/pencil.svg" alt="edit profile personal information">
-                            </button>
                         </div>
                         <div class="personal-information__saved-fields_grid">
                             <div class="saved-fields__field">
@@ -59,13 +61,31 @@
                                 <p id="email__id"><?php echo $email; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Phone</label>
-                                <p id="pNumber__id">+598 098 561 082</p>
+                                <label>Username</label>
+                                <p id="username__id"><?php echo $username;?></p>
+                            </div>
+                            <div class="saved-fields__field">
+                                <label>Registered on</label>
+                                <p id="created__id"><?php echo $createdAt; ?></p>
+                            </div>
+                            <div class="saved-fields__field">
+                                <label>Updated on</label>
+                                <p id="updated__id"><?php echo $updatedAt; ?></p>
                             </div>
                             <div class="saved-fields__field">
                                 <label>Bio</label>
-                                <p id="bio__id">My names is Joaquin</p>
+                                <p id="bio__id">
+                                    <?php
+                                    if ($bio == "" || $bio == null) {
+                                        echo "My name is " . htmlspecialchars($firstname);
+                                    } else {
+                                        echo htmlspecialchars($bio);
+                                    }
+                                    ?>
+                                </p>
                             </div>
+                            <br>
+                            <p id="changePassword">Cambiar contraseña</p>
                         </div>
                     </div>
                 </section>
@@ -77,14 +97,22 @@
                 </section>
 
                 <section class="dashboard-fit__content__delelteAcc" aria-step="4">
-                    <h4>Delete Account</h4>
+                <h4>Eliminar mi cuenta</h4>
+                <h6>¿Estas seguro?</h6>
+                <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>
+                <form class="form_deleteAccount">
+                    <label for="fullname">
+                        Nombre completo
+                        <input type="text" name="Nombre">
+                    </label>
+                    <label for="password">
+                        Contraseña
+                        <input type="password" name="Password">
+                    </label>
+                    <input type="submit" value="Eliminar">
+                </form>
                 </section>
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>

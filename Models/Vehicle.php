@@ -3,7 +3,8 @@
 namespace Models;
 
 use Models\ActiveRecord;
-// use JsonSerializable;
+use JsonSerializable;
+use PDOException;
 
 class Vehicle extends ActiveRecord
 {
@@ -12,12 +13,11 @@ class Vehicle extends ActiveRecord
         "id",
         "descripcion",
         "nombre",
+        "categoria",
         "modelo",
         "fabricante",
         "year",
-        "color",
-        "url_img",
-        "description_img",
+        "color", /*"url_img", "description_img",*/
         "matricula",
         "transmision",
         "tipo_carroceria",
@@ -43,7 +43,7 @@ class Vehicle extends ActiveRecord
     //     return (object) get_object_vars($this);
     // }
 
-    public $id, $nombre, $descripcion, $modelo, $fabricante, $year, $color, $url_img, $description_img, $matricula, $transmision, $tipo_carroceria, $frenos_abs,
+    public $id, $nombre, $categoria, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
@@ -53,13 +53,14 @@ class Vehicle extends ActiveRecord
     {
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
+        $this->categoria = $args["categoria"] ?? "";
         $this->descripcion = $args["descripcion"] ?? "";
         $this->modelo = $args["modelo"] ?? "";
         $this->fabricante = $args["fabricante"] ?? "";
         $this->year = $args["year"] ?? "";
         $this->color = $args["color"] ?? "";
-        $this->url_img = $args["url_img"] ?? "";
-        $this->description_img = $args["description_img"] ?? "";
+        /*$this->url_img = $args["url_img"] ?? "";
+        $this->description_img = $args["description_img"] ?? "";*/
         $this->matricula = $args["matricula"] ?? "";
         $this->transmision = $args["tipo_transmision"] ?? "";
         $this->tipo_carroceria = $args["tipo_carroceria"] ?? "";
@@ -93,10 +94,10 @@ class Vehicle extends ActiveRecord
         if ($page > 1) {
             $inicio =  ($page - 1) * 10;
         }
-        $query = "SELECT * FROM " . static::$tabla . " limit $inicio,$fin";
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY CreatedAt DESC LIMIT $inicio, $fin";
 
         if ($vehicleName) {
-            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$vehicleName%' limit $inicio,$fin";
+            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$vehicleName%' ORDER BY CreatedAt DESC LIMIT $inicio, $fin";
         }
 
         $resultado = self::consultarSQL($query);
@@ -128,6 +129,9 @@ class Vehicle extends ActiveRecord
 
         if (empty($this->nombre)) {
             $errors["nombre"] = "El campo nombre es obligatorio.";
+        }
+        if ($this->categoria == "") {
+            $errors["categoria"] = "El campo categoria es obligatorio.";
         }
         if (empty($this->descripcion)) {
             $errors["descripcion"] = "El campo descripcion es obligatorio.";
@@ -201,5 +205,110 @@ class Vehicle extends ActiveRecord
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
         return $this->crear();
+    }
+
+    public static function getVehicle($id)
+    {
+        $result = null;
+        try {
+            $query = "SELECT * FROM Vehicle WHERE id = $id LIMIT 1";
+            $result = self::consultarSQL($query);
+
+            if ($result) {
+                $vehiculo = $result[0];
+                $vehiculo->frenos_abs = $vehiculo->frenos_abs ? "abs_si" : "abs_no";
+                $vehiculo->airbag = $vehiculo->airbag ? "airbag_si" : "airbag_no";
+                $vehiculo->control_estabilidad = $vehiculo->control_estabilidad ? "est_si" : "est_no";
+                return $vehiculo;
+            }
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+        return null;
+    }
+
+    public static function modificarVehicle()
+    {
+        $errores = [];
+        header('Content-Type: application/json; charset=utf-8');
+        $vehicle = new vehicle($_POST);
+        $errores = $vehicle->validate();
+        if (empty($errores)) {
+            $result = $vehicle->actualizarVehicle();
+            if ($result) {
+                echo json_encode(["message" => "successfully"]);
+            } else {
+                echo json_encode(["error" => "Ha ocurrido un error"]);
+            }
+        } else {
+            echo json_encode(["message" => "error", "errores" => $errores]);
+        }
+        exit;
+    }
+
+    public function actualizarVehicle()
+    {
+        $this->frenos_abs = intval($this->frenos_abs == "abs_si");
+        $this->airbag = intval($this->airbag == "airbag_si");
+        $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
+        try {
+            $query = "UPDATE Vehicle SET
+            nombre = :nombre,
+            categoria = :categoria,
+            descripcion = :descripcion,
+            modelo = :modelo,
+            fabricante = :fabricante,
+            year = :year,
+            color = :color,
+            matricula = :matricula,
+            transmision = :transmision,
+            tipo_carroceria = :tipo_carroceria,
+            frenos_abs = :frenos_abs,
+            airbag = :airbag,
+            traccion = :traccion,
+            direccion = :direccion,
+            control_estabilidad = :control_estabilidad,
+            puertas = :puertas,
+            tipo_combustible = :tipo_combustible,
+            precio = :precio,
+            velocidad_max = :velocidad_max,
+            zero_to_houndred = :zero_to_houndred,
+            peso = :peso,
+            kilometros = :kilometros,
+            caballos_potencia = :caballos_potencia,
+            updatedAt = :updatedAt WHERE id = :id";
+            $params = [
+                ':nombre' => $this->nombre,
+                ':categoria' => $this->categoria,
+                ':descripcion' => $this->descripcion,
+                ':modelo' => $this->modelo,
+                ':fabricante' => $this->fabricante,
+                ':year' => $this->year,
+                ':color' => $this->color,
+                ':matricula' => $this->matricula,
+                ':transmision' => $this->transmision,
+                ':tipo_carroceria' => $this->tipo_carroceria,
+                ':frenos_abs' => $this->frenos_abs,
+                ':airbag' => $this->airbag,
+                ':traccion' => $this->traccion,
+                ':direccion' => $this->direccion,
+                ':control_estabilidad' => $this->control_estabilidad,
+                ':puertas' => $this->puertas,
+                ':tipo_combustible' => $this->tipo_combustible,
+                ':precio' => $this->precio,
+                ':velocidad_max' => $this->velocidad_max,
+                ':zero_to_houndred' => $this->zero_to_houndred,
+                ':peso' => $this->peso,
+                ':kilometros' => $this->kilometros,
+                ':caballos_potencia' => $this->caballos_potencia,
+                ':updatedAt' => $this->updatedAt,
+                ':id' => $this->id
+            ];
+            $stmt = static::$db->prepare($query);
+            $success = $stmt->execute($params);
+            return $success;
+        } catch (PDOException $th) {
+            return false;
+        }
     }
 }

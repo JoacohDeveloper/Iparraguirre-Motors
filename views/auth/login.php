@@ -5,7 +5,7 @@
 
     <section class="login-section">
         <h1>LOGIN</h1>
-        <form method="POST" action="/login" id="loginForm">
+        <form method="POST" action="/auth/login" id="loginForm">
             <div class="errores"></div>
             <div>
                 <label for="email" class="inputs_txt">Email</label>

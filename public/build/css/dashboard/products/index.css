@@ -128,7 +128,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem;
   justify-content: space-between;
 }
 
@@ -140,7 +140,7 @@
   border-radius: 0.5rem;
   /* max-width: fit-content; */
   padding: 0.6rem 0.8rem;
-  width: 70%;
+  width: 50%;
   align-self: flex-end;
   border: 1px solid #fff;
 
@@ -153,12 +153,15 @@
     color: transparent;
     -webkit-text-stroke: 1px #fff;
   }
-
   p:nth-child(2) {
     font-size: 0.8rem;
     color: #fff;
   }
   p:nth-child(3) {
+    font-size: 0.8rem;
+    color: #fff;
+  }
+  p:nth-child(4) {
     font-size: 0.8rem;
     color: #fff;
     padding: 0.3rem;
@@ -415,13 +418,34 @@
 .modal-container > .modal_add {
   width: 75%;
 }
+.modal-container > .modal_modificar {
+  width: 75%;
+}
+
 
 /*Formulario emergente de agregar vehiculo*/
+
+/* Separaciones para el formulario
+
+Seccion 1 - Datos del vehiculo:
+  Nombre, Fabricante, Modelo, Año, Matricula, Precio,
+  Categoria, Descripcion, Color (Ordenalas distinto hdp)
+
+Seccion 2 - Caracteristicas del vehiculo
+  (El resto y ordenalas bien)
+
+Seccion 3 - Drag & Drop
+  Dejar el drag & drop fixed con las preview de las imagenes debajo.
+
+*/
+
 .form_addvehicle{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
+  max-height: 35rem;
 }
 .form_addvehicle > button{
   grid-column: span 2;
@@ -441,35 +465,41 @@
 .form_addvehicle > label{
   display: flex;
   flex-direction: column;
+  gap: .3rem;
   width: 12rem
 }
-.form_addvehicle > label > label > select{
+.form_addvehicle > label > select{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#fff;
+  padding-left: .3rem;
   border: none;
   font-style: italic;
   width: 100%;
 }
-.dark .form_addvehicle > label > label > select{
+.dark .form_addvehicle > label > select{
   color: #fff;
   background:#616161e8;
 }
-.form_addvehicle > label > label > input{
+.form_addvehicle > label > input{
   border: none;
   font-style: italic;
+  padding-left: .3rem;
   width: 100%;
 }
-.form_addvehicle > label > label > textarea{
+.form_addvehicle > label > textarea{
   height: 3.75rem;
   resize: none;
   width: 100%;
+  border-radius: 0.4em;
+  padding-left: .3rem;
+  background:#fff;
+  border: none;
+  font-style: italic
 }
-.input-underline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 1px;
-  background: #b10b0a;
-  box-shadow: 0px 0px 10.6px rgba(177, 11, 10, 0.52);
+.form_addvehicle > .imageUploader-container{
+  width: 30rem;
+}
+.dark .form_addvehicle > label > textarea{
+  color: #fff;
+  background:#616161e8;
 }

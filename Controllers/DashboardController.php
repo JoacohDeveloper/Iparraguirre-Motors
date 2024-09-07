@@ -55,13 +55,17 @@ abstract class DashboardController
         $firstName = $fullNameExplode[0];
         $lastName = $fullNameExplode[1] ?? "";
         $email = $usuario->getEmail();
+        $bio = $usuario->getBio() ?? "";
+        $createdAt = $usuario->getCreated()->format('d-m-Y H:i');
+        $updatedAt = $usuario->getUpdated()->format('d-m-Y H:i');
+        if ($updatedAt == $createdAt) $updatedAt = "Never updated";
 
         if (!isset($uuid)) {
             header("Location: /dashboard");
         } else if (!isset($usuario)) {
             header("Location: /");
         } else if ($uuid != $usuario->getUUID()) header("Location: /dashboard");
-
+        
         $router->render("/dashboard/settings/index", [
             "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/index"],
             "scripts" => ["dashboard/index", "dashboard/settings/index"],
@@ -71,85 +75,42 @@ abstract class DashboardController
             "lastname" => $lastName,
             "email" => $email,
             "imagen" => $imagen,
+            "bio" => $bio,
+            "createdAt" => $createdAt,
+            "updatedAt" => $updatedAt,
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
 
         ]);
     }
 
-    public static function agregarVehiculo(Router $router)
-    {
-        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
-        $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-
-        $errores = [];
-        $campos = [];
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            header('Content-Type: application/json; charset=utf-8');
-            $vehicle = new vehicle($_POST);
-            $errores = $vehicle->validate();
-            if (empty($errores)) {
-                $result = $vehicle->registrarVehicle();
-                if ($result) {
-                    echo json_encode(["message" => "succesfuly"]);
+    public static function userDeleting(){
+        $usuario = $_SESSION["usuario"];
+        $result = null;
+    
+        if (isset($usuario)) {
+            if ($usuario->getFullName() == $_POST["Nombre"]) {
+                if ($usuario->validarPassword($_POST["Password"])) {
+                    $result = $usuario->deleteUser();
+                    if ($result) {
+                        $_SESSION["loggedIn"] = null;
+                        $_SESSION["usuario"] = null;
+                        echo json_encode(["message" => "successfuly"]);
+                    } else {
+                        echo json_encode(["message" => "Ha ocurrido un error"]);
+                    }
                 } else {
-                    echo json_encode(["error" => "Ha ocurrido un error"]);
+                    echo json_encode(["message" => "La contraseña es incorrecta"]);
                 }
             } else {
-                echo json_encode(["message" => "error", "errores" => $errores]);
+                echo json_encode(["message" => "El nombre no coincide"]);
             }
-            exit;
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
         }
-
-        $router->render("dashboard/vehicles/add-vehicle", [
-            "styles" => ["dashboard/vehicles/vehicle-form", "dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index", "dashboard/vehicle"],
-            "title" => "Dashboard | Agregar Vehiculo",
-            "description" => "Pagina de dashboard Iparraguirre Motors",
-            "errors" => $errores,
-        ]);
+        exit;
     }
-
-    public static function userDeleting(Router $router)
-    {
-        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
-        $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-
-        $errores = [];
-        $usuario = $_SESSION["usuario"];
-        $result =  ["Fail"];
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (isset($usuario)) {
-                if ($usuario->getFullName() == $_POST["Nombre"]) {
-                    if ($usuario->validarPassword($_POST["Password"])) {
-                        $result = $usuario->deleteUser();
-                        if ($result) {
-                            echo json_encode(["resultado" => "Eliminado correctamente"]);
-                            exit;
-                        } else {
-                            echo json_encode(["resultado" => "Ha ocurrido un error"]);
-                            exit;
-                        }
-                    }
-                }
-                echo json_encode(["resultado" => $result]);
-                exit;
-            }
-        }
-
-        $router->render("/dashboard/settings/user-delete", [
-            "scripts" => ["dashboard/settings/index", "dashboard/index"],
-            "title" => "Iparraguirre Motors | Settings",
-            "description" => "User settings page for admins in Iparraguirre Motors"
-        ]);
-    }
-
+    
     public static function getSettingsFromUserJson()
     {
         $uuid = $_GET["u"];
@@ -162,6 +123,7 @@ abstract class DashboardController
         unset($fullNameExplode[0]);
         $lastName = join(" ", $fullNameExplode) ?? "";
         $lastName = $fullNameExplode[1] ?? "";
+        $bio = $usuario->getBio() ?? "";
         $email = $usuario->getEmail();
 
         if (!isset($uuid)) {
@@ -181,7 +143,8 @@ abstract class DashboardController
             "firstname" => $firstName,
             "lastname" => $lastName,
             "email" => $email,
-            "imagen" => $imagen
+            "imagen" => $imagen,
+            "bio" => $bio
         ];
 
         echo json_encode($user);
