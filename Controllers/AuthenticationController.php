@@ -164,7 +164,9 @@ abstract class AuthenticationController
                 if ($resultado) {
 
                     $imagen = $usuario->getImagen();
-                    if ($imagen != "/build/src/images/users/default.jpg" || $imagen != "\build\src\images\users\default.jpg") {
+
+
+                    if (!str_contains($imagen, "default.jpg")) {
                         unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $imagen));
                     }
                     $manager = new ImageManager(new Driver());
