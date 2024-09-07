@@ -81,9 +81,6 @@ const InputText = (type, label, placeholder, name, id, value) => {
     return inputLabel;
 }
 
-<<<<<<< HEAD
-const InputSelect = (label, name, values) => {
-=======
 const TextArea = (label, placeholder, name, id, value) => {
     const inputTextLabel = document.createElement('label');
     const textarea = document.createElement('textarea');
@@ -100,7 +97,6 @@ const TextArea = (label, placeholder, name, id, value) => {
     return inputTextLabel;
 }
 const InputSelect = (label, name, values, id, selectedValue) => {
->>>>>>> f8c8641cbbf222d4495ca51329f113ef22db4ef5
     const inputSelectLabel = document.createElement('label');
     const inputSelect = document.createElement('select');
     inputSelect.name = name;
@@ -182,12 +178,7 @@ const ModalAdd = () => {
         InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros", ""),
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza", "")
     ];
-<<<<<<< HEAD
-
-
-=======
     
->>>>>>> f8c8641cbbf222d4495ca51329f113ef22db4ef5
     modalHeader.appendChild(divSpacer)
     modalHeader.appendChild(modalTitle)
     modalHeader.appendChild(btnClose)
@@ -200,24 +191,8 @@ const ModalAdd = () => {
     const modalBody = document.createElement("section")
     modalBody.classList.add("modal-body")
 
-<<<<<<< HEAD
-    inputs.forEach(input => {
-        const inputLabel = document.createElement('label');
-        const div = document.createElement('div');
-        div.classList.add('input-underline');
-        inputLabel.appendChild(input);
-        inputLabel.appendChild(div);
-        vehicleform.appendChild(inputLabel);
-    });
-
-
-
-
-
-=======
     inputs.forEach(input => vehicleform.appendChild(input))
     
->>>>>>> f8c8641cbbf222d4495ca51329f113ef22db4ef5
     const submitInput = document.createElement("button")
     submitInput.textContent = "Agregar"
 
@@ -716,10 +691,6 @@ const AgregarBtn = document.querySelector(".product-add__input")
 
 if (AgregarBtn) {
     AgregarBtn.addEventListener("click", handlerAgregar)
-<<<<<<< HEAD
-
-=======
->>>>>>> f8c8641cbbf222d4495ca51329f113ef22db4ef5
 }
 
 
