@@ -759,7 +759,18 @@ footer {
 
 .social-icons {
   display: flex;
+  justify-content: center;
   margin-top: 1rem;
+}
+
+.payments-icons{
+  display: flex;
+  justify-content: center;
+  gap: .8rem;
+  img{
+    max-width: 50px;
+    max-height: 50px;
+  }
 }
 
 .social-icons a {
@@ -773,6 +784,10 @@ footer {
 .social-icons a:hover {
   color: #e63946;
 }
+.footer-section > .card__toggle{
+  justify-content: center;
+  margin-top: 1.5rem;
+}
 
 .footer-section img {
   max-width: 150px;
@@ -781,12 +796,16 @@ footer {
 
 .footer-bottom {
   text-align: center;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   font-size: 1rem;
   color: #777;
   border-top: 1px solid #ddd;
 }
-
+@media (max-width: 1110px) {
+  .footer {
+    gap: 2rem;
+  }
+}
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -794,6 +813,7 @@ footer {
   }
 
   .footer-section {
+    width: 20rem;
     text-align: center;
     margin: 1.4rem 0;
   }

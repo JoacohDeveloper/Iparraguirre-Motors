@@ -179,7 +179,6 @@
 .profile-resume-configuration__edit {
   display: flex;
   align-self: flex-end;
-  position: absolute;
   width: 8rem;
   justify-content: center;
   align-items: center;
