@@ -34,113 +34,104 @@ function ImageUploader() {
     dropzone.addEventListener("dragend", () => dropzone.classList.remove("drop-zone_active"))
 
     dropzone.addEventListener('drop', preventDefaults);
-    dropzone.addEventListener("drop", e => {
-        const files = e.dataTransfer.files;
-        dropzone.classList.remove("drop-zone_active")
-        // Checking if there are any files
-        if (files.length) {
-            // Assigning the files to the hidden input from the first step
-            fileInupt.files = files;
 
-            // Processing the files for previews (next step)
-            handleFiles(files);
-        }
-    })
-    const fileInupt = document.createElement("input")
-    fileInupt.type = "file"
-    fileInupt.multiple = true
-    fileInupt.name = "images"
-    fileInupt.hidden = true;
-    fileInupt.setAttribute("accept", "jpg, png, webp, svg, jpeg")
 
     const text = document.createElement("p")
     text.textContent = "drag and drop images here"
 
     dropzone.appendChild(text)
 
-    dropzone.appendChild(fileInupt)
 
     const filesUploaded = document.createElement("ul")
 
-    let filesVar = []
-    function handleFiles(files) {
+    const fileInupt = document.createElement("input")
+    fileInupt.type = "file"
+    fileInupt.multiple = true
+    fileInupt.hidden = true;
+    fileInupt.name = "imagen"
+    fileInupt.setAttribute("accept", "jpg, png, webp, svg, jpeg")
 
-        filesVar = [...filesVar, ...files]
 
-        document.querySelector("ul").innerHTML = null;
+    dropzone.appendChild(fileInupt)
 
+    let container = new DataTransfer();
+    dropzone.addEventListener("drop", e => {
+        const files = e.dataTransfer.files;
+        dropzone.classList.remove("drop-zone_active")
 
-        function filterUniqueFiles(files) {
+        if (files.length) {
 
-            const fileNames = new Set();
-            return files.filter(file => {
-                const fileName = file.name;
-                if (fileNames.has(fileName)) {
-                    // Si el nombre ya existe, no lo incluimos en el nuevo array
-                    return false;
+            [...files].forEach(file => {
+
+                const lastFiles = [...fileInupt.files]
+
+                if (lastFiles.some((lf) => {
+                    if (lf.name == file.name) return file
+                })) {
+                    addToast([{ Title: "repetido", error: "imagen ya existe" }])
+                    return
                 } else {
-                    // Si es la primera vez que vemos este nombre, lo añadimos al Set y lo dejamos pasar
-                    fileNames.add(fileName);
-                    return true;
+                    container.items.add(file)
+                    fileInupt.files = container.files;
+                    console.log(fileInupt.files)
+                    handleFiles(file)
                 }
-            });
+
+            })
+
         }
-        const uniqueFiles = filterUniqueFiles(filesVar)
-        filesVar = uniqueFiles
-        filesVar.forEach(file => {
+    })
 
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
 
-            // Once the file has been loaded, fire the processing
-            reader.onloadend = function (e) {
 
-                //intento de validacion de repetidos
+    function handleFiles(file) {
 
-                const preview = document.createElement('img');
-                const li = document.createElement("li")
-                const deleteBtn = document.createElement("div")
-                deleteBtn.classList.add("deleteBtn")
-                deleteBtn.addEventListener("click", () => {
-                    li.remove()
-                    return;
+
+
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onloadend = (e => {
+
+            const preview = document.createElement('img');
+            const li = document.createElement("li")
+            const deleteBtn = document.createElement("div")
+            deleteBtn.classList.add("deleteBtn")
+            deleteBtn.addEventListener("click", () => {
+                li.remove()
+                console.log(file)
+
+                const lastItems = [...fileInupt.files]
+
+                const nuevosItems = lastItems.map(item => {
+                    if (item.lastModified !== file.lastModified) return item
                 })
-                const img = document.createElement("img")
-                img.src = "/build/src/images/trash.svg"
-                deleteBtn.appendChild(img)
-                li.appendChild(deleteBtn)
-                li.appendChild(preview)
+                container = new DataTransfer()
 
-                preview.src = e.target.result;
-                // Apply styling
-                preview.classList.add('preview-image');
-                filesUploaded.appendChild(li);
-            }
+                nuevosItems.forEach(item => {
+                    if (item) container.items.add(item)
+                })
+                fileInupt.files = container.files;
+
+                console.log(fileInupt.files)
+                return;
+            })
+            const img = document.createElement("img")
+            img.src = "/build/src/images/trash.svg"
+            deleteBtn.appendChild(img)
+            li.appendChild(deleteBtn)
+            li.appendChild(preview)
+
+            preview.src = e.target.result;
+
+            preview.classList.add('preview-image');
+            filesUploaded.appendChild(li);
         })
 
-        // filesVar.forEach(file => {
-        //     if(uniqueFiles.includes(file.name)) {
 
-        //             }
-        //         }
-        //     }
-        // })
-
-        // for(const file of files) {
-
-
-        //     const arrayNoRepetidos = [...new Set(filesVar)]
-
-        //     arrayNoRepetidos.forEach(filev => {
-
-
-        //         if(file.name == filev) {
-
-        //         }
-        //     })
-        // }
 
     }
+
 
 
     contenedor.appendChild(dropzone)

@@ -144,8 +144,6 @@ abstract class AuthenticationController
 
 
 
-
-
             $fileHash = md5($filename . rand(0, 50) . gmdate("dd-MM-YYYY"));
 
 

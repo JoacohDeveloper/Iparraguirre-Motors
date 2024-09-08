@@ -73,7 +73,7 @@ const InputText = (type, label, placeholder, name, id, value) => {
     input.placeholder = placeholder;
     input.value = value;
 
-    inputLabel.htmlFor = id; 
+    inputLabel.htmlFor = id;
     inputLabel.textContent = label;
 
     inputLabel.appendChild(input);
@@ -178,7 +178,7 @@ const ModalAdd = () => {
         InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros", ""),
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza", "")
     ];
-    
+
     modalHeader.appendChild(divSpacer)
     modalHeader.appendChild(modalTitle)
     modalHeader.appendChild(btnClose)
@@ -192,7 +192,7 @@ const ModalAdd = () => {
     modalBody.classList.add("modal-body")
 
     inputs.forEach(input => vehicleform.appendChild(input))
-    
+
     const submitInput = document.createElement("button")
     submitInput.textContent = "Agregar"
 
@@ -210,6 +210,8 @@ const ModalAdd = () => {
 
     modalBody.appendChild(vehicleform)
 
+
+
     vehicleform.addEventListener("submit", async e => {
         //El metodo para mostrar el usuario (error.push) va a ser cambiado, por lo tanto 
         //este metodo de corroboracion de errores no funciona pero tampoco tira error
@@ -223,127 +225,127 @@ const ModalAdd = () => {
             }
         });
 
-        if(object.nombre.length == 0){
+        if (object.nombre.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo nombre se encuentra vacio"
+                title: "Failure",
+                error: "El campo nombre se encuentra vacio"
             })
-        } else if(object.categoria == "-Seleccione-"){
+        } else if (object.categoria == "-Seleccione-") {
             error.push({
-                title:"Failure",
-                error:"El campo categoria es obligatorio"
+                title: "Failure",
+                error: "El campo categoria es obligatorio"
             })
-        } else if(object.descripcion.length == 0){
+        } else if (object.descripcion.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo descripcion se encuentra vacio"
+                title: "Failure",
+                error: "El campo descripcion se encuentra vacio"
             })
-        } else if(object.modelo.length == 0){
+        } else if (object.modelo.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo modelo se encuentra vacio"
+                title: "Failure",
+                error: "El campo modelo se encuentra vacio"
             })
-        } else if(object.fabricante.length == 0){
+        } else if (object.fabricante.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo fabricante se encuentra vacio"
+                title: "Failure",
+                error: "El campo fabricante se encuentra vacio"
             })
-        } else if(object.year.length == 0){
+        } else if (object.year.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo año de fabricacion se encuentra vacio"
+                title: "Failure",
+                error: "El campo año de fabricacion se encuentra vacio"
             })
-        } else if(object.color.length == 0){
+        } else if (object.color.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo color se encuentra vacio"
+                title: "Failure",
+                error: "El campo color se encuentra vacio"
             })
-        } else if(object.matricula.length == 0){
+        } else if (object.matricula.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo matricula se encuentra vacio"
+                title: "Failure",
+                error: "El campo matricula se encuentra vacio"
             })
-        } else if(object.tipo_transmision == ""){
+        } else if (object.tipo_transmision == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de transmision se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de transmision se encuentra vacio"
             })
-        } else if(object.tipo_carroceria == ""){
+        } else if (object.tipo_carroceria == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de carroceria se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de carroceria se encuentra vacio"
             })
-        } else if(object.FrenosABS == ""){
+        } else if (object.FrenosABS == "") {
             error.push({
-                title:"Failure",
-                error:"El campo frenos ABS se encuentra vacio"
+                title: "Failure",
+                error: "El campo frenos ABS se encuentra vacio"
             })
-        } else if(object.Airbag == ""){
+        } else if (object.Airbag == "") {
             error.push({
-                title:"Failure",
-                error:"El campo airbag se encuentra vacio"
+                title: "Failure",
+                error: "El campo airbag se encuentra vacio"
             })
-        } else if(object.tipo_traccion == ""){
+        } else if (object.tipo_traccion == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de traccion se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de traccion se encuentra vacio"
             })
-        } else if(object.tipo_direccion == ""){
+        } else if (object.tipo_direccion == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de direccion se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de direccion se encuentra vacio"
             })
-        } else if(object.estabilidad == ""){
+        } else if (object.estabilidad == "") {
             error.push({
-                title:"Failure",
-                error:"El campo control de estabilidad se encuentra vacio"
+                title: "Failure",
+                error: "El campo control de estabilidad se encuentra vacio"
             })
-        } else if(object.puertas == ""){
+        } else if (object.puertas == "") {
             error.push({
-                title:"Failure",
-                error:"El campo numero de puertas se encuentra vacio"
+                title: "Failure",
+                error: "El campo numero de puertas se encuentra vacio"
             })
-        } else if(object.tipo_combustible.length == 0){
+        } else if (object.tipo_combustible.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de combustible se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de combustible se encuentra vacio"
             })
-        } else if(object.precio.length == 0){
+        } else if (object.precio.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo precio se encuentra vacio"
+                title: "Failure",
+                error: "El campo precio se encuentra vacio"
             })
-        } else if(object.velocidad_max.length == 0){
+        } else if (object.velocidad_max.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo velocidad maxima se encuentra vacio"
+                title: "Failure",
+                error: "El campo velocidad maxima se encuentra vacio"
             })
-        } else if(object.zero_to_houndred.length == 0){
+        } else if (object.zero_to_houndred.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo de 0 a 100 km/h se encuentra vacio"
+                title: "Failure",
+                error: "El campo de 0 a 100 km/h se encuentra vacio"
             })
-        } else if(object.peso.length == 0){
+        } else if (object.peso.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo peso se encuentra vacio"
+                title: "Failure",
+                error: "El campo peso se encuentra vacio"
             })
-        } else if(object.kilometros.length == 0){
+        } else if (object.kilometros.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo kilometraje del vehiculo se encuentra vacio"
+                title: "Failure",
+                error: "El campo kilometraje del vehiculo se encuentra vacio"
             })
-        } else if(object.caballos_fuerza.length == 0){
+        } else if (object.caballos_fuerza.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo caballos de fuerza se encuentra vacio"
+                title: "Failure",
+                error: "El campo caballos de fuerza se encuentra vacio"
             })
         }
-    
-        if(error.length != 0){
+
+        if (error.length != 0) {
             addToast(error);
         } else {
-            try{
+            try {
                 const response = await fetch("http://localhost:3000/dashboard/agregar-vehiculo", {
                     method: "POST",
                     body: formdata
@@ -353,7 +355,7 @@ const ModalAdd = () => {
                     const errors = Object?.values(data?.errores).map(err => {
                         const error = document.createElement("div");
                         error.classList.add("error")
-                        error.textContent = err        
+                        error.textContent = err
                         return { title: "Failure", error: err }
                     })
                     addToast(errors);
@@ -362,17 +364,17 @@ const ModalAdd = () => {
                     contenedor.remove()
                 }
             }
-            catch(err){
+            catch (err) {
                 addToast([{
-                    title:"Failure",
-                    error:"Ha ocurrido un error"
+                    title: "Failure",
+                    error: "Ha ocurrido un error"
                 }]);
             }
         }
     })
 
     contenedor.appendChild(modal)
-    
+
     modal.appendChild(modalHeader)
     modal.appendChild(modalBody)
     return contenedor;
@@ -434,7 +436,7 @@ const ModalModificar = (data) => {
         InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros", "", data.kilometros),
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza", "", data.caballos_potencia)
     ];
-    
+
     modalHeader.appendChild(divSpacer)
     modalHeader.appendChild(modalTitle)
     modalHeader.appendChild(btnClose)
@@ -448,7 +450,7 @@ const ModalModificar = (data) => {
     modalBody.classList.add("modal-body")
 
     inputs.forEach(input => modvehicleform.appendChild(input))
-    
+
     const submitInput = document.createElement("button")
     submitInput.textContent = "Actualizar"
 
@@ -467,124 +469,124 @@ const ModalModificar = (data) => {
             }
         });
 
-        if(object.nombre.length == 0){
+        if (object.nombre.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo nombre se encuentra vacio"
+                title: "Failure",
+                error: "El campo nombre se encuentra vacio"
             })
-        } else if(object.categoria == "-Seleccione-"){
+        } else if (object.categoria == "-Seleccione-") {
             error.push({
-                title:"Failure",
-                error:"El campo categoria es obligatorio"
+                title: "Failure",
+                error: "El campo categoria es obligatorio"
             })
-        } else if(object.descripcion.length == 0){
+        } else if (object.descripcion.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo descripcion se encuentra vacio"
+                title: "Failure",
+                error: "El campo descripcion se encuentra vacio"
             })
-        } else if(object.modelo.length == 0){
+        } else if (object.modelo.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo modelo se encuentra vacio"
+                title: "Failure",
+                error: "El campo modelo se encuentra vacio"
             })
-        } else if(object.fabricante.length == 0){
+        } else if (object.fabricante.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo fabricante se encuentra vacio"
+                title: "Failure",
+                error: "El campo fabricante se encuentra vacio"
             })
-        } else if(object.year.length == 0){
+        } else if (object.year.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo año de fabricacion se encuentra vacio"
+                title: "Failure",
+                error: "El campo año de fabricacion se encuentra vacio"
             })
-        } else if(object.color.length == 0){
+        } else if (object.color.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo color se encuentra vacio"
+                title: "Failure",
+                error: "El campo color se encuentra vacio"
             })
-        } else if(object.matricula.length == 0){
+        } else if (object.matricula.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo matricula se encuentra vacio"
+                title: "Failure",
+                error: "El campo matricula se encuentra vacio"
             })
-        } else if(object.tipo_transmision == ""){
+        } else if (object.tipo_transmision == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de transmision se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de transmision se encuentra vacio"
             })
-        } else if(object.tipo_carroceria == ""){
+        } else if (object.tipo_carroceria == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de carroceria se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de carroceria se encuentra vacio"
             })
-        } else if(object.FrenosABS == ""){
+        } else if (object.FrenosABS == "") {
             error.push({
-                title:"Failure",
-                error:"El campo frenos ABS se encuentra vacio"
+                title: "Failure",
+                error: "El campo frenos ABS se encuentra vacio"
             })
-        } else if(object.Airbag == ""){
+        } else if (object.Airbag == "") {
             error.push({
-                title:"Failure",
-                error:"El campo airbag se encuentra vacio"
+                title: "Failure",
+                error: "El campo airbag se encuentra vacio"
             })
-        } else if(object.tipo_traccion == ""){
+        } else if (object.tipo_traccion == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de traccion se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de traccion se encuentra vacio"
             })
-        } else if(object.tipo_direccion == ""){
+        } else if (object.tipo_direccion == "") {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de direccion se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de direccion se encuentra vacio"
             })
-        } else if(object.estabilidad == ""){
+        } else if (object.estabilidad == "") {
             error.push({
-                title:"Failure",
-                error:"El campo control de estabilidad se encuentra vacio"
+                title: "Failure",
+                error: "El campo control de estabilidad se encuentra vacio"
             })
-        } else if(object.puertas == ""){
+        } else if (object.puertas == "") {
             error.push({
-                title:"Failure",
-                error:"El campo numero de puertas se encuentra vacio"
+                title: "Failure",
+                error: "El campo numero de puertas se encuentra vacio"
             })
-        } else if(object.tipo_combustible.length == 0){
+        } else if (object.tipo_combustible.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo tipo de combustible se encuentra vacio"
+                title: "Failure",
+                error: "El campo tipo de combustible se encuentra vacio"
             })
-        } else if(object.precio.length == 0){
+        } else if (object.precio.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo precio se encuentra vacio"
+                title: "Failure",
+                error: "El campo precio se encuentra vacio"
             })
-        } else if(object.velocidad_max.length == 0){
+        } else if (object.velocidad_max.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo velocidad maxima se encuentra vacio"
+                title: "Failure",
+                error: "El campo velocidad maxima se encuentra vacio"
             })
-        } else if(object.zero_to_houndred.length == 0){
+        } else if (object.zero_to_houndred.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo de 0 a 100 km/h se encuentra vacio"
+                title: "Failure",
+                error: "El campo de 0 a 100 km/h se encuentra vacio"
             })
-        } else if(object.peso.length == 0){
+        } else if (object.peso.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo peso se encuentra vacio"
+                title: "Failure",
+                error: "El campo peso se encuentra vacio"
             })
-        } else if(object.kilometros.length == 0){
+        } else if (object.kilometros.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo kilometraje del vehiculo se encuentra vacio"
+                title: "Failure",
+                error: "El campo kilometraje del vehiculo se encuentra vacio"
             })
-        } else if(object.caballos_fuerza.length == 0){
+        } else if (object.caballos_fuerza.length == 0) {
             error.push({
-                title:"Failure",
-                error:"El campo caballos de fuerza se encuentra vacio"
+                title: "Failure",
+                error: "El campo caballos de fuerza se encuentra vacio"
             })
         }
-    
-        if(error.length != 0){
+
+        if (error.length != 0) {
             addToast(error);
         } else {
             formdata.append('id', data.id);
@@ -618,7 +620,7 @@ const ModalModificar = (data) => {
                     error: "Ha ocurrido un error"
                 }]);
             }
-            
+
         }
     })
 
@@ -671,8 +673,8 @@ const fetchVehiculoData = async (vehiculoID) => {
     });
     if (!response.ok) {
         addToast([{
-            title:"Failure",
-            error:"Ha ocurrido un error"
+            title: "Failure",
+            error: "Ha ocurrido un error"
         }]);
     }
     return await response.json();
