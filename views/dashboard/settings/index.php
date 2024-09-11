@@ -85,8 +85,6 @@
                                     ?>
                                 </p>
                             </div>
-                            <br>
-                            <p id="changePassword">Cambiar contraseña</p>
                         </div>
                     </div>
                 </section>
@@ -98,6 +96,21 @@
                 </section>
                 <section class="dashboard-fit__content__password" aria-step="4">
                     <h4>Change Password</h4>
+                    <form class="form_changePassword">
+                        <label for="olderPassword">
+                            Contraseña actual
+                            <input type="password" name="olderPassword">
+                        </label>
+                        <label for="password">
+                            Nueva contraseña
+                            <input type="password" name="password">
+                        </label>
+                        <label for="repeatPassword">
+                            Repetir nueva contraseña
+                            <input type="password" name="repeatPassword">   
+                        </label>
+                        <input type="submit" value="Cambiar">
+                    </form>
                 </section>
                 <section class="dashboard-fit__content__delelteAcc" aria-step="5">
                     <h4>Eliminar mi cuenta</h4>
@@ -118,4 +131,5 @@
             </div>
         </div>
     </div>
+    <?php implementComp("error_toast.php") ?>
 </div>

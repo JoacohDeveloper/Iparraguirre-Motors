@@ -394,7 +394,7 @@ function setSettingSection(step) {
 
 
 /* Admin settings li selected */
-const menuItems = document.querySelectorAll("#profile, #notifications, #security, #delete-account");
+const menuItems = document.querySelectorAll("#profile, #notifications, #security, #delete-account, #change-pass");
 menuItems.forEach(item => {
     item.addEventListener("click", (event) => {
         menuItems.forEach(el => el.classList.remove("selected"));
@@ -437,6 +437,79 @@ async function submitEventHandler(event) {
         confirm("¿Estás seguro de que quieres borrar tu cuenta?");
         try {
             const response = await fetch("http://localhost:3000/dashboard/user-delete", {
+                method: "POST",
+                body: formdata
+            });
+            const data = await response.json();
+            if (data?.errores) {
+                const errors = Object?.values(data?.errores).map(err => {
+                    const error = document.createElement("div");
+                    error.classList.add("error");
+                    error.textContent = err;
+                    return { title: "Failure", error: err };
+                });
+                addToast(errors);
+            } else if (data?.message == "successfuly") {
+                setTimeout(function() {
+                    window.location.href = 'http://localhost:3000/dashboard/login';
+                }, 3000);
+            }
+        } catch (err) {
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error"
+            }]);
+        }
+    }
+}
+
+
+
+/* ChangePassword user form */
+document.querySelector('input[name="olderPassword"]').setAttribute('autocomplete', 'olderPassword');
+document.querySelector('input[name="password"]').setAttribute('autocomplete', 'password');
+document.querySelector('input[name="repeatPassword"]').setAttribute('autocomplete', 'repeatPassword');
+
+const form_changePassword = document.querySelector(".form_changePassword");
+
+form_changePassword.addEventListener("submit", submitEventHandler2);
+
+async function submitEventHandler2(event) {
+    event.preventDefault();
+    const formdata = new FormData(form_changePassword);
+    const object = {};
+    const error = [];
+    formdata.forEach((value, key) => {
+        object[key] = value;
+    });
+
+    // Errores
+    if (object.olderPassword.length == 0) {
+        error.push({
+            title: "Failure",
+            error: "Debes ingresar la contraseña actual de tu cuenta"
+        });
+    } else if (object.password.length == 0) {
+        error.push({
+            title: "Failure",
+            error: "Debes ingresar la nueva contraseña de tu cuenta"
+        });
+    } else if (object.repeatPassword.length == 0) {
+        error.push({
+            title: "Failure",
+            error: "Debes repetir la nueva contraseña de tu cuenta"
+        });
+    } else if (object.password !== object.repeatPassword) {
+        error.push({
+            title: "Failure",
+            error: "La contraseña repetida no coincide"
+        });
+    }
+    if (error.length != 0) {
+        addToast(error);
+    } else {
+        try {
+            const response = await fetch("http://localhost:3000/dashboard/user-newPassword", {
                 method: "POST",
                 body: formdata
             });

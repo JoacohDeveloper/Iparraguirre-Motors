@@ -605,6 +605,16 @@ textarea {
   }
 }
 
+/* Change password form */
+
+.form_changePassword{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  width: 15rem;
+}
+
 /* delete acc step */
 
 .dashboard-fit__content > section {

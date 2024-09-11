@@ -230,6 +230,17 @@ class User extends ActiveRecord
         return $result;
     }
 
+    public function changePassword($new_password){
+        $result = null;
+        $this->password = password_hash($new_password, PASSWORD_BCRYPT);
+        try {
+            return $this->actualizar($this->uuid);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+        return $result;
+    }
+
     public function getUsername()
     {
         return $this->username;

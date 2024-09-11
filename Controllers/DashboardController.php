@@ -56,8 +56,8 @@ abstract class DashboardController
         $lastName = $fullNameExplode[1] ?? "";
         $email = $usuario->getEmail();
         $bio = $usuario->getBio() ?? "";
-        $createdAt = $usuario->getCreated()->format('d-m-Y H:i');
-        $updatedAt = $usuario->getUpdated()->format('d-m-Y H:i');
+        $createdAt = $usuario->getCreated()->format('d-m-Y H:i:s');
+        $updatedAt = $usuario->getUpdated()->format('d-m-Y H:i:s');
         if ($updatedAt == $createdAt) $updatedAt = "Never updated";
 
         if (!isset($uuid)) {
@@ -80,7 +80,6 @@ abstract class DashboardController
             "updatedAt" => $updatedAt,
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
-
         ]);
     }
 
@@ -104,6 +103,36 @@ abstract class DashboardController
                 }
             } else {
                 echo json_encode(["message" => "El nombre no coincide"]);
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+        }
+        exit;
+    }
+
+    public static function changePassword(){
+        $usuario = $_SESSION["usuario"];
+        $olderPassword = $_POST["olderPassword"];
+        $newPassword = $_POST["password"];
+        $repeatNewPassword = $_POST["repeatPassword"];
+        $result = null;
+    
+        if (isset($usuario)) {
+            if ($usuario->validarPassword($olderPassword)) {
+                if ($newPassword == $repeatNewPassword) {
+                    $result = $usuario->changePassword($newPassword);
+                    if ($result) {
+                        $_SESSION["loggedIn"] = null;
+                        $_SESSION["usuario"] = null;
+                        echo json_encode(["message" => "successfuly"]);
+                    } else {
+                        echo json_encode(["message" => "Ha ocurrido un error"]);
+                    }
+                } else {
+                    echo json_encode(["message" => "La nueva contraseña no coincide"]);
+                }
+            } else {
+                echo json_encode(["message" => "La contraseña es incorrecta"]);
             }
         } else {
             echo json_encode(["message" => "Usuario no encontrado"]);
