@@ -52,7 +52,7 @@ body {
   }
 }
 
-header .navegacion ul li a {
+header .navegacion ul li .nav-links {
   text-transform: uppercase;
   font-weight: 600;
   transition: color 0.3s ease;
