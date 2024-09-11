@@ -801,6 +801,18 @@ footer {
   justify-content: center;
   margin-top: 1rem;
 }
+.icon-black {
+  display: none;
+}
+
+.dark .icon-white {
+  display: none;
+}
+
+.dark .icon-black {
+  display: inline;
+}
+
 
 .payments-icons{
   display: flex;

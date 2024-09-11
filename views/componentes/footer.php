@@ -4,10 +4,20 @@
     <div class="footer-section">
       <h3>Iparraguirre-Motors</h3>
       <div class="social-icons">
-        <a href="https://www.facebook.com/"><img src="/build/src/images/footer/facebook.png" alt="facebook social-icons"></a>
-        <a href="https://www.instagram.com/"><img src="/build/src/images/footer/instagram.png" alt="instagram social-icons"></a>
-        <a href="https://www.linkedin.com/"><img src="/build/src/images/footer/linkedin.png" alt="linkedin social-icons"></a>
-      </div>
+        <a href="https://www.facebook.com/">
+            <img src="/build/src/images/footer/facebook-white.png" alt="facebook social-icons" class="icon-white">
+            <img src="/build/src/images/footer/facebook-black.png" alt="facebook social-icons" class="icon-black">
+        </a>
+        <a href="https://www.instagram.com/">
+            <img src="/build/src/images/footer/instagram-white.png" alt="instagram social-icons" class="icon-white">
+            <img src="/build/src/images/footer/instagram-black.png" alt="instagram social-icons" class="icon-black">
+        </a>
+        <a href="https://x.com/">
+            <img src="/build/src/images/footer/twitter-white.png" alt="twitter social-icons" class="icon-white">
+            <img src="/build/src/images/footer/twitter-black.png" alt="twitter social-icons" class="icon-black">
+        </a>
+    </div>
+
       <div class="payments-icons">
         <img src="/build/src/images/footer/visa.svg" alt="visa payments-icons">
         <img src="/build/src/images/footer/mastercard.svg" alt="mastercard payments-icons">

@@ -4,7 +4,7 @@
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">
-                <h3>Esta sera la pagina de repuestos</h3>
+                <h3>Refractions</h3>
             </div>
 
             <div class="contenedor-buscador">
@@ -16,9 +16,10 @@
 
         </div>
 
-        <!-- <div class="products-managment">
+        <div class="products-managment">
             <div class="card-container"></div>
-        </div> -->
+        </div>
     </div>
+    <?php implementComp("dashboard/addProductos.php") ?>
     <?php implementComp("error_toast.php") ?>
 </div>
