@@ -5,6 +5,7 @@ namespace Models;
 use Models\ActiveRecord;
 use JsonSerializable;
 use PDOException;
+use PDO;
 
 class Vehicle extends ActiveRecord
 {
@@ -47,7 +48,7 @@ class Vehicle extends ActiveRecord
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
-    public $vehicleImages;
+    public $vehicleImages = [];
 
     function __construct($args = [])
     {
@@ -59,8 +60,7 @@ class Vehicle extends ActiveRecord
         $this->fabricante = $args["fabricante"] ?? "";
         $this->year = $args["year"] ?? "";
         $this->color = $args["color"] ?? "";
-        /*$this->url_img = $args["url_img"] ?? "";
-        $this->description_img = $args["description_img"] ?? "";*/
+        $this->vehicleImages = $args["imagen"] ?? [];
         $this->matricula = $args["matricula"] ?? "";
         $this->transmision = $args["tipo_transmision"] ?? "";
         $this->tipo_carroceria = $args["tipo_carroceria"] ?? "";
@@ -105,23 +105,6 @@ class Vehicle extends ActiveRecord
         return $resultado;
     }
 
-    public function create()
-    {
-
-        try {
-            $this->db->beginTransaction();
-
-
-
-
-
-
-            //fin de la transaction
-            $this->db->commit();
-        } catch (\Throwable $th) {
-            $this->db->rollBack();
-        }
-    }
 
     public function validate()
     {
@@ -204,7 +187,16 @@ class Vehicle extends ActiveRecord
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
-        return $this->crear();
+
+        if ($this->crear()) {
+            $stmt = static::$db->prepare("select * from Vehicle where id = LAST_INSERT_ID()");
+
+            $stmt->execute();
+            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return $registro["id"];
+            }
+        }
+        return null;
     }
 
     public static function getVehicle($id)

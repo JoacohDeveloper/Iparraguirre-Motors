@@ -199,14 +199,14 @@ const ModalAdd = () => {
     vehicleform.appendChild(ImageUploader())
     vehicleform.appendChild(submitInput)
 
-    vehicleform.addEventListener("submit", e => {
-        e.preventDefault();
-        const form_data = new FormData(vehicleform)
+    // vehicleform.addEventListener("submit", e => {
+    //     e.preventDefault();
+    //     const form_data = new FormData(vehicleform)
 
-        console.log([...form_data])
+    //     console.log([...form_data])
 
-        addToast([{ Title: "error", error: "Message" }])
-    })
+    //     addToast([{ title: "error", error: "Message" }])
+    // })
 
     modalBody.appendChild(vehicleform)
 
@@ -224,6 +224,7 @@ const ModalAdd = () => {
                 object[key] = value
             }
         });
+
 
         if (object.nombre.length == 0) {
             error.push({
@@ -351,7 +352,9 @@ const ModalAdd = () => {
                     body: formdata
                 })
                 const data = await response.json();
+                console.log(data)
                 if (data?.errores) {
+                    console.log("server errors")
                     const errors = Object?.values(data?.errores).map(err => {
                         const error = document.createElement("div");
                         error.classList.add("error")
@@ -362,6 +365,14 @@ const ModalAdd = () => {
                 } else if (data?.message == "succesfuly") {
                     toggleBackground()
                     contenedor.remove()
+                    document.querySelector(".product-search__input").querySelector("button").click()
+                    Swal.fire({
+                        title: "Exito",
+                        text: "El vehiculo fue guardado",
+                        icon: "success"
+                    });
+
+
                 }
             }
             catch (err) {
@@ -694,5 +705,6 @@ const AgregarBtn = document.querySelector(".product-add__input")
 if (AgregarBtn) {
     AgregarBtn.addEventListener("click", handlerAgregar)
 }
+
 
 

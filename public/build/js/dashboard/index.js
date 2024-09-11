@@ -33,14 +33,25 @@ if (aside) {
 
 
     const links = document.querySelectorAll(".dropDown-links")
+    const asideElements = document.querySelectorAll(".aside-element")
+    asideElements.forEach(el => {
+        el.addEventListener("click", e => {
 
+            if (!el.classList.contains("more-information")) aside.classList.add("stretch")
+
+        })
+    })
     links.forEach(link => {
+
+
         if (!link.classList.contains("dropDownNotDeployed")) {
             aside.classList.add("stretch")
         }
     })
-
 }
+
+
+
 
 const account = document.querySelector(".account")
 const notifications = document.querySelector(".notifications")

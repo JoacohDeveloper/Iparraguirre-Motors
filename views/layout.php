@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.png">
     <link rel="stylesheet" href="/build/css/normalize.css">
     <link rel="stylesheet" href="/build/css/globals.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php
     //script loader
     if (isset($scripts) && count($scripts) != 0) {

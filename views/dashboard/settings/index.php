@@ -12,9 +12,10 @@
                     <nav>
                         <ul class="steps">
                             <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">My Profile</a></li>
-                            <li aria-label="step-2" id="notifications" ><a href="#">Notifications</a></li>
-                            <li aria-label="step-3" id="security" ><a href="#">Security</a></li>
-                            <li aria-label="step-4" id="delete-account"><a href="#">Delete Account</a></li>
+                            <li aria-label="step-2" id="notifications"><a href="#">Notifications</a></li>
+                            <li aria-label="step-3" id="security"><a href="#">Security</a></li>
+                            <li aria-label="step-4" id="change-pass"><a href="#">Change Password</a></li>
+                            <li aria-label="step-5" id="delete-account"><a href="#">Delete Account</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -30,17 +31,17 @@
                                 <img id="profile-img__id" src="<?php echo $imagen["url"] ?>" alt="<?php echo $imagen["alt"] ?>">
                             </div>
                             <div class="profile-resume__data">
-                                <h4 id="fullname__id"><?php echo $fullname;?></h4>
-                                <p><?php echo $username;?></p>
+                                <h4 id="fullname__id"><?php echo $fullname; ?></h4>
+                                <p><?php echo $username; ?></p>
                             </div>
                         </div>
                         <?php
-                            if ($imagen["url"] != "\build\src\images\users\default.jpg") {
+                        if ($imagen["url"] != "\build\src\images\users\default.jpg") {
                             echo '<button class="delete-picture-configuration__edit" id="delete-image">
                                     <p>Delete profile picture</p>
                                     <img src="/build/src/images/trash.svg" alt="delete profile picture">
                                 </button>';
-                            }
+                        }
                         ?>
                     </div>
                     <div class="dashboard-fit__content__personal-information">
@@ -62,7 +63,7 @@
                             </div>
                             <div class="saved-fields__field">
                                 <label>Username</label>
-                                <p id="username__id"><?php echo $username;?></p>
+                                <p id="username__id"><?php echo $username; ?></p>
                             </div>
                             <div class="saved-fields__field">
                                 <label>Registered on</label>
@@ -95,22 +96,24 @@
                 <section class="dashboard-fit__content__security" aria-step="3">
                     <h4>Security</h4>
                 </section>
-
-                <section class="dashboard-fit__content__delelteAcc" aria-step="4">
-                <h4>Eliminar mi cuenta</h4>
-                <h6>¿Estas seguro?</h6>
-                <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>
-                <form class="form_deleteAccount">
-                    <label for="fullname">
-                        Nombre completo
-                        <input type="text" name="Nombre">
-                    </label>
-                    <label for="password">
-                        Contraseña
-                        <input type="password" name="Password">
-                    </label>
-                    <input type="submit" value="Eliminar">
-                </form>
+                <section class="dashboard-fit__content__password" aria-step="4">
+                    <h4>Change Password</h4>
+                </section>
+                <section class="dashboard-fit__content__delelteAcc" aria-step="5">
+                    <h4>Eliminar mi cuenta</h4>
+                    <h6>¿Estas seguro?</h6>
+                    <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>
+                    <form class="form_deleteAccount">
+                        <label for="fullname">
+                            Nombre completo
+                            <input type="text" name="Nombre">
+                        </label>
+                        <label for="password">
+                            Contraseña
+                            <input type="password" name="Password">
+                        </label>
+                        <input type="submit" value="Eliminar">
+                    </form>
                 </section>
             </div>
         </div>

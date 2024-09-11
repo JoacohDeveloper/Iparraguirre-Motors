@@ -27,11 +27,6 @@ class VehicleImage extends ActiveRecord
 
     public function create()
     {
-        try {
-
-            $this->crear();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        return $this->crear();
     }
 }
