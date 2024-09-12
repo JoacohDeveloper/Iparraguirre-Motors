@@ -24,9 +24,9 @@ const Card = ({ nombre, precio, id, imageUrl, año, modelo, fabricante }) => {
 
 
     btnEliminar.addEventListener("click", handlerEliminar)
-    
+
     btnModificar.addEventListener("click", handlerModificar)
-    
+
 
     contenedorControllers.appendChild(btnModificar)
     contenedorControllers.appendChild(btnEliminar)
@@ -291,9 +291,9 @@ async function buscar() {
                         const arregloNoRepetido = [...vehiclesNomUnicos]
 
                         arregloNoRepetido.forEach(vehicle => {
-                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
+                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
                         })
-                        
+
                         if (Object.values(data).length == 0) ocultarBusqueda()
                     } else {
                         ocultarBusqueda()
