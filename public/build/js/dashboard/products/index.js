@@ -1,4 +1,19 @@
 
+
+const ErrorComp = (text) => {
+
+
+
+    const errorContainer = document.createElement("div")
+    errorContainer.classList.add("error-input-container")
+    const errorText = document.createElement("p")
+    errorText.textContent = text;
+
+    errorContainer.appendChild(errorText)
+
+    return errorContainer
+}
+
 const ModalDelete = () => {
     const contenedor = document.createElement("div")
 
@@ -56,6 +71,7 @@ const ModalDelete = () => {
     contenedor.appendChild(modal)
     modal.appendChild(modalHeader)
     modal.appendChild(modalBody)
+
     return contenedor;
 }
 
@@ -141,6 +157,10 @@ const ModalAdd = () => {
 
     const btnClose = document.createElement("button")
 
+
+
+
+
     const btnImage = document.createElement("img")
     btnImage.src = "/build/src/images/cross.svg"
 
@@ -152,12 +172,18 @@ const ModalAdd = () => {
     modalTitle.textContent = "Agregar Vehiculo"
 
     const vehicleform = document.createElement("form")
+
+
+
     vehicleform.classList.add("form_addvehicle")
 
     const detailsSectionInputs = [
         InputText("text", "Nombre", "Nombre", "nombre", "name", ""),
         InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", ""),
         TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", ""),
+    ]
+
+    const detailsSectionInputs2 = [
         InputText("text", "Modelo", "Modelo", "modelo", "", ""),
         InputText("text", "Fabricante", "Fabricante", "fabricante", "", ""),
         InputText("number", "Año de fabricacion", "Año de fabricacion", "year", ""),
@@ -206,7 +232,6 @@ const ModalAdd = () => {
     tabsBtns.classList.add("tabs-container")
 
     const tabButton = document.createElement("button");
-    tabButton.classList.add("done")
     tabButton.classList.add("selected")
     tabButton.ariaLabel = "step-1"
 
@@ -244,20 +269,29 @@ const ModalAdd = () => {
     //---------------------------------
 
 
-
+    //--------------------DETAILS-----------------
     const detailsSection = document.createElement("section")
 
     const detailsSectionTitle = document.createElement("p")
     detailsSectionTitle.textContent = "Detalles del Vehiculo"
-    detailsSection.appendChild(detailsSectionTitle)
+    const detailsSectionLabelContainer = document.createElement("article")
     const detailsSectionLabels = document.createElement("div")
-    detailsSection.appendChild(detailsSectionLabels)
+    const detailsSectionLabels2 = document.createElement("div")
+    detailsSection.appendChild(detailsSectionTitle)
+    detailsSection.appendChild(detailsSectionLabelContainer)
 
+
+    detailsSectionLabelContainer.appendChild(detailsSectionLabels)
+    detailsSectionLabelContainer.appendChild(detailsSectionLabels2)
     detailsSection.classList.add("settingsStepVisible")
 
     detailsSection.setAttribute("aria-step", "1")
 
     detailsSectionInputs.forEach(input => detailsSectionLabels.appendChild(input))
+    detailsSectionInputs2.forEach(input => detailsSectionLabels2.appendChild(input))
+//---------------------------------------------------------------------------
+
+
 
     const specSection = document.createElement("section")
 
@@ -314,11 +348,38 @@ const ModalAdd = () => {
         }
     }
 
+    const modalFooter = document.createElement("section")
+    modalFooter.classList.add("modal-footer")
+
+    const botonVolver = document.createElement("button")
+    botonVolver.classList.add("modal-footer_volver")
+    const botonSiguiente = document.createElement("button")
+    botonSiguiente.classList.add("modal-footer_siguiente")
+    botonVolver.textContent = "Atras"
+    botonSiguiente.textContent = "Siguiente"
+    botonVolver.disabled = true;
+
     const menuItems = tabsBtns.querySelectorAll("*")
     menuItems.forEach(item => {
         item.addEventListener("click", (event) => {
             menuItems.forEach(el => el.classList.remove("selected"));
             item.classList.add("selected");
+            if(item.ariaLabel == "step-1") {
+                botonVolver.disabled = true;
+                botonSiguiente.disabled = false;
+                botonSiguiente.classList.remove("button-enviar")
+                botonSiguiente.textContent = "Siguiente"
+            } else if(item.ariaLabel == "step-4") {
+                botonVolver.disabled = false;
+                botonSiguiente.textContent = "Enviar"
+                botonSiguiente.disabled = true;
+                botonSiguiente.classList.add("button-enviar")
+            } else {
+                botonSiguiente.disabled = false;
+                botonVolver.disabled = false;
+                botonSiguiente.textContent = "Siguiente"
+                botonSiguiente.classList.remove("button-enviar")
+            }
         });
     });
 
@@ -519,8 +580,72 @@ const ModalAdd = () => {
 
     modal.appendChild(modalHeader)
     modal.appendChild(modalBody)
+
+    modal.appendChild(modalFooter)
+    modalFooter.appendChild(botonVolver)
+    modalFooter.appendChild(botonSiguiente)
+
+    vehicleform.querySelectorAll("input,  textarea, select")
+    .forEach(input => {
+
+        input.addEventListener("click", e=> {
+            
+            const hayErrores = vehicleform.querySelector(".error-input-container")
+            const btn = tabsBtns.querySelector(".selected")
+
+            const step = btn.ariaLabel.substring(5,6)
+            console.log(step)
+
+            if(step == "1") {
+                
+                const nuevoArray = [...detailsSectionInputs, ...detailsSectionInputs2]
+
+                const hayError = nuevoArray.some(el => el.querySelector(".error-input-container"))
+
+                if(!hayError) {
+                    
+                } else {
+                    btn.classList.remove("done")
+                }
+
+            }
+        })
+
+        input.addEventListener("change", e => {
+
+            const error = ErrorComp("")
+            const errorText = error.querySelector("p")
+            
+            if(e.target.tagName == "INPUT" || e.target.tagName == "TEXTAREA") {
+                
+                if(e.target.value == "") {
+                    e.target.classList.add("error")
+                    errorText.textContent = `el campo ${e.target.parentElement.textContent.toLowerCase()} no puede estar vacio`
+                    e.target.parentElement.appendChild(error)
+                } else {
+                    e.target.classList.remove("error")
+                    e.target.parentElement.querySelector(".error-input-container")?.remove()
+                    
+                }
+            } else if(e.target.tagName == "SELECT") {
+                if(e.target.selectedIndex == 0) {
+                    e.target.classList.add("error")
+                    errorText.textContent = `debes seleccionar un elemento`
+                    e.target.parentElement.appendChild(error)
+                }else {
+                    e.target.classList.remove("error")
+                    e.target.parentElement.querySelector(".error-input-container")?.remove()
+                    
+                }
+            }
+        })
+    })
+
     return contenedor;
 }
+
+
+
 
 const ModalModificar = (data) => {
     data.frenos_abs = data.frenos_abs === "abs_si" ? "Si" : "No";

@@ -443,7 +443,6 @@ Seccion 3 - Drag & Drop
   align-items: center;
   gap: 1rem;
   max-height: 35rem;
-  padding-bottom: 4rem;
 }
 .form_addvehicle > button {
   grid-column: span 2;
@@ -580,7 +579,7 @@ Seccion 3 - Drag & Drop
   width: 100%;
   padding: 0 2rem;
 
-  p {
+  &>p {
     font-size: 1.3rem;
     color: #59595a;
     font-weight: 300;
@@ -598,9 +597,13 @@ Seccion 3 - Drag & Drop
     select {
       margin-top: 0.4rem;
       min-width: fit-content;
-      width: 40%;
-
-      padding: 0.4rem 0.2rem;
+      border-radius: .3rem;
+      background: none;
+      border: none;
+      border: 1px solid #59595a;
+      outline: none;
+      width: 90%;
+      padding: 0.4rem 0.4rem;
       resize: none;
     }
 
@@ -617,4 +620,93 @@ Seccion 3 - Drag & Drop
 
 .form_addvehicle > .settingsStepVisible > .imageUploader-container {
   width: 100%;
+}
+.form_addvehicle > section > article {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  div {
+    width: 50%;
+  }
+}
+
+
+@media screen and (max-width:810px) {
+  .form_addvehicle > section > article {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  
+    div {
+      width: 100%;
+    }
+  }
+  
+}
+
+
+/* Modal Footer */
+
+.modal-footer {
+  display: flex;
+  padding: 2rem 4rem;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-end;
+
+  button {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: .5rem .5rem;
+    border-radius: .4rem;
+    transition: background-color .3s ease-in-out, transform .3s ease-in-out;
+    
+    &:hover:not(button[disabled]) {
+      background-color: #ccc;
+      transform: translateY(-3px);
+    }
+
+
+
+  }
+}
+
+
+
+
+
+/* Error input */
+
+
+input.error {
+  border: 1.5px solid #ff0000 !important;
+
+
+}
+
+label:has(> input.error,textarea.error, select.error) {
+  color: #ff0000;
+}
+
+.error-input-container {
+  width: 90% !important;
+  /* background-color: #ff0000; */
+  color: #ff0000;
+  border-radius: .4rem;
+  display: flex;
+  margin-top: .5rem;
+  p {
+    color: #ff0000;
+    font-size: .9em;
+    text-transform: lowercase;
+    /* font-weight: bold; */
+
+  }
+
+
+
 }
