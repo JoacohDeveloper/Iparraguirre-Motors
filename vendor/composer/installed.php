@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'alumno/iparraguirre-motors',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '38b46fb3cab2ed4906f21a2f27c4da4d2625e987',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'alumno/iparraguirre-motors' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '38b46fb3cab2ed4906f21a2f27c4da4d2625e987',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

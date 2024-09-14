@@ -140,8 +140,7 @@ abstract class DashboardController
         exit;
     }
     
-    public static function getSettingsFromUserJson()
-    {
+    public static function getSettingsFromUserJson(){
         $uuid = $_GET["u"];
         $usuario = $_SESSION["usuario"];
 

@@ -159,6 +159,11 @@ class Customer extends ActiveRecord
         return $this->crear();
     }
 
+    public function getFullName()
+    {
+        return $this->full_name;
+    }
+
     public function getEmail()
     {
         return $this->email;
@@ -195,6 +200,22 @@ class Customer extends ActiveRecord
         }
 
         return $result[0] ?? null;
+    }
+
+    public function getCreated(){
+        if ($this->createdAt instanceof \DateTime) {
+            return $this->createdAt;
+        } else {
+            return new \DateTime($this->createdAt);
+        }
+    }
+
+    public function getUpdated(){
+        if ($this->updatedAt instanceof \DateTime) {
+            return $this->updatedAt;
+        } else {
+            return new \DateTime($this->updatedAt);
+        }
     }
 
     public function validarPassword($password)

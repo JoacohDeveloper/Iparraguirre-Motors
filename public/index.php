@@ -67,6 +67,8 @@ $router->post("/dashboard/verificar", [AuthenticationController::class, "verific
 
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);
 
+$router->get("/settings", [HomePageController::class, "userSettings"]);
+$router->post("/settings", [HomePageController::class, "userSettings"]);
 $router->get("/logout", [CustomerController::class, "logout"]);
 $router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 
