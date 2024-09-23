@@ -79,7 +79,8 @@ $router->get("/dashboard", [DashboardController::class, "index"]);
 $router->post("/dashboard/agregar-vehiculo", [VehiclesController::class, "agregarVehiculo"]);
 $router->post("/dashboard/obtener-vehiculo", [VehiclesController::class, "getOneVehicle"]);
 $router->post("/dashboard/modificar-vehiculo", [VehiclesController::class, "modificarVehicle"]); 
-$router->post("/dashboard/discount-vehiculo", [VehiclesController::class, "discountVehicle"]);
+$router->post("/dashboard/discount-vehiculo", [VehiclesController::class, "discountVehicle"]); 
+$router->post("/dashboard/delete-discount-vehiculo", [VehiclesController::class, "removeDiscountVehicle"]);
 
 $router->get("/dashboard/products/vehicle", [ProductController::class, "vehicle"]);
 $router->get("/dashboard/products/repuestos", [ProductController::class, "repuestos"]);

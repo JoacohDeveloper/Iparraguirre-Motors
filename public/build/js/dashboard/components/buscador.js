@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, descuento, id, imageUrl, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -40,13 +40,13 @@ const Card = ({ nombre, precio, descuento, id, imageUrl, año, modelo, fabricant
     const contenedorPrecio = document.createElement("div");
     contenedorPrecio.classList.add("contenedor-precio");
 
-    if (descuento) {
+    if (discount) {
         const precioOriginalHTML = document.createElement("p");
         const precioFinalHTML = document.createElement("p");
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
         
-        const precioFinal = precio - descuento;
+        const precioFinal = precio - discount;
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
 
@@ -144,7 +144,7 @@ async function init(search = null) {
             const customV = {
                 nombre: v.nombre,
                 precio: v.precio,
-                descuento: v.descuento,
+                discount: v.discount,
                 id: v.id,
                 imageUrl: v.imagen,
                 fabricante: v.fabricante,

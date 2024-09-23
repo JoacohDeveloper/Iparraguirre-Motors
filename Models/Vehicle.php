@@ -34,6 +34,9 @@ class Vehicle extends ActiveRecord
         "tipo_combustible",
         "precio",
         "discount",
+        "discount_type",
+        "discount_start",
+        "discount_end",
         "velocidad_max",
         "zero_to_houndred",
         "peso",
@@ -49,13 +52,12 @@ class Vehicle extends ActiveRecord
     // }
 
     public $id, $nombre, $categoria, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
-        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
-        $caballos_potencia, $createdAt, $updatedAt;
+        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $discount_type, $discount_start, $discount_end, 
+        $velocidad_max, $zero_to_houndred, $peso, $kilometros, $caballos_potencia, $createdAt, $updatedAt;
 
     public $vehicleImages = [];
 
-    function __construct($args = [])
-    {
+    function __construct($args = []) {
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
         $this->categoria = $args["categoria"] ?? "";
@@ -76,7 +78,10 @@ class Vehicle extends ActiveRecord
         $this->puertas = $args["puertas"] ?? "";
         $this->tipo_combustible = $args["tipo_combustible"] ?? "";
         $this->precio = $args["precio"] ?? "";
-        $this->discount = isset($args["discount"]) && is_numeric($args["discount"]) ? $args["discount"] : 0;
+        $this->discount = isset($args["descuento"]) && is_numeric($args["descuento"]) ? $args["descuento"] : 0;
+        $this->discount_type = $args["type"] ?? "";
+        $this->discount_start = isset($args["startDate"]) && !empty($args["startDate"]) ? $args["startDate"] : null;
+        $this->discount_end = isset($args["endDate"]) && !empty($args["endDate"]) ? $args["endDate"] : null;
         $this->velocidad_max = $args["velocidad_max"] ?? "";
         $this->zero_to_houndred = $args["zero_to_houndred"] ?? "";
         $this->peso = $args["peso"] ?? "";
@@ -84,7 +89,7 @@ class Vehicle extends ActiveRecord
         $this->caballos_potencia = $args["caballos_fuerza"] ?? "";
         $this->createdAt = $this->createdAt ? $this->createdAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
         $this->updatedAt = $this->updatedAt ? $this->updatedAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
-    }
+    }    
 
     public static function getAllVehicles()
     {
@@ -312,33 +317,49 @@ class Vehicle extends ActiveRecord
         }
     }
 
-    public static function VehicleDiscount() {
-        header('Content-Type: application/json; charset=utf-8');
-        $vehicle = new vehicle($_POST);
-        if (empty($errores)) {
-            $result = $vehicle->addDiscountVehicle();
-            if ($result) {
-                echo json_encode(["message" => "successfuly"]);
-            } else {
-                echo json_encode(["error" => "Ha ocurrido un error"]);
-            }
-        } else {
-            echo json_encode(["message" => "error", "errores" => $errores]);
-        }
-        exit;
-    }
-
     public function addDiscountVehicle() {
         try {
-            $query = "UPDATE Vehicle SET
-            discount = :discount WHERE id = :id";
+            $query = "UPDATE Vehicle SET 
+                      discount = :discount, 
+                      discount_type = :discount_type, 
+                      discount_start = :discount_start, 
+                      discount_end = :discount_end 
+                      WHERE id = :id";
             $params = [
                 ':discount' => $this->discount,
+                ':discount_type' => $this->discount_type,
+                ':discount_start' => $this->discount_start,
+                ':discount_end' => $this->discount_end,
                 ':id' => $this->id
             ];
             $stmt = static::$db->prepare($query);
-            $success = $stmt->execute($params);
-            return $success;
+            return $stmt->execute($params);
+        } catch (PDOException $th) {
+            return false;
+        }
+    }
+
+    public function removeDiscountVehicle() {
+        $this->discount = 0;
+        $this->discount_type = null;
+        $this->discount_start = null;
+        $this->discount_end = null;
+        try {
+            $query = "UPDATE Vehicle SET 
+                      discount = :discount, 
+                      discount_type = :discount_type, 
+                      discount_start = :discount_start, 
+                      discount_end = :discount_end 
+                      WHERE id = :id";
+            $params = [
+                ':discount' => $this->discount,
+                ':discount_type' => $this->discount_type,
+                ':discount_start' => $this->discount_start,
+                ':discount_end' => $this->discount_end,
+                ':id' => $this->id
+            ];
+            $stmt = static::$db->prepare($query);
+            return $stmt->execute($params);
         } catch (PDOException $th) {
             return false;
         }

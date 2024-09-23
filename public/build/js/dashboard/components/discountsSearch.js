@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, descuento, id, imageUrl, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -15,10 +15,21 @@ const Card = ({ nombre, precio, descuento, id, imageUrl, año, modelo, fabricant
     discountImg.src = "/build/src/images/plus.svg"
 
     btnDiscount.appendChild(discountImg)
-    
     btnDiscount.addEventListener("click", handlerAgregar)
+
+    const btnNoDiscount = document.createElement("button")
+    const noDiscountImg = document.createElement("img")
+    btnNoDiscount.id = id;
+    noDiscountImg.src = "/build/src/images/trash.svg"
+
+    btnNoDiscount.appendChild(noDiscountImg)
+    btnNoDiscount.addEventListener("click", handlerEliminar)
     
-    contenedorControllers.appendChild(btnDiscount)
+    if(discount === 0 || discount === null){
+        contenedorControllers.appendChild(btnDiscount)
+    } else {
+        contenedorControllers.appendChild(btnNoDiscount)
+    }
 
     const img = document.createElement("img")
 
@@ -28,13 +39,13 @@ const Card = ({ nombre, precio, descuento, id, imageUrl, año, modelo, fabricant
     const contenedorPrecio = document.createElement("div");
     contenedorPrecio.classList.add("contenedor-precio");
 
-    if (descuento) {
+    if (discount) {
         const precioOriginalHTML = document.createElement("p");
         const precioFinalHTML = document.createElement("p");
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
         
-        const precioFinal = precio - descuento;
+        const precioFinal = precio - discount;
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
 
@@ -132,7 +143,7 @@ async function init(search = null) {
             const customV = {
                 nombre: v.nombre,
                 precio: v.precio,
-                descuento: v.descuento,
+                discount: v.discount,
                 id: v.id,
                 imageUrl: v.imagen,
                 fabricante: v.fabricante,
@@ -319,9 +330,6 @@ async function buscar() {
 
 
 }
-
-
-
 
 const contenedorInputListado = document.querySelector(".product-search__input")
 

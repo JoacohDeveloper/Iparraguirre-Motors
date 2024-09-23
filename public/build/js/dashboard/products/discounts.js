@@ -92,10 +92,10 @@ const ModalAddDiscount = (data) => {
     const modalAddDiscount = document.createElement("form")
     modalAddDiscount.classList.add("form_addvehicle")
     const inputs = [
-        InputSelect("Tipo de descuento", "categoria", ["Dolares", "Porcentaje"], "tipo"),
-        InputText("text", "Descuento", "Descuento", "descuento", "descuento", "")
-        //InputText("date", "¿Cuando inicia?", "startDate",),
-        //InputText("date", "¿Cuando finaliza?", "endDate",)
+        InputSelect("Tipo de descuento", "type", ["Dolares", "Porcentaje"], "tipo"),
+        InputText("text", "Descuento", "Descuento", "descuento", "descuento", ""),
+        InputText("date", "¿Cuando inicia?", "startDate",),
+        InputText("date", "¿Cuando finaliza?", "endDate",)
     ];
 
     modalHeader.appendChild(divSpacer)
@@ -129,29 +129,24 @@ const ModalAddDiscount = (data) => {
             }
         });
 
-        // if (object.nombre.length == 0) {
-        //     error.push({
-        //         title: "Failure",
-        //         error: "El campo nombre se encuentra vacio"
-        //     })
-        // } else if (object.categoria == "-Seleccione-") {
-        //     error.push({
-        //         title: "Failure",
-        //         error: "El campo categoria es obligatorio"
-        //     })
-        // } else if (object.descripcion.length == 0) {
-        //     error.push({
-        //         title: "Failure",
-        //         error: "El campo descripcion se encuentra vacio"
-        //     })
-        // }
+        if (object.type == "-Seleccione-" ) {
+            error.push({
+                title: "Failure",
+                error: "El campo tipo de descuento se encuentra vacio"
+            })
+        } else if (object.descuento.length == 0) {
+            error.push({
+                title: "Failure",
+                error: "El campo descuento es obligatorio"
+            })
+        }
 
         if (error.length != 0) {
             addToast(error);
         } else {
             formdata.append('id', data.id);
             try {
-                const response = await fetch("http://localhost:3000/dashboard/discounts/vehicle", {
+                const response = await fetch("http://localhost:3000/dashboard/discount-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -180,7 +175,127 @@ const ModalAddDiscount = (data) => {
                     error: "Ha ocurrido un error"
                 }]);
             }
+        }
+    })
+    contenedor.appendChild(modal)
 
+    modal.appendChild(modalHeader)
+    modal.appendChild(modalBody)
+    return contenedor;
+}
+
+const ModalRemoveDiscount = (data) => {
+    const contenedor = document.createElement("div")
+
+    contenedor.classList.add("modal-container")
+
+    const modal = document.createElement("div")
+
+    modal.classList.add("modal")
+    modal.classList.add("modal_add-discount")
+
+    const modalHeader = document.createElement("section")
+
+    modalHeader.classList.add("modal-header")
+
+    const btnClose = document.createElement("button")
+
+    const btnImage = document.createElement("img")
+    btnImage.src = "/build/src/images/cross.svg"
+
+    btnClose.appendChild(btnImage)
+
+    const divSpacer = document.createElement("div")
+
+    const modalTitle = document.createElement("h3")
+    modalTitle.textContent = ("Eliminar descuento de " + data.nombre)
+
+    const modalRemoveDiscount = document.createElement("form")
+    modalRemoveDiscount.classList.add("form_addvehicle")
+    const input = InputText("text", "", "Ingresar palabra", "secureword", "secureword", "")
+
+
+    modalHeader.appendChild(divSpacer)
+    modalHeader.appendChild(modalTitle)
+    modalHeader.appendChild(btnClose)
+
+    btnClose.addEventListener("click", e => {
+        toggleBackground()
+        contenedor.remove()
+    })
+
+    const modalBody = document.createElement("section")
+    modalBody.classList.add("modal-body")
+
+    const secureword = document.createElement("p")
+    secureword.textContent = ("Palabra de seguridad: eliminar descuento")
+
+    modalRemoveDiscount.appendChild(secureword)
+    modalRemoveDiscount.appendChild(input)
+
+    const submitInput = document.createElement("button")
+    submitInput.textContent = "Confirmar"
+
+    modalRemoveDiscount.appendChild(submitInput)
+    modalBody.appendChild(modalRemoveDiscount)
+
+    modalRemoveDiscount.addEventListener("submit", async e => {
+        e.preventDefault()
+        const formdata = new FormData(modalRemoveDiscount)
+        const object = {};
+        const error = [];
+        formdata.forEach((value, key) => {
+            if (key !== 'image') {
+                object[key] = value
+            }
+        });
+
+        if (object.secureword.length == 0) {
+            error.push({
+                title: "Failure",
+                error: "Debes ingresar la palabra de seguridad"
+            })
+        } else if (object.secureword != "eliminar descuento") {
+            error.push({
+                title: "Failure",
+                error: "La palabra de seguridad es incorrecta"
+            })
+        }
+
+        if (error.length != 0) {
+            addToast(error);
+        } else {
+            formdata.append('id', data.id);
+            try {
+                const response = await fetch("http://localhost:3000/dashboard/delete-discount-vehiculo", {
+                    method: "POST",
+                    body: formdata
+                });
+                const data = await response.json();
+                if (data?.errores) {
+                    const errors = Object.values(data.errores).map(err => {
+                        const error = document.createElement("div");
+                        error.classList.add("error");
+                        error.textContent = err;
+                        return { title: "Failure", error: err };
+                    });
+                    addToast(errors);
+                } else if (data?.message == "successfuly") {
+                    toggleBackground();
+                    contenedor.remove();
+                } else if (data?.error) {
+                    addToast([{
+                        title: "Failure",
+                        error: "Ha ocurrido un error"
+                    }]);
+                }
+            } catch (err) {
+                console.log(err);
+                addToast([{
+                    title: "Failure",
+                    error: "Ha ocurrido un error"
+                }]);
+            }
         }
     })
     contenedor.appendChild(modal)
@@ -207,6 +322,22 @@ const handlerAgregar = (e) => {
     fetchVehiculoData(vehiculoID)
         .then(data => {
             document.body.appendChild(ModalAddDiscount(data));
+        })
+        .catch(err => {
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error"
+            }]);
+        });
+};
+
+const handlerEliminar = (e) => {
+    const vehiculoID = e.currentTarget.id;
+    toggleBackground();
+
+    fetchVehiculoData(vehiculoID)
+        .then(data => {
+            document.body.appendChild(ModalRemoveDiscount(data));
         })
         .catch(err => {
             addToast([{
