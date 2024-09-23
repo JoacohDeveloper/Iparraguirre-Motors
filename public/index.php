@@ -78,17 +78,13 @@ $router->get("/dashboard", [DashboardController::class, "index"]);
 
 $router->post("/dashboard/agregar-vehiculo", [VehiclesController::class, "agregarVehiculo"]);
 $router->post("/dashboard/obtener-vehiculo", [VehiclesController::class, "getOneVehicle"]);
-$router->post("/dashboard/modificar-vehiculo", [VehiclesController::class, "modificarVehicle"]);
+$router->post("/dashboard/modificar-vehiculo", [VehiclesController::class, "modificarVehicle"]); 
+$router->post("/dashboard/discount-vehiculo", [VehiclesController::class, "discountVehicle"]);
 
 $router->get("/dashboard/products/vehicle", [ProductController::class, "vehicle"]);
 $router->get("/dashboard/products/repuestos", [ProductController::class, "repuestos"]);
-
-
-
-
-
-
-
+$router->get("/dashboard/discounts/vehicle", [ProductController::class, "discountForVehicle"]);
+$router->get("/dashboard/discounts/refractions", [ProductController::class, "discountForRefractions"]);
 
 
 //dashboard user settings
@@ -104,8 +100,7 @@ $router->get("/dashboard/user-settings/usuario", [DashboardController::class, "g
 //tienda
 
 $router->get("/tienda", [TiendaController::class, "tienda"]);
-
-$router->get("/tienda/results", [TiendaController::class,  "results"]);
+$router->get("/catalogo/vehiculos", [TiendaController::class, "vehicles"]);
 
 
 //Rest Vehicles

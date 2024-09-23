@@ -371,8 +371,6 @@ const ModalAdd = () => {
                         text: "El vehiculo fue guardado",
                         icon: "success"
                     });
-
-
                 }
             }
             catch (err) {
@@ -615,7 +613,7 @@ const ModalModificar = (data) => {
                         return { title: "Failure", error: err };
                     });
                     addToast(errors);
-                } else if (data?.message === "successfuly") {
+                } else if (data?.message == "successfuly") {
                     toggleBackground();
                     contenedor.remove();
                 } else if (data?.error) {

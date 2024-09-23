@@ -25,21 +25,6 @@ abstract class DashboardController
         ]);
     }
 
-    public static function productManagment(Router $router)
-    {
-        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
-        $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-
-        $router->render("dashboard/product-managment/index", [
-            "styles" => ["dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index"],
-            "title" => "Dashboard | Product Managment"
-        ]);
-    }
-
     public static function userSettings(Router $router)
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");

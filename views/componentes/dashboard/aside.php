@@ -28,17 +28,18 @@
         </ul>
         <ul aria-label="ddl_2" class="dropDown-list">
             <li>
-                <a title="Coupons" class="aside-element rounded" href="#">
+                <a title="Discounts" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
-                        <img src="/build/src/images/card.svg" alt="Coupons">
-                        <p>Coupons</p>
+                        <img src="/build/src/images/card.svg" alt="Discounts">
+                        <p>Discounts</p>
                     </div>
                     <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
                 </a>
             </li>
             <li>
                 <ul class="dropDown-links dropDownNotDeployed">
-                    <li><a href="/dashboard/coupons">Administrar cupones</a></li>
+                    <li><a href="/dashboard/discounts/vehicle">Descuentos de vehiculos</a></li>
+                    <li><a href="/dashboard/discounts/refractions">Descuentos de repuestos</a></li>
                 </ul>
             </li>
         </ul>

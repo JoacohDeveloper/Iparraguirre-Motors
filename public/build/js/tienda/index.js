@@ -4,16 +4,47 @@
 
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, id }) => {
+const Card = ({ id, nombre, fabricante, modelo, año, precio, descuento }) => {
 
     const card = document.createElement("div")
     card.classList.add("card")
     card.setAttribute("aria-label", id)
-    const text = document.createElement("p")
 
-    text.textContent = `Id: ${id} - Nombre: ${nombre} - Precio: $${precio}`
+    const card_image = document.createElement("div");
+    card_image.classList.add("card_image")
+    card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
 
-    card.appendChild(text)
+
+    const card_info = document.createElement("div");
+    card_info.classList.add("card_info")
+
+    const text_name = document.createElement("p")
+    const text_fabricante = document.createElement("p")
+    const text_modelo = document.createElement("p")
+    const text_year = document.createElement("p")
+    const text_precio = document.createElement("p")
+
+    text_name.textContent = `${nombre}`
+    text_fabricante.textContent = `${fabricante}`
+    text_modelo.textContent = `${modelo}`
+    text_year.textContent = `${año}`
+    text_precio.textContent = `${precio}`
+
+    card_info.appendChild(text_name)
+    card_info.appendChild(text_fabricante)
+    card_info.appendChild(text_modelo)
+    card_info.appendChild(text_year)
+    card_info.appendChild(text_precio)
+
+    const btn = document.createElement("button")
+    btn.textContent = "Agregar al carrito"
+    btn.classList.add("btn_addToCart")
+    btn.id = id;
+
+    card_info.appendChild(btn)
+
+    card.appendChild(card_image)
+    card.appendChild(card_info)
 
     return card
 }
@@ -36,60 +67,59 @@ const Spinner = () => {
 async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
-        if (cardContainer) cardContainer.appendChild(spinner)
-        const url = `http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
+        if (cardContainer) cardContainer.appendChild(spinner);
+        const url = `http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`;
 
-        const response = await fetch(url)
-        spinner.remove()
+        const response = await fetch(url);
+        spinner.remove();
 
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
-        const newData = [...oldData, ...data]
-        //localStorage.setItem("tiendaItems", JSON.stringify(newData))
+        const newData = [...oldData, ...data];
+        console.log(data);
+        //localStorage.setItem("tiendaItems", JSON.stringify(newData));
 
         data.forEach(v => {
             const customV = {
                 nombre: v.nombre,
-                precio: 100,
-                id: v.id
-            }
-            if (cardContainer) cardContainer.appendChild(Card(customV))
-        })
+                precio: v.precio,
+                descuento: v.descuento,
+                id: v.id,
+                fabricante: v.fabricante,
+                modelo: v.modelo,
+                año: v.year
+            };
+            if (cardContainer) cardContainer.appendChild(Card(customV));
+        });
 
         if (data.length > 0) {
+            const lastId = data[data.length - 1].id;
+            const lastEl = cardContainer?.querySelector(`[aria-label='${lastId}']`);
 
-            const lastId = data[data.length - 1].id
-
-            const lastEl = cardContainer?.querySelector(`[aria-label='${lastId}']`)
-
-
-            if (cardContainer)
-                return lastEl
+            if (cardContainer) return lastEl;
         }
 
-        return
-
-    }
-
+        return null;
+    };
 
     let page = 1;
-    let lastEl = await cargarMasVehiculos(page)
+    let lastEl = await cargarMasVehiculos(page);
 
     const observer = new IntersectionObserver(entries => {
-        entries.forEach(async entrie => {
-            if (entrie.isIntersecting) {
-                observer.unobserve(lastEl)
+        entries.forEach(async entry => {
+            if (entry.isIntersecting) {
+                observer.unobserve(lastEl);
                 page++;
-                localStorage.setItem("tiendaPage", JSON.stringify(page))
-                lastEl = await cargarMasVehiculos(page)
-                if (lastEl) observer.observe(lastEl)
+                localStorage.setItem("tiendaPage", JSON.stringify(page));
+                lastEl = await cargarMasVehiculos(page);
+                if (lastEl) observer.observe(lastEl);
             }
-        })
-    })
+        });
+    });
 
-    if (lastEl)
-        observer.observe(lastEl)
+    if (lastEl) observer.observe(lastEl);
 }
+
 
 
 
@@ -105,6 +135,10 @@ const buscador = document.querySelector("#id_product-search__input")
 const resultadoBusqueda = document.querySelector(".result-list")
 const contenedorBuscador = document.querySelector(".search__input")
 
+if (location.pathname === "/catalogo/vehiculos") {
+    init();
+}
+
 contenedorBuscador.addEventListener("submit", async e => {
     e.preventDefault()
     ocultarBusqueda()
@@ -113,22 +147,26 @@ contenedorBuscador.addEventListener("submit", async e => {
         cardContainer.innerHTML = null
     }
 
-
-
-    if (location.pathname.includes("/tienda/results")) {
-
-        await handlerBusqueda(buscador?.value)
-        const url = new URL(location.origin + "/tienda/results");
-        url.searchParams.set('search', buscador?.value);
-        history.replaceState(null, null, url.toString());
+    if (buscador.value) {
+        if (location.pathname.includes("/catalogo/vehiculos")) {
+            await handlerBusqueda(buscador?.value);
+            const url = new URL(location.origin + "/catalogo/vehiculos");
+            url.searchParams.set('search', buscador?.value);
+            history.replaceState(null, null, url.toString());
+        } else {
+            const url = new URL(location.origin + "/catalogo/vehiculos");
+            url.searchParams.set('search', buscador?.value);
+            location.assign(url.toString());
+        }
+    } else {
+        if (location.pathname === "/catalogo/vehiculos") {
+            await init();
+        } else {
+            const url = new URL(location.origin + "/catalogo/vehiculos");
+            history.replaceState(null, null, url.toString());
+            await init();
+        }
     }
-    else {
-        const url = new URL(location.origin + "/tienda/results");
-        url.searchParams.set('search', buscador?.value);
-        location.assign(url.toString())
-    }
-
-
 })
 
 async function handlerBusqueda(search) {
@@ -152,7 +190,7 @@ const ItemBusqueda = (text) => {
 
     item.appendChild(img)
     item.appendChild(p)
-    const url = new URL(location.origin + "/tienda");
+    const url = new URL(location.origin + "/catalogo/vehiculos");
 
     url.searchParams.set("search", text)
 
@@ -179,50 +217,43 @@ if (querySearch) {
 buscador.addEventListener("input", async () => await buscar())
 
 async function buscar() {
-    clearTimeout(timer)
+    clearTimeout(timer);
     timer = setTimeout(async () => {
-        resultadoBusqueda.innerHTML = null
+        resultadoBusqueda.innerHTML = null;
         if (buscador?.value?.length > 0) {
-
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
-
-
+                const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`);
                 if (response.ok) {
-                    const data = await response.json()
+                    const data = await response.json();
                     if (!data?.message || data?.message !== "404") {
-                        resultadoBusqueda.classList.remove("hidden")
-                        const vehicles = Object.values(data)
-                        const vehiclesName = vehicles.map(vehicles => vehicles?.nombre)
-                        const vehiclesNomUnicos = new Set(vehiclesName)
-                        const arregloNoRepetido = [...vehiclesNomUnicos]
+                        resultadoBusqueda.classList.remove("hidden");
+                        const vehicles = Object.values(data);
+                        const vehiclesName = vehicles.map(vehicle => vehicle?.nombre);
+                        const vehiclesNomUnicos = new Set(vehiclesName);
+                        const arregloNoRepetido = [...vehiclesNomUnicos];
 
                         arregloNoRepetido.forEach(vehicle => {
-                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
-                        })
-                        
-                        if (Object.values(data).length == 0) ocultarBusqueda()
+                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle));
+                        });
+
+                        if (Object.values(data).length == 0) ocultarBusqueda();
                     } else {
-                        ocultarBusqueda()
+                        ocultarBusqueda();
                     }
                 }
-
             } catch (err) {
-                console.error(err?.message)
+                console.error(err?.message);
             }
         } else {
-            ocultarBusqueda()
-            // const url = new URL(location.href);
-            // url.searchParams.delete("search")
-            // history.replaceState(null, null, url.toString());
+            ocultarBusqueda();
+            const url = new URL(location.origin + "/catalogo/vehiculos");
+            history.replaceState(null, null, url.toString());
+            if (!location.pathname.includes("/catalogo/vehiculos/results")) {
+                await init();
+            }
         }
-    }, 300)
-
-
+    }, 300);
 }
-
-
-
 
 const contenedorInputListado = document.querySelector(".product-search__input")
 

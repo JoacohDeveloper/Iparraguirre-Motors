@@ -6,6 +6,7 @@ use Models\ActiveRecord;
 use JsonSerializable;
 use PDOException;
 use PDO;
+use DateTime;
 
 class Vehicle extends ActiveRecord
 {
@@ -18,7 +19,9 @@ class Vehicle extends ActiveRecord
         "modelo",
         "fabricante",
         "year",
-        "color", /*"url_img", "description_img",*/
+        "color",
+        /*"url_img",
+        "description_img",*/
         "matricula",
         "transmision",
         "tipo_carroceria",
@@ -30,6 +33,7 @@ class Vehicle extends ActiveRecord
         "puertas",
         "tipo_combustible",
         "precio",
+        "discount",
         "velocidad_max",
         "zero_to_houndred",
         "peso",
@@ -45,7 +49,7 @@ class Vehicle extends ActiveRecord
     // }
 
     public $id, $nombre, $categoria, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
-        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
+        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $velocidad_max, $zero_to_houndred, $peso, $kilometros,
         $caballos_potencia, $createdAt, $updatedAt;
 
     public $vehicleImages = [];
@@ -72,6 +76,7 @@ class Vehicle extends ActiveRecord
         $this->puertas = $args["puertas"] ?? "";
         $this->tipo_combustible = $args["tipo_combustible"] ?? "";
         $this->precio = $args["precio"] ?? "";
+        $this->discount = isset($args["discount"]) && is_numeric($args["discount"]) ? $args["discount"] : 0;
         $this->velocidad_max = $args["velocidad_max"] ?? "";
         $this->zero_to_houndred = $args["zero_to_houndred"] ?? "";
         $this->peso = $args["peso"] ?? "";
@@ -223,12 +228,15 @@ class Vehicle extends ActiveRecord
     {
         $errores = [];
         header('Content-Type: application/json; charset=utf-8');
+        date_default_timezone_set('America/Montevideo');
+        $this->updatedAt = new DateTime();
+        $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
         $vehicle = new vehicle($_POST);
         $errores = $vehicle->validate();
         if (empty($errores)) {
             $result = $vehicle->actualizarVehicle();
             if ($result) {
-                echo json_encode(["message" => "successfully"]);
+                echo json_encode(["message" => "successfuly"]);
             } else {
                 echo json_encode(["error" => "Ha ocurrido un error"]);
             }
@@ -294,6 +302,38 @@ class Vehicle extends ActiveRecord
                 ':kilometros' => $this->kilometros,
                 ':caballos_potencia' => $this->caballos_potencia,
                 ':updatedAt' => $this->updatedAt,
+                ':id' => $this->id
+            ];
+            $stmt = static::$db->prepare($query);
+            $success = $stmt->execute($params);
+            return $success;
+        } catch (PDOException $th) {
+            return false;
+        }
+    }
+
+    public static function VehicleDiscount() {
+        header('Content-Type: application/json; charset=utf-8');
+        $vehicle = new vehicle($_POST);
+        if (empty($errores)) {
+            $result = $vehicle->addDiscountVehicle();
+            if ($result) {
+                echo json_encode(["message" => "successfuly"]);
+            } else {
+                echo json_encode(["error" => "Ha ocurrido un error"]);
+            }
+        } else {
+            echo json_encode(["message" => "error", "errores" => $errores]);
+        }
+        exit;
+    }
+
+    public function addDiscountVehicle() {
+        try {
+            $query = "UPDATE Vehicle SET
+            discount = :discount WHERE id = :id";
+            $params = [
+                ':discount' => $this->discount,
                 ':id' => $this->id
             ];
             $stmt = static::$db->prepare($query);

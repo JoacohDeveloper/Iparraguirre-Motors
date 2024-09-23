@@ -16,13 +16,9 @@ class TiendaController
         ]);
     }
 
-    public static function results(Router $router)
-    {
-
-        $busqueda = $_GET["search"] ?? null;
-
-        $router->render("tienda/results", [
-            "title" => "Iparraguirre Motors | $busqueda",
+    public static function vehicles(Router $router) {
+        $router->render("tienda/vehicle", [
+            "title" => "Iparraguirre Motors | Catalogo de vehiculos",
             "scripts" => ["tienda/index"],
             "styles" => ["tienda/index", "globals", "tienda/results"]
         ]);

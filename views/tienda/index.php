@@ -19,7 +19,7 @@
                     Lorem ipsum dolor sit
                 </p>
 
-                <a href="/tienda/results?search=Dodge">Shop Now</a>
+                <a href="/catalogo/vehiculos">Shop Now</a>
             </article>
         </div>
     </div>

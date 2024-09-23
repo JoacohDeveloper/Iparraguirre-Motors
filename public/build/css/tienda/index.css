@@ -1,3 +1,7 @@
+header {
+  position: unset !important;
+}
+
 /* Fix display from container*/
 .container{
   display: flex;
@@ -6,22 +10,46 @@
 
 /* infinite scroll cards */
 .card-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 2rem;
 }
 
 .card {
-  width: 300px;
-  height: 600px;
+  height: 22rem;
+  width: 28rem;
   display: flex;
-  background-color: #202020;
-  color: #fff;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  border: #202020 solid;
+  border-radius: .8rem;
+}
+
+.dark.card {
+  border: #ffffff solid;
+}
+
+.card_image {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  border-radius: .6rem .6rem 0 0;
+}
+
+.card_info {
+  padding: .6rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  min-height: 25%;
+  background-color: #aa0000;
+  color: #ffffff;
+  border-radius: 0 0 .6rem .6rem;
 }
 
 /* spinner */

@@ -4,7 +4,7 @@
     <a href="<?php echo str_contains($url, "/dashboard") ? "/dashboard" : "/" ?>" class="logo">
         <img src="/build/src/images/LOGO2.png" alt="Logo Iparraguirre Motors">
     </a>
-    <?php if(str_contains($url, "/tienda") || str_contains($url, "/tienda/..")) implementComp("/tienda/buscadorProductos.php") ?>
+    <?php if(str_contains($url, "/catalogo") || str_contains($url, "/catalogo/..")) implementComp("/tienda/buscadorProductos.php") ?>
     <?php include __DIR__ . "/dashboard/navegacion.php"; ?>
     <div class="hello-world">
 

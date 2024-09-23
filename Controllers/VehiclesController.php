@@ -113,4 +113,21 @@ class VehiclesController
         }
         exit;
     }
+
+    public static function discountVehicle() {
+        $errores = [];
+        header('Content-Type: application/json; charset=utf-8');
+        $vehicle = new vehicle($_POST);
+        if (empty($errores)) {
+            $success = $vehicle->VehicleDiscount();
+            if ($success) {
+                echo json_encode(["message" => "successfuly"]);
+            } else {
+                echo json_encode(["error" => "Ha ocurrido un error"]);
+            }
+        } else {
+            echo json_encode(["message" => "error", "errores" => $errores]);
+        }
+        exit;
+    }
 }

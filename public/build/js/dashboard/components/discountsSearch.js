@@ -9,28 +9,16 @@ const Card = ({ nombre, precio, descuento, id, imageUrl, año, modelo, fabricant
 
     const contenedorControllers = document.createElement("div")
     contenedorControllers.classList.add("contenedor-controllers")
-    const btnModificar = document.createElement("button")
-    const modificarImg = document.createElement("img")
-    btnModificar.id = id;
-    modificarImg.src = "/build/src/images/pencil.svg"
+    const btnDiscount = document.createElement("button")
+    const discountImg = document.createElement("img")
+    btnDiscount.id = id;
+    discountImg.src = "/build/src/images/plus.svg"
 
-    const btnEliminar = document.createElement("button")
-    const btnEliminarImg = document.createElement("img")
-    btnEliminar.id = id;
-    btnEliminarImg.src = "/build/src/images/trash.svg"
-
-    btnEliminar.appendChild(btnEliminarImg)
-    btnModificar.appendChild(modificarImg)
-
-
-    btnEliminar.addEventListener("click", handlerEliminar)
+    btnDiscount.appendChild(discountImg)
     
-    btnModificar.addEventListener("click", handlerModificar)
+    btnDiscount.addEventListener("click", handlerAgregar)
     
-
-    contenedorControllers.appendChild(btnModificar)
-    contenedorControllers.appendChild(btnEliminar)
-
+    contenedorControllers.appendChild(btnDiscount)
 
     const img = document.createElement("img")
 
