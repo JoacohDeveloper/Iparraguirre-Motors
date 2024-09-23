@@ -17,12 +17,12 @@ class InformationController
         ]);
     }
 
-    public static function preguntasFrecuentes(Router $router){
-        $router->render("information/FAQ", [
-            "title" => "Iparraguirre Motors | Preguntas frecuentes",
-            "styles" => ["information/faq", "globals"],
-            "scripts" => ["faq/index", "/index"],
-            "description" => "Preguntas frecuentes de Iparraguirre-Motors"
-        ]);
-    }
+    // public static function preguntasFrecuentes(Router $router){
+    //     $router->render("information/faq", [
+    //         "title" => "Iparraguirre Motors | Preguntas frecuentes",
+    //         "styles" => ["information/faq", "globals"],
+    //         "scripts" => ["faq/index", "/index"],
+    //         "description" => "Preguntas frecuentes de Iparraguirre-Motors"
+    //     ]);
+    // }
 }
