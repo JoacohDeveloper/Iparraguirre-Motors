@@ -103,7 +103,9 @@ header {
 header .navegacion ul li .nav-links.actual-index {
   border: 2px solid #be0000;
 }
-
+.dark header .navegacion ul li .nav-links.actual-index {
+  border: 2px solid #be0000;
+}
 header .navegacion ul li .nav-links.actual {
   border: 2px solid #be0000;
 }
@@ -129,7 +131,7 @@ header .navegacion ul li .nav-links.actual {
   margin-top: .5rem;
   z-index: 1;
   right: 0;
-  background-color: white;
+  background-color: #fff;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -202,6 +204,7 @@ ul li a:hover {
   font-weight: 900;
   align-items: center;
   flex-direction: column;
+  
 }
 
 .not_found h2 {
@@ -210,6 +213,11 @@ ul li a:hover {
   margin-bottom: 2rem;
   border-bottom: 1px solid #ccc;
   width: 60%;
+}
+
+#goback{
+border-radius: 0.2rem;
+border: 2px solid #be0000;
 }
 
 .dark .not_found a {
@@ -310,7 +318,7 @@ header .brgMenu {
   align-items: center;
   justify-content: space-between;
   padding: 0 0.8rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #000000;
 }
 
 .mobile-menu-header .quit-menu-img {
@@ -365,6 +373,33 @@ header .brgMenu {
 
   ul > li > .actual-index {
     border: 2px solid #202020;
+  }
+}
+.dark .mobile-menu-content > .navegacion {
+  display: flex;
+  flex-direction: column;
+
+  ul {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  ul > li {
+    height: auto;
+  }
+
+  ul > li a {
+    color: #ffffff;
+
+    &:hover {
+      border: 2px solid #ffffff;
+    }
+  }
+
+  ul > li > .actual-index {
+    border: 2px solid #ffffff;
   }
 }
 
@@ -724,7 +759,7 @@ header .brgMenu {
 /* Footer */
 
 footer {
-  background-color: #111;
+  background-color: #202020;
   padding: 40px 20px;
 }
 .dark footer {
@@ -791,9 +826,28 @@ footer {
 }
 
 .nav-links a:hover, .info-links a:hover {
-  color: #f50014;
-  text-decoration: underline;
+  text-decoration: none;
   font-size: .92rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+  border: 2px solid #ffffff;
+  transition: color 0.3s ease;
+}
+.dark .nav-links a:hover {
+  text-decoration: none;
+  font-size: .92rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem; 
+  border: 2px solid #000000;
+  transition: color 0.3s ease;
+}
+.dark .info-links a:hover {
+  text-decoration: none;
+  font-size: .92rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+  border: 2px solid #000000;
+  transition: color 0.3s ease;
 }
 
 .social-icons {
@@ -817,22 +871,28 @@ footer {
 .payments-icons{
   display: flex;
   justify-content: center;
-  gap: .8rem;
+  gap: 1.6rem;
   img{
     max-width: 50px;
     max-height: 50px;
   }
 }
 
-.social-icons a {
+.social-icons {
   font-size: 1.5rem;
   color: #333;
-  margin-right: 1rem;
   text-decoration: none;
   transition: color 0.3s ease;
+  gap: 1.6rem;
+}
+.social-icons {
+  a {
+      width: 50px;
+      height: 50px;
+  }
 }
 
-.social-icons a:hover {
+.social-icons:hover {
   color: #e63946;
 }
 .footer-section > .card__toggle{

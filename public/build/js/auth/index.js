@@ -172,7 +172,7 @@ anchoPage();
     function iniciarSesion(){
         if (window.innerWidth > 850){
             formularioLogin.style.display = "flex";
-            contenedor_login_register.style.left = "10px";
+            contenedor_login_register.style.left = "60px";
             formularioRegister.style.display = "none";
             caja_trasera_register.style.opacity = "1";
             caja_trasera_login.style.opacity = "0";
@@ -188,7 +188,7 @@ anchoPage();
     function register(){
         if (window.innerWidth > 850){
             formularioRegister.style.display = "flex";
-            contenedor_login_register.style.left = "410px";
+            contenedor_login_register.style.left = "525px";
             formularioLogin.style.display = "none";
             caja_trasera_register.style.opacity = "0";
             caja_trasera_login.style.opacity = "1";

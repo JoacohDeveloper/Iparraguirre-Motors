@@ -560,10 +560,10 @@ textarea {
     top: -0.3rem;
     right: -0.3rem;
     transition: scale 0.3s ease;
+    background-color: #f2f2f29a;
     &:hover {
       scale: 1.03;
     }
-    background-color: #f2f2f29a;
   }
 }
 
