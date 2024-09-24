@@ -204,6 +204,7 @@ async function setFormEdit(target, formContainer) {
                     const previewImg = document.querySelector("#preview_edit_resume__img")
                     setResumeChanges(formdata, previewImg);
                     document.querySelector(".close__settings_forms")?.click()
+                    location.reload();
                 }
 
             } catch (error) {

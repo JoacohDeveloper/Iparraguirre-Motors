@@ -162,6 +162,7 @@ const ModalAddDiscount = (data) => {
                 } else if (data?.message == "successfuly") {
                     toggleBackground();
                     contenedor.remove();
+                    location.reload();
                 } else if (data?.error) {
                     addToast([{
                         title: "Failure",
@@ -283,6 +284,7 @@ const ModalRemoveDiscount = (data) => {
                 } else if (data?.message == "successfuly") {
                     toggleBackground();
                     contenedor.remove();
+                    location.reload();
                 } else if (data?.error) {
                     addToast([{
                         title: "Failure",

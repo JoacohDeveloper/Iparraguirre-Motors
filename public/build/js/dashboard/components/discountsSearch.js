@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, discount_type, id, imageUrl, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -45,10 +45,17 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
         
-        const precioFinal = precio - discount;
+        let precioFinal;
+        if (discount_type == "Dolares") {
+            precioFinal = precio - discount;
+        } else if (discount_type == "Porcentaje") {
+            let montoDescuento = (precio * discount) / 100;
+            precioFinal = precio - montoDescuento;
+        }
+    
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-
+    
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -56,7 +63,7 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }
+    }    
 
     contenedorInformacion.appendChild(contenedorPrecio);
 
@@ -144,6 +151,9 @@ async function init(search = null) {
                 nombre: v.nombre,
                 precio: v.precio,
                 discount: v.discount,
+                discount_type: v.discount_type,
+                discount_start: v.discount_start,
+                discount_end: v.discount_end,
                 id: v.id,
                 imageUrl: v.imagen,
                 fabricante: v.fabricante,
