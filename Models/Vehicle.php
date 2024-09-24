@@ -35,8 +35,6 @@ class Vehicle extends ActiveRecord
         "precio",
         "discount",
         "discount_type",
-        // "discount_start",
-        //"discount_end",
         "velocidad_max",
         "zero_to_houndred",
         "peso",
@@ -52,8 +50,8 @@ class Vehicle extends ActiveRecord
     // }
 
     public $id, $nombre, $categoria, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
-        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $discount_type, //$discount_start, $discount_end, 
-        $velocidad_max, $zero_to_houndred, $peso, $kilometros, $caballos_potencia, $createdAt, $updatedAt;
+        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $discount_type, $velocidad_max, $zero_to_houndred,
+        $peso, $kilometros, $caballos_potencia, $createdAt, $updatedAt;
 
     public $vehicleImages = [];
 
@@ -80,8 +78,6 @@ class Vehicle extends ActiveRecord
         $this->precio = $args["precio"] ?? "";
         $this->discount = isset($args["descuento"]) && is_numeric($args["descuento"]) ? $args["descuento"] : 0;
         $this->discount_type = $args["type"] ?? "";
-        // $this->discount_start = isset($args["startDate"]) && !empty($args["startDate"]) ? $args["startDate"] : null;
-        // $this->discount_end = isset($args["endDate"]) && !empty($args["endDate"]) ? $args["endDate"] : null;
         $this->velocidad_max = $args["velocidad_max"] ?? "";
         $this->zero_to_houndred = $args["zero_to_houndred"] ?? "";
         $this->peso = $args["peso"] ?? "";
@@ -321,15 +317,11 @@ class Vehicle extends ActiveRecord
         try {
             $query = "UPDATE Vehicle SET 
                       discount = :discount, 
-                      discount_type = :discount_type--, 
-                    --   discount_start = :discount_start, 
-                    --   discount_end = :discount_end 
+                      discount_type = :discount_type
                       WHERE id = :id";
             $params = [
                 ':discount' => $this->discount,
                 ':discount_type' => $this->discount_type,
-                // ':discount_start' => $this->discount_start,
-                // ':discount_end' => $this->discount_end,
                 ':id' => $this->id
             ];
             $stmt = static::$db->prepare($query);
@@ -342,20 +334,14 @@ class Vehicle extends ActiveRecord
     public function removeDiscountVehicle() {
         $this->discount = 0;
         $this->discount_type = null;
-        // $this->discount_start = null;
-        // $this->discount_end = null;
         try {
             $query = "UPDATE Vehicle SET 
                       discount = :discount, 
-                      discount_type = :discount_type--, 
-                    --   discount_start = :discount_start, 
-                    --   discount_end = :discount_end 
+                      discount_type = :discount_type
                       WHERE id = :id";
             $params = [
                 ':discount' => $this->discount,
                 ':discount_type' => $this->discount_type,
-                // ':discount_start' => $this->discount_start,
-                // ':discount_end' => $this->discount_end,
                 ':id' => $this->id
             ];
             $stmt = static::$db->prepare($query);
