@@ -9,6 +9,12 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
 
     const contenedorControllers = document.createElement("div")
     contenedorControllers.classList.add("contenedor-controllers")
+
+    const btnView = document.createElement("button")
+    const btnViewImg = document.createElement("img")
+    btnView.id = id;
+    btnViewImg.src = "/build/src/images/eye.svg"
+
     const btnModificar = document.createElement("button")
     const modificarImg = document.createElement("img")
     btnModificar.id = id;
@@ -21,13 +27,16 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
 
     btnEliminar.appendChild(btnEliminarImg)
     btnModificar.appendChild(modificarImg)
+    btnView.appendChild(btnViewImg)
 
 
     btnEliminar.addEventListener("click", handlerEliminar)
     
     btnModificar.addEventListener("click", handlerModificar)
-    
 
+    //btnView.addEventListener("click", handlerPreview)
+    
+    contenedorControllers.appendChild(btnView)
     contenedorControllers.appendChild(btnModificar)
     contenedorControllers.appendChild(btnEliminar)
 
@@ -81,7 +90,7 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
 
-    img.src = imageUrl ?? "/build/src/images/vehicles/Dodge-1969.png";
+    img.src = imageUrl ?? "/build/src/images/vehicles/default.jpg";
     img.alt = nombre;
     imageContainer.appendChild(img)
 
