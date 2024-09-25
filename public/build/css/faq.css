@@ -8,15 +8,15 @@ header .navegacion > ul > li > a {
   transition: border 0.3s ease !important;
   &:hover {
     transition: border 0.3s ease !important;
-    border: 2px solid #be0000 !important;
+    border: 2px solid #b10b0a !important;
   }
 }
 .navegacion > ul > li:nth-child(3) > a {
-  border: 2px solid #be0000 !important;
+  border: 2px solid #b10b0a !important;
   border-radius: .2rem;
   &:hover {
     transition: border 0.3s ease !important;
-    border: 2px solid #be0000 !important;
+    border: 2px solid #b10b0a !important;
   }
 }
 .dark header .navegacion > ul > li > a {
@@ -24,15 +24,15 @@ header .navegacion > ul > li > a {
   transition: border 0.3s ease !important;
   &:hover {
     transition: border 0.3s ease !important;
-    border: 2px solid #be0000 !important;
+    border: 2px solid #b10b0a !important;
   }
 }
 .dark .navegacion > ul > li:nth-child(3) > a {
-  border: 2px solid #be0000 !important;
+  border: 2px solid #b10b0a !important;
   border-radius: .2rem;
   &:hover {
     transition: border 0.3s ease !important;
-    border: 2px solid #be0000 !important;
+    border: 2px solid #b10b0a !important;
   }
 }
 .brgMenuHandler {
@@ -354,7 +354,7 @@ main {
 }
 
 .social-icons:hover {
-  color: #e63946;
+  color: #b10b0a;
 }
 .footer-section > .card__toggle{
   justify-content: center;

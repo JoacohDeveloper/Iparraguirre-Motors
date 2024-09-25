@@ -143,7 +143,7 @@ main{
 .contenedor__login-register form h2{
   font-size: 2rem;
   text-align: center;
-  color: rgb(177, 11, 10);
+  color: #b10b0a;
   padding-bottom: 5%;
 }
 
@@ -165,7 +165,7 @@ main{
   border: none;
   border-radius: .8rem;
   font-size: 17px;
-  background: rgb(177, 11, 10);
+  background: #b10b0a;
   font-weight: 600;
   cursor: pointer;
   color: rgb(255, 255, 255);
@@ -173,7 +173,7 @@ main{
 }
 .contenedor__login-register form .boton:hover{
   transition: ease;
-  background: rgb(160, 1, 1);
+  background: #b10b0a;
   color: rgb(255, 255, 255);
   box-shadow: 3px 3px 5px -2px rgba(0,0,0,0.75);
 }

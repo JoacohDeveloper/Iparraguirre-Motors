@@ -132,7 +132,8 @@ header .navegacion ul li .nav-links.actual {
   z-index: 1;
   right: 0;
   background-color: #fff;
-  border-radius: 5px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   overflow: hidden;
 }
 .dark .navegacion > ul > li > .dropdown-content {
@@ -142,6 +143,7 @@ header .navegacion ul li .nav-links.actual {
 .navegacion > ul > li > .dropdown-content > .card__toggle > #themeSwitcher{
   margin: auto;
   margin-bottom: .4rem;
+  background-color: #ccc;
 }
 .navegacion > ul > li > .dropdown-content.show {
   display: block;
@@ -157,10 +159,10 @@ header .navegacion ul li .nav-links.actual {
   box-sizing: border-box;
 }
 .navegacion > ul > li > .dropdown-content > li > a:hover {
-  background-color: #f1f1f1;
+  background-color: #ccc;
 }
 .dark .navegacion > ul > li > .dropdown-content > li > a:hover {
-  background-color: #1b1b1b;
+  background-color: #202020;
 }
 .navegacion > ul > li.dropdown {
   cursor: pointer;
@@ -530,7 +532,7 @@ header .brgMenu {
 /* Linear loader */
 .linear-loading {
   height: 4px;
-  background-color: #ff0000;
+  background-color: #b10b0a;
   position: relative;
   overflow: hidden;
 }
@@ -622,7 +624,7 @@ header .brgMenu {
   justify-content: center;
   height: 35px;
   min-width: 35px;
-  background-color: #ff0000;
+  background-color: #b10b0a;
   color: #fff;
   font-size: 20px;
   border-radius: 50%;
@@ -677,7 +679,7 @@ header .brgMenu {
   right: 0;
   height: 100%;
   width: 100%;
-  background-color: #ff0000;
+  background-color: #b10b0a;
 }
 
 .progress.active:before {
@@ -695,7 +697,7 @@ header .brgMenu {
   font-size: 20px;
   outline: none;
   border: none;
-  background-color: #ff000091;
+  background-color: #b10b0a;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
@@ -703,7 +705,7 @@ header .brgMenu {
 }
 
 .toast button:hover {
-  background-color: #ff0000;
+  background-color: #b10b0a;
 }
 
 .toast.active ~ button {
@@ -895,7 +897,7 @@ footer {
 }
 
 .social-icons:hover {
-  color: #e63946;
+  color: #b10b0a;
 }
 .footer-section > .card__toggle{
   justify-content: center;
