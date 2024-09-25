@@ -87,6 +87,15 @@ class Vehicle extends ActiveRecord
         return $vehicle->getAll();
     }
 
+    public function delete()
+    {
+        $query = "DELETE FROM Vehicle WHERE id = " . $this->id;
+        $result = self::consultarSQL($query);
+
+        if ($result) return 1;
+        return 0;
+    }
+
     public static function getAllVehiclesByPage($page = 1, $vehicleName = null)
     {
         $inicio = 0;
