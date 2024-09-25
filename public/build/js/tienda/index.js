@@ -4,7 +4,7 @@
 
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ id, nombre, fabricante, modelo, año, precio, descuento }) => {
+const Card = ({ id, nombre, año, precio, descuento, km }) => {
 
     const card = document.createElement("div")
     card.classList.add("card")
@@ -19,29 +19,17 @@ const Card = ({ id, nombre, fabricante, modelo, año, precio, descuento }) => {
     card_info.classList.add("card_info")
 
     const text_name = document.createElement("p")
-    const text_fabricante = document.createElement("p")
-    const text_modelo = document.createElement("p")
-    const text_year = document.createElement("p")
     const text_precio = document.createElement("p")
+    const text_kmyear = document.createElement("p")
 
     text_name.textContent = `${nombre}`
-    text_fabricante.textContent = `${fabricante}`
-    text_modelo.textContent = `${modelo}`
-    text_year.textContent = `${año}`
-    text_precio.textContent = `${precio}`
+    text_precio.textContent = ` US$ ${precio}`
+    text_kmyear.textContent = `${año} | ${km}` 
+
 
     card_info.appendChild(text_name)
-    card_info.appendChild(text_fabricante)
-    card_info.appendChild(text_modelo)
-    card_info.appendChild(text_year)
     card_info.appendChild(text_precio)
-
-    const btn = document.createElement("button")
-    btn.textContent = "Agregar al carrito"
-    btn.classList.add("btn_addToCart")
-    btn.id = id;
-
-    card_info.appendChild(btn)
+    card_info.appendChild(text_kmyear)
 
     card.appendChild(card_image)
     card.appendChild(card_info)
@@ -85,8 +73,7 @@ async function init(search = null) {
                 precio: v.precio,
                 descuento: v.descuento,
                 id: v.id,
-                fabricante: v.fabricante,
-                modelo: v.modelo,
+                km: v.kilometros,
                 año: v.year
             };
             if (cardContainer) cardContainer.appendChild(Card(customV));

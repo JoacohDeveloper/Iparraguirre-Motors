@@ -1,11 +1,15 @@
 header {
   position: unset !important;
 }
-
+.dropdown-content{
+  z-index: 999;
+}
 /* Fix display from container*/
 .container{
   display: flex;
   flex-direction: column;
+  z-index: 1;
+  background-color: #f1f1f1;
 }
 
 /* infinite scroll cards */
@@ -14,44 +18,98 @@ header {
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem;
+  z-index: 5;
 }
 
 .card {
-  height: 22rem;
-  width: 28rem;
+  box-shadow: 0.5px 0.5px 4px 0px rgba(0,0,0,0.55);
+  cursor: pointer;
+  height: 20rem;
+  width: 18rem;
   display: flex;
   flex-direction: column;
-  border: #202020 solid;
-  border-radius: .8rem;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.card:hover {
+  transition: 0.3s ease;
+  box-shadow: 1px 1px 14px 0px rgba(0,0,0,0.47);
+  color: #202020;
+
 }
 
-.dark.card {
-  border: #ffffff solid;
+.dark .card {
+  box-shadow: 1px 1px 3px 0px rgba(192, 192, 192, 0.55);
+  
+  &:hover {
+    transition: 0.3s ease;
+    box-shadow: 1px 1px 10px 0px rgba(255, 255, 255, 0.47);
+    color: #202020;
+  }
 }
 
 .card_image {
-  height: 100%;
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position-x: center;
-  border-radius: .6rem .6rem 0 0;
+  z-index: 999;
+  width: 345px;
+  height: 230px;
+  background-size: cover;
+  border-bottom:#c0c0c0 solid .4px;
 }
 
 .card_info {
-  padding: .6rem;
+  padding: 0 16px 16px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   font-size: 1rem;
-  min-height: 25%;
-  background-color: #aa0000;
-  color: #ffffff;
-  border-radius: 0 0 .6rem .6rem;
+  min-height: 8em;
+  background-color: #ffffffbe;
+  color: #000000;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
+.dark .card_info { 
+  color: #fff;
+  background-color: #202020;
+
+}
+.card_info p:nth-child(1){
+  
+  font-size: 24px;
+  margin-top: 16px;
+}
+.card_info p:nth-child(2){
+  text-decoration: solid;
+  font-size: 24px;
+  margin: 12px 0 0;
+}
+
+.card_info p:nth-child(3){
+  font-weight: 400;
+  overflow: hidden;
+  font-size: 14px;
+  margin: 8px 0 4px;
+}
+
+button{
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.2rem;
+  font-size: 0.7rem;
+  color: #ffffff;
+  background-color: #000000;
+  z-index: 10;
+  &:hover {
+    font-size: 0.72rem;
+    transition: 0.3s ease;
+    box-shadow: 1px 1px 14px 0px rgba(0,0,0,0.47);
+}
+}
 /* spinner */
 
 .spinner-square {
@@ -117,7 +175,11 @@ header {
   border: 1px solid #202020;
   border-radius: 1rem;
 }
-
+.dark .search__input {
+  display: flex;
+  border: 0.5px solid #ffffffb6;
+  border-radius: 1rem;
+}
 .search__input > button {
   all: unset;
   cursor: pointer;
@@ -134,12 +196,20 @@ header {
     background-color: #ccccccd7;
   }
 }
+.dark .search__input > button {
+  background-color: #ccccccd7;
+}
 .search__input > input {
   outline: unset;
   border: none;
   border-radius: 1rem;
   width: 100%;
   padding: 0.3rem 1rem;
+}
+
+.dark .search__input > input {
+background-color: #202020;
+color: #ccc;
 }
 
 .search__input:has(> input:focus) {
@@ -150,6 +220,10 @@ header {
   .product-search__input {
     width: 70%;
   }
+  .card{
+    height: 18rem;
+    width: 18rem;
+  }
 }
 
 .result-list {
@@ -157,7 +231,7 @@ header {
   max-height: 15rem;
   position: absolute;
   top: 2rem;
-  z-index: 200;
+  z-index: 2;
   background-color: #fff;
   border: 2px solid #ccc;
   overflow-y: auto;

@@ -8,7 +8,7 @@
 
             <h1>Iparraguirre <br> <span>Motors</span></h1>
             <p>Descubre el lujo en Iparraguirre Motors, tu agencia de autos exóticos.<br> Encuentra tu vehículo de ensueño entre nuestra selección exclusiva. <br> ¡Bienvenido a la excelencia automotriz!</p>
-            <a href="/tienda">Mostrar Catalogo</a>
+            <a href="/catalogo/vehiculos">Mostrar Catalogo</a>
         </div>
         <div class="downside">
             <div class="empty"></div>
@@ -39,8 +39,8 @@
         <h4>Dodge Charger 1968</h4>
         <p>$ 78,800</p>
         <div class="bestSelled__modelIntro-buttonGroup">
-            <button>Change Model</button>
-            <button>View More</button>
+            <button>Catálogo</button>
+            <button>Ver más</button>
             <button>Test Drive</button>
         </div>
     </div>

@@ -4,7 +4,10 @@ body{
   backdrop-filter: blur(1rem);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+}
+.mobile-menu-content{
+  display: none !important;
 }
 .dark .navegacion ul li a {
 
@@ -42,27 +45,26 @@ footer{
 }
 
 main{
-  width: 100%;
+  width: 100vw;
   padding: 20px;
   margin: auto;
   margin-top: 100px;
 }
 
 .contenedor__todo{
-  width: 100%;
-  max-width: 60%;
+  width: 100vw;
+  max-width: 56em;
   margin: auto;
   position: relative;
 }
 
 .caja__trasera{
   height: 25em;
-  width: 100%;
+  width: 56em;
   padding: 10px 20px;
   display: flex;
   justify-content: center;
   background-color:  rgba(32, 32, 32, 0.801);
-
 }
 
 .caja__trasera div{
@@ -110,7 +112,7 @@ main{
 .contenedor__login-register{
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 56.8vw;
   max-width: 380px;
   position: relative;
   top: -242px;
@@ -190,14 +192,14 @@ main{
 }
 @media (max-width: 768px) {
   body{
-    height: 100vh;
+    min-height: 100vh;
   }
   .contenedor__todo {
     max-width: 90%;
   }
 
   .caja__trasera {
-    display: none;
+   display: none;  
   }
 
   .caja__trasera div {

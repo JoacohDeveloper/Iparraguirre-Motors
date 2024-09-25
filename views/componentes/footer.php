@@ -31,7 +31,7 @@
         <li><a href="/">Inicio</a></li>
         <li><a href="/tienda">Tienda</a></li>
         <li><a href="/cuenta">Cuenta</a></li>
-        <li><a href="/FAQ">FAQ</a></li>
+        <li><a href="/faq">FAQ</a></li>
       </ul>
     </div>
 

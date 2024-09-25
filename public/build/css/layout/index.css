@@ -56,20 +56,20 @@ header .navegacion ul li .nav-links {
   text-transform: uppercase;
   font-weight: 600;
   transition: color 0.3s ease;
-  color: #ffffff;
+  color: #fff;
   border: 2px solid transparent;
   padding: 0.5rem 0.8rem;
   border-radius: 0.2rem;
   transition: border 0.3s ease;
   &:hover {
-    border: 2px solid #000000;
+    border: 2px solid #fff;
   }
 }
  .dark header .navegacion ul li .nav-links {
     text-transform: uppercase;
     font-weight: 600;
     transition: color 0.3s ease;
-    color: #ffffff;
+    color: #fff;
     border: 2px solid transparent;
     padding: 0.5rem 0.8rem;
     border-radius: 0.2rem;
@@ -445,16 +445,14 @@ main {
   padding: 0.6rem 0.8rem;
   border-radius: 0.2rem;
   transition: background-color 0.3s ease, color 0.3s ease;
+
   &:first-child {
     background-color: #000;
     color: #fff;
-    &:hover {
-      background-color: #202020;
-    }
   }
-
   &:hover {
-    background-color: #f2f2f2;
+    color: #fff;
+    background-color: #202020;
   }
 }
 

@@ -9,7 +9,7 @@
             <div class="errores"></div>
             <div>
                 <label for="email" class="inputs_txt">Email</label>
-                <input class="inputs" id="email" type="text" name="email" placeholder="Usuario o Email">
+                <input class="inputs" id="email" type="text" name="email" placeholder="User or Email">
                 <div class="input-underline"></div>
             </div>
             <div>

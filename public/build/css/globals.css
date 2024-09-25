@@ -289,7 +289,7 @@ header .brgMenu {
   width: 75%;
   height: 100svh;
   right: 0;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #202020;
   background-color: #fff;
   /* background: linear-gradient(to bottom, #202020, #fff); */
   /* transition: ; */
@@ -344,6 +344,8 @@ header .brgMenu {
 }
 
 .mobile-menu-content {
+  background-color: #202020;
+  border: none;
   height: 100%;
   width: 100%;
 }

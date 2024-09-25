@@ -35,6 +35,12 @@ form {
   font-family: "Istok Web", sans-serif;
   font-style: italic;
 }
+.dark #email{
+  color: #fff;
+}
+.dark #password{
+  color: #fff;
+}
 #password_txt {
   display: flex;
   flex-direction: column;
@@ -47,6 +53,9 @@ form {
   flex-direction: column;
   font-size: 0.75rem;
   font-family: "Istok Web", sans-serif;
+}
+.dark .inputs_txt{
+  color: #fff;
 }
 
 .inputs {
@@ -80,6 +89,9 @@ form {
   display: flex;
   height: 1.7rem;
 }
+.dark .remember{
+  color: #fff;
+}
 .remember > input {
   cursor: pointer;
 }
@@ -94,6 +106,10 @@ form {
 }
 #terms_txt {
   margin: 0;
+}
+
+.dark #terms_txt{
+  color: #fff;
 }
 
 .terms > input {
