@@ -28,7 +28,7 @@ class Router
         $apiRoutes = ["/api/v1/vehicles"];
 
         $method = $_SERVER["REQUEST_METHOD"];
-        $urlActual = $_SERVER["PATH_INFO"] ?? "/";
+        $urlActual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
 
         if (str_ends_with($urlActual, "/") && $urlActual != "/") {
             $urlActual = rtrim($urlActual, "/");

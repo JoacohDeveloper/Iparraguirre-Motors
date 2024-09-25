@@ -3,7 +3,7 @@
         'name' => 'alumno/iparraguirre-motors',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9a4522760557f2f1654674faf872fe9313f5f8ce',
+        'reference' => 'fb6b5f8cf9947ecb9e8f7bce4d52acd1a70c9144',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'alumno/iparraguirre-motors' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9a4522760557f2f1654674faf872fe9313f5f8ce',
+            'reference' => 'fb6b5f8cf9947ecb9e8f7bce4d52acd1a70c9144',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
