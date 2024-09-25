@@ -52,7 +52,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, imageUrl, año, mod
             let montoDescuento = (precio * discount) / 100;
             precioFinal = precio - montoDescuento;
         }
-    
+
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
     
@@ -87,7 +87,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, imageUrl, año, mod
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
 
-    img.src = imageUrl ?? "/build/src/images/vehicles/Dodge-1969.png";
+    img.src = imageUrl ?? "/build/src/images/vehicles/default.jpg";
     img.alt = nombre;
     imageContainer.appendChild(img)
 

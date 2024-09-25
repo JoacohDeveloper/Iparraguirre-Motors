@@ -451,9 +451,17 @@ async function submitEventHandler(event) {
                 });
                 addToast(errors);
             } else if (data?.message == "successfuly") {
-                setTimeout(function() {
-                    window.location.href = 'http://localhost:3000/dashboard/login';
-                }, 3000);
+                Swal.fire({
+                    title: "Éxito",
+                    text: "Se ha borrado tu cuenta",
+                    icon: "success"
+                });
+                const btn_swal = document.querySelector(".swal2-confirm");
+                if(btn_swal){
+                    btn_swal.addEventListener("click", () =>{
+                        location.reload();
+                    })
+                }
             }
         } catch (err) {
             addToast([{
@@ -515,18 +523,22 @@ async function submitEventHandler2(event) {
                 body: formdata
             });
             const data = await response.json();
-            if (data?.errores) {
-                const errors = Object?.values(data?.errores).map(err => {
-                    const error = document.createElement("div");
-                    error.classList.add("error");
-                    error.textContent = err;
-                    return { title: "Failure", error: err };
-                });
-                addToast(errors);
+            if (data?.error) {
+                
+                addToast([{ title: "Failure", error: data.error}]);
+                return
             } else if (data?.message == "successfuly") {
-                setTimeout(function() {
-                    window.location.href = 'http://localhost:3000/dashboard/login';
-                }, 3000);
+                Swal.fire({
+                    title: "Éxito",
+                    text: "Se ha cambiado tu contraseña",
+                    icon: "success"
+                });
+                const btn_swal = document.querySelector(".swal2-confirm");
+                if(btn_swal){
+                    btn_swal.addEventListener("click", () =>{
+                        window.location.href = 'http://localhost:3000/dashboard/login';
+                    })
+                }
             }
         } catch (err) {
             addToast([{
@@ -534,5 +546,43 @@ async function submitEventHandler2(event) {
                 error: "Ha ocurrido un error"
             }]);
         }
+    }
+}
+
+const btn_defaultImage = document.querySelector(".delete-picture-configuration__edit");
+if(btn_defaultImage) btn_defaultImage.addEventListener("click", defaultImage);
+
+async function defaultImage(event) {
+    event.preventDefault();
+    try {
+        const response = await fetch("http://localhost:3000/dashboard/user-default-image");
+        const data = await response.json();
+        console.log(data)
+        if (data?.errores) {
+            const errors = Object?.values(data?.errores).map(err => {
+                const error = document.createElement("div");
+                error.classList.add("error");
+                error.textContent = err;
+                return { title: "Failure", error: err };
+            });
+            addToast(errors);
+        } else if (data?.message == "successfuly") {
+            Swal.fire({
+                title: "Éxito",
+                text: "Se ha cambiado foto de perfil",
+                icon: "success"
+            });
+            const btn_swal = document.querySelector(".swal2-confirm");
+            if(btn_swal){
+                btn_swal.addEventListener("click", () =>{
+                    location.reload();
+                })
+            }
+        }
+    } catch (err) {
+        addToast([{
+            title: "Failure",
+            error: "Ha ocurrido un error"
+        }]);
     }
 }

@@ -294,4 +294,24 @@ class User extends ActiveRecord
     {
         return boolval($this->isAdmin);
     }
+
+    public function defaultImage()
+    {
+        $result = null;
+        $this->imagen = "\build\src\images\users\default.jpg";
+        try {
+            $query = "UPDATE User SET 
+                      imagen = :imagen, 
+                      WHERE uuid = :uuid";
+            $params = [
+                ':imagen' => $this->imagen,
+                ':id' => $this->uuid
+            ];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+            return $result;
+        } catch (PDOException $th) {
+            return $result;
+        }
+    }
 }

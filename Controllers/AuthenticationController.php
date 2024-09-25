@@ -188,6 +188,37 @@ abstract class AuthenticationController
         exit;
     }
 
+    public static function eliminarImage()
+    {
+        $errores = [];
+
+        $usuario = $_SESSION["usuario"] ?? null;
+        $usuarioDB = User::getUser($usuario->getEmail());
+
+        if (!isset($usuario)) return;
+
+        $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
+        if (!file_exists($dirname)) {
+            mkdir($dirname);
+        }
+
+        $errores = $usuarioDB->validate();
+
+        if (empty($errores)) {
+
+            $imagen = $usuario->getImagen();
+            unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $imagen));
+
+            
+            $usuario->defaultImage();
+            $_SESSION["usuario"] = $usuario;
+            echo json_encode(["message" => "successfuly"]);
+            exit;
+    }
+        echo json_encode(["message" => "error", "errores" => $errores]);
+        exit;
+    }
+
     public static function logout()
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {

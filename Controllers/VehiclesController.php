@@ -12,70 +12,72 @@ class VehiclesController
 {
 
     public static function agregarVehiculo()
-    {
-        $errores = [];
-        header('Content-Type: application/json; charset=utf-8');
+{
+    $errores = [];
+    header('Content-Type: application/json; charset=utf-8');
 
-        $vehicle = new vehicle($_POST);
-        $errores = $vehicle->validate();
-        if (empty($errores)) {
-            $result = $vehicle->registrarVehicle();
-            if ($result) {
-                //procedo a crear las imagenes de ese vehiculo
-                $imagenes = [];
+    $vehicle = new vehicle($_POST);
+    $errores = $vehicle->validate();
 
-                if (!is_null($_FILES['imagen']['name'])) {
-                    $totalFiles = count($_FILES['imagen']['name']);
-                    for ($i = 0; $i < $totalFiles; $i++) {
-                        $fileName = $_FILES['imagen']['name'][$i];
-                        $fileTmpName = $_FILES['imagen']['tmp_name'][$i];
+    if (empty($errores)) {
+        $result = $vehicle->registrarVehicle();
 
+        if ($result) {
+            // Procedo a crear las imágenes de ese vehículo
+            $imagenes = [];
 
-                        $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/vehicles/";
-                        if (!file_exists($dirname)) {
-                            mkdir($dirname);
-                        }
+            // Verifica si 'imagen' existe en $_FILES
+            if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['name'][0]) && $_FILES['imagen']['error'][0] === UPLOAD_ERR_OK) {
+                $totalFiles = count($_FILES['imagen']['name']);
+                for ($i = 0; $i < $totalFiles; $i++) {
+                    $fileName = $_FILES['imagen']['name'][$i];
+                    $fileTmpName = $_FILES['imagen']['tmp_name'][$i];
 
-                        $fileExtArray = explode(".", $fileName);
-                        $fileExt = $fileExtArray[count($fileExtArray) - 1];
+                    $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/vehicles/";
+                    if (!file_exists($dirname)) {
+                        mkdir($dirname, 0755, true);
+                    }
 
+                    $fileExtArray = explode(".", $fileName);
+                    $fileExt = end($fileExtArray);
+                    $fileHash = md5($fileName . rand(0, 50) . gmdate("d-m-Y"));
+                    $nuevaImagen = $fileHash . ".$fileExt";
+                    $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
+                    $x = str_replace("\\", "/", $dirname . $nuevaImagen);
 
-                        $fileHash = md5($fileName . rand(0, 50) . gmdate("dd-MM-YYYY"));
+                    $manager = new ImageManager(new Driver());
 
-                        $nuevaImagen = $fileHash . ".$fileExt";
-
-                        $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
-
-
-                        $x = str_replace("\\", "/", $dirname . $nuevaImagen);
-
-
-                        $manager = new ImageManager(new Driver());
-
-
-                        $res = move_uploaded_file($fileTmpName, $x);
-
+                    // Mueve el archivo subido
+                    if (move_uploaded_file($fileTmpName, $x)) {
+                        // Procesa la imagen
                         $imagen = $manager->read($x);
                         $imagen->resize(1280, 720);
                         $imagen->save(quality: 70);
 
                         $fileImg = new VehicleImage($result, $x, "vehicle img");
-
                         $fileImg->create();
-
                         $imagenes[] = $fileImg;
+                    } else {
+                        $errores[] = "Error al mover el archivo: $fileName";
                     }
                 }
-                echo json_encode(["message" => "succesfuly"]);
+            } 
+
+            if (!empty($errores)) {
+                echo json_encode(["status" => "error", "message" => "Ha ocurrido un error", "detalles" => $errores]);
             } else {
-                $vehicle->delete();
-                echo json_encode(["error" => "Ha ocurrido un error"]);
+                echo json_encode(["status" => "success", "message" => "Las imágenes se han subido exitosamente."]);
             }
         } else {
-            echo json_encode(["message" => "error", "errores" => $errores]);
+            $vehicle->delete();
+            echo json_encode(["status" => "error", "message" => "Error al registrar el vehículo"]);
         }
-        exit;
+    } else {
+        echo json_encode(["status" => "error", "message" => "Errores de validación", "errores" => $errores]);
     }
+    exit;
+}
+
 
     public static function getOneVehicle()
     {

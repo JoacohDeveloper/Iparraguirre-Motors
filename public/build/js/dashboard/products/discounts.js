@@ -162,7 +162,17 @@ const ModalAddDiscount = (data) => {
                 } else if (data?.message == "successfuly") {
                     toggleBackground();
                     contenedor.remove();
-                    location.reload();
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "Se ha aplicado el descuento",
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if(btn_swal){
+                        btn_swal.addEventListener("click", () =>{
+                            document.querySelector(".product-search__input").querySelector("button").click();
+                        })
+                    }
                 } else if (data?.error) {
                     addToast([{
                         title: "Failure",
@@ -284,7 +294,17 @@ const ModalRemoveDiscount = (data) => {
                 } else if (data?.message == "successfuly") {
                     toggleBackground();
                     contenedor.remove();
-                    location.reload();
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "Se ha eliminado el descuento",
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if(btn_swal){
+                        btn_swal.addEventListener("click", () =>{
+                            document.querySelector(".product-search__input").querySelector("button").click();
+                        })
+                    }
                 } else if (data?.error) {
                     addToast([{
                         title: "Failure",
