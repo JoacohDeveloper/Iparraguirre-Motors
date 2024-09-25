@@ -93,9 +93,9 @@ const ModalAddDiscount = (data) => {
     modalAddDiscount.classList.add("form_addvehicle")
     const inputs = [
         InputSelect("Tipo de descuento", "type", ["Dolares", "Porcentaje"], "tipo"),
-        InputText("text", "Descuento", "Descuento", "descuento", "descuento", ""),
-        InputText("date", "¿Cuando inicia?", "startDate",),
-        InputText("date", "¿Cuando finaliza?", "endDate",)
+        InputText("text", "Descuento", "Descuento", "descuento", "descuento", "")//,
+        // InputText("date", "¿Cuando inicia?", "startDate",),
+        // InputText("date", "¿Cuando finaliza?", "endDate",)
     ];
 
     modalHeader.appendChild(divSpacer)

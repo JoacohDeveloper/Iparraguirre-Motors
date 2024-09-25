@@ -88,6 +88,9 @@ $router->get("/dashboard/discounts/vehicle", [ProductController::class, "discoun
 $router->get("/dashboard/discounts/refractions", [ProductController::class, "discountForRefractions"]);
 
 
+$router->get("/dashboard/products/vehicle/preview", [ProductController::class, "vehiclePreview"]);
+
+
 //dashboard user settings
 
 $router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
