@@ -21,55 +21,54 @@ class VehiclesController
         if (empty($errores)) {
             $result = $vehicle->registrarVehicle();
             if ($result) {
-
                 //procedo a crear las imagenes de ese vehiculo
-
                 $imagenes = [];
 
-                $totalFiles = count($_FILES['imagen']['name']);
+                if (!is_null($_FILES['imagen']['name'])) {
+                    $totalFiles = count($_FILES['imagen']['name']);
+                    for ($i = 0; $i < $totalFiles; $i++) {
+                        $fileName = $_FILES['imagen']['name'][$i];
+                        $fileTmpName = $_FILES['imagen']['tmp_name'][$i];
 
-                for ($i = 0; $i < $totalFiles; $i++) {
-                    $fileName = $_FILES['imagen']['name'][$i];
-                    $fileTmpName = $_FILES['imagen']['tmp_name'][$i];
+
+                        $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/vehicles/";
+                        if (!file_exists($dirname)) {
+                            mkdir($dirname);
+                        }
+
+                        $fileExtArray = explode(".", $fileName);
+                        $fileExt = $fileExtArray[count($fileExtArray) - 1];
 
 
-                    $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/vehicles/";
-                    if (!file_exists($dirname)) {
-                        mkdir($dirname);
+                        $fileHash = md5($fileName . rand(0, 50) . gmdate("dd-MM-YYYY"));
+
+                        $nuevaImagen = $fileHash . ".$fileExt";
+
+                        $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
+
+
+                        $x = str_replace("\\", "/", $dirname . $nuevaImagen);
+
+
+                        $manager = new ImageManager(new Driver());
+
+
+                        $res = move_uploaded_file($fileTmpName, $x);
+
+                        $imagen = $manager->read($x);
+                        $imagen->resize(1280, 720);
+                        $imagen->save(quality: 70);
+
+                        $fileImg = new VehicleImage($result, $x, "vehicle img");
+
+                        $fileImg->create();
+
+                        $imagenes[] = $fileImg;
                     }
-
-                    $fileExtArray = explode(".", $fileName);
-                    $fileExt = $fileExtArray[count($fileExtArray) - 1];
-
-
-                    $fileHash = md5($fileName . rand(0, 50) . gmdate("dd-MM-YYYY"));
-
-                    $nuevaImagen = $fileHash . ".$fileExt";
-
-                    $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
-
-
-                    $x = str_replace("\\", "/", $dirname . $nuevaImagen);
-
-
-                    $manager = new ImageManager(new Driver());
-
-
-                    $res = move_uploaded_file($fileTmpName, $x);
-
-                    $imagen = $manager->read($x);
-                    $imagen->resize(1280, 720);
-                    $imagen->save(quality: 70);
-
-                    $fileImg = new VehicleImage($result, $x, "vehicle img");
-
-                    $fileImg->create();
-
-                    $imagenes[] = $fileImg;
                 }
-
                 echo json_encode(["message" => "succesfuly"]);
             } else {
+                $vehicle->delete();
                 echo json_encode(["error" => "Ha ocurrido un error"]);
             }
         } else {

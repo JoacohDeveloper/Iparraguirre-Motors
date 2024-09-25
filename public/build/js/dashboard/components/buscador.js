@@ -31,12 +31,14 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
 
 
     btnEliminar.addEventListener("click", handlerEliminar)
-    
+
     btnModificar.addEventListener("click", handlerModificar)
 
     //btnView.addEventListener("click", handlerPreview)
     
     contenedorControllers.appendChild(btnView)
+
+
     contenedorControllers.appendChild(btnModificar)
     contenedorControllers.appendChild(btnEliminar)
 
@@ -221,20 +223,20 @@ contenedorBuscador.addEventListener("submit", async e => {
 
     if (buscador.value) {
 
-        if (location.pathname.includes("/dashboard/products")) {
+        if (location.pathname.includes("/dashboard/products/vehicle")) {
 
             await handlerBusqueda(buscador?.value)
-            const url = new URL(location.origin + "/dashboard/products");
+            const url = new URL(location.origin + "/dashboard/products/vehicle");
             url.searchParams.set('search', buscador?.value);
             history.replaceState(null, null, url.toString());
         }
         else {
-            const url = new URL(location.origin + "/dashboard/products");
+            const url = new URL(location.origin + "/dashboard/products/vehicle");
             url.searchParams.set('search', buscador?.value);
             location.assign(url.toString())
         }
     } else {
-        const url = new URL(location.origin + "/dashboard/products");
+        const url = new URL(location.origin + "/dashboard/products/vehicle");
         history.replaceState(null, null, url.toString());
 
         await init()
@@ -269,7 +271,7 @@ const ItemBusqueda = (text) => {
 
     item.appendChild(img)
     item.appendChild(p)
-    const url = new URL(location.origin + "/dashboard/products");
+    const url = new URL(location.origin + "/dashboard/products/vehicle");
 
     url.searchParams.set("search", text)
 
@@ -318,9 +320,9 @@ async function buscar() {
                         const arregloNoRepetido = [...vehiclesNomUnicos]
 
                         arregloNoRepetido.forEach(vehicle => {
-                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
+                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
                         })
-                        
+
                         if (Object.values(data).length == 0) ocultarBusqueda()
                     } else {
                         ocultarBusqueda()
