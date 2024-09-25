@@ -13,9 +13,8 @@
                         <ul class="steps">
                             <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">My Profile</a></li>
                             <li aria-label="step-2" id="notifications"><a href="#">Notifications</a></li>
-                            <li aria-label="step-3" id="security"><a href="#">Security</a></li>
-                            <li aria-label="step-4" id="change-pass"><a href="#">Change Password</a></li>
-                            <li aria-label="step-5" id="delete-account"><a href="#">Delete Account</a></li>
+                            <li aria-label="step-3" id="change-pass"><a href="#">Change Password</a></li>
+                            <li aria-label="step-4" id="delete-account"><a href="#">Delete Account</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -91,10 +90,7 @@
                 <section class="dashboard-fit__content__notifications" aria-step="2">
                     <h4>Notifications</h4>
                 </section>
-                <section class="dashboard-fit__content__security" aria-step="3">
-                    <h4>Security</h4>
-                </section>
-                <section class="dashboard-fit__content__password" aria-step="4">
+                <section class="dashboard-fit__content__password" aria-step="3">
                     <h4>Change Password</h4>
                     <form class="form_changePassword">
                         <label for="olderPassword">
@@ -112,7 +108,7 @@
                         <input type="submit" value="Cambiar">
                     </form>
                 </section>
-                <section class="dashboard-fit__content__delelteAcc" aria-step="5">
+                <section class="dashboard-fit__content__delelteAcc" aria-step="4">
                     <h4>Eliminar mi cuenta</h4>
                     <h6>¿Estas seguro?</h6>
                     <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>

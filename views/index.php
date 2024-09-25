@@ -39,9 +39,9 @@
         <h4>Dodge Charger 1968</h4>
         <p>$ 78,800</p>
         <div class="bestSelled__modelIntro-buttonGroup">
-            <button>Catálogo</button>
-            <button>Ver más</button>
-            <button>Test Drive</button>
+        <a href="/catalogo/vehiculos">Catálogo</a>
+        <a href="">Ver más</a>
+        <a href="">Test Drive</a>
         </div>
     </div>
     </div>

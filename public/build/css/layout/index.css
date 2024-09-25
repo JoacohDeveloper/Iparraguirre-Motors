@@ -438,7 +438,7 @@ main {
   gap: 0.6rem;
 }
 
-.bestSelled__modelIntro-buttonGroup > button {
+.bestSelled__modelIntro-buttonGroup > a {
   all: unset;
   border: 2px solid #000;
   cursor: pointer;
@@ -456,7 +456,7 @@ main {
   }
 }
 
-.dark .bestSelled__modelIntro-buttonGroup > button {
+.dark .bestSelled__modelIntro-buttonGroup > a {
   color: #fff;
   border: 2px solid #fff;
   &:first-child {

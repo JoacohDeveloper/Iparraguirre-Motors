@@ -111,16 +111,16 @@ abstract class DashboardController
                         $_SESSION["usuario"] = null;
                         echo json_encode(["message" => "successfuly"]);
                     } else {
-                        echo json_encode(["message" => "Ha ocurrido un error"]);
+                        echo json_encode(["error" => "Ha ocurrido un error"]);
                     }
                 } else {
-                    echo json_encode(["message" => "La nueva contraseña no coincide"]);
+                    echo json_encode(["error" => "La nueva contraseña no coincide"]);
                 }
             } else {
-                echo json_encode(["message" => "La contraseña es incorrecta"]);
+                echo json_encode(["error" => "La contraseña es incorrecta"]);
             }
         } else {
-            echo json_encode(["message" => "Usuario no encontrado"]);
+            echo json_encode(["error" => "Usuario no encontrado"]);
         }
         exit;
     }

@@ -199,6 +199,7 @@ class Vehicle extends ActiveRecord
 
     public function registrarVehicle()
     {
+        date_default_timezone_set('America/Montevideo');
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
@@ -234,7 +235,7 @@ class Vehicle extends ActiveRecord
         return null;
     }
 
-    public static function modificarVehicle()
+    public function modificarVehicle()
     {
         $errores = [];
         header('Content-Type: application/json; charset=utf-8');
@@ -258,6 +259,7 @@ class Vehicle extends ActiveRecord
 
     public function actualizarVehicle()
     {
+        date_default_timezone_set('America/Montevideo');
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");

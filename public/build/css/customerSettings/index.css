@@ -1,21 +1,53 @@
 header {
   position: unset !important;
 }
-
+.container{
+  z-index: -1;
+  height: 100vh;
+  padding-bottom: 3em;
+}
 .settings-fit__content_aside {
   width: 250px;
   background-color: #f4f4f4;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+#LogOut{
+  margin-top: 55vh;
+  color: #000000;
+  border-left: 4px solid #be0000;
+  text-decoration: none;
+  color: #505050;
+  background-color: #f4f4f4;
+  font-size: 16px;
+  display: block;
+  padding-left: .5rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #dcdcdc;
+  transition: background-color 0.3s ease, border-left 0.3s ease;
+}
 .settings-userinfo_aside {
   text-align: center;
   padding: 1rem 0;
   background-color: #ececec;
   border-bottom: 1px solid #dcdcdc;
 }
-
+.settings-userinfo_aside img{
+width: 100px;
+height: 100px;
+border-radius: 50%;
+object-fit: cover;
+}
+.aside_profile-resume__image{
+  height: 6rem;
+  border: 1px solid #f2f2f2;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .profile-resume__image img {
   width: 100px;
   height: 100px;
@@ -67,11 +99,10 @@ nav.aside-nav ul.steps li.selected a {
   border-left: 4px solid #be0000;
 }
 /* DASHBOARD*/
-/*
+
 .dashboard-fit__content {
   display: flex;
-  width: 100%;
-  min-height: 75vh;
+  width: 100vw;
   background-color: #fff;
   border-radius: 0.8rem;
   margin-top: 2rem;
@@ -163,7 +194,7 @@ nav.aside-nav ul.steps li.selected a {
   }
 }
 .dashboard-fit__content_aside ul #delete-account a {
-  color: #ff0000;
+  color: #be0000;
 }
 
 .selected {
@@ -231,21 +262,17 @@ nav.aside-nav ul.steps li.selected a {
 
 .profile-resume__image {
   border-radius: 50%;
-  width: 6rem;
   height: 6rem;
   border: 1px solid #f2f2f2;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
-
 .profile-resume-configuration__edit {
   display: flex;
   align-self: flex-end;
@@ -358,7 +385,7 @@ nav.aside-nav ul.steps li.selected a {
 }
 
 /* botones */
-/*
+
 #edit-resume,
 #edit-p-information {
   transition: background-color 0.3s ease, transform 0.3s ease-in-out;
@@ -385,7 +412,7 @@ nav.aside-nav ul.steps li.selected a {
 }
 
 /* settings form */
-/*
+
 .settings_forms {
   position: absolute;
   display: flex;
@@ -401,7 +428,7 @@ nav.aside-nav ul.steps li.selected a {
 
 .form-container {
   min-width: 15rem;
-  /* position: relative; *//*
+  /* position: relative; */
   width: 40%;
   height: 70vh;
   background-color: #fff;
@@ -436,7 +463,7 @@ nav.aside-nav ul.steps li.selected a {
 .removed__settings_forms {
   opacity: 0;
   visibility: hidden;
-  /* z-index: -1; *//*
+  /* z-index: -1; */
   transform: translateY(calc(-100svh - 3rem));
 }
 
@@ -480,7 +507,7 @@ nav.aside-nav ul.steps li.selected a {
 
 .form-container > form {
   width: 100%;
-  /* height: 100%; *//*
+  /* height: 100%; */
   display: flex;
   padding: 0 4rem;
   flex-direction: column;
@@ -536,7 +563,7 @@ nav.aside-nav ul.steps li.selected a {
 }
 
 .edit-resume__banner {
-  /* background-color: #f2f2f2; *//*
+  /* background-color: #f2f2f2; */
   display: flex;
   width: 100%;
   padding: 0.4rem 0;
@@ -544,7 +571,7 @@ nav.aside-nav ul.steps li.selected a {
   align-items: center;
 }
 
-/* aside bug *//*
+/* aside bug */
 
 .dashboard-content {
   margin-top: 3rem;
@@ -608,7 +635,7 @@ textarea {
 }
 
 /* img preview */
-/*
+
 .imgContainer__big {
   position: absolute;
   width: 400px;
@@ -637,45 +664,59 @@ textarea {
   }
 }
 
-/* Delete account Form *//*
+/* Delete account Form */
 .dashboard-fit__content__delelteAcc > h4 {
   font-size: 2rem;
 }
 .dashboard-fit__content__delelteAcc > h6 {
   font-size: 1rem;
-  color: #ff0000;
+  color: #be0000;
   margin-top: 1rem;
 }
 .dashboard-fit__content__delelteAcc > p {
   font-size: 0.8rem;
-  color: #ff0000;
+  color: #be0000;
 }
 .dashboard-fit__content__delelteAcc > .form_deleteAccount {
   display: flex;
   flex-direction: column;
-  width: 10rem;
+  gap: .8rem;
+  width: 15rem;
   margin-top: 2rem;
-  gap: 1rem;
 }
 .dashboard-fit__content__delelteAcc > .form_deleteAccount > label > input {
-  background: none;
-  border: none;
-  padding: 0.3rem 0.2rem;
-  margin-top: 0.5rem;
-  border-bottom: 2px solid #ccc;
-  outline: none;
-  width: 100%;
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: #be0000;
+    background: rgb(255, 255, 255);
+    font-size: 16px;
+    outline: none;
 }
 .dashboard-fit__content__delelteAcc > .form_deleteAccount > input {
   padding: 0.3rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: translateY(-3px);
+}
+#Delete{
+  min-height: 40px;
+  border: 2px solid #000;
+  border-radius: .2rem;
+  font-size: 14px;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  color: #000;
+  outline: none;
+  &:hover{
+    transition: .5ms ease;
+    border: 2px solid #be0000;
+    font-size: 15px;
   }
 }
-
-/* Change password form *//*
+/* Change password form */
 
 .form_changePassword{
   margin-top: 1rem;
@@ -685,12 +726,41 @@ textarea {
   width: 15rem;
 }
 
+input{
+  width: 100%;
+  height: auto;
+  padding: 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: #be0000;
+  background: rgb(255, 255, 255);
+  font-size: 16px;
+  outline: none;
+}
+#Changepw{
+  padding: 10px 15px;
+  border: 2px solid #000;
+  border-radius: .2rem;
+  font-size: 14px;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  color: #000;
+  outline: none; 
+   &:hover{
+    transition: .5ms ease;
+    border: 2px solid #be0000;
+    font-size: 15px;
+  }
+}
+
 /* delete acc step */
-/*
+
 .dashboard-fit__content > section {
   display: none;
 }
 
 .dashboard-fit__content > .settingsStepVisible {
   display: flex;
-}*/
+}

@@ -372,40 +372,53 @@ const ModalAdd = () => {
                 const response = await fetch("http://localhost:3000/dashboard/agregar-vehiculo", {
                     method: "POST",
                     body: formdata
-                })
+                });
+                
                 botonSiguiente.disabled = false;
+                
                 const data = await response.json();
-                console.log(data)
-                if (data?.errores) {
-                    console.log("server errors")
-                    const errors = Object?.values(data?.errores).map(err => {
+                console.log(data);
+                
+                if (data.status === "error") {
+                    console.log("Server errors:", data.message);
+                    const errors = data.detalles || [data.message];
+                    
+                    errors.forEach(err => {
+                        console.log("Error:", err);
+                    });
+                    
+                    const errorElements = errors.map(err => {
                         const error = document.createElement("div");
-                        error.classList.add("error")
-                        error.textContent = err
-                        return { title: "Failure", error: err }
-                    })
-                    addToast(errors);
-                } else if (data?.message == "succesfuly") {
-
-                    contenedor.remove()
-
-                    document.querySelector(".dashboard-content").classList.remove("fixed")
-                    document.body.classList.remove("blured")
-                    document.querySelector(".product-search__input").querySelector("button").click()
+                        error.classList.add("error");
+                        error.textContent = err;
+                        return error;
+                    });
+                    addToast(errorElements);
+                } else if (data.status === "success") {
+                    contenedor.remove();
+            
+                    document.querySelector(".dashboard-content").classList.remove("fixed");
+                    document.body.classList.remove("blured");
                     Swal.fire({
-                        title: "Exito",
-                        text: "El vehiculo fue guardado",
+                        title: "Éxito",
+                        text: "El vehículo fue guardado",
                         icon: "success"
                     });
-                    location.reload();
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if(btn_swal){
+                        btn_swal.addEventListener("click", () =>{
+                            document.querySelector(".product-search__input").querySelector("button").click();
+                        })
+                    }
                 }
-            }
-            catch (err) {
+            } catch (err) {
+                console.error("Error en la petición:", err);
                 addToast([{
                     title: "Failure",
                     error: "Ha ocurrido un error"
                 }]);
             }
+            
         }
     }
 
@@ -1068,6 +1081,7 @@ const ModalModificar = (data) => {
                     body: formdata
                 });
                 const data = await response.json();
+                console.log(data.error)
                 if (data?.errores) {
                     const errors = Object.values(data.errores).map(err => {
                         const error = document.createElement("div");
@@ -1075,11 +1089,21 @@ const ModalModificar = (data) => {
                         error.textContent = err;
                         return { title: "Failure", error: err };
                     });
-                    addToast(errors);
+                    
                 } else if (data?.message == "successfuly") {
                     toggleBackground();
                     contenedor.remove();
-                    location.reload();
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "El vehículo fue modificado",
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if(btn_swal){
+                        btn_swal.addEventListener("click", () =>{
+                            document.querySelector(".product-search__input").querySelector("button").click();
+                        })
+                    }
                 } else if (data?.error) {
                     addToast([{
                         title: "Failure",
@@ -1090,7 +1114,7 @@ const ModalModificar = (data) => {
                 console.log(err);
                 addToast([{
                     title: "Failure",
-                    error: "Ha ocurrido un error"
+                    error: err ? err :"Ha ocurrido un error"
                 }]);
             }
 
