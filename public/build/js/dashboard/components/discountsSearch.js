@@ -220,21 +220,21 @@ contenedorBuscador.addEventListener("submit", async e => {
 
 
     if (buscador.value) {
-
-        if (location.pathname.includes("/dashboard/products")) {
+        
+        if (location.pathname.includes("/dashboard/discounts/vehicle")) {
 
             await handlerBusqueda(buscador?.value)
-            const url = new URL(location.origin + "/dashboard/products");
+            const url = new URL(location.origin + "/dashboard/discounts/vehicle");
             url.searchParams.set('search', buscador?.value);
             history.replaceState(null, null, url.toString());
         }
         else {
-            const url = new URL(location.origin + "/dashboard/products");
+            const url = new URL(location.origin + "/dashboard/discounts/vehicle");
             url.searchParams.set('search', buscador?.value);
             location.assign(url.toString())
         }
     } else {
-        const url = new URL(location.origin + "/dashboard/products");
+        const url = new URL(location.origin + "/dashboard/discounts/vehicle");
         history.replaceState(null, null, url.toString());
 
         await init()
@@ -269,7 +269,7 @@ const ItemBusqueda = (text) => {
 
     item.appendChild(img)
     item.appendChild(p)
-    const url = new URL(location.origin + "/dashboard/products");
+    const url = new URL(location.origin + "/dashboard/discounts/vehicle");
 
     url.searchParams.set("search", text)
 
