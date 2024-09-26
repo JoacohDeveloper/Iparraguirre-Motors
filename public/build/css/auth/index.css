@@ -29,9 +29,7 @@ header {
 footer{
     display: none;
 }
-.container{
-  min-height: auto;
-}
+
 .dark .container{
   background: none;
 }
@@ -45,10 +43,8 @@ footer{
 }
 
 main{
-  width: 100vw;
-  padding: 20px;
+  width: 100%;
   margin: auto;
-  margin-top: 100px;
 }
 
 .contenedor__todo{
@@ -190,6 +186,19 @@ main{
   flex-direction: column;
   gap: 2rem;
 }
+#p_logIn{
+  display: none;
+  margin-top: -1.5rem;
+  font-size: .6rem;
+  align-self: center;
+}
+#p_signUp{
+  display: none;
+  margin-top: -1.5rem;
+  font-size: .6rem;
+  align-self: center;
+}
+
 @media (max-width: 768px) {
   body{
     min-height: 100vh;
@@ -220,18 +229,36 @@ main{
     width: 100%;
     padding: 20px;
   }
+
+  #p_logIn{
+    display: flex;
+  }
+  #p_signUp{
+    display: flex;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px){
+  body{
+    
+  }
   main {
-    padding: 10%;
-    margin-top: 25%;
+    height: auto;
+    width: auto;
+    margin: auto;
   }
 
   .contenedor__todo {
     max-width: 100%;
-  }
+    z-index: 999;
 
+  }
+  .dark .container{
+    background: none !important;
+  }
+  .container{
+    height: 100%;
+  }
   .caja__trasera div {
     display: none;
   }
@@ -247,7 +274,15 @@ main{
   }
 
   #regForm, #loginForm {
-    width: 100%;
+    width: 290px;
     padding: 20px;
+    height: 25rem;
+  }
+
+  #p_logIn{
+    display: flex;
+  }
+  #p_signUp{
+    display: flex;
   }
 }

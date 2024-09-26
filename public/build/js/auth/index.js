@@ -201,3 +201,20 @@ anchoPage();
             caja_trasera_login.style.opacity = "1";
         }
 }
+
+
+const p_logIn = document.querySelector("#p_logIn")
+const p_signUp = document.querySelector("#p_signUp")
+
+p_signUp.addEventListener("click", mobileRegister);
+p_logIn.addEventListener("click", mobileIniciarSesion);
+
+    function mobileIniciarSesion(){
+        formularioLogin.style.display = "flex";
+        formularioRegister.style.display = "none";
+    }
+
+    function mobileRegister(){
+        formularioLogin.style.display = "none";
+        formularioRegister.style.display = "flex";
+    }
