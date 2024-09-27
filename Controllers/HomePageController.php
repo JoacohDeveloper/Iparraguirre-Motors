@@ -22,8 +22,12 @@ abstract class HomePageController
     }
 
     public static function userSettings(Router $router){
-        if (!isset($_SESSION["usuario"])) header("location: /auth");
+        if (!isset($_SESSION["usuario"])) header("location: /login");
+        $uuid = $_GET["u"];
         $customer = $_SESSION["usuario"];
+        if ($customer->isAdmin()) {
+            header("location: /");
+        }
 
         $uuid = $customer->getUUID();
         $fullName = $customer->getFullname();
