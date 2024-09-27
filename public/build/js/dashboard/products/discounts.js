@@ -65,6 +65,7 @@ const InputSelect = (label, name, values, id, selectedValue) => {
 
 const ModalAddDiscount = (data) => {
     const contenedor = document.createElement("div")
+    document.body.classList.add("fixed")
 
     contenedor.classList.add("modal-container")
 
@@ -146,7 +147,7 @@ const ModalAddDiscount = (data) => {
         } else {
             formdata.append('id', data.id);
             try {
-                const response = await fetch("http://localhost:3000/dashboard/discount-vehiculo", {
+                const response = await fetch(location.origin + "/dashboard/discount-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -174,6 +175,7 @@ const ModalAddDiscount = (data) => {
                         })
                     }
                 } else if (data?.error) {
+                    document.body.classList.add("fixed")
                     addToast([{
                         title: "Failure",
                         error: "Ha ocurrido un error"
@@ -181,6 +183,7 @@ const ModalAddDiscount = (data) => {
                 }
             } catch (err) {
                 console.log(err);
+                document.body.classList.add("fixed")
                 addToast([{
                     title: "Failure",
                     error: "Ha ocurrido un error"
@@ -278,7 +281,7 @@ const ModalRemoveDiscount = (data) => {
         } else {
             formdata.append('id', data.id);
             try {
-                const response = await fetch("http://localhost:3000/dashboard/delete-discount-vehiculo", {
+                const response = await fetch(location.origin + "/dashboard/delete-discount-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -372,7 +375,7 @@ const handlerEliminar = (e) => {
 const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
-    const response = await fetch("http://localhost:3000/dashboard/obtener-vehiculo", {
+    const response = await fetch(location.origin + "/dashboard/obtener-vehiculo", {
         method: "POST",
         body: formdata
     });

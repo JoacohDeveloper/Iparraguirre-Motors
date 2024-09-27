@@ -1,8 +1,6 @@
-header {
-  position: unset !important;
-}
+
 .dropdown-content{
-  z-index: 999;
+  z-index: 2;
 }
 /* Fix display from container*/
 .container{
@@ -14,7 +12,8 @@ header {
 
 /* infinite scroll cards */
 .card-container {
-  margin-top: 2rem;
+  margin-left: 5rem;
+  margin-top: 5rem;
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
@@ -55,7 +54,8 @@ header {
   z-index: 999;
   width: 345px;
   height: 230px;
-  background-size: cover;
+  background-size:cover;
+  background-position: center center;
   border-bottom:#c0c0c0 solid .4px;
 }
 
@@ -394,6 +394,10 @@ main {
 }
 
 @media screen and (max-width: 620px) {
+  .card-container {
+    margin: auto;
+    margin-top: 5rem;
+  }
   .articles_container {
     padding: 0;
   }

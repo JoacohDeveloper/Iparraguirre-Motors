@@ -4,7 +4,7 @@
 
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ id, nombre, año, precio, descuento, km }) => {
+const Card = ({ id, nombre, año, precio, descuento, km, images }) => {
 
     const card = document.createElement("div")
     card.classList.add("card")
@@ -12,7 +12,13 @@ const Card = ({ id, nombre, año, precio, descuento, km }) => {
 
     const card_image = document.createElement("div");
     card_image.classList.add("card_image")
-    card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    
+    if(images.length == 0)
+     card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    else{
+     card_image.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
+    }
+    
 
 
     const card_info = document.createElement("div");
@@ -56,7 +62,7 @@ async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
         if (cardContainer) cardContainer.appendChild(spinner);
-        const url = `http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`;
+        const url = location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
 
         const response = await fetch(url);
         spinner.remove();
@@ -74,7 +80,8 @@ async function init(search = null) {
                 descuento: v.descuento,
                 id: v.id,
                 km: v.kilometros,
-                año: v.year
+                año: v.year,
+                images: v.vehicleImages
             };
             if (cardContainer) cardContainer.appendChild(Card(customV));
         });
@@ -209,7 +216,7 @@ async function buscar() {
         resultadoBusqueda.innerHTML = null;
         if (buscador?.value?.length > 0) {
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`);
+                const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
                 if (response.ok) {
                     const data = await response.json();
                     if (!data?.message || data?.message !== "404") {

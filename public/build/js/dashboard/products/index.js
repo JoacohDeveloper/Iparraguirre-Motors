@@ -77,6 +77,8 @@ const ModalDelete = () => {
     return contenedor;
 }
 
+const prueba = location.origin + "/dashboard/agregar-vehiculo"
+console.log(prueba)
 
 //Estas 3 const sirven para generar label que contienen las casillas del formulario agregar vehiculo. El primero
 //genera las casillas en las que el administrador debe escribir datos especificos. En el segundo se genera el
@@ -141,7 +143,6 @@ const InputSelect = (label, name, values, id, selectedValue) => {
 
     return inputSelectLabel;
 }
-
 
 const ModalAdd = () => {
     const contenedor = document.createElement("div")
@@ -369,7 +370,7 @@ const ModalAdd = () => {
         } else {
             try {
                 botonSiguiente.disabled = true;
-                const response = await fetch("http://localhost:3000/dashboard/agregar-vehiculo", {
+                const response = await fetch(location.origin + "/dashboard/agregar-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -1076,7 +1077,7 @@ const ModalModificar = (data) => {
         } else {
             formdata.append('id', data.id);
             try {
-                const response = await fetch("http://localhost:3000/dashboard/modificar-vehiculo", {
+                const response = await fetch(location.origin + "/dashboard/modificar-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -1164,7 +1165,7 @@ const handlerModificar = (e) => {
 const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
-    const response = await fetch("http://localhost:3000/dashboard/obtener-vehiculo", {
+    const response = await fetch(location.origin + "/dashboard/obtener-vehiculo", {
         method: "POST",
         body: formdata
     });

@@ -41,7 +41,7 @@ formularioLogin.addEventListener("submit", async (e) => {
 
 
         try {
-            const response = await fetch("http://localhost:3000/dashboard/login", {
+            const response = await fetch(location.origin + "/dashboard/login", {
                 method: "POST",
                 body: form_data
             })

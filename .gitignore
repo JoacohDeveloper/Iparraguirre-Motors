@@ -1,2 +1,4 @@
 .env
 vendor
+.user.ini
+phpinfo.php

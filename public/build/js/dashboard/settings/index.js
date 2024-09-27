@@ -131,7 +131,7 @@ async function setFormEdit(target, formContainer) {
     const uuid = urlParams.get('u');
 
     try {
-        const response = await fetch(`http://localhost:3000/dashboard/user-settings/usuario?u=${uuid}`);
+        const response = await fetch(location.origin + `/dashboard/user-settings/usuario?u=${uuid}`);
 
         const data = await response.json();
         if (data?.error) throw new Error(data?.error)
@@ -183,7 +183,7 @@ async function setFormEdit(target, formContainer) {
 
             try {
                 const formdata = new FormData(formHTML)
-                const response = await fetch("http://localhost:3000/dashboard/user-settings/usuario/modificar", {
+                const response = await fetch(location.origin + "/dashboard/user-settings/usuario/modificar", {
                     method: "POST",
                     body: formdata
                 })
@@ -437,7 +437,7 @@ async function submitEventHandler(event) {
     } else {
         confirm("¿Estás seguro de que quieres borrar tu cuenta?");
         try {
-            const response = await fetch("http://localhost:3000/dashboard/user-delete", {
+            const response = await fetch(location.origin + "/dashboard/user-delete", {
                 method: "POST",
                 body: formdata
             });
@@ -518,7 +518,7 @@ async function submitEventHandler2(event) {
         addToast(error);
     } else {
         try {
-            const response = await fetch("http://localhost:3000/dashboard/user-newPassword", {
+            const response = await fetch(location.origin + "/dashboard/user-newPassword", {
                 method: "POST",
                 body: formdata
             });
@@ -536,7 +536,7 @@ async function submitEventHandler2(event) {
                 const btn_swal = document.querySelector(".swal2-confirm");
                 if(btn_swal){
                     btn_swal.addEventListener("click", () =>{
-                        window.location.href = 'http://localhost:3000/dashboard/login';
+                        location.reload();
                     })
                 }
             }
@@ -555,7 +555,7 @@ if(btn_defaultImage) btn_defaultImage.addEventListener("click", defaultImage);
 async function defaultImage(event) {
     event.preventDefault();
     try {
-        const response = await fetch("http://localhost:3000/dashboard/user-default-image");
+        const response = await fetch(location.origin + "/dashboard/user-default-image");
         const data = await response.json();
         console.log(data)
         if (data?.errores) {

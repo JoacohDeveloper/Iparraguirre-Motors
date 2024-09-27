@@ -8,7 +8,7 @@
         <form method="POST" action="/dashboard/login" id="loginForm">
             <div class="errores"></div>
             <div>
-                <label for="email" class="inputs_txt">Email</label>
+                <label for="email" class="inputs_txt">Email or Username</label>
                 <input class="inputs" id="email" type="text" name="email" placeholder="Usuario o Email">
                 <div class="input-underline"></div>
             </div>

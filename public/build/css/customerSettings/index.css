@@ -4,12 +4,10 @@ header {
 .container{
   z-index: -1;
   height: 100vh;
-  padding-bottom: 3em;
 }
 .settings-fit__content_aside {
   width: 250px;
   background-color: #f4f4f4;
-  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 #LogOut{
@@ -104,9 +102,6 @@ nav.aside-nav ul.steps li.selected a {
   display: flex;
   width: 100vw;
   background-color: #fff;
-  border-radius: 0.8rem;
-  margin-top: 2rem;
-  padding: 3rem 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -763,4 +758,6 @@ input{
 
 .dashboard-fit__content > .settingsStepVisible {
   display: flex;
+  padding-top: 2em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

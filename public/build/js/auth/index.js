@@ -29,7 +29,7 @@ formularioLogin.addEventListener("submit", async (e) => {
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
         try {
-            const response = await fetch("http://localhost:3000/auth/login", {
+            const response = await fetch(location.origin + "/auth/login", {
                 method: "POST",
                 body: form_data
             })
@@ -110,7 +110,7 @@ formularioRegister.addEventListener("submit", async e => {
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
         try {
-            const response = await fetch("http://localhost:3000/auth/register", {
+            const response = await fetch(location.origin + "/auth/register", {
                 method: "POST",
                 body: form_data
             })
@@ -200,4 +200,21 @@ anchoPage();
             caja_trasera_login.style.display = "block";
             caja_trasera_login.style.opacity = "1";
         }
+}
+
+
+const p_logIn = document.querySelector("#p_logIn")
+const p_signUp = document.querySelector("#p_signUp")
+
+p_signUp.addEventListener("click", mobileRegister);
+p_logIn.addEventListener("click", mobileIniciarSesion);
+
+function mobileIniciarSesion(){
+    formularioLogin.style.display = "flex";
+    formularioRegister.style.display = "none";
+}
+
+function mobileRegister(){
+    formularioLogin.style.display = "none";
+    formularioRegister.style.display = "flex";
 }

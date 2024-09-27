@@ -1,16 +1,16 @@
 /*Este es el css del register y login de los clientes*/
-body{
+body{  
+  position: fixed;
   background-image: url("/build/src/images/fondo.webp");
   backdrop-filter: blur(1rem);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  width: 100%;
 }
-.mobile-menu-content{
-  display: none !important;
+.toast { 
+  margin-bottom: 4em;
 }
 .dark .navegacion ul li a {
-
   color: #202020;
 &:hover {
   border: 2px solid #202020;
@@ -29,9 +29,7 @@ header {
 footer{
     display: none;
 }
-.container{
-  min-height: auto;
-}
+
 .dark .container{
   background: none;
 }
@@ -45,10 +43,8 @@ footer{
 }
 
 main{
-  width: 100vw;
-  padding: 20px;
+  width: 100%;
   margin: auto;
-  margin-top: 100px;
 }
 
 .contenedor__todo{
@@ -190,14 +186,44 @@ main{
   flex-direction: column;
   gap: 2rem;
 }
+#p_logIn{
+  display: none;
+  margin-top: -1.5rem;
+  font-size: .8rem;
+  align-self: center;
+}
+#p_signUp{
+  display: none;
+  margin-top: -1.5rem;
+  font-size: .8rem;
+  align-self: center;
+}
+
 @media (max-width: 768px) {
+  .blured::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: none;
+}
+ header .brgMenu {
+  display: none;
+}
   body{
-    min-height: 100vh;
+    height: auto;
+    background-image: none;
+    backdrop-filter: none !important;
   }
-  .contenedor__todo {
-    max-width: 90%;
+  main {
+    height: auto;
+    width: auto;
+    margin: auto;
   }
 
+  .contenedor__todo {
+    width: 100%;
+    margin: auto;
+  }
   .caja__trasera {
    display: none;  
   }
@@ -217,21 +243,49 @@ main{
   }
 
   #regForm, #loginForm {
-    width: 100%;
+    width: 380px;
+    height: 576px;
     padding: 20px;
+  }
+
+  #p_logIn{
+    
+    display: flex;
+  }
+  #p_signUp{
+
+    display: flex;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px){
+  .blured::after {
+    backdrop-filter: none;
+}
+header .brgMenu {
+  display: none;
+}
+  body{
+    height: auto;
+    background-image: none;
+    backdrop-filter: none !important;
+  }
   main {
-    padding: 10%;
-    margin-top: 25%;
+    height: auto;
+    width: auto;
+    margin: auto;
   }
 
   .contenedor__todo {
-    max-width: 100%;
+    width: 100%;
+    margin: auto;
   }
-
+  .dark .container{
+    background: none !important;
+  }
+  .container{
+    height: 100%;
+  }
   .caja__trasera div {
     display: none;
   }
@@ -247,7 +301,64 @@ main{
   }
 
   #regForm, #loginForm {
-    width: 100%;
+    width: 320px;
     padding: 20px;
+    height: 30rem;
+  }
+
+  #p_logIn{
+    display: flex;
+  }
+  #p_signUp{
+    display: flex;
+  }
+}
+@media (max-width: 1024px) {
+
+  body{
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  main {
+    height: auto;
+    width: auto;
+    margin: auto;
+  }
+
+  .contenedor__todo {
+    width: 100%;
+    margin: auto;
+  }
+  .caja__trasera {
+   display: none;  
+  }
+  .caja__trasera div {
+    margin: 50px 20px;
+  }
+
+  .contenedor__login-register {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contenedor__login-register form {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  #regForm, #loginForm {
+    width: 380px;
+    height: 576px;
+    padding: 20px;
+  }
+
+  #p_logIn{
+    
+    display: flex;
+  }
+  #p_signUp{
+
+    display: flex;
   }
 }

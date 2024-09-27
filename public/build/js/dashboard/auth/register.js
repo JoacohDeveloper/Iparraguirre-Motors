@@ -54,7 +54,7 @@ formularioRegister.addEventListener("submit", async e => {
 
 
         try {
-            const response = await fetch("http://localhost:3000/dashboard/register", {
+            const response = await fetch(location.origin + "/dashboard/register", {
                 method: "POST",
                 body: form_data
             })

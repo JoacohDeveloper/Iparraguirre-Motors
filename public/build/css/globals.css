@@ -331,7 +331,7 @@ header .brgMenu {
   cursor: pointer;
 
   &:hover {
-    background-color: #ccc;
+    background-color: #000;
   }
 }
 
@@ -342,16 +342,20 @@ header .brgMenu {
 }
 
 .mobile-menu-content {
-  background-color: #202020;
+  background-color: #fff;
   border: none;
   height: 100%;
   width: 100%;
 }
+.dark .mobile-menu-content{
+  background-color: #202020;
+}
 
 .mobile-menu-content > .navegacion {
+  padding-top: 1.5em;
   display: flex;
   flex-direction: column;
-
+  background-color: #fff;
   ul {
     flex-direction: column;
     align-items: center;
@@ -364,7 +368,7 @@ header .brgMenu {
   }
 
   ul > li a {
-    color: #202020;
+    color: #000000 !important;
 
     &:hover {
       border: 2px solid #202020;
@@ -378,7 +382,7 @@ header .brgMenu {
 .dark .mobile-menu-content > .navegacion {
   display: flex;
   flex-direction: column;
-
+  background-color: #202020;
   ul {
     flex-direction: column;
     align-items: center;
@@ -391,7 +395,7 @@ header .brgMenu {
   }
 
   ul > li a {
-    color: #ffffff;
+    color: #ffffff !important;
 
     &:hover {
       border: 2px solid #ffffff;

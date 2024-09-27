@@ -37,6 +37,7 @@ class ActiveRecord
             $stmt = static::$db->prepare($query);
             $stmt->execute($params);
         } catch (\Throwable $th) {
+            logg($th);
             logg("[MARIA BECERRA] ERROR EN LA BASE DE DATOS!");
         }
 

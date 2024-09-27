@@ -16,17 +16,25 @@ abstract class VehicleRestController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
+  
     public static function vehicles()
-    {
-        header('Content-Type: application/json;');
+{
+    header('Content-Type: application/json;');
 
+    try {
         $vehicleId = isset($_GET["id"]) ? intval($_GET["id"]) : null;
         $vehiclePage = isset($_GET["page"]) ? intval($_GET["page"]) : null;
-
         $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
 
         if ($vehiclePage && $vehicleName) {
             $vehicles = Vehicle::getAllVehiclesByPage($vehiclePage, $vehicleName);
+          foreach($vehicles as $vehicle) {
+            if ($vehicle instanceof Vehicle) {
+
+              $vehicle->getAllVehiclesImages();
+
+            }
+          }
             echo json_encode($vehicles);
             exit;
         } else if ($vehiclePage) {
@@ -34,7 +42,15 @@ abstract class VehicleRestController
         } else {
             $vehicles = Vehicle::getAllVehicles();
         }
-
+        
+        
+        foreach($vehicles as $vehicle) {
+          if ($vehicle instanceof Vehicle) {
+            
+             $vehicle->getAllVehiclesImages();
+            
+          }
+        }
         if ($vehicleId) {
             foreach ($vehicles as $vehicle) {
                 if ($vehicle instanceof Vehicle) {
@@ -63,13 +79,12 @@ abstract class VehicleRestController
                 echo json_encode(["message" => "404"]);
             exit;
         }
-
-
-        $json = json_encode($vehicles);
-
-
-
-        echo $json;
-        exit;
+       
+        echo json_encode($vehicles);
+    } catch (Exception $e) {
+        echo json_encode(["error" => "Error en la base de datos: " . $e->getMessage()]);
     }
+    exit;
+}
+
 }

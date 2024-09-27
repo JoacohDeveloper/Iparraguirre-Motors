@@ -25,6 +25,7 @@
                         <input type="text" name="email" placeholder="User o Email">
                         <input type="password" name="password" placeholder="Password">
                         <input class="boton" type="submit" value="Ingresar">
+                        <p id="p_signUp">¿No tienes una cuenta? Registrate</p>
                     </form>
 
                     <!--Register-->
@@ -37,6 +38,7 @@
                         <input type="password" name="password" placeholder="Password">
                         <input type="password" name="re_password" placeholder="Repeat Password">
                         <input class="boton" type="submit" value="Registrar">
+                        <p id="p_logIn">¿Ya tienes una cuenta? Inicia sesion</p>
                     </form>
                 </div>
             </div>
@@ -45,5 +47,6 @@
     <?php implementComp("error_toast.php") ?>       
 
 </div>
+
 
 

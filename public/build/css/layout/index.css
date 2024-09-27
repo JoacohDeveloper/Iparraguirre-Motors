@@ -140,6 +140,19 @@ header {
   .banner-content p {
     text-align: center;
   }
+  
+  .content__title h2{
+    
+    font-size: 1.7rem;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
 }
 
 .banner-content a {
@@ -319,7 +332,13 @@ main {
     }
   }
 }
-
+.bestSelled__banner-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 200;
+}
 .content__bestSelled {
   display: flex;
   flex-direction: column;
@@ -372,8 +391,8 @@ main {
 }
 
 .bestSelled__banner-image > img {
-  width: 135%;
-  height: 135%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   position: relative;
   z-index: 200;
@@ -471,6 +490,7 @@ main {
     background-color: #000;
   }
 }
+
 
 @media screen and (max-width: 765px) {
   .bestSelled__modelIntro-buttonGroup {

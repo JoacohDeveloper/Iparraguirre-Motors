@@ -10,7 +10,7 @@ use DateTime;
 
 class Vehicle extends ActiveRecord
 {
-    protected static $tabla = "Vehicle";
+    protected static $tabla = "vehicle";
     protected static $columnasdb = [
         "id",
         "descripcion",
@@ -54,7 +54,20 @@ class Vehicle extends ActiveRecord
         $peso, $kilometros, $caballos_potencia, $createdAt, $updatedAt;
 
     public $vehicleImages = [];
+    public function getAllVehiclesImages()
+    {
+        try {
+            $query = "select * from vehicle_img where vehicle_id = " . $this->id;
+            $stmt = static::$db->prepare($query);
+            $stmt->execute();
 
+            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $this->vehicleImages[] = ["url" => $registro["url"], "alt" => $registro["alt"]];
+            }
+        } catch (\Throwable $th) {
+            logg("Error al cargar imagenes");
+        }
+    }
     function __construct($args = []) {
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
@@ -205,7 +218,7 @@ class Vehicle extends ActiveRecord
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
 
         if ($this->crear()) {
-            $stmt = static::$db->prepare("select * from Vehicle where id = LAST_INSERT_ID()");
+            $stmt = static::$db->prepare("select * from vehicle where id = LAST_INSERT_ID()");
 
             $stmt->execute();
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -219,7 +232,7 @@ class Vehicle extends ActiveRecord
     {
         $result = null;
         try {
-            $query = "SELECT * FROM Vehicle WHERE id = $id LIMIT 1";
+            $query = "SELECT * FROM vehicle WHERE id = $id LIMIT 1";
             $result = self::consultarSQL($query);
 
             if ($result) {
@@ -264,7 +277,7 @@ class Vehicle extends ActiveRecord
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
         try {
-            $query = "UPDATE Vehicle SET
+            $query = "UPDATE vehicle SET
             nombre = :nombre,
             categoria = :categoria,
             descripcion = :descripcion,
@@ -326,7 +339,7 @@ class Vehicle extends ActiveRecord
 
     public function addDiscountVehicle() {
         try {
-            $query = "UPDATE Vehicle SET 
+            $query = "UPDATE vehicle SET 
                       discount = :discount, 
                       discount_type = :discount_type
                       WHERE id = :id";
@@ -346,7 +359,7 @@ class Vehicle extends ActiveRecord
         $this->discount = 0;
         $this->discount_type = null;
         try {
-            $query = "UPDATE Vehicle SET 
+            $query = "UPDATE vehicle SET 
                       discount = :discount, 
                       discount_type = :discount_type
                       WHERE id = :id";

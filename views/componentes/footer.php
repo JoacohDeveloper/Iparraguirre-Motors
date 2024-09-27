@@ -29,7 +29,7 @@
       <h3>Navegación</h3>
       <ul class="nav-links">
         <li><a href="/">Inicio</a></li>
-        <li><a href="/tienda">Tienda</a></li>
+        <li><a href="/catalogo/vehiculos">Tienda</a></li>
         <li><a href="/cuenta">Cuenta</a></li>
         <li><a href="/faq">FAQ</a></li>
       </ul>
