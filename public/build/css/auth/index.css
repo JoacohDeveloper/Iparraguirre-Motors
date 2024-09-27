@@ -189,13 +189,13 @@ main{
 #p_logIn{
   display: none;
   margin-top: -1.5rem;
-  font-size: .8rem;
+  font-size: .6rem;
   align-self: center;
 }
 #p_signUp{
   display: none;
   margin-top: -1.5rem;
-  font-size: .8rem;
+  font-size: .6rem;
   align-self: center;
 }
 
@@ -249,26 +249,16 @@ main{
   }
 
   #p_logIn{
-    
     display: flex;
   }
   #p_signUp{
-
     display: flex;
   }
 }
 
 @media (max-width: 480px){
-  .blured::after {
-    backdrop-filter: none;
-}
-header .brgMenu {
-  display: none;
-}
   body{
-    height: auto;
-    background-image: none;
-    backdrop-filter: none !important;
+    
   }
   main {
     height: auto;
@@ -277,8 +267,9 @@ header .brgMenu {
   }
 
   .contenedor__todo {
-    width: 100%;
-    margin: auto;
+    max-width: 100%;
+    z-index: 999;
+
   }
   .dark .container{
     background: none !important;
@@ -301,9 +292,9 @@ header .brgMenu {
   }
 
   #regForm, #loginForm {
-    width: 320px;
+    width: 290px;
     padding: 20px;
-    height: 30rem;
+    height: 25rem;
   }
 
   #p_logIn{
@@ -311,46 +302,6 @@ header .brgMenu {
   }
   #p_signUp{
     display: flex;
-  }
-}
-@media (max-width: 1024px) {
-
-  body{
-    height: auto;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  main {
-    height: auto;
-    width: auto;
-    margin: auto;
-  }
-
-  .contenedor__todo {
-    width: 100%;
-    margin: auto;
-  }
-  .caja__trasera {
-   display: none;  
-  }
-  .caja__trasera div {
-    margin: 50px 20px;
-  }
-
-  .contenedor__login-register {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contenedor__login-register form {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  #regForm, #loginForm {
-    width: 380px;
-    height: 576px;
-    padding: 20px;
   }
 
   #p_logIn{

@@ -102,6 +102,8 @@ nav.aside-nav ul.steps li.selected a {
   display: flex;
   width: 100vw;
   background-color: #fff;
+  border-radius: 0.8rem;
+  padding: 3rem 0;
 }
 
 @media screen and (max-width: 768px) {
