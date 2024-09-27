@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use Models\Customer;
 use MVC\Router;
 
@@ -20,8 +22,7 @@ abstract class CustomerController
         ]);
     }
 
-    public static function login(Router $router)
-    {
+    public static function login(Router $router){
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /");
         $errores = [];
         $campos = [];
@@ -65,8 +66,7 @@ abstract class CustomerController
     }
 
 
-    public static function register(Router $router)
-    {
+    public static function register(Router $router){
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /");
         $errores = [];
         $campos = [];
@@ -99,8 +99,7 @@ abstract class CustomerController
         }
     }
 
-    public static function logout()
-    {
+    public static function logout(){
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
             $_SESSION["loggedIn"] = null;
             $_SESSION["usuario"] = null;
@@ -108,5 +107,70 @@ abstract class CustomerController
         } else {
             header("location: /auth");
         }
+    }
+
+    public static function modificarUsuario()
+    {
+        $errores = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $customer = $_SESSION["usuario"] ?? null;
+            $customerDB = Customer::getCustomer($customer->getEmail());
+
+            if (!isset($customer)) return;
+
+            $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
+            if (!file_exists($dirname)) {
+                mkdir($dirname);
+            }
+
+            $filename = $_FILES["image"]["name"];
+            $fileExtArray = explode(".", $_FILES["image"]["name"]);
+            $fileExt = $fileExtArray[count($fileExtArray) - 1];
+
+
+
+            $fileHash = md5($filename . rand(0, 50) . gmdate("dd-MM-YYYY"));
+
+
+            $nuevaImagen = $fileHash . ".$fileExt";
+            $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
+            $x = str_replace("\\", "/", $dirname . $nuevaImagen);
+            $_POST["imagen"] = "/build/src/images/users/" . $nuevaImagen;
+            $customerDB->sincronizar($_POST);
+
+            $errores = $customerDB->validate();
+
+
+            if (empty($errores)) {
+                //no hay errores del servidor
+                $resultado = $customerDB->actualizarUsuario();
+                if ($resultado) {
+
+                    $imagen = $customer->getImagen();
+
+
+                    if (!str_contains($imagen, "default.jpg")) {
+                        unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $imagen));
+                    }
+                    $manager = new ImageManager(new Driver());
+
+
+                    $res = move_uploaded_file($_FILES["image"]["tmp_name"], $x);
+
+                    $imagen = $manager->read($x);
+                    $imagen->resize(600, 600);
+                    $imagen->toWebp();
+                    $imagen->save(quality: 10);
+
+                    $_SESSION["usuario"] = $customerDB;
+                    echo json_encode(["message" => "successfuly", "file_uploaded" => $res]);
+                    exit;
+                }
+            }
+        }
+        echo json_encode(["message" => "error", "errores" => $errores]);
+
+        exit;
     }
 }

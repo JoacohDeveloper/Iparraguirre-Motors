@@ -234,3 +234,20 @@ dropDownLists.forEach(ele => {
 
     })
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggles = document.querySelectorAll('.toggle-dropdown');
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const dropdown = this.nextElementSibling;
+            if (dropdown && dropdown.tagName === 'UL') {
+                if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.style.display = 'none';
+                }
+            }
+        });
+    });
+});

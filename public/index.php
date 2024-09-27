@@ -74,6 +74,7 @@ $router->get("/dashboard/verificar", [AuthenticationController::class, "verifica
 
 $router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
+$router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);
 
 $router->get("/dashboard/user-default-image", [AuthenticationController::class, "eliminarImage"]);
@@ -106,10 +107,13 @@ $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "
 
 $router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
 
+$router->post("/customer/user-delete", [HomePageController::class, "userDeleting"]);
 $router->post("/dashboard/user-delete", [DashboardController::class, "userDeleting"]);
 
+$router->post("/customer/customer-settings/customer/modificar", [CustomerController::class, "modificarUsuario"]);
 $router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);
 
+$router->get("/customer/user-settings/usuario", [HomePageController::class, "getSettingsFromUserJson"]);
 $router->get("/dashboard/user-settings/usuario", [DashboardController::class, "getSettingsFromUserJson"]);
 
 //tienda

@@ -10,8 +10,8 @@
         <nav class="aside-nav">
             <ul class="steps">
                 <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">Personal information</a></li>
-                <li aria-label="step-2" id="notifications"><a href="#cart">Cart</a></li>
-                <li aria-label="step-3" id="security"><a href="#wishlist">Wishlist</a></li>
+                <li aria-label="step-2" id="cart"><a href="#cart">Cart</a></li>
+                <li aria-label="step-3" id="wishlist"><a href="#wishlist">Wishlist</a></li>
                 <li aria-label="step-4" id="change-pass"><a href="#changepass">Change password</a></li>
                 <li aria-label="step-5" id="delete-account"><a href="#deleteacount">Delete account</a></li>
             </ul>
@@ -73,18 +73,6 @@
                 <div class="saved-fields__field">
                     <label>Updated on</label>
                     <p id="updated__id"><?php echo $updatedAt; ?></p>
-                </div>
-                <div class="saved-fields__field">
-                    <label>Bio</label>
-                    <p id="bio__id">
-                        <?php
-                        if ($bio == "" || $bio == null) {
-                            echo "My name is " . htmlspecialchars($firstname);
-                        } else {
-                            echo htmlspecialchars($bio);
-                        }
-                        ?>
-                    </p>
                 </div>
             </div>
         </div>

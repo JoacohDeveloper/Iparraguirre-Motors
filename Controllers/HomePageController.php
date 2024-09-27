@@ -44,7 +44,7 @@ abstract class HomePageController
         
         $router->render("/customerSettings/settings", [
             "styles" => ["customerSettings/index", "globals"],
-            "scripts" => ["dashboard/index", "dashboard/settings/index"],
+            "scripts" => ["index", "customerSettings/index"],
             "username" => $customer->getUsername(),
             "fullname" => $fullName,
             "firstname" => $firstName,
@@ -91,6 +91,63 @@ abstract class HomePageController
                 "imagen" => $imagen
             ];
             echo json_encode($customer);
+        }
+        exit;
+    }
+
+    public static function userDeleting(){
+        $customer = $_SESSION["usuario"];
+        $result = null;
+    
+        if (isset($customer)) {
+            if ($customer->getFullName() == $_POST["Nombre"]) {
+                if ($customer->validarPassword($_POST["Password"])) {
+                    $result = $customer->deleteUser();
+                    if ($result) {
+                        $_SESSION["loggedIn"] = null;
+                        $_SESSION["usuario"] = null;
+                        echo json_encode(["message" => "successfuly"]);
+                    } else {
+                        echo json_encode(["message" => "Ha ocurrido un error"]);
+                    }
+                } else {
+                    echo json_encode(["message" => "La contraseña es incorrecta"]);
+                }
+            } else {
+                echo json_encode(["message" => "El nombre no coincide"]);
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+        }
+        exit;
+    }
+
+    public static function changePassword(){
+        $customer = $_SESSION["usuario"];
+        $olderPassword = $_POST["olderPassword"];
+        $newPassword = $_POST["password"];
+        $repeatNewPassword = $_POST["repeatPassword"];
+        $result = null;
+    
+        if (isset($customer)) {
+            if ($customer->validarPassword($olderPassword)) {
+                if ($newPassword == $repeatNewPassword) {
+                    $result = $customer->changePassword($newPassword);
+                    if ($result) {
+                        $_SESSION["loggedIn"] = null;
+                        $_SESSION["usuario"] = null;
+                        echo json_encode(["message" => "successfuly"]);
+                    } else {
+                        echo json_encode(["error" => "Ha ocurrido un error"]);
+                    }
+                } else {
+                    echo json_encode(["error" => "La nueva contraseña no coincide"]);
+                }
+            } else {
+                echo json_encode(["error" => "La contraseña es incorrecta"]);
+            }
+        } else {
+            echo json_encode(["error" => "Usuario no encontrado"]);
         }
         exit;
     }

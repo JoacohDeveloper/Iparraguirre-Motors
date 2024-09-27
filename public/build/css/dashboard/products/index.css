@@ -216,7 +216,7 @@
 .contenedor-controllers {
   display: flex;
   position: absolute;
-  z-index: 120;
+  z-index: 95;
   top: 1rem;
   gap: 1rem;
   right: 1rem;
@@ -275,7 +275,6 @@
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1000;
   background-color: transparent;
   backdrop-filter: blur(5px);
 }
@@ -388,7 +387,7 @@
   position: absolute;
   right: 2rem;
   bottom: 2rem;
-  z-index: 130;
+  z-index: 100;
 }
 .product-add__input > button {
   background-color: #fff;
