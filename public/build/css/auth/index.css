@@ -199,7 +199,7 @@ main{
   align-self: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px){
   .blured::after {
     content: "";
     position: absolute;
@@ -295,21 +295,5 @@ main{
     width: 290px;
     padding: 20px;
     height: 25rem;
-  }
-
-  #p_logIn{
-    display: flex;
-  }
-  #p_signUp{
-    display: flex;
-  }
-
-  #p_logIn{
-    
-    display: flex;
-  }
-  #p_signUp{
-
-    display: flex;
   }
 }

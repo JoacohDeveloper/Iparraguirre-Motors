@@ -124,6 +124,7 @@ const ModalAddDiscount = (data) => {
         const formdata = new FormData(modalAddDiscount)
         const object = {};
         const error = [];
+        const descuentoRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
         formdata.forEach((value, key) => {
             if (key !== 'image') {
                 object[key] = value
@@ -140,6 +141,25 @@ const ModalAddDiscount = (data) => {
                 title: "Failure",
                 error: "El campo descuento es obligatorio"
             })
+        } else if (!descuentoRegex.test(object.descuento) || parseFloat(object.descuento) < 0) {
+            error.push({
+                title: "Failure",
+                error: "Solo se aceptan valores numéricos positivos"
+            });
+        } else if (object.type === "Dolares") {
+            if (parseFloat(object.descuento) > data.precio) {
+                error.push({
+                    title: "Failure",
+                    error: "El descuento en dólares no puede ser mayor al precio del producto"
+                });
+            }
+        } else if (object.type === "Porcentaje") {
+            if (parseFloat(object.descuento) < 1 || parseFloat(object.descuento) > 100) {
+                error.push({
+                    title: "Failure",
+                    error: "El descuento en porcentaje debe estar entre 1 y 100"
+                });
+            }
         }
 
         if (error.length != 0) {

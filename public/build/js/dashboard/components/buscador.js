@@ -57,10 +57,17 @@ const Card = ({ nombre, precio, discount, id, images, año, modelo, fabricante }
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
         
-        const precioFinal = precio - discount;
+        let precioFinal;
+        if (discount_type == "Dolares") {
+            precioFinal = precio - discount;
+        } else if (discount_type == "Porcentaje") {
+            let montoDescuento = (precio * discount) / 100;
+            precioFinal = precio - montoDescuento;
+        }
+
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-
+    
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -68,7 +75,7 @@ const Card = ({ nombre, precio, discount, id, images, año, modelo, fabricante }
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }
+    }   
 
     contenedorInformacion.appendChild(contenedorPrecio);
 

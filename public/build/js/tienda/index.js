@@ -4,7 +4,7 @@
 
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ id, nombre, año, precio, descuento, km, images }) => {
+const Card = ({ id, nombre, año, precio, discount, discount_type, km, images }) => {
 
     const card = document.createElement("div")
     card.classList.add("card")
@@ -25,16 +25,45 @@ const Card = ({ id, nombre, año, precio, descuento, km, images }) => {
     card_info.classList.add("card_info")
 
     const text_name = document.createElement("p")
-    const text_precio = document.createElement("p")
     const text_kmyear = document.createElement("p")
 
     text_name.textContent = `${nombre}`
-    text_precio.textContent = ` US$ ${precio}`
     text_kmyear.textContent = `${año} | ${km}` 
+
+    const contenedorPrecio = document.createElement("div");
+    contenedorPrecio.classList.add("contenedor-precio");
+
+    if (discount) {
+        const precioOriginalHTML = document.createElement("p");
+        const precioFinalHTML = document.createElement("p");
+        precioOriginalHTML.classList.add("precioOriginal");
+        precioFinalHTML.classList.add("precioFinal");
+        
+        let precioFinal;
+        if (discount_type == "Dolares") {
+            precioFinal = precio - discount;
+        } else if (discount_type == "Porcentaje") {
+            let montoDescuento = (precio * discount) / 100;
+            precioFinal = precio - montoDescuento;
+        }
+
+        precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+    
+        contenedorPrecio.appendChild(precioFinalHTML);
+        contenedorPrecio.appendChild(precioOriginalHTML);
+    } else {
+        const precioHTML = document.createElement("p");
+        precioHTML.classList.add("precio");
+        precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        contenedorPrecio.appendChild(precioHTML);
+    }    
+
+    
 
 
     card_info.appendChild(text_name)
-    card_info.appendChild(text_precio)
+    card_info.appendChild(contenedorPrecio);
     card_info.appendChild(text_kmyear)
 
     card.appendChild(card_image)
@@ -77,7 +106,8 @@ async function init(search = null) {
             const customV = {
                 nombre: v.nombre,
                 precio: v.precio,
-                descuento: v.descuento,
+                discount: v.discount,
+                discount_type: v.discount_type,
                 id: v.id,
                 km: v.kilometros,
                 año: v.year,

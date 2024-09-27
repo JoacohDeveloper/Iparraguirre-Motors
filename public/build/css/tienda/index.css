@@ -95,6 +95,14 @@
   margin: 8px 0 4px;
 }
 
+.card_info > .contenedor-precio > .precioOriginal{
+  font-size: 12px;
+  color: #424242;
+  text-decoration: line-through;
+  margin-top: 4px;
+}
+
+
 button{
   cursor: pointer;
   border: 2px solid transparent;
