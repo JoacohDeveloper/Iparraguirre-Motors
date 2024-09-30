@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, discount, id, images, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, discount_type, id, images, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -170,6 +170,7 @@ async function init(search = null) {
                 nombre: v.nombre,
                 precio: v.precio,
                 discount: v.discount,
+                discount_type: v.discount_type,
                 id: v.id,
                 imageUrl: v.imagen,
                 fabricante: v.fabricante,

@@ -30,8 +30,10 @@
                 <?php 
                 if(str_contains($url, "/dashboard") || str_contains($url, "/dashboard/..")) {
                     implementComp("/dashboard/brgMenu.php");
+                } else if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]){
+                    include __DIR__ . "/navegacionLogged.php"; 
                 } else {
-                    include __DIR__ . "/navegacion.php"; 
+                  include __DIR__ . "/navegacion.php"; 
                 }
                 ?>
             </section>

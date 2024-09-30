@@ -3,18 +3,18 @@
 include_once "../vendor/autoload.php";
 
 /* Inicio: Codigo para web */
-// $lastPublicPos = strrpos(__DIR__, '/public');
-// if ($lastPublicPos !== false) {
-//     $pathWithoutLastPublic = substr(__DIR__, 0, $lastPublicPos);
-// }
-// $dotenv = Dotenv\Dotenv::createImmutable($pathWithoutLastPublic);
-// $dotenv->safeLoad();
+$lastPublicPos = strrpos(__DIR__, '/public');
+if ($lastPublicPos !== false) {
+  $pathWithoutLastPublic = substr(__DIR__, 0, $lastPublicPos);
+}
+$dotenv = Dotenv\Dotenv::createImmutable($pathWithoutLastPublic);
+$dotenv->safeLoad();
 /* Fin: Codigo para web */
 
 
 /* Inicio: Codigo para localhost */
-$dotenv = Dotenv\Dotenv::createImmutable(str_replace("\public", "", __DIR__));
-$dotenv->safeLoad();
+//$dotenv = Dotenv\Dotenv::createImmutable(str_replace("\//public", "", __DIR__));
+//$dotenv->safeLoad();
 /* Fin: Codigo para localhost */
 
 include "../includes/app.php";

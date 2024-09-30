@@ -9,11 +9,28 @@
 }
 
 @media screen and (max-width: 768px) {
+  .dashboard-title {
+    flex-direction: column;
+  }
   .dashboard-fit__content {
     flex-direction: column;
   }
   .dashboard-fit__content .dashboard-fit__content_aside {
     width: 100%;
+  }
+  .dashboard-fit__content__profile{
+    h4{
+      display: flex;
+      justify-content: center;
+    }
+    .button_settings{
+      margin: 0;
+      margin-top: 1rem;
+    }
+  }
+  .profile-resume__data > p {
+    display: flex;
+    justify-content: center;
   }
   .dashboard-fit__content_aside nav {
     width: 100%;
@@ -23,7 +40,10 @@
     justify-content: center;
     flex-wrap: wrap;
   }
-
+  .dashboard-fit__content_aside nav ul li a{
+    display: flex;
+    justify-content: center;
+  }
   .dashboard-fit__content_aside nav ul .delete-account {
     margin: 0;
   }
@@ -38,6 +58,9 @@
   #edit-p-information {
     width: 50%;
     padding: 0.4rem 0;
+  }
+  .logo img{
+    margin-left: -1rem;
   }
 }
 

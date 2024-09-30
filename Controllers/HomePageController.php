@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use MVC\Router;
-// $user = new User();
 
 abstract class HomePageController
 {
