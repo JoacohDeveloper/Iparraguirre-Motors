@@ -64,48 +64,40 @@ abstract class AuthenticationController
         ]);
     }
 
-
-    public static function register(Router $router)
-    {
-        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) header("location: /dashboard");
+    public static function adminRegister(){
         $errores = [];
-        $campos = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            header('Content-Type: application/json; charset=utf-8');
+            
+            $username = $_POST['username'];
             $usuario = new User($_POST);
-            $errores = $usuario->validate();
+            
+            $defaultPassword = "imotorsadmin" . $username;
+            $defaultEmail = $username . "@default.com";
             if (empty($errores)) {
-                $result = User::getUser($usuario->getEmail());
-                if (!isset($result)) {
-                    $usuario->passwordHash();
+                $result = $usuario->usernameRepeat($username);
+                if (!$result) {
+                    $usuario->defaultPasswordHash($defaultPassword);
+                    $usuario->defaultEmail($defaultEmail);
                     $usuario->gen_uuid();
                     if ($usuario->crearUsuario()) {
-                        $_SESSION["usuario"] = $usuario;
-                        $_SESSION["loggedIn"] = true;
                         $response = ["message" => "succesfuly"];
+                        echo json_encode($response);
+                        exit;
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                         $response["errores"] = $errores;
                     }
                 } else {
-                    $errores["already_register"] = "El email ingresado ya esta registrado";
+                    $errores["already_register"] = "Ese numero de documento ya se encuentra registrado";
                     $response["errores"] = $errores;
                 }
             } else {
                 $response["errores"] = $errores;
             }
-            header('Content-Type: application/json; charset=utf-8');
             echo json_encode($response);
             exit;
         }
-
-        $router->render("dashboard/auth/register", [
-            "scripts" => ["dashboard/auth/index", "dashboard/auth/register"],
-            "styles" => ["dashboard/auth/index"],
-            "errores" => $errores,
-            "campos" => $campos,
-            "title" => "Iparraguirre Motors | Dashboard Register",
-            "description" => "Registrate en Iparraguirre Motors!"
-        ]);
     }
 
     public static function recuperar(Router $router)
@@ -187,6 +179,31 @@ abstract class AuthenticationController
 
         exit;
     }
+
+    public static function modificarUsuarioDefault(){
+        $errores = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $usuario = $_SESSION["usuario"] ?? null;
+            if (!isset($usuario)) return;
+
+            $usuarioDB = User::getUser($usuario->getEmail());
+            $usuarioDB->sincronizar($_POST);
+
+            $errores = $usuarioDB->validate();
+            if (empty($errores)) {
+                $newPassword = $_POST["password"];
+                $resultado = $usuarioDB->actualizarUsuarioDefault($newPassword);
+                if ($resultado) {
+                    $_SESSION["usuario"] = $usuarioDB;
+                    echo json_encode(["message" => "successfuly"]);
+                    exit;
+                }
+            }
+        }
+        echo json_encode(["message" => "error", "errores" => $errores]);
+        exit;
+    }
+
 
     public static function eliminarImage()
     {

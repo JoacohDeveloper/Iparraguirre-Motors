@@ -68,8 +68,3 @@ formularioLogin.addEventListener("submit", async (e) => {
     }
 
 })
-
-
-//funcion encargada de postear los datos del usuario en el servidor.
-
-

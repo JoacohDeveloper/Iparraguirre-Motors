@@ -38,16 +38,16 @@ function implementComp($url = "", $params = []) {
     ob_start();
 
     /* Inicio: Codigo para localhost */
-    //$root = str_replace("/public", "/views/componentes/", str_replace("\\", "/", $serverRoot));
-    //$includeFile = $root . $url;
-    //include_once $includeFile;
-    /* Inicio: Codigo para localhost */
+    $root = str_replace("/public", "/views/componentes/", str_replace("\\", "/", $serverRoot));
+    $includeFile = $root . $url;
+    include_once $includeFile;
+    /* Fin: Codigo para localhost */
 
 
     /* Inicio: Codigo para web */
-    $root = str_replace("\\", "/", $pathWithoutLastPublic . "/views/componentes/");
-    $filePath = $root . $url;
-    include_once $filePath;
+    // $root = str_replace("\\", "/", $pathWithoutLastPublic . "/views/componentes/");
+    // $filePath = $root . $url;
+    // include_once $filePath;
     /* Fin: Codigo para web */
   
     echo ob_get_clean();

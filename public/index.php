@@ -3,18 +3,22 @@
 include_once "../vendor/autoload.php";
 
 /* Inicio: Codigo para web */
-$lastPublicPos = strrpos(__DIR__, '/public');
-if ($lastPublicPos !== false) {
-  $pathWithoutLastPublic = substr(__DIR__, 0, $lastPublicPos);
-}
-$dotenv = Dotenv\Dotenv::createImmutable($pathWithoutLastPublic);
-$dotenv->safeLoad();
+
+// $lastPublicPos = strrpos(__DIR__, '/public');
+// if ($lastPublicPos !== false) {
+//     $pathWithoutLastPublic = substr(__DIR__, 0, $lastPublicPos);
+// }
+// $dotenv = Dotenv\Dotenv::createImmutable($pathWithoutLastPublic);
+// $dotenv->safeLoad();
+
 /* Fin: Codigo para web */
 
 
 /* Inicio: Codigo para localhost */
-//$dotenv = Dotenv\Dotenv::createImmutable(str_replace("\//public", "", __DIR__));
-//$dotenv->safeLoad();
+
+$dotenv = Dotenv\Dotenv::createImmutable(str_replace("\public", "", __DIR__));
+$dotenv->safeLoad();
+
 /* Fin: Codigo para localhost */
 
 include "../includes/app.php";
@@ -102,6 +106,9 @@ $router->get("/dashboard/discounts/refractions", [ProductController::class, "dis
 
 $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "vehiclePreview"]);
 
+$router->get("/dashboard/registAdmin", [DashboardController::class, "addAdmin"]);
+$router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
+
 
 //dashboard user settings
 
@@ -112,6 +119,8 @@ $router->post("/dashboard/user-delete", [DashboardController::class, "userDeleti
 
 $router->post("/customer/customer-settings/customer/modificar", [CustomerController::class, "modificarUsuario"]);
 $router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);
+$router->post("/dashboard/user-settings/usuario/modificarDefault", [AuthenticationController::class, "modificarUsuarioDefault"]);
+
 
 $router->get("/customer/user-settings/usuario", [HomePageController::class, "getSettingsFromUserJson"]);
 $router->get("/dashboard/user-settings/usuario", [DashboardController::class, "getSettingsFromUserJson"]);

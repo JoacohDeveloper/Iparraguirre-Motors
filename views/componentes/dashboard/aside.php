@@ -69,6 +69,10 @@
                 </ul>
             </li>
         </ul>
+        <a title="Register" class="aside-element rounded" href="/dashboard/registAdmin">
+            <img src="/build/src/images/plus.svg" alt="Registrar admin">
+            <p>Admin regist</p>
+        </a>
 
     </div>
     <a title="Settings" class="aside-element rounded" href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">

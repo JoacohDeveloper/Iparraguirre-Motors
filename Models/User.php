@@ -4,7 +4,7 @@ namespace Models;
 
 use DateTime;
 use PDOException;
-
+use PDO;
 //Este es un modelo que hereda a ActiveRecord dentro de este modelo se especifica el nombre de la tabla SQL y las columnas. Es importante que cuando agreguemos datos a columnasdb al momento de hacer una operacion de Active Record se utilicen todos los campos, sin haber ningun dato vacío.
 
 
@@ -13,7 +13,7 @@ class User extends ActiveRecord
 
     protected static $tabla = "User";
 
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isEncargado", "isFirstLog", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
@@ -36,6 +36,10 @@ class User extends ActiveRecord
     protected $imagen;
 
     protected $isAdmin;
+
+    protected $isEncargado;
+
+    protected $isFirstLog;
 
     protected $isDeleted;
 
@@ -63,6 +67,8 @@ class User extends ActiveRecord
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
         $this->isAdmin = 1;
+        $this->isEncargado = $args["isEncargado"] ?? 0;
+        $this->isFirstLog = $args["isFirstLog"] ?? 1;
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->token = null;
         $this->titulo_imagen = "imagen default de usuario";
@@ -187,6 +193,14 @@ class User extends ActiveRecord
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
+    public function defaultPasswordHash($defaultPassword)
+    {
+        $this->password = password_hash($defaultPassword, PASSWORD_BCRYPT);
+    }
+    public function defaultEmail($defaultEmail)
+    {
+        $this->email = $defaultEmail;
+    }
 
     public function crearUsuario()
     {
@@ -194,11 +208,39 @@ class User extends ActiveRecord
         return $this->crear();
     }
 
+    public function usernameRepeat($dato)
+    {
+        $result = null;
+        try {
+            $query = "SELECT * FROM user  
+                      WHERE username = :dato";
+            $params = [
+                ':dato' => $dato
+            ];
+            $stmt = static::$db->prepare($query);
+            $stmt->execute($params);
+            $result = ($stmt->fetch(PDO::FETCH_ASSOC));
+            return isset( $result["uuid"]) ? $result : false;
+        } catch (PDOException $th) {
+            return $result;
+        }
+    }
+
     public function actualizarUsuario()
     {
         date_default_timezone_set('America/Montevideo');
         $this->updatedAt = new DateTime();
         $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
+        $this->isFirstLog = 0; //Se da por hecho que si actualizo el usuario, no es su primer log
+        return $this->actualizar($this->uuid);
+    }
+
+    public function actualizarUsuarioDefault($new_password){
+        date_default_timezone_set('America/Montevideo');
+        $this->updatedAt = new DateTime();
+        $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
+        $this->isFirstLog = 0; //Se da por hecho que si actualizo el usuario, no es su primer log
+        $this->password = password_hash($new_password, PASSWORD_BCRYPT);
         return $this->actualizar($this->uuid);
     }
 
@@ -290,9 +332,16 @@ class User extends ActiveRecord
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
 
-    public function isAdmin()
-    {
+    public function isAdmin(){
         return boolval($this->isAdmin);
+    }
+
+    public function isEncargado(){
+        return boolval($this->isEncargado);
+    }
+
+    public function isFirstLog(){
+        return boolval($this->isFirstLog);
     }
 
     public function defaultImage()

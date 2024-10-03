@@ -14,6 +14,8 @@ create table User(
 	imagen VARCHAR(255),
 	token VARCHAR(100),
 	isAdmin tinyint(1) DEFAULT 1,
+	isEncargado tinyint(1) DEFAULT 0,
+	isFirstLog tinyInt(1) default 1,
 	isDeleted tinyint(1) DEFAULT 0,
 	verify tinyInt(1) DEFAULT 0,
 	createdAt datetime default CURRENT_TIMESTAMP,

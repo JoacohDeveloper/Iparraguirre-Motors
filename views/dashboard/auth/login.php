@@ -22,7 +22,6 @@
                 <label for="remember" id="remember_txt">Remember me</label>
             </div>
             <input id="boton" type="submit" value="Ingresar">
-            <a class="opposite" href="/dashboard/register">Sign Up</a>
         </form>
     </section>
     <?php implementComp("error_toast.php") ?>
