@@ -1056,3 +1056,26 @@ footer {
   cursor: pointer;
   width: 100%;
 }
+
+/* Arreglo de account drop menu lado cliente */
+
+#settings{
+  display: none;
+}
+#settingsLog{
+  display: none;
+}
+.dropdown{
+  display: flex;
+}
+@media (max-width: 768px) {
+  #settings{
+    display: inline;
+  }
+  #settingsLog{
+    display: inline;
+  }
+  .dropdown{
+    display: none;
+  }
+}

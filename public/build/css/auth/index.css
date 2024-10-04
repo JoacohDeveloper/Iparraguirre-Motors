@@ -257,9 +257,6 @@ main{
 }
 
 @media (max-width: 480px){
-  body{
-    
-  }
   main {
     height: auto;
     width: auto;

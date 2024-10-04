@@ -181,6 +181,9 @@ abstract class DashboardController
         if (!$user->isAdmin()) {
             header("location: /");
         }
+        if(!$user->isEncargado()){
+            header("location: /");
+        }
 
         $router->render("dashboard/addAdmin", [
             "styles" => ["dashboard/index", "dashboard/aside"],

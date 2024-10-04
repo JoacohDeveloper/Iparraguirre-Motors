@@ -30,6 +30,18 @@
             <li><a href="/dashboard/analytics/products">Products</a></li>
         </ul>
     </li>
+    <?php
+        $usuario = $_SESSION["usuario"] ?? null;
+        if (isset($usuario)) {
+            $isEncargado = $usuario->isEncargado();
+        }
+
+        if ($isEncargado == true) {
+            echo '<li>
+                    <a href="/dashboard/registAdmin">Admin regist</a>
+                  </li>';
+        }
+    ?>
     <li>
         <a href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">Settings</a>
     </li>

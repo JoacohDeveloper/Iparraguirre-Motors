@@ -3,13 +3,16 @@
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">
-            <h3>Bienvenido al dashboard de IparraguirreMotors</h3>
+                <h3>Bienvenido al dashboard de IparraguirreMotors</h3>
             </div>
 
-            <p>Actualmente los datos de tu cuenta son inseguros</p>
-            <p>Completa las siguientes casillas con la nueva informacion de tu cuenta</p>
+            <div class="dashboard-info">
+                <p>Actualmente los datos de tu cuenta son inseguros<br>
+                Completa las siguientes casillas con la nueva informacion de tu cuenta</p>
+            </div>
 
             <form id="newInfo">
+                <h5>Mis datos</h5>
             <div>
                 <label class="inputs_txt" id="username_txt">Username</label>
                 <input class="inputs" type="text" name="username" placeholder="Username">

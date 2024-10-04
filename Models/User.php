@@ -239,7 +239,7 @@ class User extends ActiveRecord
         date_default_timezone_set('America/Montevideo');
         $this->updatedAt = new DateTime();
         $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
-        $this->isFirstLog = 0; //Se da por hecho que si actualizo el usuario, no es su primer log
+        $this->isFirstLog = 0;
         $this->password = password_hash($new_password, PASSWORD_BCRYPT);
         return $this->actualizar($this->uuid);
     }
