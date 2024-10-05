@@ -1,27 +1,27 @@
 const formularioLogin = document.querySelector("#loginForm")
 
 formularioLogin.addEventListener("submit", async (e) => {
-    e.preventDefault()
-    const log_dato = e.target[0].value; //Dato puede ser username o email
+    e.preventDefault();
+    const log_dato = e.target[0].value; // Dato puede ser username o email
     const log_pass = e.target[1].value;
     const errores = [];
-    const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
+    const datoRegex = /^[^\s]{4,}$/;
+
     if (log_dato.length == 0) {
-        errores.push("Debes ingresar un usuario o correo electronico.");
-    } else if (log_pass.length == 0) {
+        errores.push("Debes ingresar un usuario o correo electrónico.");
+    } else if (!datoRegex.test(log_dato)) {
+        errores.push("El usuario o correo electrónico debe tener al menos 4 caracteres y no contener espacios.");
+    }
+    if (log_pass.length == 0) {
         errores.push("Debes ingresar una contraseña.");
     }
 
     if (errores.length != 0) {
-        const errors = errores.map(err => {
-            const error = document.createElement("div");
-            error.classList.add("error")
-            error.textContent = err
-            return { title: "Failure", error: err }
-        })
-        addToast(errors);
+        const firstError = errores[0];
+        const error = document.createElement("div");
+        error.classList.add("error");
+        error.textContent = firstError;
+        addToast([{ title: "Failure", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
@@ -67,42 +67,52 @@ formularioRegister.addEventListener("submit", async e => {
     const reg_pass = e.target[4].value;
     const reg_rePass = e.target[5].value;
     const errores = [];
+
     const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const phoneRegex = /^[0-9]{9}$/;
+    const passwordRegex = /^[^\s]{4,}$/;
+
+    const fields = [
+        { value: reg_fullname, regex: nameRegex, error: "Debes ingresar nombre y apellido." },
+        { value: reg_username, regex: /.{5,}/, error: "Debes ingresar un usuario mayor a 4 caracteres." },
+        { value: reg_email, regex: emailRegex, error: "Formato de email inválido." },
+        { value: reg_phone, regex: phoneRegex, error: "Debes ingresar un número de celular válido." },
+        { value: reg_pass, regex: passwordRegex, error: "La contraseña debe tener mínimo 4 caracteres y no contener espacios." }
+    ];
+
+    fields.forEach(field => {
+        if (!field.regex.test(field.value)) {
+            errores.push(field.error);
+        }
+    });
 
     if (reg_fullname.length <= 2) {
         errores.push("Debes ingresar tu nombre completo.");
-    }  else if (!nameRegex.test(reg_fullname)) {
-        errores.push("Debes ingresar nombre y apellido.");
-    } else if (reg_username.length == 0) {
+    }
+    if (reg_username.length == 0) {
         errores.push("Debes ingresar un usuario.");
-    } else if (reg_username.length <= 4) {
-        errores.push("Debes ingresar un usuario mayor a 4 caracteres.");
-    } else if (reg_email.length == 0) {
+    }
+    if (reg_email.length == 0) {
         errores.push("Debes ingresar un email.");
-    } else if (!emailRegex.test(reg_email)) {
-        errores.push("Formato de email inválido.");
-    } else if (reg_phone.length == 0) {
-        errores.push("Debes ingresar un numero de celular.");
-    } else if (reg_phone.length != 9) {
-        errores.push("Debes ingresar un numero de celular valido.");
-    } else if (reg_pass.length == 0) {
+    }
+    if (reg_phone.length == 0) {
+        errores.push("Debes ingresar un número de celular.");
+    }
+    if (reg_pass.length == 0) {
         errores.push("Debes ingresar una contraseña.");
-    } else if (reg_pass.length <= 3 || reg_rePass.length <= 3) {
-        errores.push("La contraseña debe tener minimo 4 caracteres.");
-    } else if (reg_pass != reg_rePass) {
+    }
+    if (reg_pass != reg_rePass) {
         errores.push("Las contraseñas no son iguales.");
     }
 
     if (errores.length != 0) {
-        e.preventDefault()
-        const errors = errores.map(err => {
-            const error = document.createElement("div");
-            error.classList.add("error")
-            error.textContent = err
-            return { title: "Fail", error: err }
-        })
-        addToast(errors)
+        e.preventDefault();
+        const firstError = errores[0];
+        const error = document.createElement("div");
+        error.classList.add("error");
+        error.textContent = firstError;
+        addToast([{ title: "Fail", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner

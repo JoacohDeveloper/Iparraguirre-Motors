@@ -120,50 +120,39 @@ const ModalAddDiscount = (data) => {
     modalBody.appendChild(modalAddDiscount)
 
     modalAddDiscount.addEventListener("submit", async e => {
-        e.preventDefault()
-        const formdata = new FormData(modalAddDiscount)
+        e.preventDefault();
+        const formdata = new FormData(modalAddDiscount);
         const object = {};
-        const error = [];
+        const errores = [];
         const descuentoRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
         formdata.forEach((value, key) => {
             if (key !== 'image') {
-                object[key] = value
+                object[key] = value;
             }
         });
-
-        if (object.type == "-Seleccione-" ) {
-            error.push({
-                title: "Failure",
-                error: "El campo tipo de descuento se encuentra vacio"
-            })
-        } else if (object.descuento.length == 0) {
-            error.push({
-                title: "Failure",
-                error: "El campo descuento es obligatorio"
-            })
-        } else if (!descuentoRegex.test(object.descuento) || parseFloat(object.descuento) < 0) {
-            error.push({
-                title: "Failure",
-                error: "Solo se aceptan valores numéricos positivos"
-            });
-        } else if (object.type === "Dolares") {
-            if (parseFloat(object.descuento) > data.precio) {
-                error.push({
-                    title: "Failure",
-                    error: "El descuento en dólares no puede ser mayor al precio del producto"
-                });
+        const fields = [
+            { value: object.type, regex: /^(?!-Seleccione-).+$/, error: "El campo tipo de descuento se encuentra vacío" },
+            { value: object.descuento, regex: descuentoRegex, error: "Solo se aceptan valores numéricos positivos" }
+        ];
+    
+        fields.forEach(field => {
+            if (!field.regex.test(field.value)) {
+                errores.push({ title: "Failure", error: field.error });
             }
-        } else if (object.type === "Porcentaje") {
-            if (parseFloat(object.descuento) < 1 || parseFloat(object.descuento) > 100) {
-                error.push({
-                    title: "Failure",
-                    error: "El descuento en porcentaje debe estar entre 1 y 100"
-                });
-            }
+        });
+    
+        if (parseFloat(object.descuento) < 0) {
+            errores.push({ title: "Failure", error: "Solo se aceptan valores numéricos positivos" });
         }
-
-        if (error.length != 0) {
-            addToast(error);
+        if (object.type === "Dolares" && parseFloat(object.descuento) > data.precio) {
+            errores.push({ title: "Failure", error: "El descuento en dólares no puede ser mayor al precio del producto" });
+        }
+        if (object.type === "Porcentaje" && (parseFloat(object.descuento) < 1 || parseFloat(object.descuento) > 100)) {
+            errores.push({ title: "Failure", error: "El descuento en porcentaje debe estar entre 1 y 100" });
+        }
+        if (errores.length != 0) {
+            const firstError = errores[0]; // Tomamos el primer error
+            addToast([{ title: "Failure", error: firstError.error }]); // Mostramos solo el primer error
         } else {
             formdata.append('id', data.id);
             try {

@@ -473,35 +473,31 @@ async function submitEventHandler2(event) {
     event.preventDefault();
     const formdata = new FormData(form_changePassword);
     const object = {};
-    const error = [];
+    const errores = [];
+    const passwordRegex = /^[^\s]{4,}$/;
     formdata.forEach((value, key) => {
         object[key] = value;
     });
+    
+    const fields = [
+        { value: object.olderPassword, error: "Debes ingresar la contraseña actual de tu cuenta" },
+        { value: object.password, regex: passwordRegex, error: "La nueva contraseña debe tener mínimo 4 caracteres y no contener espacios." },
+        { value: object.repeatPassword, error: "Debes repetir la nueva contraseña de tu cuenta" }
+    ];
 
-    // Errores
-    if (object.olderPassword.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "Debes ingresar la contraseña actual de tu cuenta"
-        });
-    } else if (object.password.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "Debes ingresar la nueva contraseña de tu cuenta"
-        });
-    } else if (object.repeatPassword.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "Debes repetir la nueva contraseña de tu cuenta"
-        });
-    } else if (object.password !== object.repeatPassword) {
-        error.push({
-            title: "Failure",
-            error: "La contraseña repetida no coincide"
-        });
+    fields.forEach(field => {
+        if (field.value.length == 0) {
+            errores.push({ title: "Failure", error: field.error });
+        }
+    });
+
+    if (object.password !== object.repeatPassword) {
+        errores.push({ title: "Failure", error: "La contraseña repetida no coincide" });
     }
-    if (error.length != 0) {
-        addToast(error);
+
+    if (errores.length != 0) {
+        const firstError = errores[0];
+        addToast([{ title: "Failure", error: firstError.error }]);
     } else {
         try {
             const response = await fetch(location.origin + "/customer/user-newPassword", {

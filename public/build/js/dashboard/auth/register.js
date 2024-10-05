@@ -1,44 +1,37 @@
 const formularioRegister = document.querySelector("#regForm")
 
 formularioRegister.addEventListener("submit", async e => {
-
     e.preventDefault();
 
     const fullname = e.target[0].value;
     const username = e.target[1].value;
     const errores = [];
     const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
+    const usernameRegex = /^[^\s]{5,}$/;
 
-    if (fullname.length <= 2) {
-        errores.push("Debes ingresar tu nombre completo.");
-    }  else if (!nameRegex.test(fullname)) {
-        errores.push("Debes ingresar nombre y apellido.");
-    } else if (username.length == 0) {
-        errores.push("Debes ingresar un usuario.");
-    } else if (username.length <= 4) {
-        errores.push("Debes ingresar un usuario mayor a 4 caracteres.");
-    }
+    const fields = [
+        { value: fullname, regex: nameRegex, error: "Debes ingresar nombre y apellido." },
+        { value: username, regex: usernameRegex, error: "Debes ingresar un usuario mayor a 4 caracteres y sin espacios." }
+    ];
+
+    fields.forEach(field => {
+        if (!field.regex.test(field.value)) {
+            errores.push(field.error);
+        }
+    });
 
     if (errores.length != 0) {
-        e.preventDefault()
-        const errors = errores.map(err => {
-            const error = document.createElement("div");
-            error.classList.add("error")
-            error.textContent = err
-
-            return { title: "Fail", error: err }
-        })
-
-        addToast(errors)
-
+        const firstError = errores[0];
+        const error = document.createElement("div");
+        error.classList.add("error");
+        error.textContent = firstError;
+        addToast([{ title: "Fail", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
         const loaderSection = document.querySelector(".loader")
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
-
-
         try {
             const response = await fetch(location.origin + "/dashboard/registAdmin/regist", {
                 method: "POST",

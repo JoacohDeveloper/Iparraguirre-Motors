@@ -86,7 +86,8 @@ $router->get("/dashboard/user-default-image", [AuthenticationController::class, 
 $router->get("/settings", [HomePageController::class, "userSettings"]);
 $router->post("/settings", [HomePageController::class, "userSettings"]);
 $router->get("/logout", [CustomerController::class, "logout"]);
-$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
+$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]); 
+$router->get("/dashboard/noaccess", [DashboardController::class, "noAccess"]);
 
 //dashboard 
 

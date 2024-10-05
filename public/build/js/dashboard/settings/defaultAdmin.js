@@ -1,7 +1,6 @@
 const newDataForm = document.querySelector("#newInfo")
 
 newDataForm.addEventListener("submit", async e => {
-
     e.preventDefault();
 
     const username = e.target[0].value;
@@ -9,36 +8,31 @@ newDataForm.addEventListener("submit", async e => {
     const pass = e.target[2].value;
     const rePass = e.target[3].value;
     const errores = [];
+    const usernameRegex = /^[^\s]{5,}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex = /^[^\s]{4,}$/;
 
-    if (username.length == 0) {
-        errores.push("Debes ingresar un usuario.");
-    } else if (username.length <= 4) {
-        errores.push("Debes ingresar un usuario mayor a 4 caracteres.");
-    } else if (email.length == 0) {
-        errores.push("Debes ingresar un email.");
-    } else if (!emailRegex.test(email)) {
-        errores.push("Formato de email inválido.");
-    } else if (pass.length == 0) {
-        errores.push("Debes ingresar una contraseña.");
-    } else if (pass.length <= 3 || rePass.length <= 3) {
-        errores.push("La contraseña debe tener minimo 4 caracteres.");
-    } else if (pass != rePass) {
+    const fields = [
+        { value: username, regex: usernameRegex, error: "Debes ingresar un usuario mayor a 4 caracteres y sin espacios." },
+        { value: email, regex: emailRegex, error: "Formato de email inválido." },
+        { value: pass, regex: passwordRegex, error: "La contraseña debe tener mínimo 4 caracteres y no contener espacios." }
+    ];
+
+    fields.forEach(field => {
+        if (!field.regex.test(field.value)) {
+            errores.push(field.error);
+        }
+    });
+
+    if (pass !== rePass) {
         errores.push("Las contraseñas no son iguales.");
     }
-
     if (errores.length != 0) {
-        e.preventDefault()
-        const errors = errores.map(err => {
-            const error = document.createElement("div");
-            error.classList.add("error")
-            error.textContent = err
-
-            return { title: "Fail", error: err }
-        })
-
-        addToast(errors)
-
+        const firstError = errores[0];
+        const error = document.createElement("div");
+        error.classList.add("error");
+        error.textContent = firstError;
+        addToast([{ title: "Fail", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner

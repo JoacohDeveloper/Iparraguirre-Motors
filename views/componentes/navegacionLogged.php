@@ -16,7 +16,7 @@
                 <li><a href="/logout" id="logout" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
             </ul>
         </li>
-        <li><a class="nav-links" id="settings" href="/settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : ""; ?>">Cuenta</a></li>
-        <li><a class="nav-links" href="/logout" id="settingsLog" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
+        <li id="settings"><a class="nav-links" href="/settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : ""; ?>">Cuenta</a></li>
+        <li id="settingsLog"><a class="nav-links" href="/logout" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
     </ul>
 </nav>

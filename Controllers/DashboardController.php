@@ -14,7 +14,7 @@ abstract class DashboardController
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
         if (!$user->isAdmin()) {
-            header("location: /");
+            header("location: /dashboard/noaccess");
         }
         $isFirstLog = $user->isFirstLog();
 
@@ -189,6 +189,12 @@ abstract class DashboardController
             "styles" => ["dashboard/index", "dashboard/aside"],
             "scripts" => ["dashboard/index", "dashboard/auth/register"],
             "title" => "Dashboard"
+        ]);
+    }
+
+    public static function noAccess(Router $router){
+        $router->render("dashboard/noaccess", [
+            "title" => "Acceso denegado"
         ]);
     }
 }

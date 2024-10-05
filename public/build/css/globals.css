@@ -1065,9 +1065,6 @@ footer {
 #settingsLog{
   display: none;
 }
-.dropdown{
-  display: flex;
-}
 @media (max-width: 768px) {
   #settings{
     display: inline;
