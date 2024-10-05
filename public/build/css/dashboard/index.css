@@ -211,7 +211,7 @@ main {
       mask-position: center center;
       width: 1rem;
       height: 1rem;
-      fill: red;
+      fill: #b10b0a;
       z-index: -1;
       top: -0.6rem;
     }
@@ -282,7 +282,7 @@ main {
   cursor: pointer;
 }
 .notifications li:hover {
-  background-color: red;
+  background-color: #b10b0a;
 }
 .navegacion-dashboard .notifications > ul {
   height: 5rem;
@@ -324,7 +324,7 @@ main {
   list-style: none;
   gap: 1rem;
   text-decoration: none;
-  color: #000000;
+  color: #202020;
   align-items: center;
 }
 
@@ -332,7 +332,7 @@ main {
   list-style: none;
   gap: 1rem;
   text-decoration: none;
-  color: #000000;
+  color: #202020;
 }
 
 .dashboard-brgMenu-ul li a {
@@ -347,7 +347,7 @@ main {
   font-size: 0.7rem;
   list-style: none;
   text-decoration: none;
-  color: #000000;
+  color: #202020;
 }
 
 .dark .dashboard-brgMenu-ul li a {

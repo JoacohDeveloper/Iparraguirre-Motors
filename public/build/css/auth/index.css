@@ -191,12 +191,22 @@ main{
   margin-top: -1.5rem;
   font-size: .6rem;
   align-self: center;
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+    font-size: .605rem;
+  }
 }
 #p_signUp{
   display: none;
   margin-top: -1.5rem;
   font-size: .6rem;
   align-self: center;
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+    font-size: .605rem;
+  }
 }
 
 @media (max-width: 768px){

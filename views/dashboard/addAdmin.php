@@ -7,8 +7,10 @@
             <h3>Agregar administrador</h3>
             </div>
 
-            <p>Completa el siguiente formulario de registro</p>
-            <p>para darle acceso a un nuevo empleado al dashboard</p>
+            <div class="dashboard-info">
+                <p>Completa el siguiente formulario de registro<br>
+                para darle acceso a un nuevo empleado al dashboard</p>
+            </div>
 
             <form id="regForm">
                 <div>

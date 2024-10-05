@@ -186,7 +186,7 @@ abstract class DashboardController
         }
 
         $router->render("dashboard/addAdmin", [
-            "styles" => ["dashboard/index", "dashboard/aside"],
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/addAdmin"],
             "scripts" => ["dashboard/index", "dashboard/auth/register"],
             "title" => "Dashboard"
         ]);
