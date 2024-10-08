@@ -76,7 +76,7 @@
             }
 
             if ($isEncargado == true) {
-                echo '<a title="Register" class="aside-element rounded" href="/dashboard/registAdmin">
+                echo '<a title="Register" class="aside-element rounded" href="/dashboard/manageEmployee">
                     <img src="/build/src/images/user.svg" alt="Registrar admin">
                     <p>Admin regist</p>
                 </a>';

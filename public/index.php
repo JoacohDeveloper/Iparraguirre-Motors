@@ -76,7 +76,12 @@ $router->post("/dashboard/recuperar", [AuthenticationController::class, "recuper
 
 $router->get("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
-$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
+$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]); 
+
+$router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]); 
+
+$router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]);
+$router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
 
 $router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);
@@ -106,9 +111,6 @@ $router->get("/dashboard/discounts/refractions", [ProductController::class, "dis
 
 
 $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "vehiclePreview"]);
-
-$router->get("/dashboard/registAdmin", [DashboardController::class, "addAdmin"]);
-$router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
 
 
 //dashboard user settings

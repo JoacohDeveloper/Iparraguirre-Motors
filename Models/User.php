@@ -208,6 +208,17 @@ class User extends ActiveRecord
         return $this->crear();
     }
 
+    public static function getAllAdmins() {
+        try {
+            $query = "SELECT * FROM User";
+            $stmt = static::$db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
     public function usernameRepeat($dato)
     {
         $result = null;

@@ -192,6 +192,24 @@ abstract class DashboardController
         ]);
     }
 
+    public static function manageAdmin(Router $router)
+    {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
+        if(!$user->isEncargado()){
+            header("location: /");
+        }
+
+        $router->render("dashboard/manageAdmin", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/manageAdmin"],
+            "scripts" => ["dashboard/index", "dashboard/manageAdmin"],
+            "title" => "Dashboard"
+        ]);
+    }
+
     public static function noAccess(Router $router){
         $router->render("dashboard/noaccess", [
             "title" => "Acceso denegado"

@@ -236,6 +236,16 @@ abstract class AuthenticationController
         exit;
     }
 
+    public static function getAdmins() {
+        $result = User::getAllAdmins();
+        if (!empty($result)) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(["message" => "Ha ocurrido un error"]);
+        }
+        exit;
+    }   
+
     public static function logout()
     {
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
