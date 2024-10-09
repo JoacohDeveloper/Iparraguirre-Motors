@@ -1,0 +1,234 @@
+.container-divisor{
+    display: flex;
+}
+
+.add-container{
+    width: 35%;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background-color: #ffffff;
+    padding: 3rem 2.5rem;
+    border-radius: .6rem;
+    gap: 1rem;
+    h3{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    p{
+        text-align: center;
+        font-size: .875rem;
+    }
+}
+.form-container > form{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 2rem;
+    width: 25rem;
+    gap: 1rem;
+}
+.form-container > form > label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: .2rem;
+}
+
+.form-container > form > label input[type="text"],
+  input[type="password"] {
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid #b10b0a;
+}
+.form-container > form > input[type="submit"]{
+    width: 60%;
+    border: 1px solid #202020;
+    background-color: #b10b0a;
+    padding: .5rem;
+    color: #ffffff;
+    border-radius: .5rem;
+    display: flex;
+    align-self: center;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: box-shadow .5s ease,
+        transform .5s ease;
+    &:hover{
+        transform: scale(1.02);
+        box-shadow: 1px 1px 2px #202020;
+    }
+}
+
+.user-container{
+    width: 65%;
+}
+.infoCant-content{
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: auto;
+    p{
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        padding: .5rem;
+        font-size: .8rem;
+        border-radius: .5rem;
+    }
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.user-card {
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px #0000001a;
+    margin: 20px;
+    background-color: #ffffff;
+    transition: box-shadow .5s ease,
+        transform .5s ease;
+}
+.user-card:hover{
+    box-shadow: 4px 4px 4px #b10b0a;
+    transform: scale(1.02);
+}
+  
+.important-container {
+    text-align: center;
+    padding: 20px;
+    cursor: default;
+}
+
+.image-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px;
+    border: 3px solid #ff0000;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: default;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.important-container > #full_name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.important-container > #rol {
+    font-size: 1em;
+    color: #666;
+    margin: 0;
+}
+
+.contenedor-informacion {
+    padding: 15px;
+    cursor: default;
+    label{
+        display: flex;
+        gap: .4rem;
+    }
+}
+
+.contenedor-informacion p {
+    font-size: .825em;
+    margin: 5px 0;
+    color: #6e6e6e;
+}
+
+@media screen and (max-width: 1550px) and (min-width: 769px) {
+    .container-divisor{
+        flex-direction: column;
+    }
+    .add-container{
+        width: 100%;
+    }
+    .form-container{
+        position: unset;
+    }
+    .user-container{
+        width: 100%;
+        margin-top: 4rem;
+        
+    }
+    .infoCant-content{
+        width: 90%;
+        flex-wrap: wrap;
+        row-gap: .6rem;
+        p{
+            padding: .75rem;
+            font-size: .8rem;
+        }
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .container-divisor{
+        flex-direction: column;
+    }
+    .add-container{
+        width: 100%;
+    }
+    .form-container{
+        position: unset;
+        padding: 2rem 2rem;
+        form{
+            width: 80%;
+        }
+        h3{
+            font-size: 1.2rem;
+        }
+        p{
+            font-size: .75rem;
+        }
+        form > input[type="submit"]{
+            width: 85%;
+        }
+    }
+    .user-container{
+        width: 100%;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        p{
+            margin: auto;
+        }
+    }
+
+    .infoCant-content{
+        width: 100%;
+        flex-direction: column;
+        gap: .6rem;
+        margin: auto;
+        p{
+            padding: .4rem;
+            font-size: .75rem;
+            border-radius: .25rem;
+            width: 12rem;
+            text-align: center;
+        }
+    }
+  }

@@ -331,7 +331,7 @@ header .brgMenu {
   cursor: pointer;
 
   &:hover {
-    background-color: #ccc;
+    background-color: #000;
   }
 }
 
@@ -342,16 +342,20 @@ header .brgMenu {
 }
 
 .mobile-menu-content {
-  background-color: #202020;
+  background-color: #fff;
   border: none;
   height: 100%;
   width: 100%;
 }
+.dark .mobile-menu-content{
+  background-color: #202020;
+}
 
 .mobile-menu-content > .navegacion {
+  padding-top: 1.5em;
   display: flex;
   flex-direction: column;
-
+  background-color: #fff;
   ul {
     flex-direction: column;
     align-items: center;
@@ -364,7 +368,7 @@ header .brgMenu {
   }
 
   ul > li a {
-    color: #202020;
+    color: #000000 !important;
 
     &:hover {
       border: 2px solid #202020;
@@ -378,7 +382,7 @@ header .brgMenu {
 .dark .mobile-menu-content > .navegacion {
   display: flex;
   flex-direction: column;
-
+  background-color: #202020;
   ul {
     flex-direction: column;
     align-items: center;
@@ -391,7 +395,7 @@ header .brgMenu {
   }
 
   ul > li a {
-    color: #ffffff;
+    color: #ffffff !important;
 
     &:hover {
       border: 2px solid #ffffff;
@@ -940,5 +944,135 @@ footer {
     width: 20rem;
     text-align: center;
     margin: 1.4rem 0;
+  }
+}
+
+
+
+
+
+
+/* Estilos generales para la navegación */
+.dashboard-brgMenu-ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 1rem;
+  text-decoration: none;
+  color: #000000;
+  align-items: center;
+}
+
+.dark .dashboard-brgMenu-ul {
+  list-style: none;
+  gap: 1rem;
+  text-decoration: none;
+  color: #000000;
+}
+
+.dashboard-brgMenu-ul li a {
+  display: inline-block;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.3s ease, border 0.3s ease;
+  border: 2px solid transparent;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.2rem;
+  font-size: 0.7rem;
+  list-style: none;
+  text-decoration: none;
+  color: #000000;
+}
+
+.dark .dashboard-brgMenu-ul li a {
+  color: #ffffff;
+}
+
+.dashboard-brgMenu-ul li a:hover {
+  border: 2px solid #000000;
+}
+
+.dark .dashboard-brgMenu-ul li a:hover {
+  border: 2px solid #ffffff;
+}
+
+.dashboard-brgMenu-ul li a.actual-index,
+.dashboard-brgMenu-ul li a.actual {
+  border: 2px solid #be0000;
+}
+
+.dark .dashboard-brgMenu-ul li a.actual-index,
+.dark .dashboard-brgMenu-ul li a.actual {
+  border: 2px solid #be0000;
+}
+
+/* Estilos para los menús desplegables */
+.productmanagment-dropdown,
+.discounts-dropdown,
+.analytics-dropdown {
+  display: none;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 0.5rem;
+  z-index: 105;
+  background-color: #fff;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  overflow: hidden;
+  align-items: center;
+  text-align: center;
+}
+
+.mobile-menu{
+  z-index: 105;
+}
+
+.dark .productmanagment-dropdown,
+.dark .discounts-dropdown,
+.dark .analytics-dropdown {
+  box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
+  background-color: #333;
+  z-index: 101;
+}
+
+.dashboard-brgMenu-ul li .dropdown-content li a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-brgMenu-ul li .dropdown-content li a:hover {
+  background-color: #ccc;
+}
+
+.dark .dashboard-brgMenu-ul li .dropdown-content li a:hover {
+  background-color: #202020;
+}
+
+.dashboard-brgMenu-ul li.dropdown {
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Arreglo de account drop menu lado cliente */
+
+#settings{
+  display: none;
+}
+#settingsLog{
+  display: none;
+}
+@media (max-width: 768px) {
+  #settings{
+    display: inline;
+  }
+  #settingsLog{
+    display: inline;
+  }
+  .dropdown{
+    display: none;
   }
 }

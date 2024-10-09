@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, discount_type, id, images, año, modelo, fabricante }) => {
 
     const card = document.createElement("div")
     card.id = id;
@@ -57,10 +57,17 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
         
-        const precioFinal = precio - discount;
+        let precioFinal;
+        if (discount_type == "Dolares") {
+            precioFinal = precio - discount;
+        } else if (discount_type == "Porcentaje") {
+            let montoDescuento = (precio * discount) / 100;
+            precioFinal = precio - montoDescuento;
+        }
+
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-
+    
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -68,7 +75,7 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }
+    }   
 
     contenedorInformacion.appendChild(contenedorPrecio);
 
@@ -91,8 +98,14 @@ const Card = ({ nombre, precio, discount, id, imageUrl, año, modelo, fabricante
     contenedorNombre.appendChild(modeloHTML)
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
-
-    img.src = imageUrl ?? "/build/src/images/vehicles/default.jpg";
+    
+   if(images.length == 0)
+       img.src = "/build/src/images/vehicles/default.jpg";
+    else{
+      img.src = `/build${images[0]?.url.split("/build")[1]}`;
+    }
+    
+  
     img.alt = nombre;
     imageContainer.appendChild(img)
 
@@ -136,11 +149,12 @@ const Spinner = () => {
 }
 
 
+
 async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
         if (cardContainer) cardContainer.appendChild(spinner)
-        const url = `http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
+        const url = location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
 
         const response = await fetch(url)
         spinner.remove()
@@ -156,11 +170,13 @@ async function init(search = null) {
                 nombre: v.nombre,
                 precio: v.precio,
                 discount: v.discount,
+                discount_type: v.discount_type,
                 id: v.id,
                 imageUrl: v.imagen,
                 fabricante: v.fabricante,
                 modelo: v.modelo,
-                año: v.year
+                año: v.year,
+                images: v.vehicleImages
             }
             if (cardContainer) cardContainer.appendChild(Card(customV))
         })
@@ -306,7 +322,7 @@ async function buscar() {
         if (buscador?.value?.length > 0) {
 
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
+                const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
 
 
                 if (response.ok) {

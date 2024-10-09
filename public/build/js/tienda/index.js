@@ -4,7 +4,7 @@
 
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ id, nombre, año, precio, descuento, km }) => {
+const Card = ({ id, nombre, año, precio, discount, discount_type, km, images }) => {
 
     const card = document.createElement("div")
     card.classList.add("card")
@@ -12,23 +12,58 @@ const Card = ({ id, nombre, año, precio, descuento, km }) => {
 
     const card_image = document.createElement("div");
     card_image.classList.add("card_image")
-    card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    
+    if(images.length == 0)
+     card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    else{
+     card_image.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
+    }
+    
 
 
     const card_info = document.createElement("div");
     card_info.classList.add("card_info")
 
     const text_name = document.createElement("p")
-    const text_precio = document.createElement("p")
     const text_kmyear = document.createElement("p")
 
     text_name.textContent = `${nombre}`
-    text_precio.textContent = ` US$ ${precio}`
     text_kmyear.textContent = `${año} | ${km}` 
+
+    const contenedorPrecio = document.createElement("div");
+    contenedorPrecio.classList.add("contenedor-precio");
+
+    if (discount) {
+        const precioOriginalHTML = document.createElement("p");
+        const precioFinalHTML = document.createElement("p");
+        precioOriginalHTML.classList.add("precioOriginal");
+        precioFinalHTML.classList.add("precioFinal");
+        
+        let precioFinal;
+        if (discount_type == "Dolares") {
+            precioFinal = precio - discount;
+        } else if (discount_type == "Porcentaje") {
+            let montoDescuento = (precio * discount) / 100;
+            precioFinal = precio - montoDescuento;
+        }
+
+        precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+    
+        contenedorPrecio.appendChild(precioFinalHTML);
+        contenedorPrecio.appendChild(precioOriginalHTML);
+    } else {
+        const precioHTML = document.createElement("p");
+        precioHTML.classList.add("precio");
+        precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        contenedorPrecio.appendChild(precioHTML);
+    }    
+
+    
 
 
     card_info.appendChild(text_name)
-    card_info.appendChild(text_precio)
+    card_info.appendChild(contenedorPrecio);
     card_info.appendChild(text_kmyear)
 
     card.appendChild(card_image)
@@ -56,7 +91,7 @@ async function init(search = null) {
     const cargarMasVehiculos = async (page) => {
         const spinner = Spinner();
         if (cardContainer) cardContainer.appendChild(spinner);
-        const url = `http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`;
+        const url = location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
 
         const response = await fetch(url);
         spinner.remove();
@@ -71,10 +106,12 @@ async function init(search = null) {
             const customV = {
                 nombre: v.nombre,
                 precio: v.precio,
-                descuento: v.descuento,
+                discount: v.discount,
+                discount_type: v.discount_type,
                 id: v.id,
                 km: v.kilometros,
-                año: v.year
+                año: v.year,
+                images: v.vehicleImages
             };
             if (cardContainer) cardContainer.appendChild(Card(customV));
         });
@@ -209,7 +246,7 @@ async function buscar() {
         resultadoBusqueda.innerHTML = null;
         if (buscador?.value?.length > 0) {
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`);
+                const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
                 if (response.ok) {
                     const data = await response.json();
                     if (!data?.message || data?.message !== "404") {

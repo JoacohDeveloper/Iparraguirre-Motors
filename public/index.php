@@ -2,8 +2,24 @@
 
 include_once "../vendor/autoload.php";
 
+/* Inicio: Codigo para web */
+
+// $lastPublicPos = strrpos(__DIR__, '/public');
+// if ($lastPublicPos !== false) {
+//     $pathWithoutLastPublic = substr(__DIR__, 0, $lastPublicPos);
+// }
+// $dotenv = Dotenv\Dotenv::createImmutable($pathWithoutLastPublic);
+// $dotenv->safeLoad();
+
+/* Fin: Codigo para web */
+
+
+/* Inicio: Codigo para localhost */
+
 $dotenv = Dotenv\Dotenv::createImmutable(str_replace("\public", "", __DIR__));
 $dotenv->safeLoad();
+
+/* Fin: Codigo para localhost */
 
 include "../includes/app.php";
 
@@ -60,8 +76,14 @@ $router->post("/dashboard/recuperar", [AuthenticationController::class, "recuper
 
 $router->get("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
-$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
+$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]); 
 
+$router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]); 
+
+$router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]);
+$router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
+
+$router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);
 
 $router->get("/dashboard/user-default-image", [AuthenticationController::class, "eliminarImage"]);
@@ -69,7 +91,8 @@ $router->get("/dashboard/user-default-image", [AuthenticationController::class, 
 $router->get("/settings", [HomePageController::class, "userSettings"]);
 $router->post("/settings", [HomePageController::class, "userSettings"]);
 $router->get("/logout", [CustomerController::class, "logout"]);
-$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
+$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]); 
+$router->get("/dashboard/noaccess", [DashboardController::class, "noAccess"]);
 
 //dashboard 
 
@@ -94,10 +117,15 @@ $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "
 
 $router->get("/dashboard/user-settings", [DashboardController::class, "userSettings"]);
 
+$router->post("/customer/user-delete", [HomePageController::class, "userDeleting"]);
 $router->post("/dashboard/user-delete", [DashboardController::class, "userDeleting"]);
 
+$router->post("/customer/customer-settings/customer/modificar", [CustomerController::class, "modificarUsuario"]);
 $router->post("/dashboard/user-settings/usuario/modificar", [AuthenticationController::class, "modificarUsuario"]);
+$router->post("/dashboard/user-settings/usuario/modificarDefault", [AuthenticationController::class, "modificarUsuarioDefault"]);
 
+
+$router->get("/customer/user-settings/usuario", [HomePageController::class, "getSettingsFromUserJson"]);
 $router->get("/dashboard/user-settings/usuario", [DashboardController::class, "getSettingsFromUserJson"]);
 
 //tienda

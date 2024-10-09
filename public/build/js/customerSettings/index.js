@@ -40,51 +40,51 @@ resumeProfileImg.addEventListener("click", resumeProfileImgHandleClick)
 
 
 async function formMenu({ target }) {
-    toggleBackground()
-    const dashboardContent = document.querySelector(".dashboard-content")
-    dashboardContent.classList.add("fixed")
-    const container = document.querySelector(".settingsContainer")
+    toggleBackground();
+    const dashboardContent = document.querySelector(".dashboard-fit__content");
+    dashboardContent.classList.add("fixed");
+    const container = document.querySelector(".container");
 
-    const lastMenu = document.querySelector(".settings_forms")
+    const lastMenu = document.querySelector(".settings_forms");
 
     if (lastMenu) {
-        lastMenu.remove()
-
+        lastMenu.remove();
     }
-    const settings_formHTML = document.createElement("section")
-    const form_containerHTMl = document.createElement("div")
-    const form_close__settings_formHTML = document.createElement("div")
-    const closeText = document.createElement("p")
+
+    const settings_formHTML = document.createElement("section");
+    const form_containerHTMl = document.createElement("div");
+    const form_close__settings_formHTML = document.createElement("div");
+    const closeText = document.createElement("p");
     closeText.textContent = "X";
-    form_close__settings_formHTML.classList.add("close__settings_forms")
-    settings_formHTML.classList.add("settings_forms")
-    form_containerHTMl.classList.add("form-container")
-    form_close__settings_formHTML.appendChild(closeText)
-    form_containerHTMl.appendChild(form_close__settings_formHTML)
+    form_close__settings_formHTML.classList.add("close__settings_forms");
+    settings_formHTML.classList.add("settings_forms");
+    form_containerHTMl.classList.add("form-container");
+    form_close__settings_formHTML.appendChild(closeText);
+    form_containerHTMl.appendChild(form_close__settings_formHTML);
     settings_formHTML.appendChild(form_containerHTMl);
     container.appendChild(settings_formHTML);
 
     await setFormEdit(target, form_containerHTMl);
 
     const removeForm = () => {
-        settings_formHTML.classList.add("removed__settings_forms")
+        settings_formHTML.classList.add("removed__settings_forms");
         setTimeout(() => {
-            const dashboardContent = document.querySelector(".dashboard-content")
-            document.body.classList.remove("fixed")
-            document.body.classList.remove("blured")
-            dashboardContent.classList.remove("fixed")
+            const dashboardContent = document.querySelector(".dashboard-fit__content");
+            document.body.classList.remove("fixed");
+            document.body.classList.remove("blured");
+            dashboardContent.classList.remove("fixed");
         }, 400);
-    }
-    form_close__settings_formHTML.addEventListener("click", removeForm)
+    };
+
+    form_close__settings_formHTML.addEventListener("click", removeForm);
     document.addEventListener("keydown", e => {
-        if (e.key == 'Escape') removeForm()
-    })
+        if (e.key === 'Escape') removeForm();
+    });
     settings_formHTML.addEventListener("click", e => {
-        if (e.target == settings_formHTML) removeForm()
-    })
-
-
+        if (e.target === settings_formHTML) removeForm();
+    });
 }
+
 
 
 
@@ -112,7 +112,6 @@ function setResumeChanges(formdata, imgURL) {
     lastNameField.textContent = fullnameSplit.length > 2 ? listOfSName.join(" ") : fullnameSplit[1]
 
     fullnameField.textContent = `${object.full_name} - ${object.username}`
-    navUsermane.textContent = `Welcome, ${object.username}.`
     imgProfile.src = imgURL.src;
     imgProfileNav.src = imgURL.src;
 }
@@ -129,11 +128,13 @@ async function setFormEdit(target, formContainer) {
     // el usuario que esta en la pagina
     const urlParams = new URLSearchParams(window.location.search);
     const uuid = urlParams.get('u');
+    console.log(uuid)
 
     try {
-        const response = await fetch(location.origin + `/dashboard/user-settings/usuario?u=${uuid}`);
+        const response = await fetch(location.origin + `/customer/user-settings/usuario?u=${uuid}`);
 
         const data = await response.json();
+        console.log(data)
         if (data?.error) throw new Error(data?.error)
 
         formContainer.appendChild(formHTML)
@@ -183,13 +184,13 @@ async function setFormEdit(target, formContainer) {
 
             try {
                 const formdata = new FormData(formHTML)
-                const response = await fetch(location.origin + "/dashboard/user-settings/usuario/modificar", {
+                const response = await fetch(location.origin + "/customer/customer-settings/customer/modificar", {
                     method: "POST",
                     body: formdata
                 })
 
                 const data = await response.json()
-
+                console.log(data)
 
                 if (data?.message && data?.message == "error") {
                     const errors = document.createElement("div")
@@ -199,8 +200,9 @@ async function setFormEdit(target, formContainer) {
                         return { title: "Failure", error: err[1] }
                     })
                     addToast(errores);
-                } else if (!data?.file_uploaded) addToast([{ title: "Failure", error: "Ocurrió un error al cargar su imagen, intenta de nuevo más tarde." }]);
-                else if (data?.message == "ok") {
+                } else if (!data?.file_uploaded) {
+                     addToast([{ title: "Failure", error: "Ocurrió un error al cargar su imagen, intenta de nuevo más tarde." }]);
+                } else if (data?.message == "successfuly") {
                     const previewImg = document.querySelector("#preview_edit_resume__img")
                     setResumeChanges(formdata, previewImg);
                     document.querySelector(".close__settings_forms")?.click()
@@ -324,19 +326,6 @@ async function setFormEdit(target, formContainer) {
             emailInput.placeholder = "Email"
             emailInput.value = data.email;
 
-            const summaryTextAreaLabel = document.createElement("label");
-
-            const summaryTextArea = document.createElement("textarea")
-            summaryTextAreaLabel.textContent = "Biografia"
-            summaryTextAreaLabel.htmlFor = "Biografia"
-
-            summaryTextArea.name = "bio"
-            summaryTextArea.id = "bio"
-            console.log(data)
-            summaryTextArea.placeholder = "Escribe aqui tu biografia"
-            summaryTextArea.textContent = data.bio;
-
-
             formHTML.appendChild(bannerUser)
             formHTML.appendChild(subtitle)
 
@@ -348,9 +337,6 @@ async function setFormEdit(target, formContainer) {
 
             formHTML.appendChild(emailInputLabel)
             formHTML.appendChild(emailInput)
-
-            formHTML.appendChild(summaryTextAreaLabel)
-            formHTML.appendChild(summaryTextArea)
 
             formHTML.appendChild(submitBTN)
 
@@ -395,7 +381,7 @@ function setSettingSection(step) {
 
 
 /* Admin settings li selected */
-const menuItems = document.querySelectorAll("#profile, #notifications, #security, #delete-account, #change-pass");
+const menuItems = document.querySelectorAll("#profile, #cart, #wishlist, #change-pass, #delete-account");
 menuItems.forEach(item => {
     item.addEventListener("click", (event) => {
         menuItems.forEach(el => el.classList.remove("selected"));
@@ -437,7 +423,7 @@ async function submitEventHandler(event) {
     } else {
         confirm("¿Estás seguro de que quieres borrar tu cuenta?");
         try {
-            const response = await fetch(location.origin + "/dashboard/user-delete", {
+            const response = await fetch(location.origin + "/customer/user-delete", {
                 method: "POST",
                 body: formdata
             });
@@ -487,38 +473,34 @@ async function submitEventHandler2(event) {
     event.preventDefault();
     const formdata = new FormData(form_changePassword);
     const object = {};
-    const error = [];
+    const errores = [];
+    const passwordRegex = /^[^\s]{4,}$/;
     formdata.forEach((value, key) => {
         object[key] = value;
     });
+    
+    const fields = [
+        { value: object.olderPassword, error: "Debes ingresar la contraseña actual de tu cuenta" },
+        { value: object.password, regex: passwordRegex, error: "La nueva contraseña debe tener mínimo 4 caracteres y no contener espacios." },
+        { value: object.repeatPassword, error: "Debes repetir la nueva contraseña de tu cuenta" }
+    ];
 
-    // Errores
-    if (object.olderPassword.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "Debes ingresar la contraseña actual de tu cuenta"
-        });
-    } else if (object.password.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "Debes ingresar la nueva contraseña de tu cuenta"
-        });
-    } else if (object.repeatPassword.length == 0) {
-        error.push({
-            title: "Failure",
-            error: "Debes repetir la nueva contraseña de tu cuenta"
-        });
-    } else if (object.password !== object.repeatPassword) {
-        error.push({
-            title: "Failure",
-            error: "La contraseña repetida no coincide"
-        });
+    fields.forEach(field => {
+        if (field.value.length == 0) {
+            errores.push({ title: "Failure", error: field.error });
+        }
+    });
+
+    if (object.password !== object.repeatPassword) {
+        errores.push({ title: "Failure", error: "La contraseña repetida no coincide" });
     }
-    if (error.length != 0) {
-        addToast(error);
+
+    if (errores.length != 0) {
+        const firstError = errores[0];
+        addToast([{ title: "Failure", error: firstError.error }]);
     } else {
         try {
-            const response = await fetch(location.origin + "/dashboard/user-newPassword", {
+            const response = await fetch(location.origin + "/customer/user-newPassword", {
                 method: "POST",
                 body: formdata
             });
@@ -555,7 +537,7 @@ if(btn_defaultImage) btn_defaultImage.addEventListener("click", defaultImage);
 async function defaultImage(event) {
     event.preventDefault();
     try {
-        const response = await fetch(location.origin + "/dashboard/user-default-image");
+        const response = await fetch(location.origin + "/customer/user-default-image");
         const data = await response.json();
         console.log(data)
         if (data?.errores) {

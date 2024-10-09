@@ -65,6 +65,7 @@ const InputSelect = (label, name, values, id, selectedValue) => {
 
 const ModalAddDiscount = (data) => {
     const contenedor = document.createElement("div")
+    document.body.classList.add("fixed")
 
     contenedor.classList.add("modal-container")
 
@@ -119,34 +120,43 @@ const ModalAddDiscount = (data) => {
     modalBody.appendChild(modalAddDiscount)
 
     modalAddDiscount.addEventListener("submit", async e => {
-        e.preventDefault()
-        const formdata = new FormData(modalAddDiscount)
+        e.preventDefault();
+        const formdata = new FormData(modalAddDiscount);
         const object = {};
-        const error = [];
+        const errores = [];
+        const descuentoRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
         formdata.forEach((value, key) => {
             if (key !== 'image') {
-                object[key] = value
+                object[key] = value;
             }
         });
-
-        if (object.type == "-Seleccione-" ) {
-            error.push({
-                title: "Failure",
-                error: "El campo tipo de descuento se encuentra vacio"
-            })
-        } else if (object.descuento.length == 0) {
-            error.push({
-                title: "Failure",
-                error: "El campo descuento es obligatorio"
-            })
+        const fields = [
+            { value: object.type, regex: /^(?!-Seleccione-).+$/, error: "El campo tipo de descuento se encuentra vacío" },
+            { value: object.descuento, regex: descuentoRegex, error: "Solo se aceptan valores numéricos positivos" }
+        ];
+    
+        fields.forEach(field => {
+            if (!field.regex.test(field.value)) {
+                errores.push({ title: "Failure", error: field.error });
+            }
+        });
+    
+        if (parseFloat(object.descuento) < 0) {
+            errores.push({ title: "Failure", error: "Solo se aceptan valores numéricos positivos" });
         }
-
-        if (error.length != 0) {
-            addToast(error);
+        if (object.type === "Dolares" && parseFloat(object.descuento) > data.precio) {
+            errores.push({ title: "Failure", error: "El descuento en dólares no puede ser mayor al precio del producto" });
+        }
+        if (object.type === "Porcentaje" && (parseFloat(object.descuento) < 1 || parseFloat(object.descuento) > 100)) {
+            errores.push({ title: "Failure", error: "El descuento en porcentaje debe estar entre 1 y 100" });
+        }
+        if (errores.length != 0) {
+            const firstError = errores[0]; // Tomamos el primer error
+            addToast([{ title: "Failure", error: firstError.error }]); // Mostramos solo el primer error
         } else {
             formdata.append('id', data.id);
             try {
-                const response = await fetch("http://localhost:3000/dashboard/discount-vehiculo", {
+                const response = await fetch(location.origin + "/dashboard/discount-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -174,6 +184,7 @@ const ModalAddDiscount = (data) => {
                         })
                     }
                 } else if (data?.error) {
+                    document.body.classList.add("fixed")
                     addToast([{
                         title: "Failure",
                         error: "Ha ocurrido un error"
@@ -181,6 +192,7 @@ const ModalAddDiscount = (data) => {
                 }
             } catch (err) {
                 console.log(err);
+                document.body.classList.add("fixed")
                 addToast([{
                     title: "Failure",
                     error: "Ha ocurrido un error"
@@ -278,7 +290,7 @@ const ModalRemoveDiscount = (data) => {
         } else {
             formdata.append('id', data.id);
             try {
-                const response = await fetch("http://localhost:3000/dashboard/delete-discount-vehiculo", {
+                const response = await fetch(location.origin + "/dashboard/delete-discount-vehiculo", {
                     method: "POST",
                     body: formdata
                 });
@@ -372,7 +384,7 @@ const handlerEliminar = (e) => {
 const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
-    const response = await fetch("http://localhost:3000/dashboard/obtener-vehiculo", {
+    const response = await fetch(location.origin + "/dashboard/obtener-vehiculo", {
         method: "POST",
         body: formdata
     });

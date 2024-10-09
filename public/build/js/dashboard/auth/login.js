@@ -1,47 +1,37 @@
-
-// aqui haremos un logueo client side usando login como rest
-
 const formularioLogin = document.querySelector("#loginForm")
 
 formularioLogin.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-
-    e.preventDefault()
-
-    const dato = e.target[0].value; //Dato puede ser username o email
+    const dato = e.target[0].value; // Dato puede ser username o email
     const pass = e.target[1].value;
     const erroresClient = [];
+    const datoRegex = /^[^\s]{4,}$/;
 
-    if (dato.length == 0) {
-        erroresClient.push("Debes ingresar un usuario o correo electronico.");
-    } else if (pass.length == 0) {
+    if (!datoRegex.test(dato)) {
+        erroresClient.push("El usuario o correo electrónico debe tener al menos 4 caracteres y no contener espacios.");
+    }
+    if (pass.length == 0) {
         erroresClient.push("Debes ingresar una contraseña.");
     }
 
-    const errores = document.querySelector(".errores")
-    errores.innerHTML = null
+    const errores = document.querySelector(".errores");
+    errores.innerHTML = null;
 
     if (erroresClient.length != 0) {
-        const errors = erroresClient.map(err => {
-            const error = document.createElement("div");
-            error.classList.add("error")
-            error.textContent = err
-
-            // errores.appendChild(error)
-            return { title: "Failure", error: err }
-        })
-        addToast(errors);
+        const firstError = erroresClient[0];
+        const error = document.createElement("div");
+        error.classList.add("error");
+        error.textContent = firstError;
+        addToast([{ title: "Failure", error: firstError }]);
     } else {
-
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
         const loaderSection = document.querySelector(".loader")
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
-
-
         try {
-            const response = await fetch("http://localhost:3000/dashboard/login", {
+            const response = await fetch(location.origin + "/dashboard/login", {
                 method: "POST",
                 body: form_data
             })
@@ -68,8 +58,3 @@ formularioLogin.addEventListener("submit", async (e) => {
     }
 
 })
-
-
-//funcion encargada de postear los datos del usuario en el servidor.
-
-

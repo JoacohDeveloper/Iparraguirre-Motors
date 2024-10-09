@@ -1,3 +1,40 @@
+header {
+  background-color: transparent !important; 
+  border-bottom: transparent !important; 
+}
+
+header .navegacion > ul > li > a {
+  color: #fff !important;
+  transition: border 0.3s ease !important;
+  &:hover {
+    transition: border 0.3s ease !important;
+    border: 2px solid #b10b0a !important;
+  }
+}
+.navegacion > ul > li:nth-child(3) > a {
+  border: 2px solid #b10b0a !important;
+  border-radius: .2rem;
+  &:hover {
+    transition: border 0.3s ease !important;
+    border: 2px solid #b10b0a !important;
+  }
+}
+.dark header .navegacion > ul > li > a {
+  color: #202020 !important;
+  transition: border 0.3s ease !important;
+  &:hover {
+    transition: border 0.3s ease !important;
+    border: 2px solid #b10b0a !important;
+  }
+}
+.dark .navegacion > ul > li:nth-child(3) > a {
+  border: 2px solid #b10b0a !important;
+  border-radius: .2rem;
+  &:hover {
+    transition: border 0.3s ease !important;
+    border: 2px solid #b10b0a !important;
+  }
+}
 .brgMenuHandler {
   filter: unset;
 }

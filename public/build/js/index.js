@@ -66,9 +66,8 @@ if (home_vid) {
     })
 
     observer.observe(banner);
-
-
-    fetch("http://localhost:3000/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf").then(response => response.json()).then(data => console.log(data))
+  
+fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf").then(response => response.json()).then(data => console.log(data))
 
 }
 

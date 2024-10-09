@@ -30,7 +30,7 @@
             <li>
                 <a title="Discounts" class="aside-element rounded" href="#">
                     <div class="dropDown-spacer">
-                        <img src="/build/src/images/card.svg" alt="Discounts">
+                        <img src="/build/src/images/discount.svg" alt="Discounts">
                         <p>Discounts</p>
                     </div>
                     <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
@@ -69,6 +69,19 @@
                 </ul>
             </li>
         </ul>
+        <?php
+            $usuario = $_SESSION["usuario"] ?? null;
+            if (isset($usuario)) {
+                $isEncargado = $usuario->isEncargado();
+            }
+
+            if ($isEncargado == true) {
+                echo '<a title="Register" class="aside-element rounded" href="/dashboard/manageEmployee">
+                    <img src="/build/src/images/user.svg" alt="Registrar admin">
+                    <p>Admin regist</p>
+                </a>';
+            }
+        ?>
 
     </div>
     <a title="Settings" class="aside-element rounded" href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">

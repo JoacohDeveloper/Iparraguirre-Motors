@@ -174,6 +174,19 @@ class Customer extends ActiveRecord
         return $this->username;
     }
 
+    public static function getCustomer($dato) //dato puede ser email o username
+    {
+        $result = null;
+        try {
+            $query = "SELECT * FROM Customer WHERE email = ? or username = ? LIMIT 1";
+            $result = Customer::consultarSQL($query, [$dato, $dato]);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+
+        return $result[0] ?? null;
+    }
+
     public function getImagen()
     {
         return $this->imagen;
@@ -187,19 +200,6 @@ class Customer extends ActiveRecord
     public function getNombreImagen_Url()
     {
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
-    }
-
-    public static function getCustomer($dato)
-    {
-        $result = null;
-        try {
-            $query = "SELECT * FROM Customer WHERE email = ? or username = ? LIMIT 1";
-            $result = Customer::consultarSQL($query, [$dato, $dato]);
-        } catch (PDOException $th) {
-            logg("[MARIADB] Error al consultar.");
-        }
-
-        return $result[0] ?? null;
     }
 
     public function getCreated(){
@@ -218,6 +218,14 @@ class Customer extends ActiveRecord
         }
     }
 
+    public function actualizarUsuario()
+    {
+        date_default_timezone_set('America/Montevideo');
+        $this->updatedAt = new DateTime();
+        $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
+        return $this->actualizar($this->uuid);
+    }
+
     public function validarPassword($password)
     {
         return password_verify($password, $this->password);
@@ -232,4 +240,48 @@ class Customer extends ActiveRecord
     {
         return boolval($this->isDeleted);
     }
+
+    public function changePassword($new_password){
+        $result = null;
+        $this->password = password_hash($new_password, PASSWORD_BCRYPT);
+        try {
+            return $this->actualizar($this->uuid);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+        return $result;
+    }
+
+    public function deleteusuarioDBCustomer(){
+        $result = null;
+        try {
+            $result = $this->eliminar($this->uuid);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar.");
+        }
+        return $result;
+    }
+
+    public static function superGetCustomer($dato) {
+        $result = null;
+        try {
+            $query = "SELECT * FROM Customer WHERE email = :dato OR username = :dato LIMIT 1";
+            $params = [
+                ':dato' => $dato
+            ];
+            $stmt = static::$db->prepare($query);
+            
+            $result = $stmt->execute($params);
+            error_log("Resultado de la consulta: " . print_r($result, true));
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar: " . $th->getMessage());
+        }
+    
+        if ($result) {
+            return $result;
+        } else {
+            return null;
+        }
+    }
+    
 }

@@ -14,15 +14,25 @@ abstract class DashboardController
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
         if (!$user->isAdmin()) {
-            header("location: /");
+            header("location: /dashboard/noaccess");
         }
+        $isFirstLog = $user->isFirstLog();
 
-        $router->render("dashboard/index", [
-            "styles" => ["dashboard/index", "dashboard/aside"],
-            "scripts" => ["dashboard/index"],
-            "nodefer" => ["https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"],
-            "title" => "Dashboard"
-        ]);
+        if($isFirstLog){
+            $router->render("dashboard/defaultAdmin", [
+                "styles" => ["dashboard/index", "dashboard/settings/defaultAdmin"],
+                "scripts" => ["dashboard/index", "dashboard/settings/defaultAdmin"],
+                "title" => "Dashboard"
+            ]);
+        } else {
+            $router->render("dashboard/index", [
+                "styles" => ["dashboard/index", "dashboard/aside"],
+                "scripts" => ["dashboard/index"],
+                "nodefer" => ["https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"],
+                "title" => "Dashboard"
+            ]);
+        }
+        
     }
 
     public static function userSettings(Router $router)
@@ -162,5 +172,47 @@ abstract class DashboardController
 
         echo json_encode($user);
         exit;
+    }
+
+    public static function addAdmin(Router $router)
+    {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
+        if(!$user->isEncargado()){
+            header("location: /");
+        }
+
+        $router->render("dashboard/addAdmin", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/addAdmin"],
+            "scripts" => ["dashboard/index", "dashboard/auth/register"],
+            "title" => "Dashboard"
+        ]);
+    }
+
+    public static function manageAdmin(Router $router)
+    {
+        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) {
+            header("location: /");
+        }
+        if(!$user->isEncargado()){
+            header("location: /");
+        }
+
+        $router->render("dashboard/manageAdmin", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/manageAdmin"],
+            "scripts" => ["dashboard/index", "dashboard/manageAdmin"],
+            "title" => "Dashboard"
+        ]);
+    }
+
+    public static function noAccess(Router $router){
+        $router->render("dashboard/noaccess", [
+            "title" => "Acceso denegado"
+        ]);
     }
 }
