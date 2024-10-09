@@ -53,9 +53,27 @@ class Vehicle extends ActiveRecord
         $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $discount_type, $velocidad_max, $zero_to_houndred,
         $peso, $kilometros, $caballos_potencia, $createdAt, $updatedAt;
 
+
     public $vehicleImages = [];
 
-    function __construct($args = []) {
+
+    public function getAllVehiclesImages()
+    {
+        try {
+            $query = "select * from vehicle_img where vehicle_id = " . $this->id;
+            $stmt = static::$db->prepare($query);
+            $stmt->execute();
+
+            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $this->vehicleImages[] = ["url" => $registro["url"], "alt" => $registro["alt"]];
+            }
+        } catch (\Throwable $th) {
+            logg("Error al cargar imagenes");
+        }
+    }
+
+    function __construct($args = [])
+    {
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
         $this->categoria = $args["categoria"] ?? "";
@@ -85,7 +103,7 @@ class Vehicle extends ActiveRecord
         $this->caballos_potencia = $args["caballos_fuerza"] ?? "";
         $this->createdAt = $this->createdAt ? $this->createdAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
         $this->updatedAt = $this->updatedAt ? $this->updatedAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
-    }    
+    }
 
     public static function getAllVehicles()
     {
@@ -324,7 +342,8 @@ class Vehicle extends ActiveRecord
         }
     }
 
-    public function addDiscountVehicle() {
+    public function addDiscountVehicle()
+    {
         try {
             $query = "UPDATE Vehicle SET 
                       discount = :discount, 
@@ -342,7 +361,8 @@ class Vehicle extends ActiveRecord
         }
     }
 
-    public function removeDiscountVehicle() {
+    public function removeDiscountVehicle()
+    {
         $this->discount = 0;
         $this->discount_type = null;
         try {

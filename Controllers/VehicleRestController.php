@@ -35,6 +35,8 @@ abstract class VehicleRestController
             $vehicles = Vehicle::getAllVehicles();
         }
 
+        logg($vehicles);
+
         if ($vehicleId) {
             foreach ($vehicles as $vehicle) {
                 if ($vehicle instanceof Vehicle) {
