@@ -144,7 +144,7 @@ const InputSelect = (label, name, values, id, selectedValue) => {
     return inputSelectLabel;
 }
 
-const ModalAdd = () => {
+const ModalAdd = async () => {
     const contenedor = document.createElement("div")
 
     contenedor.classList.add("modal-container")
@@ -685,7 +685,7 @@ const ModalAdd = () => {
     imageSectionTitle.textContent = "Agregar Imagenes"
     imageSection.appendChild(imageSectionTitle)
 
-    imageSection.appendChild(ImageUploader())
+    imageSection.appendChild(await ImageUploader())
     imageSection.setAttribute("aria-step", "4")
 
     vehicleform.appendChild(detailsSection)
@@ -865,8 +865,8 @@ const ModalAdd = () => {
 
 
 
-const ModalModificar = (data) => {
-
+const ModalModificar = async (data) => {
+    console.log(data)
     data.frenos_abs = data.frenos_abs === "abs_si" ? "Si" : "No";
     data.airbag = data.airbag === "airbag_si" ? "Si" : "No";
     data.control_estabilidad = data.control_estabilidad === "est_si" ? "Si" : "No";
@@ -898,12 +898,17 @@ const ModalModificar = (data) => {
     const divSpacer = document.createElement("div")
 
     const modalTitle = document.createElement("h3")
-    modalTitle.textContent = "Agregar Vehiculo"
+    modalTitle.textContent = "Modificar Vehiculo"
 
     const vehicleform = document.createElement("form")
 
+    const inputId = document.createElement("input")
+    inputId.name = "id"
+    inputId.type = "hidden"
+    inputId.value = data.id;
 
 
+    vehicleform.appendChild(inputId)
     vehicleform.classList.add("form_addvehicle")
 
     const detailsSectionInputs = [
@@ -946,6 +951,8 @@ const ModalModificar = (data) => {
         InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros", "", data.kilometros),
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza", "", data.caballos_potencia)
     ]
+
+
 
 
     //cambio de seccion
@@ -1103,24 +1110,11 @@ const ModalModificar = (data) => {
                 botonSiguiente.disabled = false;
 
                 const data = await response.json();
-                console.log(data);
 
-                if (data.status === "error") {
-                    console.log("Server errors:", data.message);
-                    const errors = data.detalles || [data.message];
+                if (data?.error) {
 
-                    errors.forEach(err => {
-                        console.log("Error:", err);
-                    });
-
-                    const errorElements = errors.map(err => {
-                        const error = document.createElement("div");
-                        error.classList.add("error");
-                        error.textContent = err;
-                        return error;
-                    });
-                    addToast(errorElements);
-                } else if (data.status === "success") {
+                    addToast([{ title: "error", error: data?.error }]);
+                } else if (data?.message === "successfuly") {
                     contenedor.remove();
 
                     document.querySelector(".dashboard-content").classList.remove("fixed");
@@ -1410,7 +1404,7 @@ const ModalModificar = (data) => {
     imageSectionTitle.textContent = "Agregar Imagenes"
     imageSection.appendChild(imageSectionTitle)
 
-    imageSection.appendChild(ImageUploader())
+    imageSection.appendChild(await ImageUploader(data.vehicleImages))
     imageSection.setAttribute("aria-step", "4")
 
     vehicleform.appendChild(detailsSection)
@@ -1611,8 +1605,8 @@ const handlerModificar = (e) => {
     toggleBackground();
 
     fetchVehiculoData(vehiculoID)
-        .then(data => {
-            document.body.appendChild(ModalModificar(data));
+        .then(async data => {
+            document.body.appendChild(await ModalModificar(data));
         })
         .catch(err => {
             addToast([{
@@ -1624,10 +1618,7 @@ const handlerModificar = (e) => {
 const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
-    const response = await fetch(location.origin + "/dashboard/obtener-vehiculo", {
-        method: "POST",
-        body: formdata
-    });
+    const response = await fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + vehiculoID);
     if (!response.ok) {
         addToast([{
             title: "Failure",
@@ -1638,9 +1629,9 @@ const fetchVehiculoData = async (vehiculoID) => {
 };
 
 
-const handlerAgregar = (e) => {
+const handlerAgregar = async (e) => {
     toggleBackground()
-    document.body.appendChild(ModalAdd())
+    document.body.appendChild(await ModalAdd())
 }
 
 

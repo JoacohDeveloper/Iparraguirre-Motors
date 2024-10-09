@@ -79,7 +79,7 @@ abstract class VehicleRestController
             }
 
             echo json_encode($vehicles);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo json_encode(["error" => "Error en la base de datos: " . $e->getMessage()]);
         }
         exit;

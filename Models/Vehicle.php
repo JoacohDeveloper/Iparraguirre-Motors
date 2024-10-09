@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use Exception;
 use Models\ActiveRecord;
 use JsonSerializable;
 use PDOException;
@@ -61,18 +62,6 @@ class Vehicle extends ActiveRecord
             $query = "select * from vehicle_img where vehicle_id = " . $this->id;
             $stmt = static::$db->prepare($query);
             $stmt->execute();
-
-<<<<<<< HEAD
-
-    public function getAllVehiclesImages()
-    {
-        try {
-            $query = "select * from vehicle_img where vehicle_id = " . $this->id;
-            $stmt = static::$db->prepare($query);
-            $stmt->execute();
-
-=======
->>>>>>> 7090359d38b23d34b3299ce947d13b8e912cd1f5
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $this->vehicleImages[] = ["url" => $registro["url"], "alt" => $registro["alt"]];
             }
@@ -80,13 +69,8 @@ class Vehicle extends ActiveRecord
             logg("Error al cargar imagenes");
         }
     }
-<<<<<<< HEAD
-
     function __construct($args = [])
     {
-=======
-    function __construct($args = []) {
->>>>>>> 7090359d38b23d34b3299ce947d13b8e912cd1f5
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
         $this->categoria = $args["categoria"] ?? "";
@@ -276,7 +260,7 @@ class Vehicle extends ActiveRecord
         $vehicle = new vehicle($_POST);
         $errores = $vehicle->validate();
         if (empty($errores)) {
-            $result = $vehicle->actualizarVehicle();
+            $result = $vehicle->actualizarVehicle($this->id);
             if ($result) {
                 echo json_encode(["message" => "successfuly"]);
             } else {
@@ -288,8 +272,10 @@ class Vehicle extends ActiveRecord
         exit;
     }
 
-    public function actualizarVehicle()
+    public function actualizarVehicle($id)
     {
+
+        $this->id = $id;
         date_default_timezone_set('America/Montevideo');
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
@@ -345,12 +331,22 @@ class Vehicle extends ActiveRecord
                 ':kilometros' => $this->kilometros,
                 ':caballos_potencia' => $this->caballos_potencia,
                 ':updatedAt' => $this->updatedAt,
-                ':id' => $this->id
+                ':id' => $id
             ];
+
+
+
+
             $stmt = static::$db->prepare($query);
             $success = $stmt->execute($params);
+
+            $stmt2 = static::$db->prepare("DELETE FROM vehicle_img where vehicle_id = " . $id);
+
+            $stmt2->execute();
+
             return $success;
         } catch (PDOException $th) {
+
             return false;
         }
     }

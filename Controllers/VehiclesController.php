@@ -103,8 +103,45 @@ class VehiclesController
         $vehicle = new vehicle($_POST);
         $errores = $vehicle->validate();
         if (empty($errores)) {
-            $success = $vehicle->actualizarVehicle();
+            $success = $vehicle->actualizarVehicle($_POST["id"]);
             if ($success) {
+
+                if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['name'][0]) && $_FILES['imagen']['error'][0] === UPLOAD_ERR_OK) {
+                    $totalFiles = count($_FILES['imagen']['name']);
+                    for ($i = 0; $i < $totalFiles; $i++) {
+                        $fileName = $_FILES['imagen']['name'][$i];
+                        $fileTmpName = $_FILES['imagen']['tmp_name'][$i];
+
+                        $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/vehicles/";
+                        if (!file_exists($dirname)) {
+                            mkdir($dirname, 0755, true);
+                        }
+
+                        $fileExtArray = explode(".", $fileName);
+                        $fileExt = end($fileExtArray);
+                        $fileHash = md5($fileName . rand(0, 50) . gmdate("d-m-Y"));
+                        $nuevaImagen = $fileHash . ".$fileExt";
+                        $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
+                        $x = str_replace("\\", "/", $dirname . $nuevaImagen);
+
+                        $manager = new ImageManager(new Driver());
+
+                        // Mueve el archivo subido
+                        if (move_uploaded_file($fileTmpName, $x)) {
+                            // Procesa la imagen
+                            $imagen = $manager->read($x);
+                            $imagen->resize(1280, 720);
+                            $imagen->save(quality: 70);
+
+                            $fileImg = new VehicleImage($vehicle->id, $x, "vehicle img");
+                            $fileImg->create();
+                            $imagenes[] = $fileImg;
+                        } else {
+                            $errores[] = "Error al mover el archivo: $fileName";
+                        }
+                    }
+                }
+
                 echo json_encode(["message" => "successfuly"]);
             } else {
                 echo json_encode(["error" => "Ha ocurrido un error"]);
