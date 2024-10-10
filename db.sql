@@ -101,6 +101,7 @@ create table refractions(
 	nombre VARCHAR(255),
 	descripcion TEXT,
 	fabricante VARCHAR(255),
+	modelo VARCHAR(255),
 	precio float,
 	discount float,
 	discount_type VARCHAR(10),

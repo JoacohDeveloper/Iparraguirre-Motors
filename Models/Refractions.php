@@ -38,11 +38,11 @@ class Refractions extends ActiveRecord implements JsonSerializable
 
     public static function getAllRefractions()
     {
-        $vehicle = new self();
-        return $vehicle->getAll();
+        $refraction = new self();
+        return $refraction->getAll();
     }
 
-    public static function getAllRefractionsByPage($page = 1, $vehicleName = null)
+    public static function getAllRefractionsByPage($page = 1, $refractionName = null)
     {
         $inicio = 0;
         $fin = 10;
@@ -51,8 +51,8 @@ class Refractions extends ActiveRecord implements JsonSerializable
         }
         $query = "SELECT * FROM " . static::$tabla . " limit $inicio,$fin";
 
-        if ($vehicleName) {
-            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$vehicleName%' limit $inicio,$fin";
+        if ($refractionName) {
+            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$refractionName%' limit $inicio,$fin";
         }
 
         $resultado = self::consultarSQL($query);

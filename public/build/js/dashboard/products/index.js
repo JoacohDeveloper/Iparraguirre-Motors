@@ -77,9 +77,6 @@ const ModalDelete = () => {
     return contenedor;
 }
 
-const prueba = location.origin + "/dashboard/agregar-vehiculo"
-console.log(prueba)
-
 //Estas 3 const sirven para generar label que contienen las casillas del formulario agregar vehiculo. El primero
 //genera las casillas en las que el administrador debe escribir datos especificos. En el segundo se genera el
 //area de texto que utilizamos para escribir la descripcion y en el tercero se general los select con las options

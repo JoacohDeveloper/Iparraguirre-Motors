@@ -35,6 +35,7 @@ use Controllers\InformationController;
 
 use MVC\Router;
 use Controllers\VehicleRestController;
+use Controllers\RefractionsRestController;
 
 //echo phpinfo();
 
@@ -137,6 +138,7 @@ $router->get("/catalogo/vehiculos", [TiendaController::class, "vehicles"]);
 //Rest Vehicles
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
+$router->get("/api/v1/refractions", [RefractionsRestController::class, "refractions"]);
 
 //faq
 

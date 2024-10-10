@@ -56,7 +56,12 @@ const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLo
     registedHTML.textContent = createdAt ?? "No registrado";
 
     const updatedHTML = document.createElement("p");
-    updatedHTML.textContent = updatedAt ?? "No actualizado";
+    if(updatedAt === createdAt){
+        updatedHTML.textContent = "No actualizado";
+    } else {
+        updatedHTML.textContent = updatedAt;
+    }
+    
 
     //Aqui vamos a agregar los iconos
     const usernameLabel = document.createElement("label");
