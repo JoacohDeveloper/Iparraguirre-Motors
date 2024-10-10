@@ -1,4 +1,5 @@
-function ImageUploader() {
+async function ImageUploader(images = null) {
+
     const contenedor = document.createElement("div");
 
     contenedor.classList.add("imageUploader-container");
@@ -60,7 +61,7 @@ function ImageUploader() {
         fileInupt.click();
     });
 
-    let container = new DataTransfer();
+
     fileInupt.addEventListener("change", (e) => {
         e.preventDefault();
         const files = [...e.target.files];
@@ -93,6 +94,42 @@ function ImageUploader() {
         }
     });
 
+    let container = new DataTransfer();
+    if (images && images.length > 0) {
+        console.log(images)
+        try {
+            const response = await Promise.all(images.map(async (image) => {
+                const uri = "/build" + image.url.split("build")[1]
+                return fetch(window.location.origin + uri);
+            }))
+
+            const validResponses = response.reduce((acc, response) => {
+                if (response.ok) {
+                    acc.push(response);
+                }
+                return acc;
+            }, []);
+
+
+
+            const FilesImage = await Promise.all(validResponses.map(async response => {
+                const filename = response.url.split("vehicles/")[1];
+                const data = await response.blob();
+                let metadata = {
+                    type: 'image/jpeg'
+                };
+                return file = new File([data], filename, metadata);
+            }))
+
+
+            if (FilesImage.length > 0) {
+                validarDT(FilesImage, container)
+            }
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
     function validarDT(files, container) {
         try {
             if (files.length) {
