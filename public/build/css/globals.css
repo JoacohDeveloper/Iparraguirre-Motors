@@ -2,7 +2,7 @@
 
 :root {
   /* variables */
-  --red-color: #ff0000;
+  --red-color: #b10b0a;
 }
 
 *,
@@ -20,10 +20,11 @@ html {
   font-style: normal;
   font-size: 1.2em;
   --color-background: #fff;
-  --color-background-secondary: #f2f2f2;
-  --color-text-default: #111;
-  --color-text-body: #444;
-  --color-text-secondary: #888;
+  --color-background-secondary: #fff;
+  --color-text-default: #202020;
+  --color-background-dark: #202020;
+
+  --color-text-secondary: #ccc;
 }
 
 body {
@@ -33,7 +34,7 @@ body {
 header {
   background-color: #ffff;
   backdrop-filter: blur(5px);
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #ccc;
   position: fixed;
   z-index: 100;
   color: #000000;
@@ -67,7 +68,7 @@ header {
   list-style: none;
   gap: 1rem;
   text-decoration: none;
-  color: #000000;
+  color: #202020;
 }
 .dark .navegacion ul li a {
   display: inline-block;
@@ -97,23 +98,23 @@ header {
   font-size: 0.7rem;
   transition: border 0.3s ease;
   &:hover {
-    border: 2px solid #000000;
+    border: 2px solid #202020;
   }
 }
 header .navegacion ul li .nav-links.actual-index {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 .dark header .navegacion ul li .nav-links.actual-index {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 header .navegacion ul li .nav-links.actual {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 
 .navegacion li a {
   display: block;
   padding: 20px 25px;
-  color: #000000;
+  color: #202020;
   text-decoration: none;
   text-align: center;
   font-size: 20px;
@@ -138,7 +139,7 @@ header .navegacion ul li .nav-links.actual {
 }
 .dark .navegacion > ul > li > .dropdown-content {
   box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
-  background-color: #333;
+  background-color: #202020;
 }
 .navegacion > ul > li > .dropdown-content > .card__toggle > #themeSwitcher {
   margin: auto;
@@ -168,7 +169,7 @@ header .navegacion ul li .nav-links.actual {
   cursor: pointer;
 }
 .navegacion > ul > li > .dropdown-content > li > #logout {
-  border-top-color: #000000;
+  border-top-color: #202020;
   border-top-style: solid;
   border-top-width: 1px;
 }
@@ -217,7 +218,7 @@ ul li a:hover {
 
 #goback{
 border-radius: 0.2rem;
-border: 2px solid #be0000;
+border: 2px solid #b10b0a;
 }
 
 .dark .not_found a {
@@ -244,7 +245,7 @@ border: 2px solid #be0000;
     transition: border 0.2s ease;
 
     &:hover {
-      border: 1px solid #ff0000;
+      border: 1px solid #b10b0a;
     }
   }
 }
@@ -316,7 +317,7 @@ header .brgMenu {
   align-items: center;
   justify-content: space-between;
   padding: 0 0.8rem;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #202020;
 }
 
 .mobile-menu-header .quit-menu-img {
@@ -331,7 +332,7 @@ header .brgMenu {
   cursor: pointer;
 
   &:hover {
-    background-color: #000;
+    background-color: #202020;
   }
 }
 
@@ -368,7 +369,7 @@ header .brgMenu {
   }
 
   ul > li a {
-    color: #000000 !important;
+    color: #202020 !important;
 
     &:hover {
       border: 2px solid #202020;
@@ -436,7 +437,7 @@ header .brgMenu {
 }
 
 .dark header {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #202020;
   background-color: #202020;
 }
 
@@ -449,12 +450,12 @@ header .brgMenu {
 }
 
 .dark .mobile-menu-header {
-  background-color: #000;
-  border-bottom: 1px solid #000;
+  background-color: #202020;
+  border-bottom: 1px solid #202020;
 }
 
 .dark .mobile-menu {
-  border-left: 1px solid #000;
+  border-left: 1px solid #202020;
 }
 
 .dark .quit-menu-img {
@@ -499,7 +500,7 @@ header .brgMenu {
   z-index: 2;
   width: 24px;
   height: 24px;
-  background: #000;
+  background: #202020;
   left: 4px;
   top: 4px;
   border-radius: 50%;
@@ -638,12 +639,12 @@ header .brgMenu {
 .message .text {
   font-size: 16px;
   font-weight: 400;
-  color: #666666;
+  color: #ccc;
 }
 
 .message .text.text-1 {
   font-weight: 600;
-  color: #333;
+  color: #000000;
 }
 
 .dark .message .text.text-1 {
@@ -796,12 +797,12 @@ footer {
 }
 
 .footer-section p {
-  color: #d3d3d3;
+  color: #ccc;
   font-size: 0.8rem;
   line-height: 1.5;
 }
 .dark .footer-section p {
-  color: #4e4e4e;
+  color: #000;
   font-size: 0.8rem;
   line-height: 1.5;
 }
@@ -887,7 +888,7 @@ footer {
 
 .social-icons {
   font-size: 1.5rem;
-  color: #333;
+  color: #000;
   text-decoration: none;
   transition: color 0.3s ease;
   gap: 1.6rem;
@@ -916,12 +917,12 @@ footer {
   text-align: center;
   padding-top: 1.5rem;
   font-size: 1rem;
-  color: #585858;
-  border-top: 1px solid #dddddd;
+  color: #ccc;
+  border-top: 1px solid #666;
 }
 .dark .footer-bottom {
-  color: #777777;
-  border-top: 1px solid #161616;
+  color: #ccc;
+  border-top: 1px solid #202020;
 }
 @media (max-width: 1110px) {
   .footer {
@@ -999,12 +1000,12 @@ footer {
 
 .dashboard-brgMenu-ul li a.actual-index,
 .dashboard-brgMenu-ul li a.actual {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 
 .dark .dashboard-brgMenu-ul li a.actual-index,
 .dark .dashboard-brgMenu-ul li a.actual {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 
 /* Estilos para los menús desplegables */
@@ -1032,7 +1033,7 @@ footer {
 .dark .discounts-dropdown,
 .dark .analytics-dropdown {
   box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
-  background-color: #333;
+  background-color: #000;
   z-index: 101;
 }
 

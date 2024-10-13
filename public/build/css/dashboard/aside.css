@@ -7,7 +7,7 @@
   padding: 0.8rem 0rem;
   /* top: 3rem; */
   justify-content: space-between;
-  border-right: 1px solid #f2f2f2;
+  border-right: 1px solid #fff;
   background-color: hsl(0, 0%, 100%);
   width: 3rem;
   transition: width 0.3s ease;
@@ -38,7 +38,7 @@
   word-break: keep-all;
   font-size: 0.8rem;
   white-space: nowrap;
-  color: #59595a;
+  color: #000;
 }
 
 .aside-element .dropDown-spacer ~ img {
@@ -97,7 +97,7 @@
 }
 
 .dark .more-information:hover {
-  background-color: #000;
+  background-color: #202020;
 }
 .dark .more-information img {
   filter: invert(100%) sepia(0%) saturate(7419%) hue-rotate(349deg)
@@ -106,7 +106,7 @@
 
 .dark .aside {
   background-color: #202020;
-  border-right: 1px solid #000;
+  border-right: 1px solid #202020;
 }
 
 .aside-element {
@@ -117,7 +117,7 @@
   align-items: center;
   /* background-color: #f2f2f29f; */
   &:hover {
-    background-color: #f2f2f2;
+    background-color: #fff;
   }
 }
 
@@ -127,11 +127,11 @@
 }
 
 .dark .aside-element:hover {
-  background-color: #100f0f;
+  background-color: #202020;
 }
 
 .dark .aside-element p {
-  color: #f2f2f2;
+  color: #fff;
 }
 
 
@@ -146,13 +146,13 @@
   gap: .6rem;
   li > a {
     text-decoration: none;
-    color: #59595a;
+    color: #000 ;
     font-size: .8rem;
     padding: .3rem .8rem;
     border-radius: .3rem;
 
     &:hover {
-      background-color: #f2f2f29f;
+      background-color: #ccc;
     }
   }
 }
@@ -194,6 +194,6 @@
 .dark .dropDown-links li a{
   color: #ffffff;
   &:hover {
-    background-color: #100f0f;
+    background-color: #000
   }
 }

@@ -283,6 +283,54 @@ class User extends ActiveRecord
         return $result;
     }
 
+    public static function adminForceDeleting($recivedUUID) {
+        $result = null;
+        try {
+            $query = "UPDATE User SET isDeleted = 1 WHERE uuid = :uuid";
+            $params = [':uuid' => $recivedUUID];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar: " . $th->getMessage());
+            return false;
+        }
+        return $result;
+    }
+
+    public static function adminForceActiving($recivedUUID) {
+        $result = null;
+        try {
+            $query = "UPDATE User SET isDeleted = 0 WHERE uuid = :uuid";
+            $params = [':uuid' => $recivedUUID];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar: " . $th->getMessage());
+            return false;
+        }
+        return $result;
+    }
+
+    public static function adminForceChangeRol($recivedUUID, $newRol) {
+        $result = null;
+        try {
+            if($newRol == "Empleado"){
+                $query = "UPDATE User SET isEncargado = 0 WHERE uuid = :uuid";
+            } else if($newRol == "Encargado"){
+                $query = "UPDATE User SET isEncargado = 1 WHERE uuid = :uuid";
+            } else {
+                return false;
+            }
+            $params = [':uuid' => $recivedUUID];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar: " . $th->getMessage());
+            return false;
+        }
+        return $result;
+    }
+    
     public function changePassword($new_password){
         $result = null;
         $this->password = password_hash($new_password, PASSWORD_BCRYPT);

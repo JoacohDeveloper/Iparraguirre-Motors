@@ -29,6 +29,10 @@ const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLo
     img.src = imagen.length === 0 ? "/build/src/images/users/default.jpg" : imagen;
     img.alt = `imagen de perfil de ${username}`;
 
+    img.onerror = () => {
+        img.src = "/build/src/images/users/default.jpg";
+    }    
+
     const contenedorInformacion = document.createElement("div");
     contenedorInformacion.classList.add("contenedor-informacion");
 
@@ -105,8 +109,36 @@ const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLo
     card.classList.add("user-card");
     card.setAttribute("aria-label", slug);
 
+    const contenedorOptions = document.createElement("div");
+    contenedorOptions.classList.add("options-container");
+
+    const btn_delete = document.createElement("button");
+    const btn_active = document.createElement("button");
+    const btn_changeRol = document.createElement("button");
+
+    btn_delete.textContent = "Eliminar"
+    btn_delete.id = slug;
+    btn_delete.addEventListener("click", () => handlerEliminar(email));
+
+    btn_active.textContent = "Reactivar"
+    btn_active.id = slug;
+    btn_active.addEventListener("click", () => handlerReactivar(email));
+
+    btn_changeRol.textContent = "Cambiar rol"
+    btn_changeRol.id = slug;
+    btn_changeRol.addEventListener("click", () => handlerChangeRol(email));
+
+    if (rol === "Dado de baja"){
+        contenedorOptions.appendChild(btn_active);
+    } else {
+        contenedorOptions.appendChild(btn_delete);
+    }
+    
+    contenedorOptions.appendChild(btn_changeRol);
+
     card.appendChild(importantData);
     card.appendChild(contenedorInformacion);
+    card.appendChild(contenedorOptions);
 
     const observer = new IntersectionObserver(items => {
         items.forEach(item => {
@@ -142,7 +174,7 @@ async function obtenerUsuarios() {
 
         let totalAdmin = 0, cantEmployee = 0, cantMandated = 0;
 
-        data.forEach(u => {
+        data.forEach(async u => {
             const customU = {
                 slug: u.slug,
                 fullname: u.full_name,
@@ -164,7 +196,12 @@ async function obtenerUsuarios() {
             if (u.isAdmin) {
                 totalAdmin++;
             }
-            if (cardContainer) cardContainer.appendChild(Card(customU));
+
+            // Corroborar si el usuario es el mismo que la sesión
+            const isCurrentUser = await isMyUser(u.email);
+            if (!isCurrentUser){
+                if (cardContainer) cardContainer.appendChild(Card(customU));
+            }
         });
         totalAdminHTML.textContent = "Cantidad de administradores: " + totalAdmin;
         cantMandatedHTML.textContent = "Cantidad de encargados: " + cantMandated;
@@ -177,6 +214,25 @@ async function obtenerUsuarios() {
     }
 }
 
+async function isMyUser(userEmail) {
+    try {
+        const response = await fetch(location.origin + `/dashboard/manageEmployee/getOtherAdmin?email=${userEmail}`);
+        const data = await response.json();
+
+        if (data.response === "error") {
+            addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+            return false;
+        } else if (data.response === "MyUser") {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+        return false;
+    }
+}
 
 obtenerUsuarios();
 
@@ -260,6 +316,400 @@ formularioRegister.addEventListener("submit", async e => {
         }
     }
 })
+
+async function handlerEliminar(userEmail) {
+    try {
+        const response = await fetch(location.origin + `/dashboard/manageEmployee/getOtherAdmin?email=${userEmail}`);
+        const data = await response.json();
+        
+        if (data.response === "error") {
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error"
+            }]);
+        } else {
+            toggleBackground();
+            document.body.appendChild(ModalDelete(data.response));
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        addToast([{
+            title: "Failure",
+            error: "Ha ocurrido un error"
+        }]);
+    }
+}
+
+const InputText = (type, label, placeholder, name, id, value) => {
+    const inputLabel = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = type;
+    input.name = name;
+    input.id = id;
+    input.placeholder = placeholder;
+    input.value = value;
+
+    inputLabel.htmlFor = id;
+    inputLabel.textContent = label;
+
+    inputLabel.appendChild(input);
+    return inputLabel;
+}
+
+const ModalDelete = (data) => {
+    //Como los datos del Model son protected, tuve que implementar esto para eliminar caracteres
+    //de "data" que rompian el flujo de datos.
+    const userUUID = data['\u0000*\u0000uuid'];
+    const userFullname = data['\u0000*\u0000full_name']
+    
+    const contenedor = document.createElement("div")
+    contenedor.classList.add("modal-container")
+
+    const modal = document.createElement("div")
+    modal.classList.add("modal")
+
+    const modalHeader = document.createElement("section")
+    modalHeader.classList.add("modal-header")
+
+    const btnClose = document.createElement("button")
+
+    const btnImage = document.createElement("img")
+    btnImage.src = "/build/src/images/cross.svg"
+
+    btnClose.appendChild(btnImage)
+
+    const divSpacer = document.createElement("div")
+
+    const modalTitle = document.createElement("h3")
+    modalTitle.textContent = "Eliminar " + userFullname;
+
+    modalHeader.appendChild(divSpacer)
+    modalHeader.appendChild(modalTitle)
+    modalHeader.appendChild(btnClose)
+
+    btnClose.addEventListener("click", e => {
+        toggleBackground()
+        contenedor.remove()
+    })
+
+    const modalBody = document.createElement("section")
+    modalBody.classList.add("modal-body")
+    const delete_form = InputText("text", "Palabra de seguridad: quitar acceso", "quitar acceso", "delete-input", "securedWord", "");
+
+    const text = document.createElement("p")
+    text.textContent = "¿Seguro que quieres eliminar este producto?"
+
+
+    const submitInput = document.createElement("button")
+    submitInput.textContent = "Confirmar"
+
+    submitInput.addEventListener("click", async e => {
+        const inputSecuredWord = document.querySelector("#securedWord");
+        if (inputSecuredWord.value != "quitar acceso") {
+            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+        } else {
+            try {
+                const response = await fetch(location.origin + `/dashboard/manageEmployee/forceDelete?uuid=${userUUID}`);
+                const data = await response.json();
+    
+                if (data.message == "successfuly") {
+                    contenedor.remove();
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "Se le ha bloqueado el acceso a " + userFullname,
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if (btn_swal) {
+                        btn_swal.addEventListener("click", () => {
+                            inputSecuredWord.value = "";
+                            toggleBackground();
+                            reloadCards();
+                        });
+                    }
+                } else {
+                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+            }
+        }
+    });
+    modalBody.appendChild(text);
+    modalBody.appendChild(delete_form)
+    modalBody.appendChild(submitInput)
+
+    contenedor.appendChild(modal)
+    modal.appendChild(modalHeader)
+    modal.appendChild(modalBody)
+
+    return contenedor;
+}
+
+async function handlerReactivar(userEmail) {
+    try {
+        const response = await fetch(location.origin + `/dashboard/manageEmployee/getOtherAdmin?email=${userEmail}`);
+        const data = await response.json();
+        
+        if (data.response === "error") {
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error"
+            }]);
+        } else {
+            toggleBackground();
+            document.body.appendChild(ModalReactivar(data.response));
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        addToast([{
+            title: "Failure",
+            error: "Ha ocurrido un error"
+        }]);
+    }
+}
+
+const ModalReactivar = (data) => {
+    //Como los datos del Model son protected, tuve que implementar esto para eliminar caracteres
+    //de "data" que rompian el flujo de datos.
+    const userUUID = data['\u0000*\u0000uuid'];
+    const userFullname = data['\u0000*\u0000full_name']
+    
+    const contenedor = document.createElement("div")
+    contenedor.classList.add("modal-container")
+
+    const modal = document.createElement("div")
+    modal.classList.add("modal")
+
+    const modalHeader = document.createElement("section")
+    modalHeader.classList.add("modal-header")
+
+    const btnClose = document.createElement("button")
+
+    const btnImage = document.createElement("img")
+    btnImage.src = "/build/src/images/cross.svg"
+
+    btnClose.appendChild(btnImage)
+
+    const divSpacer = document.createElement("div")
+
+    const modalTitle = document.createElement("h3")
+    modalTitle.textContent = "Reactivar " + userFullname;
+
+    modalHeader.appendChild(divSpacer)
+    modalHeader.appendChild(modalTitle)
+    modalHeader.appendChild(btnClose)
+
+    btnClose.addEventListener("click", e => {
+        toggleBackground()
+        contenedor.remove()
+    })
+
+    const modalBody = document.createElement("section")
+    modalBody.classList.add("modal-body")
+    const delete_form = InputText("text", "Palabra de seguridad: conceder acceso", "conceder acceso", "active-input", "securedWord", "");
+
+    const text = document.createElement("p")
+    text.textContent = "¿Seguro quieres conceder acceso a esta cuenta?"
+
+
+    const submitInput = document.createElement("button")
+    submitInput.textContent = "Confirmar"
+
+    submitInput.addEventListener("click", async e => {
+        const inputSecuredWord = document.querySelector("#securedWord");
+        if (inputSecuredWord.value != "conceder acceso") {
+            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+        } else {
+            try {
+                const response = await fetch(location.origin + `/dashboard/manageEmployee/forceActive?uuid=${userUUID}`);
+                const data = await response.json();
+    
+                if (data.message == "successfuly") {
+                    contenedor.remove();
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "Se le ha devuelto el acceso a " + userFullname,
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if (btn_swal) {
+                        btn_swal.addEventListener("click", () => {
+                            inputSecuredWord.value = "";
+                            toggleBackground();
+                            reloadCards();
+                        });
+                    }
+                } else {
+                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+            }
+        }
+    });
+    modalBody.appendChild(text) 
+    modalBody.appendChild(delete_form) 
+    modalBody.appendChild(submitInput)
+
+    contenedor.appendChild(modal)
+    modal.appendChild(modalHeader)
+    modal.appendChild(modalBody)
+
+    return contenedor;
+}
+
+const InputSelect = (label, name, values, id, selectedValue) => {
+    const inputSelectLabel = document.createElement('label');
+    const inputSelect = document.createElement('select');
+    inputSelect.name = name;
+    inputSelect.id = id;
+
+    inputSelectLabel.textContent = label;
+    inputSelectLabel.htmlFor = id;
+    inputSelectLabel.appendChild(inputSelect);
+
+    // Crear una opción para el valor por defecto
+    const defaultOption = document.createElement('option');
+    defaultOption.textContent = '-Seleccione-';
+    inputSelect.appendChild(defaultOption);
+
+    values.forEach(value => {
+        const optionElement = document.createElement('option');
+        optionElement.value = value;
+        optionElement.textContent = value;
+        if (value == selectedValue) {
+            optionElement.selected = true;
+        }
+        inputSelect.appendChild(optionElement);
+    });
+
+    return inputSelectLabel;
+}
+
+async function handlerChangeRol(userEmail) {
+    try {
+        const response = await fetch(location.origin + `/dashboard/manageEmployee/getOtherAdmin?email=${userEmail}`);
+        const data = await response.json();
+        
+        if (data.response === "error") {
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error"
+            }]);
+        } else {
+            toggleBackground();
+            document.body.appendChild(ModalRol(data.response));
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        addToast([{
+            title: "Failure",
+            error: "Ha ocurrido un error"
+        }]);
+    }
+}
+
+const ModalRol = (data) => {
+    //Como los datos del Model son protected, tuve que implementar esto para eliminar caracteres
+    //de "data" que rompian el flujo de datos.
+    const userUUID = data['\u0000*\u0000uuid'];
+    const userFullname = data['\u0000*\u0000full_name']
+    const userActualRol = data['\u0000*\u0000isEncargado']
+
+    let userRol = "indefinido"
+    if(userActualRol == 1){
+        userRol = "encargado"
+    } else {
+        userRol = "empleado"
+    }
+    
+    const contenedor = document.createElement("div")
+    contenedor.classList.add("modal-container")
+
+    const modal = document.createElement("div")
+    modal.classList.add("modal")
+
+    const modalHeader = document.createElement("section")
+    modalHeader.classList.add("modal-header")
+
+    const btnClose = document.createElement("button")
+
+    const btnImage = document.createElement("img")
+    btnImage.src = "/build/src/images/cross.svg"
+
+    btnClose.appendChild(btnImage)
+
+    const divSpacer = document.createElement("div")
+
+    const modalTitle = document.createElement("h3")
+    modalTitle.textContent = "Cambiar rol de " + userFullname;
+
+    modalHeader.appendChild(divSpacer)
+    modalHeader.appendChild(modalTitle)
+    modalHeader.appendChild(btnClose)
+
+    btnClose.addEventListener("click", e => {
+        toggleBackground()
+        contenedor.remove()
+    })
+
+    const modalBody = document.createElement("section")
+    modalBody.classList.add("modal-body")
+    const delete_form = InputSelect("Seleccione el rol", "changeRol", ["Empleado", "Encargado"], "selectRol");
+
+    const text = document.createElement("p")
+    text.textContent = "Actualmente es " + userRol;
+
+    const submitInput = document.createElement("button")
+    submitInput.textContent = "Confirmar"
+
+    submitInput.addEventListener("click", async e => {
+        const inputSelectRol = document.querySelector("#selectRol");
+        if (inputSelectRol.value == "-Seleccione-") {
+            addToast([{ title: "Failure", error: "Debes ingresar un rol para poder cambiarlo." }]);
+        } else if(inputSelectRol.value.toLowerCase() == userRol){
+            addToast([{ title: "Failure", error: "Este usuario ya es " + userRol }]);
+        } else {
+            try {
+                const response = await fetch(location.origin + `/dashboard/manageEmployee/forceChangeRol?uuid=${userUUID}&rol=${inputSelectRol.value}`);
+                const data = await response.json();
+    
+                if (data.message == "successfuly") {
+                    contenedor.remove();
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "Ahora " + userFullname + " es un " + inputSelectRol.value.toLowerCase(),
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if (btn_swal) {
+                        btn_swal.addEventListener("click", () => {
+                            toggleBackground();
+                            reloadCards();
+                        });
+                    }
+                } else {
+                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+            }
+        }
+    });
+    modalBody.appendChild(text)
+    modalBody.appendChild(delete_form)
+    modalBody.appendChild(submitInput)
+
+    contenedor.appendChild(modal)
+    modal.appendChild(modalHeader)
+    modal.appendChild(modalBody)
+
+    return contenedor;
+}
 
 const toggleBackground = () => {
 

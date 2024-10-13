@@ -52,7 +52,7 @@ h3{
     color: #000000;
     &:hover {
       box-shadow: 0px 0px 5px 2px rgba(190, 0, 0, 0.479);
-      border: 2px solid #be0000;
+      border: 2px solid #b10b0a;
     }
 }
 .dark #submit{
@@ -73,49 +73,49 @@ h3{
 }
 #transmision{
   border-radius: 0.4em;
-  background:#61616167;
+  background: #202020;
   border: none;
   font-style: italic
 }
 #carroceria{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
 #sel_abs{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
 #sel_airbag{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
 #traccion{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
 #direccion{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
 #sel_estabilidad{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
 #num_puertas{
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
@@ -124,7 +124,7 @@ input:not([type="button"]) {
 }
 textarea:not([type="button"]) {
   border-radius: 0.4em;
-  background:#61616167;
+  background:#202020;
   border: none;
   font-style: italic
 }
@@ -133,7 +133,7 @@ textarea:not([type="button"]) {
 }
 .dark textarea{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 input[type="text" i] {
   padding-block: 1px;
@@ -141,33 +141,33 @@ input[type="text" i] {
 }
 .dark #transmision{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #carroceria{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #sel_abs{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #sel_airbag{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #traccion{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #direccion{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #sel_estabilidad{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }
 .dark #num_puertas{
   color: #fff;
-  background:#616161e8;
+  background:#666666e8;
 }

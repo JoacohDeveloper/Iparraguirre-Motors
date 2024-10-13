@@ -303,7 +303,7 @@ main {
       right: -0.8rem;
       bottom: -0.8rem;
       height: 3px;
-      background-color: #ff0000;
+      background-color: #b10b0a;
     }
   }
 }
@@ -328,7 +328,7 @@ main {
       right: -0.8rem;
       bottom: -0.8rem;
       height: 3px;
-      background-color: #ff0000;
+      background-color: #b10b0a;
     }
   }
 }
@@ -379,7 +379,7 @@ main {
 
 
 .dark .content__bestSelled::after {
-  background: linear-gradient(to top,rgb(112, 112, 112) ,#424242, #202020);
+  background: linear-gradient(to top,rgb(112, 112, 112) ,#666, #202020);
 }
 
 .bestSelled__banner-image {
@@ -595,7 +595,7 @@ main {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #fff5;
+  background-color: #666;
   color: #fff;
   border: none;
   font-family: monospace;
@@ -632,7 +632,7 @@ main {
   height: 50px;
   border-radius: 50%;
   background-color: rgba(122, 122, 122, 0.333);
-  color: #000000;
+  color: #202020;
   border: none;
   font-family: monospace;
   font-weight: bold;
@@ -643,7 +643,7 @@ main {
   position: absolute;
   bottom: 10px;
   left: 0;
-  color: #222222;
+  color: #202020;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -657,7 +657,7 @@ main {
   list-style: none;
   width: 10px;
   height: 10px;
-  background-color: #242424;
+  background-color: #202020;
   margin: 10px;
   border-radius: 20px;
   transition: 0.5s;
@@ -675,11 +675,11 @@ main {
   position: relative;
   top: 15%;
   z-index: 1;
-  color: #000000;
+  color: #202020;
 }
 .slider > .list > .item > .car_background{
   position: absolute;
-  background-color: #cccccc79;
+  background-color: #666;
   backdrop-filter: blur(5px);
   z-index: 1;
   height: 100%;

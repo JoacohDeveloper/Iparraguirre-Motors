@@ -105,6 +105,67 @@ abstract class DashboardController
         exit;
     }
 
+    public static function forcedUserDeleting() {
+        header('Content-Type: application/json; charset=utf-8');
+        $uuid = $_GET["uuid"];
+        $result = null;
+    
+        if (isset($uuid)) {
+            $result = User::adminForceDeleting($uuid);
+            if ($result) {
+                echo json_encode(["message" => "successfuly"]);
+                exit;
+            } else {
+                echo json_encode(["message" => "error"]);
+                exit;
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+            exit;
+        }
+    }
+
+    public static function forcedUserActive() {
+        header('Content-Type: application/json; charset=utf-8');
+        $uuid = $_GET["uuid"];
+        $result = null;
+    
+        if (isset($uuid)) {
+            $result = User::adminForceActiving($uuid);
+            if ($result) {
+                echo json_encode(["message" => "successfuly"]);
+                exit;
+            } else {
+                echo json_encode(["message" => "error"]);
+                exit;
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+            exit;
+        }
+    }
+    
+    public static function forcedUserChangeRol() {
+        header('Content-Type: application/json; charset=utf-8');
+        $uuid = $_GET["uuid"];
+        $rol = $_GET["rol"];
+        $result = null;
+    
+        if (isset($uuid)) {
+            $result = User::adminForceChangeRol($uuid, $rol);
+            if ($result) {
+                echo json_encode(["message" => "successfuly"]);
+                exit;
+            } else {
+                echo json_encode(["message" => "error"]);
+                exit;
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+            exit;
+        }
+    }
+
     public static function changePassword(){
         $usuario = $_SESSION["usuario"];
         $olderPassword = $_POST["olderPassword"];

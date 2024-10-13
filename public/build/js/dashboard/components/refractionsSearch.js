@@ -44,7 +44,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
 
 
     const img = document.createElement("img");
-    img.src = url_image;
+    img.src = url_image ?? "/build/src/images/Refractions/default.jpg";
 
     const contenedorInformacion = document.createElement("div");
     contenedorInformacion.classList.add("contenedor-informacion");

@@ -244,7 +244,31 @@ abstract class AuthenticationController
             echo json_encode(["message" => "Ha ocurrido un error"]);
         }
         exit;
-    }   
+    }
+    
+    public static function getOtherAdmin(Router $router) {
+        header('Content-Type: application/json; charset=utf-8');
+        $email = $_GET["email"];
+        $usuario = User::getUser($email);
+        $myUser = $_SESSION["usuario"] ?? null;
+
+        if($myUser == $usuario){
+            $response = ["response" => "MyUser"];
+            echo json_encode($response);
+        } else {
+            $usuarioArray = (array) $usuario;
+    
+        if ($usuarioArray) {
+            $response = ["response" => $usuarioArray];
+            echo json_encode($response);
+        } else {
+            $response = ["response" => "error"];
+            echo json_encode($response);
+        }
+        
+        }
+        exit;
+    }
 
     public static function logout()
     {

@@ -65,7 +65,7 @@ main{
 
 .caja__trasera div{
   margin: 100px 40px;
-  color: white;
+  color: #fff;
   transition: all 500ms;
 }
 
@@ -93,7 +93,7 @@ main{
   background: transparent;
   font-weight: 600;
   cursor: pointer;
-  color: white;
+  color: #fff;
   outline: none;
   transition: all 300ms;
 }

@@ -50,7 +50,7 @@
 
   .dashboard-fit__content_aside {
     border: none;
-    border-bottom: 2px solid #f2f2f2;
+    border-bottom: 2px solid #fff;
     margin-bottom: 3rem;
   }
 
@@ -78,7 +78,7 @@
   padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  border-right: 2px solid #f2f2f2;
+  border-right: 2px solid #fff;
   align-items: center;
 }
 
@@ -107,7 +107,7 @@
   font-size: 0.8rem;
 }
 .dashboard-fit__content_aside ul li:hover {
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 .dashboard-fit__content_aside ul #delete-account {
   margin-top: 3rem;
@@ -116,18 +116,18 @@
   }
 }
 .dashboard-fit__content_aside ul #delete-account a {
-  color: #ff0000;
+  color: #b10b0a;
 }
 
 .selected {
-  background-color: #f2f2f2;
+  background-color: #fff;
 
   a {
     font-weight: bold;
   }
 }
 .selected {
-  background-color: #f2f2f2;
+  background-color: #fff;
 
   a {
     font-weight: bold;
@@ -135,7 +135,7 @@
 }
 
 .dashboard-fit__content_aside ul #delete-account.selected {
-  background-color: #f2f2f2;
+  background-color: #fff;
   a {
     font-weight: bold;
   }
@@ -161,7 +161,7 @@
   padding: 1rem;
   margin-top: 1.5rem;
   border-radius: 0.4rem;
-  border: 2px solid #f2f2f2;
+  border: 2px solid #fff;
 }
 
 .profile-resume-configuration {
@@ -186,7 +186,7 @@
   border-radius: 50%;
   width: 6rem;
   height: 6rem;
-  border: 1px solid #f2f2f2;
+  border: 1px solid #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,7 +233,7 @@
   font-size: 0.8rem;
   transition: background-color 0.3s ease, transform 0.3s ease-in-out;
   &:hover {
-    background-color: #f2f2f2;
+    background-color: #fff;
     transform: translateY(-2px);
   }
 }
@@ -257,7 +257,7 @@
 }
 
 .dashboard-fit__content__personal-information {
-  border: 2px solid #f2f2f2;
+  border: 2px solid #fff;
   border-radius: 0.4rem;
   margin-top: 0.4rem;
   padding: 1rem 0;
@@ -316,7 +316,7 @@
 #edit-p-information {
   transition: background-color 0.3s ease, transform 0.3s ease-in-out;
   &:hover {
-    background-color: #f2f2f2;
+    background-color: #fff;
     transform: translateY(-2px);
   }
 }
@@ -397,7 +397,7 @@
   text-align: center;
   padding: 1.2rem 0;
   font-size: 1.2rem;
-  border-bottom: 2px solid #f2f2f2;
+  border-bottom: 2px solid #fff;
 }
 
 .settingsContainer {
@@ -421,11 +421,11 @@
     top: 0.5rem;
     right: 0.5rem;
     box-shadow: 0 0 5px #000;
-    border: 1px solid #202020;
+    border: 1px solid #000;
     background-color: #202020;
 
     &:hover {
-      background-color: #000;
+      background-color: #202020;
     }
   }
 }
@@ -515,7 +515,7 @@
 
 .form-container > form {
   gap: 1rem;
-  border: 2px solid #f2f2f2;
+  border: 2px solid #fff;
   padding: 1.5rem 4rem;
 }
 
@@ -538,7 +538,7 @@ textarea {
   all: unset;
   text-align: center;
   background-color: #202020;
-  color: #f2f2f2;
+  color: #fff;
   font-size: 0.8rem;
   cursor: pointer;
   margin-top: 1rem;
@@ -550,7 +550,7 @@ textarea {
   align-items: center;
   transition: background-color 0.3s ease, transform 0.3s ease;
   &:hover {
-    background-color: #000;
+    background-color: #202020;
     transform: translateY(-2px);
   }
 }
@@ -582,7 +582,7 @@ textarea {
     top: -0.3rem;
     right: -0.3rem;
     transition: scale 0.3s ease;
-    background-color: #f2f2f29a;
+    background-color: #ccc;
     &:hover {
       scale: 1.03;
     }

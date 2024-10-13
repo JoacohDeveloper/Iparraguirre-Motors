@@ -83,6 +83,10 @@ $router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdm
 
 $router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]);
 $router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
+$router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]); 
+$router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]); 
+$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]); 
+$router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]); 
 
 $router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);

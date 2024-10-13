@@ -7,11 +7,11 @@ header {
 }
 main {
   margin-top: 3rem;
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 :root {
-  --loading-grey: #ededed;
+  --loading-grey: #fff;
 }
 
 .container {
@@ -63,7 +63,7 @@ main {
 }
 
 .dark .card {
-  background-color: #000;
+  background-color: #202020;
 }
 
 .container {
@@ -79,7 +79,7 @@ main {
 }
 
 .dashboard-title h3 {
-  color: #59595a;
+  color: #000;
   font-weight: 300;
 }
 
@@ -133,7 +133,7 @@ main {
 
 .navegacion-dashboard ul li a {
   text-decoration: none;
-  color: #202020;
+  color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,11 +161,11 @@ main {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f2f2f2;
+    background-color: #fff;
   }
 }
 .navegacion-dashboard ul li p {
-  color: #59595a;
+  color: #000;
   font-size: 0.8rem;
 }
 
@@ -219,7 +219,7 @@ main {
 }
 
 .navegacion-dashboard ul li ul li {
-  color: #000;
+  color: #202020;
   width: 100%;
   font-size: 0.8rem;
   display: flex;
@@ -237,7 +237,7 @@ main {
   gap: 0.4rem;
 }
 .border-top {
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid #fff;
 }
 
 .center {
@@ -311,10 +311,10 @@ main {
     contrast(98%);
 }
 .dark .navegacion-dashboard .account > p {
-  color: #f2f2f2;
+  color: #fff;
 }
 .dark .navegacion-dashboard ul li:hover {
-  background-color: #100f0f;
+  background-color: #202020;
 }
 
 /* Estilos generales para la navegación */
@@ -355,7 +355,7 @@ main {
 }
 
 .dashboard-brgMenu-ul li a:hover {
-  border: 2px solid #000000;
+  border: 2px solid #202020;
 }
 
 .dark .dashboard-brgMenu-ul li a:hover {
@@ -364,12 +364,12 @@ main {
 
 .dashboard-brgMenu-ul li a.actual-index,
 .dashboard-brgMenu-ul li a.actual {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 
 .dark .dashboard-brgMenu-ul li a.actual-index,
 .dark .dashboard-brgMenu-ul li a.actual {
-  border: 2px solid #be0000;
+  border: 2px solid #b10b0a;
 }
 
 /* Estilos para los menús desplegables */
@@ -397,7 +397,7 @@ main {
 .dark .discounts-dropdown,
 .dark .analytics-dropdown {
   box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
-  background-color: #333;
+  background-color: #202020;
   z-index: 101;
 }
 
@@ -414,7 +414,7 @@ main {
 }
 
 .dark .dashboard-brgMenu-ul li .dropdown-content li a:hover {
-  background-color: #202020;
+  background-color: #000
 }
 
 .dashboard-brgMenu-ul li.dropdown {
@@ -436,7 +436,7 @@ main {
 }
 
 .dark .dashboard-title h3 {
-  color: #f2f2f2;
+  color: #fff;
 }
 
 /* chartjs */
