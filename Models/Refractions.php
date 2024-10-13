@@ -90,6 +90,22 @@ class Refractions extends ActiveRecord implements JsonSerializable
     }
 
     public function registrarRefractions() {
-        return $this->crear();
+        date_default_timezone_set('America/Montevideo');
+        $resultado = $this->crear();
+        if ($resultado) {
+            $this->id = static::$db->lastInsertId();
+            return ['resultado' => true, 'id' => $this->id];
+        }
+        return ['resultado' => false];
+    }
+    
+    public function actualizarImagenes() {
+        $query = "UPDATE " . self::$tabla . " SET url_img = :url_img, alt_img = :alt_img WHERE id = :id";
+        $stmt = self::$db->prepare($query);
+        $stmt->bindParam(':url_img', $this->url_img);
+        $stmt->bindParam(':alt_img', $this->alt_img);
+        $stmt->bindParam(':id', $this->id);
+    
+        $stmt->execute();
     }
 }

@@ -44,7 +44,8 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
 
 
     const img = document.createElement("img");
-    img.src = url_image ?? "/build/src/images/Refractions/default.jpg";
+    img.src = url_image && url_image.trim() ? url_image : "/build/src/images/Refractions/default.jpg";
+
 
     const contenedorInformacion = document.createElement("div");
     contenedorInformacion.classList.add("contenedor-informacion");
@@ -230,20 +231,20 @@ contenedorBuscador.addEventListener("submit", async e => {
 
     if (buscador.value) {
 
-        if (location.pathname.includes("/dashboard/products/refractions")) {
+        if (location.pathname.includes("/dashboard/products/repuestos")) {
 
             await handlerBusqueda(buscador?.value)
-            const url = new URL(location.origin + "/dashboard/products/refractions");
+            const url = new URL(location.origin + "/dashboard/products/repuestos");
             url.searchParams.set('search', buscador?.value);
             history.replaceState(null, null, url.toString());
         }
         else {
-            const url = new URL(location.origin + "/dashboard/products/refractions");
+            const url = new URL(location.origin + "/dashboard/products/repuestos");
             url.searchParams.set('search', buscador?.value);
             location.assign(url.toString())
         }
     } else {
-        const url = new URL(location.origin + "/dashboard/products/refractions");
+        const url = new URL(location.origin + "/dashboard/products/repuestos");
         history.replaceState(null, null, url.toString());
 
         await init()
@@ -278,7 +279,7 @@ const ItemBusqueda = (text) => {
 
     item.appendChild(img)
     item.appendChild(p)
-    const url = new URL(location.origin + "/dashboard/products/refractions");
+    const url = new URL(location.origin + "/dashboard/products/repuestos");
 
     url.searchParams.set("search", text)
 

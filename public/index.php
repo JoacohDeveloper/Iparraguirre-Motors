@@ -32,6 +32,7 @@ use Controllers\VehiclesController;
 use Controllers\Products\ProductController;
 use Controllers\CustomerController;
 use Controllers\InformationController;
+use Controllers\RefractionsController;
 
 use MVC\Router;
 use Controllers\VehicleRestController;
@@ -116,6 +117,9 @@ $router->get("/dashboard/discounts/refractions", [ProductController::class, "dis
 
 
 $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "vehiclePreview"]);
+
+
+$router->post("/dashboard/agregar-repuesto", [RefractionsController::class, "agregarRepuesto"]);
 
 
 //dashboard user settings

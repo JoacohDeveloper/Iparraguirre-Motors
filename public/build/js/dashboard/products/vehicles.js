@@ -1,4 +1,5 @@
-
+const addButton = document.querySelector(".product-add_text");
+addButton.textContent = "Agregar vehiculo"
 
 const ErrorComp = (text) => {
 
@@ -863,7 +864,6 @@ const ModalAdd = async () => {
 
 
 const ModalModificar = async (data) => {
-    console.log(data)
     data.frenos_abs = data.frenos_abs === "abs_si" ? "Si" : "No";
     data.airbag = data.airbag === "airbag_si" ? "Si" : "No";
     data.control_estabilidad = data.control_estabilidad === "est_si" ? "Si" : "No";
@@ -1634,10 +1634,9 @@ const handlerAgregar = async (e) => {
 
 
 
-const AgregarBtn = document.querySelector(".product-add__input")
 
-if (AgregarBtn) {
-    AgregarBtn.addEventListener("click", handlerAgregar)
+if (addButton) {
+    addButton.addEventListener("click", handlerAgregar)
 }
 
 
