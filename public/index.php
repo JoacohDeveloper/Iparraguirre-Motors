@@ -119,7 +119,8 @@ $router->get("/dashboard/discounts/refractions", [ProductController::class, "dis
 $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "vehiclePreview"]);
 
 
-$router->post("/dashboard/agregar-repuesto", [RefractionsController::class, "agregarRepuesto"]);
+$router->post("/dashboard/agregar-repuesto", [RefractionsController::class, "agregarRepuesto"]); 
+$router->post("/dashboard/modificar-repuesto", [RefractionsController::class, "modificarRepuesto"]); 
 
 
 //dashboard user settings

@@ -9,8 +9,9 @@ class Refractions extends ActiveRecord implements JsonSerializable
 {
     protected static $tabla = "Refractions";
     protected static $columnasdb = [
-        "id", "nombre","descripcion","fabricante","precio","stock","peso",
-        "origen","url_img","alt_img","createdAt","updatedAt"
+        "id", "nombre","descripcion","fabricante","modelo","tipo",
+        "precio","stock","peso","origen","url_img","alt_img",
+        "createdAt","updatedAt"
     ];
 
     public function jsonSerialize()
@@ -19,13 +20,16 @@ class Refractions extends ActiveRecord implements JsonSerializable
     }
 
     public $id, $nombre, $descripcion, $fabricante, $precio, $stock,
-        $peso, $origen, $url_img, $alt_img, $createdAt, $updatedAt;
+        $peso, $modelo, $tipo, $origen, $url_img, $alt_img,
+        $createdAt, $updatedAt;
 
     function __construct($args = []) {
         $this->id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
         $this->descripcion = $args["descripcion"] ?? "";
         $this->fabricante = $args["fabricante"] ?? "";
+        $this->modelo = $args["modelo"] ?? "";
+        $this->tipo = $args["tipo"] ?? "";
         $this->precio = $args["precio"] ?? "";
         $this->stock = $args["stock"] ?? "";
         $this->peso = $args["peso"] ?? "";
@@ -74,6 +78,12 @@ class Refractions extends ActiveRecord implements JsonSerializable
         if (empty($this->fabricante)) {
             $errors["fabricante"] = "El campo fabricante es obligatorio.";
         }
+        if (empty($this->modelo)) {
+            $errors["modelo"] = "El campo modelo es obligatorio.";
+        }
+        if (empty($this->tipo)) {
+            $errors["tipo"] = "El campo tipo es obligatorio.";
+        }
         if (empty($this->precio)) {
             $errors["precio"] = "El campo precio es obligatorio.";
         }
@@ -108,4 +118,45 @@ class Refractions extends ActiveRecord implements JsonSerializable
     
         $stmt->execute();
     }
+
+    public function actualizarRepuesto($id) {
+        $this->id = $id;
+        date_default_timezone_set('America/Montevideo');
+        try {
+            $query = "UPDATE Refractions SET
+                nombre = :nombre,
+                descripcion = :descripcion,
+                fabricante = :fabricante,
+                modelo = :modelo,
+                tipo = :tipo,
+                precio = :precio,
+                stock = :stock,
+                peso = :peso,
+                origen = :origen,
+                url_img = :url_img,
+                alt_img = :alt_img,
+                updatedAt = :updatedAt
+                WHERE id = :id";
+            $params = [
+                ':nombre' => $this->nombre,
+                ':descripcion' => $this->descripcion,
+                ':fabricante' => $this->fabricante,
+                ':modelo' => $this->modelo,
+                ':tipo' => $this->tipo,
+                ':precio' => $this->precio,
+                ':stock' => $this->stock,
+                ':peso' => $this->peso,
+                ':origen' => $this->origen,
+                ':url_img' => $this->url_img,
+                ':alt_img' => $this->alt_img,
+                ':updatedAt' => date("Y-m-d H:i:s"),
+                ':id' => $this->id
+            ];
+            $stmt = static::$db->prepare($query);
+            return $stmt->execute($params);
+        } catch (PDOException $th) {
+            return false;
+        }
+    }
+    
 }

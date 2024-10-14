@@ -167,6 +167,7 @@ async function init(search = null) {
                 imageUrl: r.imagen,
                 fabricante: r.fabricante,
                 modelo: r.modelo,
+                modelo: r.tipo,
                 url_image: r.url_img,
                 alt_image: r.alt_img
             }
