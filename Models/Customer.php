@@ -4,6 +4,7 @@ namespace Models;
 
 use DateTime;
 use PDOException;
+use PDO;
 
 class Customer extends ActiveRecord
 {
@@ -185,6 +186,45 @@ class Customer extends ActiveRecord
         }
 
         return $result[0] ?? null;
+    }
+
+    public static function getAllCustomers() {
+        try {
+            $query = "SELECT * FROM Customer";
+            $stmt = static::$db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    public static function adminForceDeleting($recivedUUID) {
+        $result = null;
+        try {
+            $query = "UPDATE Customer SET isDeleted = 1 WHERE uuid = :uuid";
+            $params = [':uuid' => $recivedUUID];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar: " . $th->getMessage());
+            return false;
+        }
+        return $result;
+    }
+
+    public static function adminForceActiving($recivedUUID) {
+        $result = null;
+        try {
+            $query = "UPDATE Customer SET isDeleted = 0 WHERE uuid = :uuid";
+            $params = [':uuid' => $recivedUUID];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+        } catch (PDOException $th) {
+            logg("[MARIADB] Error al consultar: " . $th->getMessage());
+            return false;
+        }
+        return $result;
     }
 
     public function getImagen()

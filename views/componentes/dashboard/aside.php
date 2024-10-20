@@ -76,10 +76,23 @@
             }
 
             if ($isEncargado == true) {
-                echo '<a title="Register" class="aside-element rounded" href="/dashboard/manageEmployee">
-                    <img src="/build/src/images/user.svg" alt="Registrar admin">
-                    <p>Admin regist</p>
-                </a>';
+                echo '<ul aria-label="ddl_4" class="dropDown-list">
+            <li>
+                <a title="Account Managment" class="aside-element rounded" href="#">
+                    <div class="dropDown-spacer">
+                        <img src="/build/src/images/user.svg" alt="Account Managment">
+                        <p>Account Managment</p>
+                    </div>
+                    <img src="/build/src/images/miniDownArrow.svg" alt="more elements">
+                </a>
+            </li>
+            <li>
+                <ul class="dropDown-links dropDownNotDeployed">
+                    <li><a href="/dashboard/manageClient">Administrar Clientes</a></li>
+                    <li><a href="/dashboard/manageEmployee">Administrar Empleados</a></li>
+                </ul>
+            </li>
+        </ul>';
             }
         ?>
 

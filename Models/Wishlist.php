@@ -12,9 +12,9 @@ class Wishlist extends ActiveRecord {
 
     function __construct($args = []) {
         $this->wish_id = $args[""] ?? null;
-        $this->customer_id = $args[""] ?? "";
+        $this->customer_uuid = $args[""] ?? "";
         $this->item_id = $args[""] ?? "";
         $this->addedAt = new DateTime();
-        $this->addedAt =  $this->updatedAt->format('Y-m-d H:i:s');
+        $this->addedAt =  $this->addedAt->format('Y-m-d H:i:s');
     }
 }

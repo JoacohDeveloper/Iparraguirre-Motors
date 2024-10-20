@@ -115,3 +115,16 @@ create table refractions(
 	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(id)
 );
+
+create table interactions(
+	interactionID VARCHAR(25) not null,
+	interactionOwner VARCHAR(45) not null,
+	interactionType VARCHAR(50),
+	interactionCost float,
+	productName VARCHAR(255),
+	productType VARCHAR(255),
+	productLink VARCHAR(255),
+	isPrivate tinyInt(1) DEFAULT 0,
+	interactionDate datetime default CURRENT_TIMESTAMP,
+	PRIMARY KEY(interactionID)
+);

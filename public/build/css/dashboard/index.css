@@ -150,6 +150,10 @@ main {
     object-fit: cover;
   }
 }
+.profile-img > img {
+  filter: none !important;
+}
+
 .navegacion-dashboard ul li {
   height: 100%;
   display: flex;

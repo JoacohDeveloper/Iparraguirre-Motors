@@ -5,6 +5,7 @@ namespace Controllers;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Models\Customer;
+use Models\Interactions;
 use MVC\Router;
 
 abstract class CustomerController
@@ -40,7 +41,12 @@ abstract class CustomerController
                             if (!$customer->isAdmin()) {
                                 $_SESSION["usuario"] = $customer;
                                 $_SESSION["loggedIn"] = true;
-                                $response = ["message" => "succesfuly"];
+
+                                //Creamos una interaccion para notificar el inicio de sesion.
+                                $interaction = new Interactions();
+                                $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Log In", null, null, null, false);
+
+                                $response = ["message" => "succesfuly", "interaction" => $interactionResponse];
                             } else {
                                 $errores[] = "Ha ocurrido un error";
                                 $response["errores"] = $errores;
@@ -164,6 +170,11 @@ abstract class CustomerController
                     $imagen->save(quality: 10);
 
                     $_SESSION["usuario"] = $customerDB;
+
+                    //Creamos una interaccion para notificar el cambio de datos del perfil
+                    $interaction = new Interactions();
+                    $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Porfile modification", null, null, null, false);
+                    
                     echo json_encode(["message" => "successfuly", "file_uploaded" => $res]);
                     exit;
                 }
@@ -171,6 +182,33 @@ abstract class CustomerController
         }
         echo json_encode(["message" => "error", "errores" => $errores]);
 
+        exit;
+    }
+
+    public static function getClients() {
+        $result = Customer::getAllCustomers();
+        if (!empty($result)) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(["message" => "Ha ocurrido un error"]);
+        }
+        exit;
+    }
+
+    public static function getOtherClient() {
+        header('Content-Type: application/json; charset=utf-8');
+        $email = $_GET["email"];
+        $usuario = Customer::getCustomer($email);
+
+        $usuarioArray = (array) $usuario;
+
+        if ($usuarioArray) {
+            $response = ["response" => $usuarioArray];
+            echo json_encode($response);
+        } else {
+            $response = ["response" => "error"];
+            echo json_encode($response);
+        }
         exit;
     }
 }

@@ -397,7 +397,7 @@ const ModalDelete = (data) => {
     const delete_form = InputText("text", "Palabra de seguridad: quitar acceso", "quitar acceso", "delete-input", "securedWord", "");
 
     const text = document.createElement("p")
-    text.textContent = "¿Seguro que quieres eliminar este producto?"
+    text.textContent = "¿Seguro que quieres eliminar este administrador?"
 
 
     const submitInput = document.createElement("button")

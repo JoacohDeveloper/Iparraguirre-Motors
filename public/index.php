@@ -80,13 +80,21 @@ $router->get("/dashboard/verificar", [AuthenticationController::class, "verifica
 
 $router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]); 
 
-$router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]); 
+$router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]);
+$router->get("/dashboard/client/getAll", [CustomerController::class, "getClients"]);
 
-$router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]);
+$router->get("/dashboard/manageClient", [DashboardController::class, "manageClient"]); 
+$router->get("/dashboard/manageClient/getOtherClient", [CustomerController::class, "getOtherClient"]);
+$router->get("/dashboard/manageClient/forceDelete", [DashboardController::class, "forcedClientDeleting"]);
+$router->get("/dashboard/manageClient/forceActive", [DashboardController::class, "forcedClientActive"]);
+$router->get("/dashboard/manageClient/getInteractions", [DashboardController::class, "getInteractionsByUser"]);
+$router->get("/dashboard/manageClient/deleteInteraction", [DashboardController::class, "deleteInteraction"]);
+
+$router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]); 
 $router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
-$router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]); 
-$router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]); 
-$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]); 
+$router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]);
+$router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]);
+$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]);
 $router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]); 
 
 $router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);

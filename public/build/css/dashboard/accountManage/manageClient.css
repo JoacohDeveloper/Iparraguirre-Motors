@@ -1,0 +1,413 @@
+.container-divisor{
+    display: flex;
+}
+
+.interactions-container {
+    width: 45%;
+    height: 40rem;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: #cccccc70;
+    padding: 3rem 0;
+    border-radius: .6rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .interactions-message{
+        display: flex;
+        flex-direction: column;
+        gap: .4rem;
+        h4{
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        p{
+            text-align: center;
+            font-size: .95rem;
+        }
+        
+    }
+}
+.interactions-cardContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 1rem;
+}
+
+.interactions-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ccccccad;
+    color: #000;
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .interactions-cardHeader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 1.75rem;
+        background-color: #fff;
+        border-radius: 10px 10px 0 0;
+        label{
+            display: flex;
+            justify-content: space-between;
+            gap: .22rem;
+            margin-left: .5rem;
+            #txt_ID{
+                font-size: 1rem;
+                font-weight: bold;
+            }
+            #html_ID{
+                font-size: .75rem;
+            }
+        }
+        button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background-color: #b10b0a;
+            cursor: pointer;
+            height: 100%;
+            width: 1.5rem;
+            max-width: 1.5rem;
+            border-radius:  0 10px 0 0;
+        }
+        h4{
+            margin-left: .5rem;
+            font-size: .9rem;
+        }
+    }
+    .interactions-cardMain{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        margin-block: .5rem;
+        gap: .5rem;
+        label{
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            margin-inline: .5rem;
+        }
+    }
+    .interactions-cardFooter{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 1.75rem;
+        background-color: #fff;
+        border-radius: 0 0 10px 10px;
+        button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background-color: #b10b0a;
+            cursor: pointer;
+            height: 100%;
+            width: 7rem;
+            border-radius:  0 0 10px 0;
+        }
+        p{
+            cursor: default;
+            margin-left: .5rem;
+            font-size: .75rem;
+        }
+    }
+}
+
+.user-container{
+    width: 55%;
+}
+.infoCant-content{
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: auto;
+    p{
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        padding: .5rem;
+        font-size: .8rem;
+        border-radius: .5rem;
+    }
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.user-card {
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px #0000001a;
+    margin: 20px;
+    background-color: #ffffff;
+    transition: box-shadow .5s ease,
+        transform .5s ease;
+}
+.user-card:hover{
+    box-shadow: 4px 4px 4px #b10b0a;
+    transform: scale(1.005);
+}
+  
+.important-container {
+    text-align: center;
+    padding: 20px;
+    cursor: default;
+}
+
+.image-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px;
+    border: 3px solid #b10b0a;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: default;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.important-container > #full_name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #000;
+}
+
+.important-container > #rol {
+    font-size: 1em;
+    color: #666;
+    margin: 0;
+}
+
+.contenedor-informacion {
+    padding: 15px;
+    cursor: default;
+    label{
+        display: flex;
+        gap: .4rem;
+    }
+}
+
+.contenedor-informacion p {
+    font-size: .825em;
+    margin: 5px 0;
+    color: #666;
+}
+
+.options-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.user-card > .options-container > button{
+    width: 50%;
+    font-size: .8rem;
+    color: #666;
+    border: none;
+    cursor: pointer;
+    padding: .5rem;
+    border-top: 1px solid #ccc;
+    transition: background-color .5s ease,
+        color .5s ease;
+    &:hover{
+        background-color: #dddddd;
+        color: #000;
+    }
+}
+
+@media screen and (max-width: 1550px) and (min-width: 769px) {
+    .container-divisor{
+        flex-direction: column;
+    }
+    .add-container{
+        width: 100%;
+    }
+    .form-container{
+        position: unset;
+    }
+    .user-container{
+        width: 100%;
+        margin-top: 4rem;
+        
+    }
+    .infoCant-content{
+        width: 90%;
+        flex-wrap: wrap;
+        row-gap: .6rem;
+        p{
+            padding: .75rem;
+            font-size: .8rem;
+        }
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .container-divisor{
+        flex-direction: column;
+    }
+    .add-container{
+        width: 100%;
+    }
+    .form-container{
+        position: unset;
+        padding: 2rem 2rem;
+        form{
+            width: 80%;
+        }
+        h3{
+            font-size: 1.2rem;
+        }
+        p{
+            font-size: .75rem;
+        }
+        form > input[type="submit"]{
+            width: 85%;
+        }
+    }
+    .user-container{
+        width: 100%;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        p{
+            margin: auto;
+        }
+    }
+
+    .infoCant-content{
+        width: 100%;
+        flex-direction: column;
+        gap: .6rem;
+        margin: auto;
+        p{
+            padding: .4rem;
+            font-size: .75rem;
+            border-radius: .25rem;
+            width: 12rem;
+            text-align: center;
+        }
+    }
+}
+
+/* Modal */
+.blured::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+}
+  
+.modal-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+  
+.modal-container > .modal {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    min-height: 15rem;
+    max-height: 80%;
+    overflow-y: auto;
+    background-color: #fff;
+    border-radius: 0.4rem;
+    box-shadow: 0 0 17px #202020;
+}
+  
+.modal > .modal-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 1rem 2rem;
+    /* height: 3rem; */
+    border-bottom: 1px solid #ccc;
+}
+  
+.modal > .modal-header > h3 {
+    color: #000;
+}
+.modal > .modal-header > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+    border: 1px solid #000;
+    background: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+  
+.modal > .modal-body {
+    display: flex;
+    flex-direction: column;
+    margin-top: .4rem;
+    padding-bottom: 2rem;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+.modal > .modal-body > p {
+    font-size: 1rem;
+    text-justify: distribute;
+    text-align: center;
+}
+  
+.modal > .modal-body > label {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    color: #666;
+    width: 70%;
+}
+  
+.modal > .modal-body > label > input {
+    background: none;
+    border: none;
+    padding: 0.3rem 0.2rem;
+    margin-top: 0.5rem;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+}
+  
+.modal > .modal-body > button {
+    padding: 0.3rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 60%;
+    margin: auto;
+    &:hover {
+      transform: translateY(-3px);
+    }
+}

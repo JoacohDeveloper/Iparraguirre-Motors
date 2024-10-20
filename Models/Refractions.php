@@ -3,9 +3,9 @@
 namespace Models;
 
 use Models\ActiveRecord;
-use JsonSerializable;
+use PDOException;
 
-class Refractions extends ActiveRecord implements JsonSerializable
+class Refractions extends ActiveRecord
 {
     protected static $tabla = "Refractions";
     protected static $columnasdb = [
@@ -13,11 +13,6 @@ class Refractions extends ActiveRecord implements JsonSerializable
         "precio","stock","peso","origen","url_img","alt_img",
         "createdAt","updatedAt"
     ];
-
-    public function jsonSerialize()
-    {
-        return (object) get_object_vars($this);
-    }
 
     public $id, $nombre, $descripcion, $fabricante, $precio, $stock,
         $peso, $modelo, $tipo, $origen, $url_img, $alt_img,

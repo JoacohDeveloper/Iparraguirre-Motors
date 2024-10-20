@@ -5,6 +5,8 @@ namespace Controllers;
 use MVC\Router;
 use Models\Vehicle;
 use Models\User;
+use Models\Customer;
+use Models\Interactions;
 
 abstract class DashboardController
 {
@@ -19,7 +21,7 @@ abstract class DashboardController
         $isFirstLog = $user->isFirstLog();
 
         if($isFirstLog){
-            $router->render("dashboard/defaultAdmin", [
+            $router->render("dashboard/accountManage/defaultAdmin", [
                 "styles" => ["dashboard/index", "dashboard/settings/defaultAdmin"],
                 "scripts" => ["dashboard/index", "dashboard/settings/defaultAdmin"],
                 "title" => "Dashboard"
@@ -166,6 +168,46 @@ abstract class DashboardController
         }
     }
 
+    public static function forcedClientDeleting() {
+        header('Content-Type: application/json; charset=utf-8');
+        $uuid = $_GET["uuid"];
+        $result = null;
+    
+        if (isset($uuid)) {
+            $result = Customer::adminForceDeleting($uuid);
+            if ($result) {
+                echo json_encode(["message" => "successfuly"]);
+                exit;
+            } else {
+                echo json_encode(["message" => "error"]);
+                exit;
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+            exit;
+        }
+    }
+
+    public static function forcedClientActive() {
+        header('Content-Type: application/json; charset=utf-8');
+        $uuid = $_GET["uuid"];
+        $result = null;
+    
+        if (isset($uuid)) {
+            $result = Customer::adminForceActiving($uuid);
+            if ($result) {
+                echo json_encode(["message" => "successfuly"]);
+                exit;
+            } else {
+                echo json_encode(["message" => "error"]);
+                exit;
+            }
+        } else {
+            echo json_encode(["message" => "Usuario no encontrado"]);
+            exit;
+        }
+    }
+
     public static function changePassword(){
         $usuario = $_SESSION["usuario"];
         $olderPassword = $_POST["olderPassword"];
@@ -235,8 +277,7 @@ abstract class DashboardController
         exit;
     }
 
-    public static function addAdmin(Router $router)
-    {
+    public static function manageAdmin(Router $router){
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
         if (!$user->isAdmin()) {
@@ -246,15 +287,14 @@ abstract class DashboardController
             header("location: /");
         }
 
-        $router->render("dashboard/addAdmin", [
-            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/settings/addAdmin"],
-            "scripts" => ["dashboard/index", "dashboard/auth/register"],
+        $router->render("dashboard/accountManage/manageAdmin", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/accountManage/manageAdmin"],
+            "scripts" => ["dashboard/index", "dashboard/accountManage/manageAdmin"],
             "title" => "Dashboard"
         ]);
     }
 
-    public static function manageAdmin(Router $router)
-    {
+    public static function manageClient(Router $router){
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
         if (!$user->isAdmin()) {
@@ -264,14 +304,44 @@ abstract class DashboardController
             header("location: /");
         }
 
-        $router->render("dashboard/manageAdmin", [
-            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/manageAdmin"],
-            "scripts" => ["dashboard/index", "dashboard/manageAdmin"],
+        $router->render("dashboard/accountManage/manageClient", [
+            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/accountManage/manageClient"],
+            "scripts" => ["dashboard/index", "dashboard/accountManage/manageClient"],
             "title" => "Dashboard"
         ]);
+    }
+
+    public static function getInteractionsByUser(){
+        $userUUID = $_GET["uuid"];
+        $interaction = new Interactions();
+        $response = $interaction->getInteraction($userUUID);
+        if($response){
+            echo json_encode(["message" => "succesfully", "interactions" => $response]);
+        } else if (count($response) == 0){
+            echo json_encode(["message" => "succesfully", "interactions" => null]);
+        } else {
+            echo json_encode(["error" => "Ha ocurrido un error"]);
+        }
+        exit;
+    }
+
+    public static function deleteInteraction(){
+        $id = $_GET["id"];
+        $interaction = new Interactions();
+        $response = $interaction->delete($id);
+        if($response){
+            echo json_encode(["message" => "succesfully"]);
+        } else if (count($response) == 0){
+            echo json_encode(["message" => "succesfully"]);
+        } else {
+            echo json_encode(["error" => "Ha ocurrido un error"]);
+        }
+        exit;
     }
 
     public static function noAccess(Router $router){
+        header("HTTP/1.1 401 Unauthorized");
+
         $router->render("dashboard/noaccess", [
             "title" => "Acceso denegado"
         ]);
