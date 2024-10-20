@@ -208,6 +208,7 @@ const interactionsCard = ({ interactionID, interactionOwner, interactionType, in
     labelType.appendChild(typeText);
     labelType.appendChild(typeHTML);
 
+    if(interactionCost == 0) interactionCost = "Sin costo";
     const labelCost = document.createElement("label");
     labelCost.classList.add("labelCost");
     const costText = document.createElement("p");
@@ -218,15 +219,6 @@ const interactionsCard = ({ interactionID, interactionOwner, interactionType, in
     labelCost.appendChild(costHTML);
 
     if(interactionType == "Purasche" || interactionType == "Test Drive"){
-        var labelProductName = document.createElement("label");
-        labelProductName.classList.add("labelProductName");
-        const productNameText = document.createElement("p");
-        const productNameHTML = document.createElement("p");
-        productNameText.textContent = "Producto:";
-        productNameHTML.textContent = productName ?? "Indefinido";
-        labelProductName.appendChild(productNameText);
-        labelProductName.appendChild(productNameHTML);
-
         var labelProductType = document.createElement("label");
         labelProductType.classList.add("labelProductName");
         const productTypeText = document.createElement("p");
@@ -235,6 +227,15 @@ const interactionsCard = ({ interactionID, interactionOwner, interactionType, in
         productTypeHTML.textContent = productType ?? "Indefinido";
         labelProductType.appendChild(productTypeText);
         labelProductType.appendChild(productTypeHTML);
+
+        var labelProductName = document.createElement("label");
+        labelProductName.classList.add("labelProductName");
+        const productNameText = document.createElement("p");
+        const productNameHTML = document.createElement("p");
+        productNameText.textContent = "Producto:";
+        productNameHTML.textContent = productName ?? "Indefinido";
+        labelProductName.appendChild(productNameText);
+        labelProductName.appendChild(productNameHTML);
 
         var btn_link = document.createElement("button");
         btn_link.textContent = "Ver producto";
@@ -247,8 +248,8 @@ const interactionsCard = ({ interactionID, interactionOwner, interactionType, in
     registedHTML.textContent = interactionDate ?? "Sin registro";
 
     cardMain.appendChild(labelType);
-    if (typeof labelProductName !== 'undefined') cardMain.appendChild(labelProductName);
     if (typeof labelProductType !== 'undefined') cardMain.appendChild(labelProductType);
+    if (typeof labelProductName !== 'undefined') cardMain.appendChild(labelProductName);
     cardMain.appendChild(labelCost);
 
     cardFooter.appendChild(registedHTML);

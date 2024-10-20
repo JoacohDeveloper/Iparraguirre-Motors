@@ -300,9 +300,6 @@ abstract class DashboardController
         if (!$user->isAdmin()) {
             header("location: /");
         }
-        if(!$user->isEncargado()){
-            header("location: /");
-        }
 
         $router->render("dashboard/accountManage/manageClient", [
             "styles" => ["dashboard/index", "dashboard/aside", "dashboard/accountManage/manageClient"],
@@ -312,9 +309,11 @@ abstract class DashboardController
     }
 
     public static function getInteractionsByUser(){
+        $user = $_SESSION["usuario"];
+        $isEncargado = $user->isEncargado();
         $userUUID = $_GET["uuid"];
         $interaction = new Interactions();
-        $response = $interaction->getInteraction($userUUID);
+        $response = $interaction->getInteraction($userUUID, $isEncargado);
         if($response){
             echo json_encode(["message" => "succesfully", "interactions" => $response]);
         } else if (count($response) == 0){

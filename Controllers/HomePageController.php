@@ -139,6 +139,11 @@ abstract class HomePageController
                     if ($result) {
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
+
+                        //Creamos una interaccion para notificar la eliminacion del perfil.
+                        $interaction = new Interactions();
+                        $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Delete porfile", null, null, null, true);
+
                         echo json_encode(["message" => "successfuly"]);
                     } else {
                         echo json_encode(["error" => "Ha ocurrido un error"]);

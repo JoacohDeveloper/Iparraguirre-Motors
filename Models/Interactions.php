@@ -22,7 +22,7 @@ class Interactions extends ActiveRecord {
         $this->productLink = "";
         $this->isPrivate = false;
         $this->interactionDate = new DateTime();
-        $this->interactionDate = $this->interactionDate->format('H:i:s d-m-Y');
+        $this->interactionDate = $this->interactionDate->format('Y-m-d H:i:s');
     }
 
     function generateID() {
@@ -39,7 +39,7 @@ class Interactions extends ActiveRecord {
     public function createInteraction($userUUID, $tipo, $precio, $nameOfProduct, $typeOfProduct, $private) {
         date_default_timezone_set('America/Montevideo');
         $this->interactionDate = new DateTime();
-        $this->interactionDate = $this->interactionDate->format('H:i:s d-m-Y');
+        $this->interactionDate = $this->interactionDate->format('Y-m-d H:i:s');
         $this->interactionOwner = $userUUID ?? null;
         $this->interactionType = $tipo ?? null;
         $this->interactionCost = $precio ?? 0;
@@ -74,17 +74,34 @@ class Interactions extends ActiveRecord {
             $stmt = static::$db->prepare($query);
             return $stmt->execute($params);
         } catch (PDOException $th) {
-            return $null;
+            return $th;
         }
     }
 
-    public function getInteraction($userUUID){
+    public function getInteraction($userUUID, $adminType) {
+        $params = [':interactionOwner' => $userUUID];
+    
         try {
-            $query = "SELECT * FROM interactions WHERE interactionOwner = :interactionOwner";
-            $params = [
-                ':interactionOwner' => $userUUID
-            ];
+            if ($adminType == 1) {
+                $query = "SELECT * FROM interactions WHERE interactionOwner = :interactionOwner";
+            } else {
+                $query = "SELECT * FROM interactions WHERE interactionOwner = :interactionOwner AND isPrivate = 0";
+            }
+    
             $result = Interactions::consultarSQL($query, $params);
+    
+            // Formateamos la fecha de todas las interacciones que se traen.
+            foreach ($result as $row) {
+                // Convertimos el resultado en un array para manejarlo correctamente.
+                $rowArray = get_object_vars($row);
+                $datetime = new DateTime($rowArray['interactionDate']);
+                $rowArray['interactionDate'] = $datetime->format('H:i:s d-m-Y');
+                // Se actualiza el array con el nuevo formato de fecha.
+                foreach ($rowArray as $key => $value) {
+                    $row->$key = $value;
+                }
+            }
+    
             return $result;
         } catch (PDOException $th) {
             return null;
