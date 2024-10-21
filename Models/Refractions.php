@@ -3,26 +3,47 @@
 namespace Models;
 
 use Models\ActiveRecord;
-use JsonSerializable;
 
-class Refractions extends ActiveRecord implements JsonSerializable
+class Refractions extends ActiveRecord
 {
-    protected static $tabla = "Refractions";
+    protected static $tabla = "refractions";
     protected static $columnasdb = [
-        "id", "nombre","descripcion","fabricante","precio","stock","peso",
-        "origen","url_img","alt_img","createdAt","updatedAt"
+        "refraction_id",   // Cambiado de "id" a "refraction_id"
+        "nombre",          // Nombre de la refacción
+        "descripcion",     // Descripción de la refacción
+        "fabricante",      // Fabricante de la refacción
+        "modelo",          // Modelo de la refacción
+        "precio",          // Precio de la refacción
+        "discount",        // Descuento aplicado
+        "discount_type",   // Tipo de descuento
+        "stock",           // Cantidad en stock
+        "peso",            // Peso de la refacción
+        "origen",          // País de origen
+        "url_img",         // URL de la imagen
+        "alt_img",         // Texto alternativo de la imagen
+        "createdAt",       // Fecha de creación
+        "updatedAt"        // Fecha de actualización
     ];
 
-    public function jsonSerialize()
+    public $refraction_id,  // Cambiado de "id" a "refraction_id"
+        $nombre,
+        $descripcion,
+        $fabricante,
+        $modelo,         // Agregado el modelo de la refacción
+        $precio,
+        $discount,       // Agregado el descuento
+        $discount_type,  // Agregado el tipo de descuento
+        $stock,
+        $peso,
+        $origen,
+        $url_img,
+        $alt_img,
+        $createdAt,
+        $updatedAt;
+
+    function __construct($args = [])
     {
-        return (object) get_object_vars($this);
-    }
-
-    public $id, $nombre, $descripcion, $fabricante, $precio, $stock,
-        $peso, $origen, $url_img, $alt_img, $createdAt, $updatedAt;
-
-    function __construct($args = []) {
-        $this->id = $args["id"] ?? null;
+        $this->refraction_id = $args["id"] ?? null;
         $this->nombre = $args["nombre"] ?? "";
         $this->descripcion = $args["descripcion"] ?? "";
         $this->fabricante = $args["fabricante"] ?? "";
@@ -89,23 +110,25 @@ class Refractions extends ActiveRecord implements JsonSerializable
         return $errors;
     }
 
-    public function registrarRefractions() {
+    public function registrarRefractions()
+    {
         date_default_timezone_set('America/Montevideo');
         $resultado = $this->crear();
         if ($resultado) {
-            $this->id = static::$db->lastInsertId();
-            return ['resultado' => true, 'id' => $this->id];
+            $this->refraction_id = static::$db->lastInsertId();
+            return ['resultado' => true, 'id' => $this->refraction_id];
         }
         return ['resultado' => false];
     }
-    
-    public function actualizarImagenes() {
+
+    public function actualizarImagenes()
+    {
         $query = "UPDATE " . self::$tabla . " SET url_img = :url_img, alt_img = :alt_img WHERE id = :id";
         $stmt = self::$db->prepare($query);
         $stmt->bindParam(':url_img', $this->url_img);
         $stmt->bindParam(':alt_img', $this->alt_img);
-        $stmt->bindParam(':id', $this->id);
-    
+        $stmt->bindParam(':id', $this->refraction_id);
+
         $stmt->execute();
     }
 }

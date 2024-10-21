@@ -167,11 +167,11 @@ async function init(search = null) {
 
         data.forEach(v => {
             const customV = {
-                nombre: v.nombre,
-                precio: v.precio,
-                discount: v.discount,
-                discount_type: v.discount_type,
-                id: v.id,
+                nombre: v.product.nombre,
+                precio: v.product.precio,
+                discount: v.product.discount,
+                discount_type: v.product.discount_type,
+                id: v.vehicle_id,
                 imageUrl: v.imagen,
                 fabricante: v.fabricante,
                 modelo: v.modelo,
@@ -331,7 +331,7 @@ async function buscar() {
                         resultadoBusqueda.classList.remove("hidden")
 
                         const vehicles = Object.values(data)
-                        const vehiclesName = vehicles.map(vehicles => vehicles?.nombre)
+                        const vehiclesName = vehicles.map(vehicles => vehicles?.product.nombre)
                         const vehiclesNomUnicos = new Set(vehiclesName)
                         const arregloNoRepetido = [...vehiclesNomUnicos]
 

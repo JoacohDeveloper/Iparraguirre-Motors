@@ -66,8 +66,8 @@ if (home_vid) {
     })
 
     observer.observe(banner);
-  
-fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf").then(response => response.json()).then(data => console.log(data))
+
+    fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf").then(response => response.json()).then(data => console.log(data))
 
 }
 
@@ -191,8 +191,8 @@ const addToast = (errors) => {
 const dropdown = document.querySelector('.dropdown');
 const dropdownContent = document.querySelector('.dropdown-content');
 
-if(dropdown){
-    dropdown.addEventListener('click', function(event) {
+if (dropdown) {
+    dropdown.addEventListener('click', function (event) {
         event.preventDefault();
         if (dropdownContent.classList.contains('show')) {
             dropdownContent.classList.remove('show');
@@ -200,13 +200,13 @@ if(dropdown){
             dropdownContent.classList.add('show');
         }
     });
-    
-    dropdownContent.addEventListener('click', function(event) {
+
+    dropdownContent.addEventListener('click', function (event) {
         event.stopPropagation();
     });
     const dropdownLinks = document.querySelectorAll('.dropdown-content > a');
     dropdownLinks.forEach(link => {
-      link.style.color = 'black';
+        link.style.color = 'black';
     });
 }
 

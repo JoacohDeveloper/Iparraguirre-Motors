@@ -24,8 +24,8 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
 
     btnNoDiscount.appendChild(noDiscountImg)
     btnNoDiscount.addEventListener("click", handlerEliminar)
-    
-    if(discount === 0 || discount === null){
+
+    if (discount === 0 || discount === null) {
         contenedorControllers.appendChild(btnDiscount)
     } else {
         contenedorControllers.appendChild(btnNoDiscount)
@@ -44,7 +44,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         const precioFinalHTML = document.createElement("p");
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
-        
+
         let precioFinal;
         if (discount_type == "Dolares") {
             precioFinal = precio - discount;
@@ -55,7 +55,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
 
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-    
+
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -63,7 +63,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }    
+    }
 
     contenedorInformacion.appendChild(contenedorPrecio);
 
@@ -87,10 +87,10 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
 
-   if(images.length == 0)
-       img.src = "/build/src/images/vehicles/default.jpg";
-    else{
-      img.src = `/build${images[0]?.url.split("/build")[1]}`;
+    if (images.length == 0)
+        img.src = "/build/src/images/vehicles/default.jpg";
+    else {
+        img.src = `/build${images[0]?.url.split("/build")[1]}`;
     }
     img.alt = nombre;
     imageContainer.appendChild(img)
@@ -225,7 +225,7 @@ contenedorBuscador.addEventListener("submit", async e => {
 
 
     if (buscador.value) {
-        
+
         if (location.pathname.includes("/dashboard/discounts/vehicle")) {
 
             await handlerBusqueda(buscador?.value)
@@ -323,9 +323,9 @@ async function buscar() {
                         const arregloNoRepetido = [...vehiclesNomUnicos]
 
                         arregloNoRepetido.forEach(vehicle => {
-                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
+                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
                         })
-                        
+
                         if (Object.values(data).length == 0) ocultarBusqueda()
                     } else {
                         ocultarBusqueda()

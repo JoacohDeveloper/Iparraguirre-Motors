@@ -864,6 +864,7 @@ const ModalAdd = async () => {
 
 
 const ModalModificar = async (data) => {
+
     data.frenos_abs = data.frenos_abs === "abs_si" ? "Si" : "No";
     data.airbag = data.airbag === "airbag_si" ? "Si" : "No";
     data.control_estabilidad = data.control_estabilidad === "est_si" ? "Si" : "No";
@@ -902,16 +903,16 @@ const ModalModificar = async (data) => {
     const inputId = document.createElement("input")
     inputId.name = "id"
     inputId.type = "hidden"
-    inputId.value = data.id;
+    inputId.value = data.vehicle_id;
 
 
     vehicleform.appendChild(inputId)
     vehicleform.classList.add("form_addvehicle")
 
     const detailsSectionInputs = [
-        InputText("text", "Nombre", "Nombre", "nombre", "name", data.nombre),
+        InputText("text", "Nombre", "Nombre", "nombre", "name", data.product.nombre),
         InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", data.categoria),
-        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", data.descripcion),
+        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", data.product.descripcion),
     ]
 
     const detailsSectionInputs2 = [
@@ -938,7 +939,7 @@ const ModalModificar = async (data) => {
 
     const perfSectionInputs = [
         InputText("text", "Tipo de combustible", "Tipo de combustible", "tipo_combustible", "", data.tipo_combustible),
-        InputText("number", "Precio (USD)", "Precio", "precio", "", data.precio),
+        InputText("number", "Precio (USD)", "Precio", "precio", "", data.product.precio),
         InputText("number", "Velocidad maxima (KM/H)", "Velocidad maxima", "velocidad_max", "", data.velocidad_max),
         InputText("number", "De 0 a 100 (segundos)", "De 0 a 100", "zero_to_houndred", "", data.zero_to_houndred),
 
@@ -1103,11 +1104,11 @@ const ModalModificar = async (data) => {
                     method: "POST",
                     body: formdata
                 });
-
+                console.log([...formdata])
                 botonSiguiente.disabled = false;
 
                 const data = await response.json();
-
+                console.log(data)
                 if (data?.error) {
 
                     addToast([{ title: "error", error: data?.error }]);
@@ -1599,6 +1600,7 @@ const handlerEliminar = (e) => {
 
 const handlerModificar = (e) => {
     const vehiculoID = e.currentTarget.id;
+    console.log(vehiculoID)
     toggleBackground();
 
     fetchVehiculoData(vehiculoID)
@@ -1615,7 +1617,8 @@ const handlerModificar = (e) => {
 const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
-    const response = await fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + vehiculoID);
+    const response = await fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + encodeURIComponent(vehiculoID) + "");
+    console.log(response.url)
     if (!response.ok) {
         addToast([{
             title: "Failure",

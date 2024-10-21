@@ -17,6 +17,8 @@ class VehiclesController
         header('Content-Type: application/json; charset=utf-8');
 
         $vehicle = new vehicle($_POST);
+
+        // logg($_POST);
         $errores = $vehicle->validate();
 
         if (empty($errores)) {
@@ -24,6 +26,7 @@ class VehiclesController
 
             if ($result) {
                 // Procedo a crear las imágenes de ese vehículo
+                //logg($result);
                 $imagenes = [];
 
                 // Verifica si 'imagen' existe en $_FILES
@@ -102,8 +105,10 @@ class VehiclesController
         header('Content-Type: application/json; charset=utf-8');
         $vehicle = new vehicle($_POST);
         $errores = $vehicle->validate();
+
         if (empty($errores)) {
             $success = $vehicle->actualizarVehicle($_POST["id"]);
+            //logg($success);
             if ($success) {
 
                 if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['name'][0]) && $_FILES['imagen']['error'][0] === UPLOAD_ERR_OK) {
@@ -133,7 +138,7 @@ class VehiclesController
                             $imagen->resize(1280, 720);
                             $imagen->save(quality: 70);
 
-                            $fileImg = new VehicleImage($vehicle->id, $x, "vehicle img");
+                            $fileImg = new VehicleImage($vehicle->vehicle_id, $x, "vehicle img");
                             $fileImg->create();
                             $imagenes[] = $fileImg;
                         } else {

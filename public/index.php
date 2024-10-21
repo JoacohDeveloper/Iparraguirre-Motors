@@ -78,16 +78,16 @@ $router->post("/dashboard/recuperar", [AuthenticationController::class, "recuper
 
 $router->get("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
-$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]); 
+$router->post("/dashboard/verificar", [AuthenticationController::class, "verificar"]);
 
-$router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]); 
+$router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]);
 
 $router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]);
 $router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
-$router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]); 
-$router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]); 
-$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]); 
-$router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]); 
+$router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]);
+$router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]);
+$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]);
+$router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]);
 
 $router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);
@@ -97,7 +97,7 @@ $router->get("/dashboard/user-default-image", [AuthenticationController::class, 
 $router->get("/settings", [HomePageController::class, "userSettings"]);
 $router->post("/settings", [HomePageController::class, "userSettings"]);
 $router->get("/logout", [CustomerController::class, "logout"]);
-$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]); 
+$router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 $router->get("/dashboard/noaccess", [DashboardController::class, "noAccess"]);
 
 //dashboard 
@@ -106,8 +106,8 @@ $router->get("/dashboard", [DashboardController::class, "index"]);
 
 $router->post("/dashboard/agregar-vehiculo", [VehiclesController::class, "agregarVehiculo"]);
 $router->post("/dashboard/obtener-vehiculo", [VehiclesController::class, "getOneVehicle"]);
-$router->post("/dashboard/modificar-vehiculo", [VehiclesController::class, "modificarVehicle"]); 
-$router->post("/dashboard/discount-vehiculo", [VehiclesController::class, "discountVehicle"]); 
+$router->post("/dashboard/modificar-vehiculo", [VehiclesController::class, "modificarVehicle"]);
+$router->post("/dashboard/discount-vehiculo", [VehiclesController::class, "discountVehicle"]);
 $router->post("/dashboard/delete-discount-vehiculo", [VehiclesController::class, "removeDiscountVehicle"]);
 
 $router->get("/dashboard/products/vehicle", [ProductController::class, "vehicle"]);
@@ -153,6 +153,9 @@ $router->get("/api/v1/refractions", [RefractionsRestController::class, "refracti
 $router->get("/faq", function () {
     header("Location: /faq.html");
 });
+
+
+$router->get("/catalogo/product/view", [TiendaController::class, "view"]);
 
 //Pruebas Randoms
 
