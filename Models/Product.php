@@ -14,7 +14,10 @@ class Product extends ActiveRecord
         "product_id",      // ID del producto
         "nombre",          // Nombre del producto
         "descripcion",     // Descripción del producto
-        "precio",          // Precio del producto
+        "categoria",
+        "precio",
+        "modelo",
+        "fabricante",          // Precio del producto
         "discount",        // Descuento aplicado
         "discount_type",   // Tipo de descuento
         "createdAt",       // Fecha de creación

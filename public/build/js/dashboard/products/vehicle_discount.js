@@ -64,6 +64,7 @@ const InputSelect = (label, name, values, id, selectedValue) => {
 
 
 const ModalAddDiscount = (data) => {
+    console.log(data)
     const contenedor = document.createElement("div")
     document.body.classList.add("fixed")
 
@@ -93,8 +94,8 @@ const ModalAddDiscount = (data) => {
     const modalAddDiscount = document.createElement("form")
     modalAddDiscount.classList.add("form_addvehicle")
     const inputs = [
-        InputSelect("Tipo de descuento", "type", ["Dolares", "Porcentaje"], "tipo"),
-        InputText("text", "Descuento", "Descuento", "descuento", "descuento", "")//,
+        InputSelect("Tipo de descuento", "discount_type", ["Dolares", "Porcentaje"], ""),
+        InputText("text", "Descuento", "Descuento", "discount", "descuento", "")//,
         // InputText("date", "¿Cuando inicia?", "startDate",),
         // InputText("date", "¿Cuando finaliza?", "endDate",)
     ];
@@ -131,16 +132,16 @@ const ModalAddDiscount = (data) => {
             }
         });
         const fields = [
-            { value: object.type, regex: /^(?!-Seleccione-).+$/, error: "El campo tipo de descuento se encuentra vacío" },
-            { value: object.descuento, regex: descuentoRegex, error: "Solo se aceptan valores numéricos positivos" }
+            { value: object.discount_type, regex: /^(?!-Seleccione-).+$/, error: "El campo tipo de descuento se encuentra vacío" },
+            { value: object.discount, regex: descuentoRegex, error: "Solo se aceptan valores numéricos positivos" }
         ];
-    
+
         fields.forEach(field => {
             if (!field.regex.test(field.value)) {
                 errores.push({ title: "Failure", error: field.error });
             }
         });
-    
+
         if (parseFloat(object.descuento) < 0) {
             errores.push({ title: "Failure", error: "Solo se aceptan valores numéricos positivos" });
         }
@@ -154,7 +155,8 @@ const ModalAddDiscount = (data) => {
             const firstError = errores[0]; // Tomamos el primer error
             addToast([{ title: "Failure", error: firstError.error }]); // Mostramos solo el primer error
         } else {
-            formdata.append('id', data.id);
+            formdata.append('vehicle_id', data.vehicle_id);
+            console.log([...formdata])
             try {
                 const response = await fetch(location.origin + "/dashboard/discount-vehiculo", {
                     method: "POST",
@@ -178,8 +180,8 @@ const ModalAddDiscount = (data) => {
                         icon: "success"
                     });
                     const btn_swal = document.querySelector(".swal2-confirm");
-                    if(btn_swal){
-                        btn_swal.addEventListener("click", () =>{
+                    if (btn_swal) {
+                        btn_swal.addEventListener("click", () => {
                             document.querySelector(".product-search__input").querySelector("button").click();
                         })
                     }
@@ -288,7 +290,7 @@ const ModalRemoveDiscount = (data) => {
         if (error.length != 0) {
             addToast(error);
         } else {
-            formdata.append('id', data.id);
+            formdata.append('vehicle_id', data.vehicle_id);
             try {
                 const response = await fetch(location.origin + "/dashboard/delete-discount-vehiculo", {
                     method: "POST",
@@ -312,8 +314,8 @@ const ModalRemoveDiscount = (data) => {
                         icon: "success"
                     });
                     const btn_swal = document.querySelector(".swal2-confirm");
-                    if(btn_swal){
-                        btn_swal.addEventListener("click", () =>{
+                    if (btn_swal) {
+                        btn_swal.addEventListener("click", () => {
                             document.querySelector(".product-search__input").querySelector("button").click();
                         })
                     }
@@ -349,7 +351,7 @@ const toggleBackground = () => {
 }
 
 
-const handlerAgregar = (e) => {
+const handlerAgregarDiscount = (e) => {
     const vehiculoID = e.currentTarget.id;
     toggleBackground();
 
@@ -365,7 +367,7 @@ const handlerAgregar = (e) => {
         });
 };
 
-const handlerEliminar = (e) => {
+const handlerEliminarDiscount = (e) => {
     const vehiculoID = e.currentTarget.id;
     toggleBackground();
 
@@ -384,10 +386,7 @@ const handlerEliminar = (e) => {
 const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
-    const response = await fetch(location.origin + "/dashboard/obtener-vehiculo", {
-        method: "POST",
-        body: formdata
-    });
+    const response = await fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + encodeURIComponent(vehiculoID) + "");
     if (!response.ok) {
         addToast([{
             title: "Failure",

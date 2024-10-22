@@ -17,13 +17,14 @@ const ImageItem = ({ url, alt }) => {
 
 async function loadProduct() {
 
+
+
     const $image = document.querySelector("#image")
     const $title = document.querySelector(".title")
     const $price = document.querySelector(".price");
     const $description = document.querySelector(".description")
 
     const $contenedorImagenes = document.querySelector(".image-items")
-    moveArrows()
 
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -32,7 +33,7 @@ async function loadProduct() {
     const response = await fetch(`${window.location.origin}/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`)
 
     const product = await response.json();
-    console.log(product)
+
 
     $title.textContent = product?.product?.nombre
     $price.textContent = product?.product.precio.toLocaleString("en-US", {
@@ -74,9 +75,31 @@ async function loadProduct() {
             })
         })
     } else {
+        const $imageSelector = document.querySelector(".image-selector")
+        $imageSelector.style.display = "none";
         $image.src = "/build/src/images/vehicles/default.jpg"
     }
+
+    const $basketBtn = document.querySelector("#basket")
+
+    $basketBtn.addEventListener("click", e => {
+
+        const ultimosProductos = JSON.parse(localStorage.getItem("basket")) || []
+        const newProduct = { ...product.product, images: product.vehicleImages || [] }
+
+        const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id)
+
+        if (!yaExiste) {
+            localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]))
+            basketScript()
+        }
+    })
+
+
+    moveArrows()
 }
+
+
 
 
 
@@ -102,16 +125,17 @@ function moveArrows() {
 
         })
 
-
         $rightBtn.addEventListener("click", (e) => {
+
             if (margin > MAX) {
-                margin -= 5;
+                margin -= 3;
                 $firstEl.style.marginLeft = `${margin}rem`;
             }
         })
     }
-
 }
+
+
 
 
 loadProduct()

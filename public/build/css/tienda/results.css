@@ -4,3 +4,9 @@
   position: relative;
   justify-content: center;
 }
+
+@media (max-width: 768px) {
+  .container {
+    overflow-y: auto !important;
+  }
+}

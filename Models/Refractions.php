@@ -3,64 +3,57 @@
 namespace Models;
 
 use Models\ActiveRecord;
+use PDO;
 
 class Refractions extends ActiveRecord
 {
     protected static $tabla = "refractions";
     protected static $columnasdb = [
         "refraction_id",   // Cambiado de "id" a "refraction_id"
-        "nombre",          // Nombre de la refacción
-        "descripcion",     // Descripción de la refacción
-        "fabricante",      // Fabricante de la refacción
-        "modelo",          // Modelo de la refacción
-        "precio",          // Precio de la refacción
-        "discount",        // Descuento aplicado
-        "discount_type",   // Tipo de descuento
-        "stock",           // Cantidad en stock
-        "peso",            // Peso de la refacción
-        "origen",          // País de origen
         "url_img",         // URL de la imagen
         "alt_img",         // Texto alternativo de la imagen
-        "createdAt",       // Fecha de creación
-        "updatedAt"        // Fecha de actualización
     ];
 
-    public $refraction_id,  // Cambiado de "id" a "refraction_id"
-        $nombre,
-        $descripcion,
-        $fabricante,
-        $modelo,         // Agregado el modelo de la refacción
-        $precio,
-        $discount,       // Agregado el descuento
-        $discount_type,  // Agregado el tipo de descuento
-        $stock,
-        $peso,
-        $origen,
+
+    public
+        $product,
+        $refraction_id,  // Cambiado de "id" a "refraction_id"
         $url_img,
-        $alt_img,
-        $createdAt,
-        $updatedAt;
+        $alt_img;
 
     function __construct($args = [])
     {
-        $this->refraction_id = $args["id"] ?? null;
-        $this->nombre = $args["nombre"] ?? "";
-        $this->descripcion = $args["descripcion"] ?? "";
-        $this->fabricante = $args["fabricante"] ?? "";
-        $this->precio = $args["precio"] ?? "";
-        $this->stock = $args["stock"] ?? "";
-        $this->peso = $args["peso"] ?? "";
-        $this->origen = $args["origen"] ?? "";
+
+        $this->product = new Product($args);
+        $this->product->categoria = "Repuesto";
+        $this->refraction_id = $args["refraction_id"] ?? null;
         $this->url_img = $args["url_img"] ?? "";
         $this->alt_img = $args["alt_img"] ?? "";
-        $this->createdAt = $this->createdAt ? $this->createdAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
-        $this->updatedAt = $this->updatedAt ? $this->updatedAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
     }
+
+
+
 
     public static function getAllRefractions()
     {
         $refraction = new self();
-        return $refraction->getAll();
+        $refractions = $refraction->getAll();
+
+        $product = new Product();
+        $products = $product->getAll();
+
+        foreach ($refractions as $ref) {
+            // Casteamos $vehicle a la clase Vehicle
+            if ($ref instanceof Refractions)
+                foreach ($products as $product) {
+                    if ($product instanceof Product)
+                        // Casteamos $product a la clase Product
+                        if ($ref->refraction_id == $product->product_id) {
+                            $ref->product = $product;
+                        }
+                }
+        }
+        return $refractions;
     }
 
     public static function getAllRefractionsByPage($page = 1, $refractionName = null)
@@ -70,13 +63,31 @@ class Refractions extends ActiveRecord
         if ($page > 1) {
             $inicio =  ($page - 1) * 10;
         }
-        $query = "SELECT * FROM " . static::$tabla . " limit $inicio,$fin";
+        $query = "SELECT * FROM " . static::$tabla . " R INNER JOIN product P on R.refraction_id = P.product_id limit $inicio,$fin";
 
         if ($refractionName) {
-            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$refractionName%' limit $inicio,$fin";
+            $query = "SELECT * FROM " . static::$tabla . " R INNER JOIN product P on R.refraction_id = P.product_id WHERE P.nombre LIKE '%$refractionName%' limit $inicio,$fin";
         }
 
         $resultado = self::consultarSQL($query);
+
+
+
+        $product = new Product();
+        $products = $product->getAll();
+
+        foreach ($resultado as $ref) {
+            // Casteamos $vehicle a la clase Vehicle
+            if ($ref instanceof Refractions)
+                foreach ($products as $product) {
+                    if ($product instanceof Product)
+                        // Casteamos $product a la clase Product
+                        if ($ref->refraction_id == $product->product_id) {
+                            $ref->product = $product;
+                        }
+                }
+        }
+
 
         return $resultado;
     }
@@ -86,39 +97,49 @@ class Refractions extends ActiveRecord
     {
         $errors = [];
 
-        if (empty($this->nombre)) {
+        if (empty($this->product->nombre)) {
             $errors["nombre"] = "El campo nombre es obligatorio.";
         }
-        if (empty($this->descripcion)) {
+        if (empty($this->product->descripcion)) {
             $errors["descripcion"] = "El campo descripcion es obligatorio.";
         }
-        if (empty($this->fabricante)) {
+        if (empty($this->product->fabricante)) {
             $errors["fabricante"] = "El campo fabricante es obligatorio.";
         }
-        if (empty($this->precio)) {
+        if (empty($this->product->precio)) {
             $errors["precio"] = "El campo precio es obligatorio.";
         }
-        if (empty($this->stock)) {
+        if (empty($this->product->stock)) {
             $errors["stock"] = "El campo stock del producto es obligatorio.";
         }
-        if (empty($this->peso)) {
+        if (empty($this->product->peso)) {
             $errors["peso"] = "El campo peso del producto es obligatorio.";
         }
-        if (empty($this->origen)) {
+        if (empty($this->product->origen)) {
             $errors["origen"] = "El campo origen del producto es obligatorio.";
         }
+
         return $errors;
     }
 
     public function registrarRefractions()
     {
         date_default_timezone_set('America/Montevideo');
-        $resultado = $this->crear();
+        $resultado = $this->product->registrar();
         if ($resultado) {
-            $this->refraction_id = static::$db->lastInsertId();
-            return ['resultado' => true, 'id' => $this->refraction_id];
+            $this->refraction_id = $this->product->product_id;
+            if ($this->crear()) {
+
+                $stmt = static::$db->prepare("select * from product where product_id ='" . $this->product->product_id . "'");
+
+                $stmt->execute();
+
+                while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    return $registro["product_id"];
+                }
+            }
+            return null;
         }
-        return ['resultado' => false];
     }
 
     public function actualizarImagenes()

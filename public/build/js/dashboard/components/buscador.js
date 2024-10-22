@@ -162,7 +162,6 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
-        console.log(data)
         //localStorage.setItem("tiendaItems", JSON.stringify(newData))
 
         data.forEach(v => {
@@ -324,6 +323,7 @@ async function buscar() {
             try {
                 const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
 
+                console.log(response)
 
                 if (response.ok) {
                     const data = await response.json()

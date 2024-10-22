@@ -15,7 +15,10 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
     discountImg.src = "/build/src/images/plus.svg"
 
     btnDiscount.appendChild(discountImg)
-    btnDiscount.addEventListener("click", handlerAgregar)
+
+    btnDiscount.addEventListener("click", (e) => {
+        handlerAgregarDiscount(e)
+    })
 
     const btnNoDiscount = document.createElement("button")
     const noDiscountImg = document.createElement("img")
@@ -23,7 +26,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
     noDiscountImg.src = "/build/src/images/trash.svg"
 
     btnNoDiscount.appendChild(noDiscountImg)
-    btnNoDiscount.addEventListener("click", handlerEliminar)
+    btnNoDiscount.addEventListener("click", handlerEliminarDiscount)
 
     if (discount === 0 || discount === null) {
         contenedorControllers.appendChild(btnDiscount)
@@ -152,17 +155,17 @@ async function init(search = null) {
 
         data.forEach(v => {
             const customV = {
-                nombre: v.nombre,
-                precio: v.precio,
-                discount: v.discount,
-                discount_type: v.discount_type,
+                nombre: v.product.nombre,
+                precio: v.product.precio,
+                discount: v.product.discount,
+                discount_type: v.product.discount_type,
                 // discount_start: v.discount_start,
                 // discount_end: v.discount_end,
-                id: v.id,
+                id: v.vehicle_id,
                 imageUrl: v.imagen,
-                fabricante: v.fabricante,
-                modelo: v.modelo,
-                año: v.year,
+                fabricante: v.product.fabricante,
+                modelo: v.product.modelo,
+                año: v.product.year,
                 images: v.vehicleImages
             }
             if (cardContainer) cardContainer.appendChild(Card(customV))
@@ -318,7 +321,7 @@ async function buscar() {
                         resultadoBusqueda.classList.remove("hidden")
 
                         const vehicles = Object.values(data)
-                        const vehiclesName = vehicles.map(vehicles => vehicles?.nombre)
+                        const vehiclesName = vehicles.map(vehicles => vehicles?.product?.nombre)
                         const vehiclesNomUnicos = new Set(vehiclesName)
                         const arregloNoRepetido = [...vehiclesNomUnicos]
 

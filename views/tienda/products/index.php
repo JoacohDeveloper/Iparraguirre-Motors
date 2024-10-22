@@ -24,7 +24,7 @@
 
             <div class="add-to-cart-container">
                 <input type="number" value="1" disabled name="qty">
-                <button>ADD TO CART</button>
+                <button id="basket">ADD TO CART</button>
             </div>
             <button class="wishlist">
                 <img src="/build/src/images/bookmark.svg" alt="bookmark icon">

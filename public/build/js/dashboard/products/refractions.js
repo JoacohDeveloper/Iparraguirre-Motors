@@ -133,6 +133,7 @@ const ModalAgregar = async () => {
                     body: formdata
                 });
                 const data = await response.json();
+
                 if (data?.errores) {
                     const errors = Object.values(data.errores).map(err => {
                         return { title: "Failure", error: err };
@@ -159,7 +160,7 @@ const ModalAgregar = async () => {
                 console.error(err);
                 addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
             }
-            
+
         }
     });
 
