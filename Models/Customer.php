@@ -170,6 +170,11 @@ class Customer extends ActiveRecord
         return $this->email;
     }
 
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
     public function getUsername()
     {
         return $this->username;
@@ -281,6 +286,25 @@ class Customer extends ActiveRecord
         return boolval($this->isDeleted);
     }
 
+    public function defaultImage(){
+        $result = null;
+        $this->imagen = "\build\src\images\users\default.jpg";
+        try {
+            $query = "UPDATE customer SET 
+                      imagen = :imagen
+                      WHERE uuid = :uuid";
+            $params = [
+                ':imagen' => $this->imagen,
+                ':uuid' => $this->uuid
+            ];
+            $stmt = static::$db->prepare($query);
+            $result = $stmt->execute($params);
+            return $result;
+        } catch (PDOException $th) {
+            return null;
+        }
+    }
+
     public function changePassword($new_password){
         $result = null;
         $this->password = password_hash($new_password, PASSWORD_BCRYPT);
@@ -292,7 +316,7 @@ class Customer extends ActiveRecord
         return $result;
     }
 
-    public function deleteusuarioDBCustomer(){
+    public function deleteCustomer(){
         $result = null;
         try {
             $result = $this->eliminar($this->uuid);
@@ -300,28 +324,6 @@ class Customer extends ActiveRecord
             logg("[MARIADB] Error al consultar.");
         }
         return $result;
-    }
-
-    public static function superGetCustomer($dato) {
-        $result = null;
-        try {
-            $query = "SELECT * FROM Customer WHERE email = :dato OR username = :dato LIMIT 1";
-            $params = [
-                ':dato' => $dato
-            ];
-            $stmt = static::$db->prepare($query);
-            
-            $result = $stmt->execute($params);
-            error_log("Resultado de la consulta: " . print_r($result, true));
-        } catch (PDOException $th) {
-            logg("[MARIADB] Error al consultar: " . $th->getMessage());
-        }
-    
-        if ($result) {
-            return $result;
-        } else {
-            return null;
-        }
     }
     
 }

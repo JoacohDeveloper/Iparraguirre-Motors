@@ -185,6 +185,42 @@ abstract class CustomerController
         exit;
     }
 
+    public static function eliminarImage()
+    {
+        $errores = [];
+
+        $customer = $_SESSION["usuario"] ?? null;
+        $customerDB = Customer::getCustomer($customer->getEmail());
+
+        if (!isset($customer)) return;
+
+        $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
+        if (!file_exists($dirname)) {
+            mkdir($dirname);
+        }
+
+        $errores = $customerDB->validate();
+
+        if (empty($errores)) {
+
+            $imagen = $customer->getImagen();
+            unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $imagen));
+
+            
+            $customer->defaultImage();
+            $_SESSION["usuario"] = $customer;
+
+            //Creamos una interaccion para notificar el cambio imagen del perfil
+            $interaction = new Interactions();
+            $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Porfile image modification", null, null, null, false);
+
+            echo json_encode(["message" => "successfuly"]);
+            exit;
+    }
+        echo json_encode(["message" => "error", "errores" => $errores]);
+        exit;
+    }
+
     public static function getClients() {
         $result = Customer::getAllCustomers();
         if (!empty($result)) {

@@ -11,38 +11,11 @@ function toggleBackground() {
     document.body.classList.toggle("fixed")
     document.body.classList.toggle("blured")
 }
-const resumeProfileImgHandleClick = () => {
-    toggleBackground()
-
-    const container = document.querySelector(".settingsContainer")
-
-    const imgContainer = document.createElement("div")
-    imgContainer.classList.add("imgContainer__big")
-    const closeBtn = document.createElement("p")
-    closeBtn.classList.add("closeBtn")
-    closeBtn.textContent = "X"
-    imgContainer.appendChild(closeBtn)
-    container.appendChild(imgContainer)
-    const img = document.createElement("img")
-    img.src = resumeProfileImg.querySelector("img").src
-    imgContainer.append(img)
-    closeBtn.addEventListener("click", () => {
-        toggleBackground()
-        imgContainer.remove()
-
-    })
-
-
-
-}
-const resumeProfileImg = document.querySelector(".profile-resume__image")
-resumeProfileImg.addEventListener("click", resumeProfileImgHandleClick)
-
 
 async function formMenu({ target }) {
     toggleBackground();
-    const dashboardContent = document.querySelector(".dashboard-fit__content");
-    dashboardContent.classList.add("fixed");
+    const settingsContent = document.querySelector(".fit__content");
+    settingsContent.classList.add("fixed");
     const container = document.querySelector(".container");
 
     const lastMenu = document.querySelector(".settings_forms");
@@ -69,10 +42,10 @@ async function formMenu({ target }) {
     const removeForm = () => {
         settings_formHTML.classList.add("removed__settings_forms");
         setTimeout(() => {
-            const dashboardContent = document.querySelector(".dashboard-fit__content");
+            const settingsContent = document.querySelector(".fit__content");
             document.body.classList.remove("fixed");
             document.body.classList.remove("blured");
-            dashboardContent.classList.remove("fixed");
+            settingsContent.classList.remove("fixed");
         }, 400);
     };
 
@@ -118,9 +91,6 @@ function setResumeChanges(formdata, imgURL) {
 
 
 async function setFormEdit(target, formContainer) {
-
-
-
     const headingTitle = document.createElement("h4")
     formContainer.appendChild(headingTitle);
     const formHTML = document.createElement("form")
@@ -232,7 +202,7 @@ async function setFormEdit(target, formContainer) {
         if (target.id == 'edit-resume' || target.parentElement.id == 'edit-resume') {
 
             const lastChanges = JSON.parse(localStorage.getItem("edit-resume"));
-            headingTitle.textContent = "Resume";
+            headingTitle.textContent = "Editar perfil";
             const inputImg = document.createElement("input")
 
             inputImg.type = "file"
@@ -282,74 +252,75 @@ async function setFormEdit(target, formContainer) {
             bannerUser.appendChild(separator);
 
             const subtitle = document.createElement("p")
-            subtitle.textContent = "Your Information"
+            subtitle.textContent = "Informacion personal"
             subtitle.classList.add("edit-resume__subtitle")
 
             const submitBTN = document.createElement("button");
 
             submitBTN.type = "submit";
-            submitBTN.textContent = "Submit Changes"
-
-
-            const usernameInputLabel = document.createElement("label");
-
-            const usernameInput = document.createElement("input")
-            usernameInputLabel.textContent = "Username"
-            usernameInputLabel.htmlFor = "username"
-
-            usernameInput.type = "text"
-            usernameInput.name = "username"
-            usernameInput.id = "username"
-            usernameInput.placeholder = "Username"
-            usernameInput.value = lastChanges?.username ?? data?.username;
+            submitBTN.textContent = "Actualizar cambios"
 
             const fullNameInputLabel = document.createElement("label");
-
-            const fullNameInput = document.createElement("input")
-            fullNameInputLabel.textContent = "Full Name"
+            fullNameInputLabel.textContent = "Nombre completo"
             fullNameInputLabel.htmlFor = "fullname"
-
+            const fullNameInput = document.createElement("input")
             fullNameInput.type = "text"
             fullNameInput.name = "full_name"
             fullNameInput.id = "fullname"
-            fullNameInput.placeholder = "Full Name"
+            fullNameInput.placeholder = "Nombre completo"
             fullNameInput.value = lastChanges?.fullname ?? data?.fullname;
 
-            const emailInputLabel = document.createElement("label");
-            const emailInput = document.createElement("input")
-            emailInputLabel.textContent = "Email"
-            emailInputLabel.htmlFor = "email"
 
+            const usernameInputLabel = document.createElement("label");
+            usernameInputLabel.textContent = "Nombre de usuario"
+            usernameInputLabel.htmlFor = "username"
+            const usernameInput = document.createElement("input")
+            usernameInput.type = "text"
+            usernameInput.name = "username"
+            usernameInput.id = "username"
+            usernameInput.placeholder = "Nombre de usuario"
+            usernameInput.value = lastChanges?.username ?? data?.username;
+
+
+            const emailInputLabel = document.createElement("label");
+            emailInputLabel.textContent = "Correo electronico"
+            emailInputLabel.htmlFor = "email"
+            const emailInput = document.createElement("input")
             emailInput.type = "text"
             emailInput.name = "email"
             emailInput.id = "email"
-            emailInput.placeholder = "Email"
+            emailInput.placeholder = "Correo electronico"
             emailInput.value = data.email;
+
+            const phoneInputLabel = document.createElement("label");
+            phoneInputLabel.textContent = "Celular"
+            phoneInputLabel.htmlFor = "phone"
+            const phoneInput = document.createElement("input")
+            phoneInput.type = "text"
+            phoneInput.name = "phone"
+            phoneInput.id = "phone"
+            phoneInput.placeholder = "Celular"
+            phoneInput.value = data.phone;
 
             formHTML.appendChild(bannerUser)
             formHTML.appendChild(subtitle)
 
+            fullNameInputLabel.appendChild(fullNameInput)
             formHTML.appendChild(fullNameInputLabel)
-            formHTML.appendChild(fullNameInput)
 
+            usernameInputLabel.appendChild(usernameInput)
             formHTML.appendChild(usernameInputLabel)
-            formHTML.appendChild(usernameInput)
 
+            emailInputLabel.appendChild(emailInput)
             formHTML.appendChild(emailInputLabel)
-            formHTML.appendChild(emailInput)
+
+            phoneInputLabel.appendChild(phoneInput)
+            formHTML.appendChild(phoneInputLabel)
 
             formHTML.appendChild(submitBTN)
-
-
-
-
         } else {
-            //personal information
             headingTitle.textContent = "Personal Information";
         }
-
-
-
     } catch (error) {
         console.log(error)
     }

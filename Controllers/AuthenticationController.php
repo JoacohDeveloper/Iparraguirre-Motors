@@ -5,6 +5,7 @@ namespace Controllers;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Models\User;
+use Models\Interactions;
 use MVC\Router;
 
 

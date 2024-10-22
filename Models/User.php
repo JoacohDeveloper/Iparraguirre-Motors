@@ -408,18 +408,18 @@ class User extends ActiveRecord
         $result = null;
         $this->imagen = "\build\src\images\users\default.jpg";
         try {
-            $query = "UPDATE User SET 
-                      imagen = :imagen, 
+            $query = "UPDATE user SET 
+                      imagen = :imagen
                       WHERE uuid = :uuid";
             $params = [
                 ':imagen' => $this->imagen,
-                ':id' => $this->uuid
+                ':uuid' => $this->uuid
             ];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
             return $result;
         } catch (PDOException $th) {
-            return $result;
+            return null;
         }
     }
 }

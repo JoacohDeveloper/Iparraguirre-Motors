@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use MVC\Router;
+use Models\Interactions;
 
 abstract class HomePageController
 {
@@ -21,7 +22,7 @@ abstract class HomePageController
     }
 
     public static function userSettings(Router $router){
-        if (!isset($_SESSION["usuario"])) header("location: /login");
+        if (!isset($_SESSION["usuario"])) header("location: /auth");
         $uuid = $_GET["u"];
         $customer = $_SESSION["usuario"];
         if ($customer->isAdmin()) {
@@ -73,6 +74,7 @@ abstract class HomePageController
             $lastName = join(" ", $fullNameExplode) ?? "";
             $lastName = $fullNameExplode[1] ?? "";
             $email = $customer->getEmail();
+            $phone = $customer->getPhone();
 
             if (!isset($uuid)) {
                 echo json_encode(["error" => "Unauthorized"]);
@@ -91,6 +93,7 @@ abstract class HomePageController
                 "firstname" => $firstName,
                 "lastname" => $lastName,
                 "email" => $email,
+                "phone" => $phone,
                 "imagen" => $imagen
             ];
             echo json_encode($customer);
@@ -105,8 +108,12 @@ abstract class HomePageController
         if (isset($customer)) {
             if ($customer->getFullName() == $_POST["Nombre"]) {
                 if ($customer->validarPassword($_POST["Password"])) {
-                    $result = $customer->deleteUser();
+                    $result = $customer->deleteCustomer();
                     if ($result) {
+                        //Creamos una interaccion para la baja del perfil
+                        $interaction = new Interactions();
+                        $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Account deleting", null, null, null, false);
+
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
                         echo json_encode(["message" => "successfuly"]);

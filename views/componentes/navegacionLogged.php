@@ -4,7 +4,7 @@
 <nav class="navegacion">
     <ul>
         <li><a href="/" class="nav-links <?php echo $url === '/' ? 'actual-index' : '' ?>">Inicio</a></li>
-        <li><a href="/catalogo/vehiculos" class="nav-links <?php echo (strpos($url, '/catalogo/vehiculos') === 0) ? 'actual' : '' ?>">Tienda</a></li>
+        <li><a href="/catalogo" class="nav-links <?php echo (strpos($url, '/catalogo') === 0) ? 'actual' : '' ?>">Catalogo</a></li>
         <li><a href="/faq" class="nav-links <?php echo $url === '/faq' ? 'actual' : '' ?>">Ayuda</a></li>
         <li class="dropdown">
             <a class="nav-links <?php echo $url === '/cuenta' ? 'actual' : '' ?>">Cuenta</a>

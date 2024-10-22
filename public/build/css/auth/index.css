@@ -210,12 +210,16 @@ main{
 }
 
 @media (max-width: 768px){
+  .contenedor__login-register form{
+    margin-top: 15rem;
+    position: unset;
+  }
   .blured::after {
     content: "";
     position: absolute;
     inset: 0;
     backdrop-filter: none;
-}
+  }
  header .brgMenu {
   display: none;
 }

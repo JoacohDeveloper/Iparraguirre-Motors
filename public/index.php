@@ -101,6 +101,7 @@ $router->post("/customer/user-newPassword", [HomePageController::class, "changeP
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);
 
 $router->get("/dashboard/user-default-image", [AuthenticationController::class, "eliminarImage"]);
+$router->get("/customer/user-default-image", [CustomerController::class, "eliminarImage"]);
 
 $router->get("/settings", [HomePageController::class, "userSettings"]);
 $router->post("/settings", [HomePageController::class, "userSettings"]);
@@ -148,9 +149,10 @@ $router->get("/dashboard/user-settings/usuario", [DashboardController::class, "g
 
 //tienda
 
-$router->get("/tienda", [TiendaController::class, "tienda"]);
+$router->get("/catalogo", [TiendaController::class, "tienda"]);
 $router->get("/catalogo/vehiculos", [TiendaController::class, "vehicles"]);
-
+$router->get("/catalogo/vehiculosModificados", [TiendaController::class, "customVehicles"]);
+$router->get("/catalogo/refraction", [TiendaController::class, "refraction"]);
 
 //Rest Vehicles
 
