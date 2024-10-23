@@ -70,6 +70,14 @@ header {
   text-decoration: none;
   color: #202020;
 }
+.basket > a > img{
+  filter: none;
+}
+.navegacion ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .dark .navegacion ul li a {
   display: inline-block;
   position: relative;
@@ -148,6 +156,7 @@ header .navegacion ul li .nav-links.actual {
 }
 .navegacion > ul > li > .dropdown-content.show {
   display: block;
+  margin-top: 13rem;
 }
 .navegacion > ul > li > .dropdown-content > li {
   width: 100%;
@@ -205,7 +214,6 @@ ul li a:hover {
   font-weight: 900;
   align-items: center;
   flex-direction: column;
-  
 }
 
 .not_found h2 {
@@ -216,9 +224,9 @@ ul li a:hover {
   width: 60%;
 }
 
-#goback{
-border-radius: 0.2rem;
-border: 2px solid #b10b0a;
+#goback {
+  border-radius: 0.2rem;
+  border: 2px solid #b10b0a;
 }
 
 .dark .not_found a {
@@ -348,7 +356,7 @@ header .brgMenu {
   height: 100%;
   width: 100%;
 }
-.dark .mobile-menu-content{
+.dark .mobile-menu-content {
   background-color: #202020;
 }
 
@@ -833,9 +841,10 @@ footer {
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover, .info-links a:hover {
+.nav-links a:hover,
+.info-links a:hover {
   text-decoration: none;
-  font-size: .92rem;
+  font-size: 0.92rem;
   padding: 0.2rem 0.4rem;
   border-radius: 0.2rem;
   border: 2px solid #ffffff;
@@ -843,15 +852,15 @@ footer {
 }
 .dark .nav-links a:hover {
   text-decoration: none;
-  font-size: .92rem;
+  font-size: 0.92rem;
   padding: 0.2rem 0.4rem;
-  border-radius: 0.2rem; 
+  border-radius: 0.2rem;
   border: 2px solid #000000;
   transition: color 0.3s ease;
 }
 .dark .info-links a:hover {
   text-decoration: none;
-  font-size: .92rem;
+  font-size: 0.92rem;
   padding: 0.2rem 0.4rem;
   border-radius: 0.2rem;
   border: 2px solid #000000;
@@ -875,12 +884,11 @@ footer {
   display: inline;
 }
 
-
 .payments-icons {
   display: flex;
   justify-content: center;
   gap: 1.6rem;
-  img{
+  img {
     max-width: 50px;
     max-height: 50px;
   }
@@ -895,8 +903,8 @@ footer {
 }
 .social-icons {
   a {
-      width: 50px;
-      height: 50px;
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -937,21 +945,12 @@ footer {
     height: auto !important;
   }
 
-  .dashboard-content {
-    /* margin-top: 100rem !important; */
-  }
-
   .footer-section {
     width: 20rem;
     text-align: center;
     margin: 1.4rem 0;
   }
 }
-
-
-
-
-
 
 /* Estilos generales para la navegación */
 .dashboard-brgMenu-ul {
@@ -1025,7 +1024,7 @@ footer {
   text-align: center;
 }
 
-.mobile-menu{
+.mobile-menu {
   z-index: 105;
 }
 
@@ -1060,20 +1059,174 @@ footer {
 
 /* Arreglo de account drop menu lado cliente */
 
-#settings{
+#settings {
   display: none;
 }
-#settingsLog{
+#settingsLog {
   display: none;
 }
 @media (max-width: 768px) {
-  #settings{
+  #settings {
     display: inline;
   }
-  #settingsLog{
+  #settingsLog {
     display: inline;
   }
-  .dropdown{
+  .dropdown {
     display: none;
+  }
+}
+
+/* Basket */
+
+.navegacion > ul > .basket {
+  z-index: 200;
+  a {
+    display: flex;
+
+    gap: 0.4em;
+    align-items: center;
+  }
+
+  #qty {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #b10b0a;
+    font-weight: bold;
+    font-size: 1.1em;
+    z-index: 200;
+  }
+
+  ul#basket-products-container {
+    position: absolute;
+    overflow-y: auto;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    opacity: 0;
+    gap: 0.5rem;
+    visibility: hidden;
+    background-color: #fff;
+    width: 14rem;
+    height: 10rem;
+    right: 0.4rem;
+    z-index: -1;
+    top: 2.3rem;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none; /* Oculta la scrollbar */
+
+    /* border-radius: 0.3rem; */
+    border: 1px solid #ccc;
+    -webkit-transform: scaleY(0.4);
+    transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    transition: visibility 0s ease, opacity 0s ease, transform 0.3s ease;
+
+    li {
+      display: flex;
+      height: 5rem;
+      width: 100%;
+      border-bottom: 1px solid #ccc;
+      padding: 0 0.4rem;
+      padding-bottom: 0.8rem;
+
+      justify-content: space-between;
+      .basket-product-image {
+        width: 30%;
+        height: 100%;
+        display: flex;
+        padding-left: 0.4rem;
+        justify-content: center;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: scale-down;
+        }
+      }
+
+      .basket-product-info {
+        width: 70%;
+        height: 100%;
+        padding-top: 1.4rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-direction: column;
+
+        .flex-row {
+          display: flex;
+          width: 100%;
+          padding: 0 0.8rem;
+          height: fit-content;
+          justify-content: space-between;
+
+          p {
+            font-size: 0.8em;
+            span {
+              font-weight: lighter;
+            }
+          }
+          p.crop {
+            font-size: 0.8em;
+            max-width: 70%;
+            width: 100px;
+            height: 100%;
+            overflow: hidden;
+            text-wrap: nowrap;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          p.py-3 {
+            margin-top: 3rem;
+          }
+
+          .cantidad {
+            font-weight: bold;
+          }
+
+          .precio {
+            font-weight: lighter;
+          }
+
+          .delete {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+  .empty {
+    display: none;
+  }
+  &:not(.empty):hover {
+    ul#basket-products-container {
+      visibility: visible;
+      opacity: 1;
+      z-index: 200;
+      -webkit-transform: scaleY(1);
+      transform: scaleY(1);
+      -webkit-transform-origin: 100% 0%;
+      transform-origin: 100% 0%;
+    }
   }
 }

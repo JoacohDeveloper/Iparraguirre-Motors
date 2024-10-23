@@ -20,7 +20,7 @@ create table User(
 	verify tinyInt(1) DEFAULT 0,
 	createdAt datetime default CURRENT_TIMESTAMP,
 	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY(uuid)
+	PRIMARY KEY(uuid) 
 );
 
 create table Customer(
@@ -42,13 +42,19 @@ create table Customer(
 	PRIMARY KEY(uuid)
 );
 
+
 create table Cart(
-	cart_id VARCHAR(40) not null,
 	user_uuid VARCHAR(45),
 	item_id VARCHAR(65),
 	quanity VARCHAR(25),
+	createdAt datetime default CURRENT_TIMESTAMP,
+	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(cart_id)
 );
+
+
+
+
 create table Wishlist(
 	wish_id VARCHAR(40) not null,
 	user_uuid VARCHAR(45),
@@ -56,64 +62,62 @@ create table Wishlist(
 	PRIMARY KEY(wish_id)
 );
 
-create table vehicle(
-	id int(11) not null auto_increment,
-	nombre VARCHAR(255),
-	categoria VARCHAR(255),
-	descripcion TEXT,
-	modelo VARCHAR(255),
-	fabricante VARCHAR(255),
-	year VARCHAR(45),
-	color VARCHAR(45),
-	matricula VARCHAR(45),
-	transmision VARCHAR(45),
-	tipo_carroceria VARCHAR(255),
-	frenos_abs tinyint(1),
-	airbag tinyint(1),
-	traccion VARCHAR(45),
-	direccion VARCHAR(45),
-	control_estabilidad tinyint(1),
-	puertas int,
-	tipo_combustible VARCHAR(45),
-	precio float,
-	discount float,
-	discount_type VARCHAR(10),
-	velocidad_max float,
-	zero_to_houndred float,
-	peso FLOAT,
-	kilometros int,
-	caballos_potencia int,
-	createdAt datetime default CURRENT_TIMESTAMP,
-	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY(id)
+CREATE TABLE product (
+    product_id VARCHAR(45) not null,
+    nombre VARCHAR(255),
+    descripcion TEXT,
+    categoria VARCHAR(45),
+    precio FLOAT,
+    discount FLOAT,
+    fabricante VARCHAR(255),
+    modelo VARCHAR(255),
+    discount_type VARCHAR(10),
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(product_id)
+);
+
+
+CREATE TABLE vehicle (
+    vehicle_id VARCHAR(45) NOT NULL,
+    categoria VARCHAR(255),
+    modelo VARCHAR(255),
+    fabricante VARCHAR(255),
+    year VARCHAR(45),
+    color VARCHAR(45),
+    matricula VARCHAR(45),
+    transmision VARCHAR(45),
+    tipo_carroceria VARCHAR(255),
+    frenos_abs TINYINT(1),
+    airbag TINYINT(1),
+    traccion VARCHAR(45),
+    direccion VARCHAR(45),
+    control_estabilidad TINYINT(1),
+    puertas INT,
+    tipo_combustible VARCHAR(45),
+    velocidad_max FLOAT,
+    zero_to_houndred FLOAT,
+    peso FLOAT,
+    kilometros INT,
+    caballos_potencia INT,
+    FOREIGN KEY (vehicle_id) REFERENCES Product(product_id),
+    PRIMARY KEY(vehicle_id)
 );
 
 create table vehicle_img(
-	vehicle_id int(11) not null,
+	vehicle_id VARCHAR(45) not null,
 	url VARCHAR(255),
 	alt VARCHAR(150),
-    constraint fk_vehicle_id foreign key(vehicle_id) references vehicle(id),
+    constraint fk_vehicle_id foreign key(vehicle_id) references vehicle(vehicle_id),
 	PRIMARY key(vehicle_id, url, alt)
 );
 
-create table refractions(
-	id int(11) not null auto_increment,
-	nombre VARCHAR(255),
-	descripcion TEXT,
-	fabricante VARCHAR(255),
-	modelo VARCHAR(255),
-	tipo VARCHAR(255),
-	precio float,
-	discount float,
-	discount_type VARCHAR(10),
-	stock int(11),
-	peso FLOAT,
-	origen VARCHAR(255),
-	url_img VARCHAR(255),
-	alt_img VARCHAR(150),
-	createdAt datetime default CURRENT_TIMESTAMP,
-	updatedAt datetime ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY(id)
+CREATE TABLE refractions (
+    refraction_id VARCHAR(45) NOT NULL,
+    url_img VARCHAR(255),
+    alt_img VARCHAR(150),
+    FOREIGN KEY (refraction_id) REFERENCES Product(product_id),
+    PRIMARY KEY(refraction_id)
 );
 
 create table interactions(

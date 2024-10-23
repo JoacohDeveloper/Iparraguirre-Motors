@@ -22,9 +22,10 @@ abstract class VehicleRestController
         header('Content-Type: application/json;');
 
         try {
-            $vehicleId = isset($_GET["id"]) ? intval($_GET["id"]) : null;
+            $vehicleId = isset($_GET["id"]) ? ($_GET["id"]) : null;
             $vehiclePage = isset($_GET["page"]) ? intval($_GET["page"]) : null;
             $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
+
 
             if ($vehiclePage && $vehicleName) {
                 $vehicles = Vehicle::getAllVehiclesByPage($vehiclePage, $vehicleName);
@@ -52,12 +53,16 @@ abstract class VehicleRestController
             if ($vehicleId) {
                 foreach ($vehicles as $vehicle) {
                     if ($vehicle instanceof Vehicle) {
-                        if ($vehicle->id == $vehicleId) {
+                        $cleanVehicleProductId = strtolower(trim($vehicle->product->product_id));
+                        $cleanVehicleId = strtolower(trim($vehicleId));
+
+                        if ($cleanVehicleProductId === $cleanVehicleId) {
                             echo json_encode($vehicle);
                             exit;
                         }
                     }
                 }
+
                 echo json_encode(["message" => "404"]);
                 exit;
             } else if ($vehicleName) {
@@ -65,7 +70,7 @@ abstract class VehicleRestController
                     $vehicleName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
 
                     if ($v instanceof Vehicle) {
-                        if (str_contains(trim(strtolower($v->nombre)), $vehicleName)) {
+                        if (str_contains(trim(strtolower($v->getName())), $vehicleName)) {
                             return $v;
                         }
                     }

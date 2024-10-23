@@ -45,7 +45,7 @@ abstract class HomePageController
         } else if (!isset($customer)) {
             header("Location: /");
         } else if ($uuid != $customer->getUUID()) header("Location: /");
-        
+
         $router->render("/customerSettings/settings", [
             "styles" => ["customerSettings/index", "globals"],
             "scripts" => ["index", "customerSettings/index"],
@@ -62,7 +62,8 @@ abstract class HomePageController
         ]);
     }
 
-    public static function getSettingsFromUserJson(){
+    public static function getSettingsFromUserJson()
+    {
         $uuid = $_GET["u"];
         $customer = $_SESSION["usuario"];
         if (!$customer->isAdmin()) {
@@ -101,10 +102,11 @@ abstract class HomePageController
         exit;
     }
 
-    public static function userDeleting(){
+    public static function userDeleting()
+    {
         $customer = $_SESSION["usuario"];
         $result = null;
-    
+
         if (isset($customer)) {
             if ($customer->getFullName() == $_POST["Nombre"]) {
                 if ($customer->validarPassword($_POST["Password"])) {
@@ -132,13 +134,14 @@ abstract class HomePageController
         exit;
     }
 
-    public static function changePassword(){
+    public static function changePassword()
+    {
         $customer = $_SESSION["usuario"];
         $olderPassword = $_POST["olderPassword"];
         $newPassword = $_POST["password"];
         $repeatNewPassword = $_POST["repeatPassword"];
         $result = null;
-    
+
         if (isset($customer)) {
             if ($customer->validarPassword($olderPassword)) {
                 if ($newPassword == $repeatNewPassword) {

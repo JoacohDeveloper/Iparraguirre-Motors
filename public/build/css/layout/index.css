@@ -78,6 +78,9 @@ header .navegacion ul li .nav-links {
       border: 2px solid #ffffff;
     }
 }
+.basket > a > img{
+  filter: invert(1);
+}
 header {
   background-color: transparent;
 }

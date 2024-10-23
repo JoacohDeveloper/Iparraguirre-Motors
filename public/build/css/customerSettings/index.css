@@ -7,7 +7,7 @@ header {
 }
 .settings-fit__content_aside {
   width: 15%;
-  background-color: #e2e2e2;
+  background-color: #f7f7f7;
 }
 #LogOut{
   color: #000000;
@@ -20,7 +20,7 @@ header {
 .settings-userinfo_aside {
   text-align: center;
   padding: 1rem 0;
-  background-color: #fafafa;
+  background-color: #f7f7f7;
 }
 .settings-userinfo_aside img{
   width: 100px;

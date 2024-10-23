@@ -3,7 +3,7 @@
 }
 
 /* Fix display from container*/
-.container{
+.container {
   display: flex;
   flex-direction: column;
   z-index: 1;

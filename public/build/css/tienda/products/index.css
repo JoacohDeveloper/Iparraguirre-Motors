@@ -1,0 +1,231 @@
+header {
+  position: relative;
+}
+.mobile-menu.menu-disabled {
+  display: none;
+}
+.product-container {
+  width: 100%;
+  display: flex;
+  min-height: 100dvh;
+  padding-bottom: 4rem;
+  margin-top: 1rem;
+  /* flex-wrap: wrap; */
+}
+
+.product-image-container {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  /* padding-left: 1rem; */
+  align-items: center;
+  flex-direction: column;
+
+  .image-preview {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 90%;
+      height: auto;
+      object-fit: cover;
+      user-select: none; /* Desactiva la selección de texto o imágenes */
+      -webkit-user-drag: none; /* Desactiva el arrastre en navegadores basados en WebKit */
+      pointer-events: none; /* Opcional: Evita cualquier tipo de interacción con la imagen */
+    }
+  }
+
+  .image-selector {
+    width: 70%;
+    display: flex;
+    height: 2rem;
+  }
+}
+
+.product-information-container {
+  width: 100%;
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.title {
+  font-size: 1.8em;
+  margin-bottom: 0.8rem;
+  font-weight: 400;
+}
+
+.price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--red-color);
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 0.8em;
+  color: #888787;
+  font-weight: bold;
+  width: 80%;
+  margin-bottom: 2rem;
+}
+
+.add-to-cart-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  input {
+    max-width: fit-content;
+    border: 3px solid #202020;
+    padding-left: 0.8rem;
+    width: 4rem;
+    font-weight: bold;
+    border-radius: 0.2rem;
+  }
+
+  button {
+    padding: 0.6rem 4rem;
+    font-size: 0.8em;
+    &:hover {
+      scale: 1;
+      font-size: 0.8em;
+      box-shadow: none;
+    }
+  }
+}
+
+.wishlist {
+  background-color: transparent;
+  display: flex;
+  border: none;
+  color: #202020;
+  max-width: fit-content;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin-bottom: 3rem;
+  &:hover {
+    scale: 1;
+    font-size: 0.8em;
+    border: none;
+    box-shadow: none;
+    text-decoration: underline;
+  }
+}
+
+.share-to {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8em;
+  padding-left: 1rem;
+  color: #888787;
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+  }
+}
+
+.image-items {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  overflow: hidden;
+  padding: 1rem 0;
+  width: 20rem;
+
+  gap: 1rem;
+}
+
+.img-item {
+  height: 4rem;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 27%;
+  cursor: pointer;
+  transition: scale 0.6s ease;
+  &:hover {
+    scale: 1.07;
+
+    img {
+      filter: opacity(1);
+    }
+  }
+  img {
+    width: 100%;
+    transition: filter 0.3s ease;
+    height: 100%;
+    object-fit: cover;
+    filter: opacity(0.5);
+    user-select: none; /* Desactiva la selección de texto o imágenes */
+    -webkit-user-drag: none; /* Desactiva el arrastre en navegadores basados en WebKit */
+    pointer-events: none; /* Opcional: Evita cualquier tipo de interacción con la imagen */
+  }
+}
+
+.left,
+.right {
+  height: 100%;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: scale 0.3s ease;
+  &:hover {
+    scale: 1.15;
+  }
+}
+
+.left {
+  background-image: url(/build/src/images/miniDownArrow.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transform: rotate(90deg);
+  margin-right: 0.5rem;
+}
+
+.right {
+  background-image: url(/build/src/images/miniDownArrow.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transform: rotate(-90deg);
+  margin-left: 0.5rem;
+}
+
+.selected {
+  img {
+    filter: opacity(1);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .product-container {
+    flex-wrap: wrap;
+  }
+
+  .product-information-container {
+    margin-top: 0;
+  }
+
+  .image-preview {
+    width: 100% !important;
+    height: 100%;
+  }
+
+  .image-selector {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}

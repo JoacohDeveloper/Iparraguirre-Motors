@@ -264,6 +264,7 @@ const ModalModificar = async (data) => {
                     body: formdata
                 });
                 const data = await response.json();
+
                 if (data?.errores) {
                     const errors = Object.values(data.errores).map(err => {
                         return { title: "Failure", error: err };
@@ -290,7 +291,7 @@ const ModalModificar = async (data) => {
                 console.error(err);
                 addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
             }
-            
+
         }
     });
     contenedor.appendChild(modal);

@@ -15,7 +15,10 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
     discountImg.src = "/build/src/images/plus.svg"
 
     btnDiscount.appendChild(discountImg)
-    btnDiscount.addEventListener("click", handlerAgregar)
+
+    btnDiscount.addEventListener("click", (e) => {
+        handlerAgregarDiscount(e)
+    })
 
     const btnNoDiscount = document.createElement("button")
     const noDiscountImg = document.createElement("img")
@@ -23,9 +26,9 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
     noDiscountImg.src = "/build/src/images/trash.svg"
 
     btnNoDiscount.appendChild(noDiscountImg)
-    btnNoDiscount.addEventListener("click", handlerEliminar)
-    
-    if(discount === 0 || discount === null){
+    btnNoDiscount.addEventListener("click", handlerEliminarDiscount)
+
+    if (discount === 0 || discount === null) {
         contenedorControllers.appendChild(btnDiscount)
     } else {
         contenedorControllers.appendChild(btnNoDiscount)
@@ -44,7 +47,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         const precioFinalHTML = document.createElement("p");
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
-        
+
         let precioFinal;
         if (discount_type == "Dolares") {
             precioFinal = precio - discount;
@@ -55,7 +58,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
 
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-    
+
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -63,7 +66,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }    
+    }
 
     contenedorInformacion.appendChild(contenedorPrecio);
 
@@ -87,10 +90,10 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
     contenedorNombre.appendChild(añoHTML)
     contenedorInformacion.appendChild(contenedorNombre)
 
-   if(images.length == 0)
-       img.src = "/build/src/images/vehicles/default.jpg";
-    else{
-      img.src = `/build${images[0]?.url.split("/build")[1]}`;
+    if (images.length == 0)
+        img.src = "/build/src/images/vehicles/default.jpg";
+    else {
+        img.src = `/build${images[0]?.url.split("/build")[1]}`;
     }
     img.alt = nombre;
     imageContainer.appendChild(img)
@@ -152,17 +155,17 @@ async function init(search = null) {
 
         data.forEach(v => {
             const customV = {
-                nombre: v.nombre,
-                precio: v.precio,
-                discount: v.discount,
-                discount_type: v.discount_type,
+                nombre: v.product.nombre,
+                precio: v.product.precio,
+                discount: v.product.discount,
+                discount_type: v.product.discount_type,
                 // discount_start: v.discount_start,
                 // discount_end: v.discount_end,
-                id: v.id,
+                id: v.vehicle_id,
                 imageUrl: v.imagen,
-                fabricante: v.fabricante,
-                modelo: v.modelo,
-                año: v.year,
+                fabricante: v.product.fabricante,
+                modelo: v.product.modelo,
+                año: v.product.year,
                 images: v.vehicleImages
             }
             if (cardContainer) cardContainer.appendChild(Card(customV))
@@ -225,7 +228,7 @@ contenedorBuscador.addEventListener("submit", async e => {
 
 
     if (buscador.value) {
-        
+
         if (location.pathname.includes("/dashboard/discounts/vehicle")) {
 
             await handlerBusqueda(buscador?.value)
@@ -318,14 +321,14 @@ async function buscar() {
                         resultadoBusqueda.classList.remove("hidden")
 
                         const vehicles = Object.values(data)
-                        const vehiclesName = vehicles.map(vehicles => vehicles?.nombre)
+                        const vehiclesName = vehicles.map(vehicles => vehicles?.product?.nombre)
                         const vehiclesNomUnicos = new Set(vehiclesName)
                         const arregloNoRepetido = [...vehiclesNomUnicos]
 
                         arregloNoRepetido.forEach(vehicle => {
-                                resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
+                            resultadoBusqueda.appendChild(ItemBusqueda(vehicle))
                         })
-                        
+
                         if (Object.values(data).length == 0) ocultarBusqueda()
                     } else {
                         ocultarBusqueda()

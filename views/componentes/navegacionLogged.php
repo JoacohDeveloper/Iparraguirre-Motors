@@ -18,5 +18,13 @@
         </li>
         <li id="settings"><a class="nav-links" href="/settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : ""; ?>">Cuenta</a></li>
         <li id="settingsLog"><a class="nav-links" href="/logout" class="<?php echo $url === '/Cerrar Sesion' ? 'actual' : '' ?>">Cerrar Sesión</a></li>
+        <li class="basket empty">
+            <a href="/checkout/cart" class="nav-links <?php echo $url === '/checkout/cart' ? 'actual' : '' ?>">
+                <span id="qty">0</span><img src="/build/src/images/cart.svg" alt=""> Carrito
+            </a>
+
+            <ul id="basket-products-container">
+            </ul>
+        </li>
     </ul>
 </nav>

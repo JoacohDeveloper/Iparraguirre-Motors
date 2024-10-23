@@ -11,7 +11,7 @@ use PDO;
 class User extends ActiveRecord
 {
 
-    protected static $tabla = "User";
+    protected static $tabla = "user";
 
     protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isEncargado", "isFirstLog", "isDeleted", "verify", "createdAt", "updatedAt"];
 

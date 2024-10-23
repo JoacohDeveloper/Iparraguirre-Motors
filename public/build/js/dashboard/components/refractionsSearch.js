@@ -1,7 +1,7 @@
 const cardContainer = document.querySelector(".card-container")
 
 const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_image, modelo, fabricante }) => {
-
+    console.log(nombre)
     const card = document.createElement("div")
     card.id = id;
     const imageContainer = document.createElement("div")
@@ -35,7 +35,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
     btnModificar.addEventListener("click", handlerModificar)
 
     //btnView.addEventListener("click", handlerPreview)
-    
+
     contenedorControllers.appendChild(btnView)
 
 
@@ -58,7 +58,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
         const precioFinalHTML = document.createElement("p");
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
-        
+
         let precioFinal;
         if (discount_type == "Dolares") {
             precioFinal = precio - discount;
@@ -69,7 +69,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
 
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-    
+
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -77,7 +77,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }   
+    }
 
     contenedorInformacion.appendChild(contenedorPrecio);
 
@@ -97,7 +97,7 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
     contenedorNombre.appendChild(fabricanteHTML)
     contenedorNombre.appendChild(modeloHTML)
     contenedorInformacion.appendChild(contenedorNombre)
-  
+
     img.alt = alt_image;
     imageContainer.appendChild(img)
 
@@ -149,7 +149,9 @@ async function init(search = null) {
         const url = location.origin + `/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
 
         const response = await fetch(url)
+
         spinner.remove()
+
 
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
@@ -159,15 +161,14 @@ async function init(search = null) {
 
         data.forEach(r => {
             const customr = {
-                nombre: r.nombre,
-                precio: r.precio,
-                discount: r.discount,
-                discount_type: r.discount_type,
-                id: r.id,
-                imageUrl: r.imagen,
-                fabricante: r.fabricante,
-                modelo: r.modelo,
-                modelo: r.tipo,
+                nombre: r.product.nombre,
+                precio: r.product.precio,
+                discount: r.product.discount,
+                discount_type: r.product.discount_type,
+                id: r.refraction_id,
+                imageUrl: r.product.imagen,
+                fabricante: r.product.fabricante,
+                modelo: r.product.modelo,
                 url_image: r.url_img,
                 alt_image: r.alt_img
             }
@@ -313,7 +314,6 @@ async function buscar() {
     timer = setTimeout(async () => {
         resultadoBusqueda.innerHTML = null
         if (buscador?.value?.length > 0) {
-
             try {
                 const response = await fetch(location.origin + `/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
 
@@ -324,7 +324,7 @@ async function buscar() {
                         resultadoBusqueda.classList.remove("hidden")
 
                         const refractions = Object.values(data)
-                        const refractionsName = refractions.map(refractions => refractions?.nombre)
+                        const refractionsName = refractions.map(refractions => refractions?.product?.nombre)
                         const refractionsNomUnicos = new Set(refractionsName)
                         const arregloNoRepetido = [...refractionsNomUnicos]
 

@@ -2,9 +2,7 @@
 
 namespace Models;
 
-use Exception;
 use Models\ActiveRecord;
-use JsonSerializable;
 use PDOException;
 use PDO;
 use DateTime;
@@ -13,16 +11,12 @@ class Vehicle extends ActiveRecord
 {
     protected static $tabla = "vehicle";
     protected static $columnasdb = [
-        "id",
-        "descripcion",
-        "nombre",
+        "vehicle_id",
         "categoria",
         "modelo",
         "fabricante",
         "year",
         "color",
-        /*"url_img",
-        "description_img",*/
         "matricula",
         "transmision",
         "tipo_carroceria",
@@ -33,33 +27,70 @@ class Vehicle extends ActiveRecord
         "control_estabilidad",
         "puertas",
         "tipo_combustible",
-        "precio",
-        "discount",
-        "discount_type",
         "velocidad_max",
         "zero_to_houndred",
         "peso",
         "kilometros",
-        "caballos_potencia",
-        "createdAt",
-        "updatedAt"
+        "caballos_potencia"
     ];
 
-    // public function jsonSerialize()
-    // {
-    //     return (object) get_object_vars($this);
-    // }
+    public $product;
+    public $vehicle_id;
+    public $categoria;
+    public $modelo;
+    public $fabricante;
+    public $year;
+    public $color;
+    public $matricula;
+    public $transmision;
+    public $tipo_carroceria;
+    public $frenos_abs;
+    public $airbag;
+    public $traccion;
+    public $direccion;
+    public $control_estabilidad;
+    public $puertas;
+    public $tipo_combustible;
+    public $velocidad_max;
+    public $zero_to_houndred;
+    public $peso;
+    public $kilometros;
+    public $caballos_potencia;
 
-    public $id, $nombre, $categoria, $descripcion, $modelo, $fabricante, $year, $color, /*$url_img, $description_img,*/ $matricula, $transmision, $tipo_carroceria, $frenos_abs,
-        $airbag, $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $precio, $discount, $discount_type, $velocidad_max, $zero_to_houndred,
-        $peso, $kilometros, $caballos_potencia, $createdAt, $updatedAt;
+    public function __construct($args = [])
+    {
 
+        $this->product = new Product($args);
 
+        $this->vehicle_id = $args["vehicle_id"] ?? null;
+        $this->categoria = $args["categoria"] ?? "";
+        $this->modelo = $args["modelo"] ?? "";
+        $this->fabricante = $args["fabricante"] ?? "";
+        $this->year = $args["year"] ?? "";
+        $this->color = $args["color"] ?? "";
+        $this->matricula = $args["matricula"] ?? "";
+        $this->transmision = $args["tipo_transmision"] ?? "";
+        $this->tipo_carroceria = $args["tipo_carroceria"] ?? "";
+        $this->frenos_abs = $args["frenos_abs"] ?? 0; // 0 o 1
+        $this->airbag = $args["airbag"] ?? 0; // 0 o 1
+        $this->traccion = $args["traccion"] ?? "";
+        $this->direccion = $args["direccion"] ?? "";
+        $this->control_estabilidad = $args["control_estabilidad"] ?? 0; // 0 o 1
+        $this->puertas = $args["puertas"] ?? 0;
+        $this->tipo_combustible = $args["tipo_combustible"] ?? "";
+        $this->velocidad_max = $args["velocidad_max"] ?? 0.0; // Default a 0.0
+        $this->zero_to_houndred = $args["zero_to_houndred"] ?? 0.0; // Default a 0.0
+        $this->peso = $args["peso"] ?? 0.0; // Default a 0.0
+        $this->kilometros = $args["kilometros"] ?? 0; // Default a 0
+        $this->caballos_potencia = $args["caballos_fuerza"] ?? 0; // Default a 0
+    }
     public $vehicleImages = [];
+
     public function getAllVehiclesImages()
     {
         try {
-            $query = "select * from vehicle_img where vehicle_id = " . $this->id;
+            $query = "select * from vehicle_img where vehicle_id = '" . $this->vehicle_id . "'";
+
             $stmt = static::$db->prepare($query);
             $stmt->execute();
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -69,48 +100,34 @@ class Vehicle extends ActiveRecord
             logg("Error al cargar imagenes");
         }
     }
-    function __construct($args = [])
-    {
-        $this->id = $args["id"] ?? null;
-        $this->nombre = $args["nombre"] ?? "";
-        $this->categoria = $args["categoria"] ?? "";
-        $this->descripcion = $args["descripcion"] ?? "";
-        $this->modelo = $args["modelo"] ?? "";
-        $this->fabricante = $args["fabricante"] ?? "";
-        $this->year = $args["year"] ?? "";
-        $this->color = $args["color"] ?? "";
-        $this->vehicleImages = $args["imagen"] ?? [];
-        $this->matricula = $args["matricula"] ?? "";
-        $this->transmision = $args["tipo_transmision"] ?? "";
-        $this->tipo_carroceria = $args["tipo_carroceria"] ?? "";
-        $this->frenos_abs = $args["frenos_abs"] ?? "";
-        $this->airbag = $args["airbag"] ?? "";
-        $this->traccion = $args["traccion"] ?? "";
-        $this->direccion = $args["direccion"] ?? "";
-        $this->control_estabilidad = $args["control_estabilidad"] ?? "";
-        $this->puertas = $args["puertas"] ?? "";
-        $this->tipo_combustible = $args["tipo_combustible"] ?? "";
-        $this->precio = $args["precio"] ?? "";
-        $this->discount = isset($args["descuento"]) && is_numeric($args["descuento"]) ? $args["descuento"] : 0;
-        $this->discount_type = $args["type"] ?? "";
-        $this->velocidad_max = $args["velocidad_max"] ?? "";
-        $this->zero_to_houndred = $args["zero_to_houndred"] ?? "";
-        $this->peso = $args["peso"] ?? "";
-        $this->kilometros = $args["kilometros"] ?? "";
-        $this->caballos_potencia = $args["caballos_fuerza"] ?? "";
-        $this->createdAt = $this->createdAt ? $this->createdAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
-        $this->updatedAt = $this->updatedAt ? $this->updatedAt->format('Y-m-d H:i:s') : date("Y-m-d H:i:s");
-    }
 
     public static function getAllVehicles()
     {
         $vehicle = new self();
-        return $vehicle->getAll();
+        $vehicles = $vehicle->getAll();
+
+        $product = new Product();
+        $products = $product->getAll();
+
+
+
+        foreach ($vehicles as $vehicle) {
+            // Casteamos $vehicle a la clase Vehicle
+            if ($vehicle instanceof Vehicle)
+                foreach ($products as $product) {
+                    if ($product instanceof Product)
+                        // Casteamos $product a la clase Product
+                        if ($vehicle->vehicle_id == $product->product_id) {
+                            $vehicle->product = $product;
+                        }
+                }
+        }
+        return $vehicles;
     }
 
     public function delete()
     {
-        $query = "DELETE FROM Vehicle WHERE id = " . $this->id;
+        $query = "DELETE FROM Vehicle WHERE id = " . $this->vehicle_id;
         $result = self::consultarSQL($query);
 
         if ($result) return 1;
@@ -124,13 +141,31 @@ class Vehicle extends ActiveRecord
         if ($page > 1) {
             $inicio =  ($page - 1) * 10;
         }
-        $query = "SELECT * FROM " . static::$tabla . " ORDER BY CreatedAt DESC LIMIT $inicio, $fin";
+        $query = "SELECT * FROM " . static::$tabla . " v LEFT JOIN product p on v.vehicle_id = p.product_id ORDER BY p.CreatedAt DESC LIMIT $inicio, $fin";
 
         if ($vehicleName) {
-            $query = "SELECT * FROM " . static::$tabla . " WHERE nombre LIKE '%$vehicleName%' ORDER BY CreatedAt DESC LIMIT $inicio, $fin";
+            $query = "SELECT * FROM " . static::$tabla . " v LEFT JOIN product p on v.vehicle_id = p.product_id WHERE p.nombre LIKE '%$vehicleName%' ORDER BY CreatedAt DESC LIMIT $inicio, $fin";
         }
 
         $resultado = self::consultarSQL($query);
+
+
+
+        $product = new Product();
+        $products = $product->getAll();
+
+        foreach ($resultado as $vehicle) {
+            // Casteamos $vehicle a la clase Vehicle
+            if ($vehicle instanceof Vehicle)
+                foreach ($products as $product) {
+                    if ($product instanceof Product)
+                        // Casteamos $product a la clase Product
+                        if ($vehicle->vehicle_id == $product->product_id) {
+                            $vehicle->product = $product;
+                        }
+                }
+        }
+
 
         return $resultado;
     }
@@ -140,13 +175,13 @@ class Vehicle extends ActiveRecord
     {
         $errors = [];
 
-        if (empty($this->nombre)) {
-            $errors["nombre"] = "El campo nombre es obligatorio.";
-        }
+        // if (empty($this->product->nombre)) {
+        //     $errors["nombre"] = "El campo nombre es obligatorio.";
+        // }
         if ($this->categoria == "") {
             $errors["categoria"] = "El campo categoria es obligatorio.";
         }
-        if (empty($this->descripcion)) {
+        if (empty($this->product->descripcion)) {
             $errors["descripcion"] = "El campo descripcion es obligatorio.";
         }
         if (empty($this->modelo)) {
@@ -167,6 +202,7 @@ class Vehicle extends ActiveRecord
         if ($this->transmision == "") {
             $errors["transmision"] = "El campo transmision es obligatorio.";
         }
+
         if ($this->tipo_carroceria == "") {
             $errors["tipo_carroceria"] = "El campo tipo de carroceria es obligatorio.";
         }
@@ -191,7 +227,7 @@ class Vehicle extends ActiveRecord
         if (empty($this->tipo_combustible)) {
             $errors["tipo_combustible"] = "El campo tipo de combustible es obligatorio.";
         }
-        if (empty($this->precio)) {
+        if (empty($this->product->precio)) {
             $errors["precio"] = "El campo precio es obligatorio.";
         }
         if (empty($this->velocidad_max)) {
@@ -214,27 +250,38 @@ class Vehicle extends ActiveRecord
 
     public function registrarVehicle()
     {
+
         date_default_timezone_set('America/Montevideo');
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
+        $result = $this->product->registrar();
+        if ($result) {
+            $this->vehicle_id = $this->product->product_id;
+            if ($this->crear()) {
 
-        if ($this->crear()) {
-            $stmt = static::$db->prepare("select * from vehicle where id = LAST_INSERT_ID()");
+                $stmt = static::$db->prepare("select * from product where product_id ='" . $this->product->product_id . "'");
 
-            $stmt->execute();
-            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                return $registro["id"];
+                $stmt->execute();
+                while ($registro = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    return $registro["product_id"];
+                }
             }
+            return null;
         }
-        return null;
+    }
+
+
+    public function getName()
+    {
+        return $this->product->nombre;
     }
 
     public static function getVehicle($id)
     {
         $result = null;
         try {
-            $query = "SELECT * FROM vehicle WHERE id = $id LIMIT 1";
+            $query = "SELECT * FROM vehicle WHERE vehicle_id = $id LIMIT 1";
             $result = self::consultarSQL($query);
 
             if ($result) {
@@ -255,12 +302,12 @@ class Vehicle extends ActiveRecord
         $errores = [];
         header('Content-Type: application/json; charset=utf-8');
         date_default_timezone_set('America/Montevideo');
-        $this->updatedAt = new DateTime();
-        $this->updatedAt = $this->updatedAt->format('Y-m-d H:i:s');
+        $this->product->updatedAt = new DateTime();
+        $this->product->updatedAt  = $this->product->updatedAt->format('Y-m-d H:i:s');
         $vehicle = new vehicle($_POST);
         $errores = $vehicle->validate();
         if (empty($errores)) {
-            $result = $vehicle->actualizarVehicle($this->id);
+            $result = $vehicle->actualizarVehicle($this->vehicle_id);
             if ($result) {
                 echo json_encode(["message" => "successfuly"]);
             } else {
@@ -272,19 +319,41 @@ class Vehicle extends ActiveRecord
         exit;
     }
 
-    public function actualizarVehicle($id)
+    public function actualizarVehicle($id): mixed
     {
 
-        $this->id = $id;
+        $this->vehicle_id = $id;
+
         date_default_timezone_set('America/Montevideo');
         $this->frenos_abs = intval($this->frenos_abs == "abs_si");
         $this->airbag = intval($this->airbag == "airbag_si");
         $this->control_estabilidad = intval($this->control_estabilidad == "est_si");
+
         try {
-            $query = "UPDATE vehicle SET
+
+            $queryProduct = "UPDATE product SET
             nombre = :nombre,
-            categoria = :categoria,
             descripcion = :descripcion,
+            precio = :precio,
+            updatedAt = :updatedAt 
+            WHERE product_id = :product_id";
+
+            $paramsProduct = [
+                ':nombre' => $this->product->nombre,
+                ':descripcion' => $this->product->descripcion,
+                ':precio' => $this->product->precio,
+                ':updatedAt' => $this->product->updatedAt,
+                ':product_id' => $id // Asegúrate de que esta propiedad exista
+            ];
+            // logg($paramsProduct);
+            $stmt = static::$db->prepare($queryProduct);
+            $success = $stmt->execute($paramsProduct);
+
+            // logg("no llegue aca");
+
+
+            $queryVehicle = "UPDATE vehicle SET
+            categoria = :categoria,
             modelo = :modelo,
             fabricante = :fabricante,
             year = :year,
@@ -299,17 +368,17 @@ class Vehicle extends ActiveRecord
             control_estabilidad = :control_estabilidad,
             puertas = :puertas,
             tipo_combustible = :tipo_combustible,
-            precio = :precio,
             velocidad_max = :velocidad_max,
             zero_to_houndred = :zero_to_houndred,
             peso = :peso,
             kilometros = :kilometros,
-            caballos_potencia = :caballos_potencia,
-            updatedAt = :updatedAt WHERE id = :id";
-            $params = [
-                ':nombre' => $this->nombre,
+            caballos_potencia = :caballos_potencia
+            WHERE vehicle_id = :vehicle_id";
+
+
+
+            $paramsVehicle = [
                 ':categoria' => $this->categoria,
-                ':descripcion' => $this->descripcion,
                 ':modelo' => $this->modelo,
                 ':fabricante' => $this->fabricante,
                 ':year' => $this->year,
@@ -324,29 +393,32 @@ class Vehicle extends ActiveRecord
                 ':control_estabilidad' => $this->control_estabilidad,
                 ':puertas' => $this->puertas,
                 ':tipo_combustible' => $this->tipo_combustible,
-                ':precio' => $this->precio,
                 ':velocidad_max' => $this->velocidad_max,
                 ':zero_to_houndred' => $this->zero_to_houndred,
                 ':peso' => $this->peso,
                 ':kilometros' => $this->kilometros,
                 ':caballos_potencia' => $this->caballos_potencia,
-                ':updatedAt' => $this->updatedAt,
-                ':id' => $id
+                // Actualiza a la fecha actual
+                ':vehicle_id' => $this->vehicle_id // Asegúrate de que esta propiedad exista
             ];
 
+            // logg($paramsVehicle);
 
 
 
-            $stmt = static::$db->prepare($query);
-            $success = $stmt->execute($params);
 
-            $stmt2 = static::$db->prepare("DELETE FROM vehicle_img where vehicle_id = " . $id);
+
+            $stmt3 = static::$db->prepare($queryVehicle);
+            $stmt3->execute($paramsVehicle);
+
+            $stmt2 = static::$db->prepare("DELETE FROM vehicle_img where vehicle_id = '" . $id . "'");
 
             $stmt2->execute();
 
             return $success;
         } catch (PDOException $th) {
 
+            logg($th);
             return false;
         }
     }
@@ -354,14 +426,14 @@ class Vehicle extends ActiveRecord
     public function addDiscountVehicle()
     {
         try {
-            $query = "UPDATE vehicle SET 
+            $query = "UPDATE product SET 
                       discount = :discount, 
                       discount_type = :discount_type
-                      WHERE id = :id";
+                      WHERE product_id = :id";
             $params = [
-                ':discount' => $this->discount,
-                ':discount_type' => $this->discount_type,
-                ':id' => $this->id
+                ':discount' => $this->product->discount,
+                ':discount_type' => $this->product->discount_type,
+                ':id' => $this->vehicle_id
             ];
             $stmt = static::$db->prepare($query);
             return $stmt->execute($params);
@@ -372,17 +444,17 @@ class Vehicle extends ActiveRecord
 
     public function removeDiscountVehicle()
     {
-        $this->discount = 0;
-        $this->discount_type = null;
+        $this->product->discount = 0;
+        $this->product->discount_type = null;
         try {
-            $query = "UPDATE vehicle SET 
+            $query = "UPDATE product SET 
                       discount = :discount, 
                       discount_type = :discount_type
-                      WHERE id = :id";
+                      WHERE product_id = :id";
             $params = [
-                ':discount' => $this->discount,
-                ':discount_type' => $this->discount_type,
-                ':id' => $this->id
+                ':discount' => $this->product->discount,
+                ':discount_type' => $this->product->discount_type,
+                ':id' => $this->vehicle_id
             ];
             $stmt = static::$db->prepare($query);
             return $stmt->execute($params);

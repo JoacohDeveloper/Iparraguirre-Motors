@@ -9,7 +9,7 @@ use PDO;
 class Customer extends ActiveRecord
 {
 
-    protected static $tabla = "Customer";
+    protected static $tabla = "customer";
     protected static $columnasdb = [
         "uuid",
         "full_name",

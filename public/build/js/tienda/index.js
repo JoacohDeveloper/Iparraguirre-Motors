@@ -7,18 +7,24 @@ const cardContainer = document.querySelector(".card-container")
 const Card = ({ id, nombre, año, precio, discount, discount_type, km, images }) => {
 
     const card = document.createElement("div")
+
+
+    card.addEventListener("click", () => {
+        window.location.href = `/catalogo/product/view?product-id=${id}`;
+    })
+
     card.classList.add("card")
     card.setAttribute("aria-label", id)
 
     const card_image = document.createElement("div");
     card_image.classList.add("card_image")
-    
-    if(images.length == 0)
-     card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
-    else{
-     card_image.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
+
+    if (images.length == 0)
+        card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    else {
+        card_image.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
     }
-    
+
 
 
     const card_info = document.createElement("div");
@@ -28,7 +34,7 @@ const Card = ({ id, nombre, año, precio, discount, discount_type, km, images })
     const text_kmyear = document.createElement("p")
 
     text_name.textContent = `${nombre}`
-    text_kmyear.textContent = `${año} | ${km}` 
+    text_kmyear.textContent = `${año} | ${km || 3000} KM`
 
     const contenedorPrecio = document.createElement("div");
     contenedorPrecio.classList.add("contenedor-precio");
@@ -38,7 +44,7 @@ const Card = ({ id, nombre, año, precio, discount, discount_type, km, images })
         const precioFinalHTML = document.createElement("p");
         precioOriginalHTML.classList.add("precioOriginal");
         precioFinalHTML.classList.add("precioFinal");
-        
+
         let precioFinal;
         if (discount_type == "Dolares") {
             precioFinal = precio - discount;
@@ -49,7 +55,7 @@ const Card = ({ id, nombre, año, precio, discount, discount_type, km, images })
 
         precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         precioOriginalHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-    
+
         contenedorPrecio.appendChild(precioFinalHTML);
         contenedorPrecio.appendChild(precioOriginalHTML);
     } else {
@@ -57,9 +63,9 @@ const Card = ({ id, nombre, año, precio, discount, discount_type, km, images })
         precioHTML.classList.add("precio");
         precioHTML.textContent = `${Number(precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
         contenedorPrecio.appendChild(precioHTML);
-    }    
+    }
 
-    
+
 
 
     card_info.appendChild(text_name)
@@ -104,12 +110,14 @@ async function init(search = null) {
 
         data.forEach(v => {
             const customV = {
-                nombre: v.nombre,
-                precio: v.precio,
-                discount: v.discount,
-                discount_type: v.discount_type,
-                id: v.id,
-                km: v.kilometros,
+                nombre: v.product.nombre,
+                precio: v.product.precio,
+                discount: v.product.discount,
+                discount_type: v.product.discount_type,
+                id: v.vehicle_id,
+                imageUrl: v.imagen,
+                fabricante: v.fabricante,
+                modelo: v.modelo,
                 año: v.year,
                 images: v.vehicleImages
             };
@@ -159,8 +167,12 @@ const buscador = document.querySelector("#id_product-search__input")
 const resultadoBusqueda = document.querySelector(".result-list")
 const contenedorBuscador = document.querySelector(".search__input")
 
-if (location.pathname === "/catalogo/vehiculos") {
-    init();
+
+
+if (location.pathname.includes("/catalogo/vehiculos")) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const querySearch = urlParams.get('search');
+    init(querySearch ?? "");
 }
 
 contenedorBuscador.addEventListener("submit", async e => {
@@ -220,6 +232,7 @@ const ItemBusqueda = (text) => {
 
     item.addEventListener("click", async e => {
         history.replaceState(null, null, url.toString());
+        location.href = url.toString();
         ocultarBusqueda()
         buscador.value = text
         contenedorBuscador.querySelector("button").click()
@@ -228,17 +241,17 @@ const ItemBusqueda = (text) => {
 }
 let timer;
 
-const urlParams = new URLSearchParams(window.location.search);
-const querySearch = urlParams.get('search');
 
-if (querySearch) {
-    buscador.value = querySearch
-    handlerBusqueda(querySearch)
 
+if (true) {
+    // buscador.value = querySearch
 }
 
 
-buscador.addEventListener("input", async () => await buscar())
+buscador.addEventListener("input", async () => {
+    console.log("s")
+    await buscar()
+})
 
 async function buscar() {
     clearTimeout(timer);
@@ -252,7 +265,7 @@ async function buscar() {
                     if (!data?.message || data?.message !== "404") {
                         resultadoBusqueda.classList.remove("hidden");
                         const vehicles = Object.values(data);
-                        const vehiclesName = vehicles.map(vehicle => vehicle?.nombre);
+                        const vehiclesName = vehicles.map(vehicle => vehicle?.product.nombre);
                         const vehiclesNomUnicos = new Set(vehiclesName);
                         const arregloNoRepetido = [...vehiclesNomUnicos];
 
