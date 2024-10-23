@@ -125,7 +125,9 @@ abstract class CustomerController
 
             if (!isset($customer)) return;
 
-            $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
+
+            if($customerDB){
+                $dirname = $_SERVER["DOCUMENT_ROOT"] . "/build/src/images/users/";
             if (!file_exists($dirname)) {
                 mkdir($dirname);
             }
@@ -143,6 +145,7 @@ abstract class CustomerController
             $nuevaImagen = str_replace("\\", "/", $nuevaImagen);
             $x = str_replace("\\", "/", $dirname . $nuevaImagen);
             $_POST["imagen"] = "/build/src/images/users/" . $nuevaImagen;
+
             $customerDB->sincronizar($_POST);
 
             $errores = $customerDB->validate();
@@ -178,6 +181,7 @@ abstract class CustomerController
                     echo json_encode(["message" => "successfuly", "file_uploaded" => $res]);
                     exit;
                 }
+            }
             }
         }
         echo json_encode(["message" => "error", "errores" => $errores]);

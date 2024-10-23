@@ -184,8 +184,8 @@ class Customer extends ActiveRecord
     {
         $result = null;
         try {
-            $query = "SELECT * FROM Customer WHERE email = ? or username = ? LIMIT 1";
-            $result = Customer::consultarSQL($query, [$dato, $dato]);
+            $query = "SELECT * FROM customer WHERE email = '$dato' or username = '$dato' LIMIT 1";
+            $result = Customer::consultarSQL($query);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
         }

@@ -63,10 +63,11 @@ async function formMenu({ target }) {
 
 
 function setResumeChanges(formdata, imgURL) {
-    const fullnameField = document.querySelector("#fullname__id")
-    const imgProfile = document.querySelector("#profile-img__id")
-    const imgProfileNav = document.querySelector("#nav_profileImg__id")
-    const navUsermane = document.querySelector("#nav_profileUsername__id")
+    const fullnameAside = document.querySelector("#aside_fullname__id")
+    const fullnameField = document.querySelector("#fullname__id") 
+    const usernameField = document.querySelector("#username_resume") 
+    const imgProfile = document.querySelector("#img_resume")
+    const imgProfileNav = document.querySelector("#img_profile")
     const firstNameField = document.querySelector("#firstname__id")
     const lastNameField = document.querySelector("#lastname__id")
 
@@ -84,9 +85,11 @@ function setResumeChanges(formdata, imgURL) {
     })
     lastNameField.textContent = fullnameSplit.length > 2 ? listOfSName.join(" ") : fullnameSplit[1]
 
-    fullnameField.textContent = `${object.full_name} - ${object.username}`
-    imgProfile.src = imgURL.src;
-    imgProfileNav.src = imgURL.src;
+    fullnameAside.textContent = `${object.full_name}`
+    fullnameField.textContent = `${object.full_name}`
+    usernameField.textContent = `${object.username}`
+    imgProfile.src = imgURL?.src;
+    imgProfileNav.src = imgURL?.src;
 }
 
 
@@ -180,6 +183,7 @@ async function setFormEdit(target, formContainer) {
                 }
 
             } catch (error) {
+                console.error(error)
                 addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
             }
 

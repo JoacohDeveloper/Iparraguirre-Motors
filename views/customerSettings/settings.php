@@ -4,7 +4,7 @@
         <div class="settings-userinfo_aside">
             <div class="aside_profile-resume__image">
                 <img id="img_profile" src="<?php echo $imagen["url"] ?>" alt="<?php echo $imagen["alt"] ?>">
-                <h4 id="fullname__id"><?php echo $fullname; ?></h4>
+                <h4 id="aside_fullname__id"><?php echo $fullname; ?></h4>
             </div>
         </div>
         <nav class="aside-nav">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="profile-resume__data">
                     <h4 id="fullname__id"><?php echo $fullname; ?></h4>
-                    <p><?php echo $username; ?></p>
+                    <p id="username_resume"><?php echo $username; ?></p>
                 </div>
             </div>
         </div>
