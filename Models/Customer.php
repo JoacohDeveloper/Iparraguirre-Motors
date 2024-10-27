@@ -184,7 +184,7 @@ class Customer extends ActiveRecord
     {
         $result = null;
         try {
-            $query = "SELECT * FROM customer WHERE email = '$dato' or username = '$dato' LIMIT 1";
+            $query = "SELECT * FROM ". self::$tabla ." WHERE email = '$dato' or username = '$dato' LIMIT 1";
             $result = Customer::consultarSQL($query);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
@@ -195,19 +195,20 @@ class Customer extends ActiveRecord
 
     public static function getAllCustomers() {
         try {
-            $query = "SELECT * FROM Customer";
+            $query = "SELECT * FROM " . selff::$tabla;
             $stmt = static::$db->prepare($query);
             $stmt->execute();
+          logg($query);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            return $e;
         }
     }
 
     public static function adminForceDeleting($recivedUUID) {
         $result = null;
         try {
-            $query = "UPDATE Customer SET isDeleted = 1 WHERE uuid = :uuid";
+            $query = "UPDATE ". self::$tabla ." SET isDeleted = 1 WHERE uuid = :uuid";
             $params = [':uuid' => $recivedUUID];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
@@ -221,7 +222,7 @@ class Customer extends ActiveRecord
     public static function adminForceActiving($recivedUUID) {
         $result = null;
         try {
-            $query = "UPDATE Customer SET isDeleted = 0 WHERE uuid = :uuid";
+            $query = "UPDATE ". self::$tabla ." SET isDeleted = 0 WHERE uuid = :uuid";
             $params = [':uuid' => $recivedUUID];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
@@ -290,7 +291,7 @@ class Customer extends ActiveRecord
         $result = null;
         $this->imagen = "\build\src\images\users\default.jpg";
         try {
-            $query = "UPDATE customer SET 
+            $query = "UPDATE ". self::$tabla ." SET 
                       imagen = :imagen
                       WHERE uuid = :uuid";
             $params = [

@@ -340,7 +340,7 @@ async function obtenerUsuarios() {
         const response = await fetch(url);
         spinner.remove();
 
-        const data = await response.json();
+        const data = await response.text();
         const oldData = JSON.parse(localStorage.getItem("userItems")) ?? [];
         const newData = [...oldData, ...data];
         console.log(data);

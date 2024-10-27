@@ -179,20 +179,20 @@ const ModalAdd = async () => {
     vehicleform.classList.add("form_addvehicle")
 
     const detailsSectionInputs = [
-        InputText("text", "Nombre", "Nombre", "nombre", "name", ""),
-        InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", ""),
-        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", ""),
+        InputText("text", "Fabricante", "Fabricante", "fabricante", "", ""),
+        InputText("text", "Modelo", "Modelo", "modelo", "", ""),
+        InputText("number", "Año de fabricacion", "Año de fabricacion", "year", ""),
     ]
 
     const detailsSectionInputs2 = [
-        InputText("text", "Modelo", "Modelo", "modelo", "", ""),
-        InputText("text", "Fabricante", "Fabricante", "fabricante", "", ""),
-        InputText("number", "Año de fabricacion", "Año de fabricacion", "year", ""),
+        InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", ""),
+        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", ""),
+        InputText("text", "Matricula (ABC-1234)", "Matricula", "matricula", "", ""),
     ]
 
     const specsSectionInputs = [
         InputText("text", "Color del vehiculo", "Color del vehiculo", "color", "", ""),
-        InputText("text", "Matricula (ABC-1234)", "Matricula", "matricula", "", ""),
+        InputSelect("Numero de puertas", "puertas", ["2", "3", "4", "5"], ""),
         InputSelect("Tipo de transmision", "tipo_transmision", ["Manual", "Automatica", "Secuencial"], "t_transmision", ""),
         InputSelect("Tipo de carroceria", "tipo_carroceria", ["Coupe", "Sedan", "Hatchback", "Cabrio", "Pick-up"], ""),
         InputSelect("Frenos ABS", "frenos_abs", ["Si", "No"], ""),
@@ -203,7 +203,6 @@ const ModalAdd = async () => {
         InputSelect("Tipo de traccion", "traccion", ["Integral", "Trasera", "Delantera"], ""),
         InputSelect("Tipo de direccion", "direccion", ["Manual", "Hidraulica", "Electrica"], ""),
         InputSelect("Control de estabilidad", "control_estabilidad", ["Si", "No"], ""),
-        InputSelect("Numero de puertas", "puertas", ["2", "3", "4", "5"], ""),
     ]
 
     const perfSectionInputs = [
@@ -246,12 +245,7 @@ const ModalAdd = async () => {
         }
 
 
-        if (object.nombre.length == 0) {
-            error.push({
-                title: "Failure",
-                error: "El campo nombre se encuentra vacio"
-            })
-        } else if (object.categoria == "-Seleccione-") {
+        if (object.categoria == "-Seleccione-") {
             error.push({
                 title: "Failure",
                 error: "El campo categoria es obligatorio"
@@ -910,20 +904,20 @@ const ModalModificar = async (data) => {
     vehicleform.classList.add("form_addvehicle")
 
     const detailsSectionInputs = [
-        InputText("text", "Nombre", "Nombre", "nombre", "name", data.product.nombre),
-        InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", data.categoria),
-        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", data.product.descripcion),
+        InputText("text", "Fabricante", "Fabricante", "fabricante", "", data.fabricante),
+        InputText("text", "Modelo", "Modelo", "modelo", "", data.modelo),
+        InputText("number", "Año de fabricacion", "Año de fabricacion", "year", "", data.year),
     ]
 
     const detailsSectionInputs2 = [
-        InputText("text", "Modelo", "Modelo", "modelo", "", data.modelo),
-        InputText("text", "Fabricante", "Fabricante", "fabricante", "", data.fabricante),
-        InputText("number", "Año de fabricacion", "Año de fabricacion", "year", "", data.year),
+        InputSelect("Categoria", "categoria", ["De fabrica", "Modificados"], "categoria", data.categoria),
+        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", data.product.descripcion),
+      InputText("text", "Matricula (ABC-1234)", "Matricula", "matricula", "", data.matricula),
     ]
 
     const specsSectionInputs = [
         InputText("text", "Color del vehiculo", "Color del vehiculo", "color", "", data.color),
-        InputText("text", "Matricula (ABC-1234)", "Matricula", "matricula", "", data.matricula),
+        InputSelect("Numero de puertas", "puertas", ["2", "3", "4", "5"], "", data.puertas),
         InputSelect("Tipo de transmision", "tipo_transmision", ["Manual", "Automatica", "Secuencial"], "t_transmision", data.transmision),
         InputSelect("Tipo de carroceria", "tipo_carroceria", ["Coupe", "Sedan", "Hatchback", "Cabrio", "Pick-up"], "", data.tipo_carroceria),
         InputSelect("Frenos ABS", "frenos_abs", ["Si", "No"], "", data.frenos_abs),
@@ -934,7 +928,6 @@ const ModalModificar = async (data) => {
         InputSelect("Tipo de traccion", "traccion", ["Integral", "Trasera", "Delantera"], "", data.traccion),
         InputSelect("Tipo de direccion", "direccion", ["Manual", "Hidraulica", "Electrica"], "", data.direccion),
         InputSelect("Control de estabilidad", "control_estabilidad", ["Si", "No"], "", data.control_estabilidad),
-        InputSelect("Numero de puertas", "puertas", ["2", "3", "4", "5"], "", data.puertas),
     ]
 
     const perfSectionInputs = [
@@ -979,12 +972,7 @@ const ModalModificar = async (data) => {
         }
 
 
-        if (object.nombre.length == 0) {
-            error.push({
-                title: "Failure",
-                error: "El campo nombre se encuentra vacio"
-            })
-        } else if (object.categoria == "-Seleccione-") {
+        if (object.categoria == "-Seleccione-") {
             error.push({
                 title: "Failure",
                 error: "El campo categoria es obligatorio"

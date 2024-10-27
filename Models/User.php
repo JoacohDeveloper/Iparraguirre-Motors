@@ -177,7 +177,7 @@ class User extends ActiveRecord
     {
         $result = null;
         try {
-            $query = "SELECT * FROM User WHERE email = ? or username = ? LIMIT 1";
+            $query = "SELECT * FROM ". self::$tabla ." WHERE email = ? or username = ? LIMIT 1";
             $result = User::consultarSQL($query, [$dato, $dato]);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
@@ -210,7 +210,7 @@ class User extends ActiveRecord
 
     public static function getAllAdmins() {
         try {
-            $query = "SELECT * FROM User";
+            $query = "SELECT * FROM ". self::$tabla;
             $stmt = static::$db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -223,7 +223,7 @@ class User extends ActiveRecord
     {
         $result = null;
         try {
-            $query = "SELECT * FROM user  
+            $query = "SELECT * FROM  ". self::$tabla ."
                       WHERE username = :dato";
             $params = [
                 ':dato' => $dato
@@ -286,7 +286,7 @@ class User extends ActiveRecord
     public static function adminForceDeleting($recivedUUID) {
         $result = null;
         try {
-            $query = "UPDATE User SET isDeleted = 1 WHERE uuid = :uuid";
+            $query = "UPDATE ". self::$tabla ." SET isDeleted = 1 WHERE uuid = :uuid";
             $params = [':uuid' => $recivedUUID];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
@@ -300,7 +300,7 @@ class User extends ActiveRecord
     public static function adminForceActiving($recivedUUID) {
         $result = null;
         try {
-            $query = "UPDATE User SET isDeleted = 0 WHERE uuid = :uuid";
+            $query = "UPDATE ". self::$tabla ." SET isDeleted = 0 WHERE uuid = :uuid";
             $params = [':uuid' => $recivedUUID];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
@@ -315,9 +315,9 @@ class User extends ActiveRecord
         $result = null;
         try {
             if($newRol == "Empleado"){
-                $query = "UPDATE User SET isEncargado = 0 WHERE uuid = :uuid";
+                $query = "UPDATE ". self::$tabla ." SET isEncargado = 0 WHERE uuid = :uuid";
             } else if($newRol == "Encargado"){
-                $query = "UPDATE User SET isEncargado = 1 WHERE uuid = :uuid";
+                $query = "UPDATE ". self::$tabla ." SET isEncargado = 1 WHERE uuid = :uuid";
             } else {
                 return false;
             }
@@ -407,8 +407,8 @@ class User extends ActiveRecord
     {
         $result = null;
         $this->imagen = "\build\src\images\users\default.jpg";
-        try {
-            $query = "UPDATE user SET 
+        try { 
+            $query = "UPDATE  ". self::$tabla ." SET 
                       imagen = :imagen
                       WHERE uuid = :uuid";
             $params = [

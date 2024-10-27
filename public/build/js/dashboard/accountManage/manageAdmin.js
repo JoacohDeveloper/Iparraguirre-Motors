@@ -304,6 +304,7 @@ formularioRegister.addEventListener("submit", async e => {
                         e.target[0].value = "";
                         e.target[1].value = "";
                         reloadCards();
+                        toggleBackground();
                     })
                 }
             }
