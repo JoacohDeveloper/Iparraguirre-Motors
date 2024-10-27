@@ -2,7 +2,7 @@ drop database db_utu2024;
 create database db_utu2024;
 use db_utu2024;
 
-create table User(
+create table user(
 	uuid VARCHAR(45) not null,
 	full_name VARCHAR(65),
 	username VARCHAR(25),
@@ -23,7 +23,7 @@ create table User(
 	PRIMARY KEY(uuid) 
 );
 
-create table Customer(
+create table customer(
 	uuid VARCHAR(45) not null,
 	full_name VARCHAR(65),
 	username VARCHAR(25),
@@ -43,7 +43,7 @@ create table Customer(
 );
 
 
-create table Cart(
+create table cart(
 	user_uuid VARCHAR(45),
 	item_id VARCHAR(65),
 	quanity VARCHAR(25),
@@ -55,7 +55,7 @@ create table Cart(
 
 
 
-create table Wishlist(
+create table wishlist(
 	wish_id VARCHAR(40) not null,
 	user_uuid VARCHAR(45),
 	item_id VARCHAR(65),

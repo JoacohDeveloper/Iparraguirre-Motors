@@ -195,10 +195,9 @@ class Customer extends ActiveRecord
 
     public static function getAllCustomers() {
         try {
-            $query = "SELECT * FROM " . selff::$tabla;
+            $query = "SELECT * FROM " . self::$tabla;
             $stmt = static::$db->prepare($query);
             $stmt->execute();
-          logg($query);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return $e;
