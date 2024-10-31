@@ -94,8 +94,11 @@ $router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAd
 $router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
 $router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]);
 $router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]);
-$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]);
+$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]); 
 $router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]); 
+
+//Registro para cuenta maestra:
+$router->get("/forceRegistOfMasterAccount", [AuthenticationController::class, "rootRegist"]);
 
 $router->post("/customer/user-newPassword", [HomePageController::class, "changePassword"]);
 $router->post("/dashboard/user-newPassword", [DashboardController::class, "changePassword"]);

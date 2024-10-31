@@ -35,7 +35,6 @@ class Product extends ActiveRecord
     public $discount_type;      // Tipo de descuento (porcentaje, cantidad fija, etc.)
     public $stock;              // Cantidad en stock
     public $peso;               // Peso del producto
-    public $origen;             // País de origen del producto
     public $createdAt;          // Fecha de creación del registro
     public $updatedAt;          // Fecha de última actualización del registro
 
@@ -50,7 +49,6 @@ class Product extends ActiveRecord
         $this->discount_type = $args["discount_type"] ?? "";
         $this->stock = $args["stock"] ?? 1;
         $this->peso = $args["peso"] ?? "";
-        $this->origen = $args["origen"] ?? "";
         $this->createdAt = date("Y-m-d H:i:s");
         $this->updatedAt = date("Y-m-d H:i:s");
         $this->categoria = $args["categoria"] ?? "";

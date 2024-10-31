@@ -58,7 +58,7 @@ class Interactions extends ActiveRecord {
         $this->interactionID = $this->generateID();
     
         try {
-            $query = "INSERT INTO interactions (interactionID, interactionOwner, interactionType, interactionCost, productName, productType, productLink, isPrivate, interactionDate) 
+            $query = "INSERT INTO ". self::$tabla ." (interactionID, interactionOwner, interactionType, interactionCost, productName, productType, productLink, isPrivate, interactionDate) 
                       VALUES (:interactionID, :interactionOwner, :interactionType, :interactionCost, :productName, :productType, :productLink, :isPrivate, :interactionDate)";
             $params = [
                 ':interactionID' => $this->interactionID,
@@ -83,9 +83,9 @@ class Interactions extends ActiveRecord {
     
         try {
             if ($adminType == 1) {
-                $query = "SELECT * FROM interactions WHERE interactionOwner = :interactionOwner";
+                $query = "SELECT * FROM ". self::$tabla ." WHERE interactionOwner = :interactionOwner";
             } else {
-                $query = "SELECT * FROM interactions WHERE interactionOwner = :interactionOwner AND isPrivate = 0";
+                $query = "SELECT * FROM ". self::$tabla ." WHERE interactionOwner = :interactionOwner AND isPrivate = 0";
             }
     
             $result = Interactions::consultarSQL($query, $params);
@@ -110,7 +110,7 @@ class Interactions extends ActiveRecord {
 
     public function delete($id){
         try {
-            $query = "DELETE FROM interactions WHERE interactionID = :interactionID";
+            $query = "DELETE FROM ". self::$tabla ." WHERE interactionID = :interactionID";
             $params = [
                 ':interactionID' => $id
             ];

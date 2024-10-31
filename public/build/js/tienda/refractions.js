@@ -4,7 +4,17 @@
 
 const cardContainer = document.querySelector(".card-container")
 
-const Card = ({ id, nombre, año, precio, discount, discount_type, km, images }) => {
+/*nombre: r.product.nombre,
+                precio: r.product.precio,
+                discount: r.product.discount,
+                discount_type: r.product.discount_type,
+                id: r.refraction_id,
+                fabricante: r.product.fabricante,
+                modelo: r.product.modelo,
+                origen: r.product.origen,
+                url: r.url_img,
+                alt: r.alt_img,*/
+const Card = ({ id, nombre, origen, precio, discount, discount_type, url, alt }) => {
 
     const card = document.createElement("div")
 
@@ -18,23 +28,22 @@ const Card = ({ id, nombre, año, precio, discount, discount_type, km, images })
 
     const card_image = document.createElement("div");
     card_image.classList.add("card_image")
-
-    if (images.length == 0)
-        card_image.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    
+    
+    if (url == "")
+        card_image.style.backgroundImage = "url('/build/src/images/refractions/default.jpg')";
     else {
-        card_image.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
+        card_image.style.backgroundImage = `url('/build${url}')`;
     }
-
-
 
     const card_info = document.createElement("div");
     card_info.classList.add("card_info")
 
     const text_name = document.createElement("p")
-    const text_kmyear = document.createElement("p")
+    const text_origen = document.createElement("p")
 
     text_name.textContent = `${nombre}`
-    text_kmyear.textContent = `${año} | ${km || 3000} KM`
+    text_origen.textContent = `${origen || "Sin origen"}`
 
     const contenedorPrecio = document.createElement("div");
     contenedorPrecio.classList.add("contenedor-precio");
@@ -66,11 +75,9 @@ const Card = ({ id, nombre, año, precio, discount, discount_type, km, images })
     }
 
 
-
-
     card_info.appendChild(text_name)
     card_info.appendChild(contenedorPrecio);
-    card_info.appendChild(text_kmyear)
+    card_info.appendChild(text_origen)
 
     card.appendChild(card_image)
     card.appendChild(card_info)
@@ -94,10 +101,10 @@ const Spinner = () => {
 }
 
 async function init(search = null) {
-    const cargarMasVehiculos = async (page) => {
+    const cargarMasRefractions = async (page) => {
         const spinner = Spinner();
         if (cardContainer) cardContainer.appendChild(spinner);
-        const url = location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
+        const url = location.origin + `/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf${search ? "&name=" + search : ""}&page=${page}`
 
         const response = await fetch(url);
         spinner.remove();
@@ -108,35 +115,21 @@ async function init(search = null) {
         console.log(data);
         //localStorage.setItem("tiendaItems", JSON.stringify(newData));
 
-        const urlActual = location.pathname + location.search + location.hash;
-        data.forEach(v => {
-            const customV = {
-                nombre: v.product.nombre,
-                precio: v.product.precio,
-                discount: v.product.discount,
-                discount_type: v.product.discount_type,
-                id: v.vehicle_id,
-                imageUrl: v.imagen,
-                fabricante: v.fabricante,
-                categoria: v.categoria,
-                modelo: v.modelo,
-                año: v.year,
-                km: v.kilometros,
-                images: v.vehicleImages
+        data.forEach(r => {
+            const customR = {
+                nombre: r.product.nombre,
+                precio: r.product.precio,
+                discount: r.product.discount,
+                discount_type: r.product.discount_type,
+                id: r.refraction_id,
+                fabricante: r.product.fabricante,
+                modelo: r.product.modelo,
+                origen: r.product.origen,
+                url: r.url_img,
+                alt: r.alt_img,
             };
-            
-            if(urlActual == "/catalogo/vehiculos" || urlActual == "/catalogo/vehiculos.."){
-                if(customV.categoria == "De fabrica"){
-                    if (cardContainer) cardContainer.appendChild(Card(customV));
-                }
-            } else if(urlActual === "/catalogo/vehiculosModificados" || urlActual === "/catalogo/vehiculosModificados.."){
-                if(customV.categoria == "Modificados"){
-                    if (cardContainer) cardContainer.appendChild(Card(customV));
-                }
-            } else {
-                console.log("Ha ocurrido un error")
-            }
-            
+
+        if (cardContainer) cardContainer.appendChild(Card(customR));
         });
 
         if (data.length > 0) {
@@ -150,7 +143,7 @@ async function init(search = null) {
     };
 
     let page = 1;
-    let lastEl = await cargarMasVehiculos(page);
+    let lastEl = await cargarMasRefractions(page);
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(async entry => {
@@ -158,7 +151,7 @@ async function init(search = null) {
                 observer.unobserve(lastEl);
                 page++;
                 localStorage.setItem("tiendaPage", JSON.stringify(page));
-                lastEl = await cargarMasVehiculos(page);
+                lastEl = await cargarMasRefractions(page);
                 if (lastEl) observer.observe(lastEl);
             }
         });
@@ -184,7 +177,7 @@ const contenedorBuscador = document.querySelector(".search__input")
 
 
 
-if (location.pathname.includes("/catalogo/vehiculos")) {
+if (location.pathname.includes("/catalogo/refraction")) {
     const urlParams = new URLSearchParams(window.location.search);
     const querySearch = urlParams.get('search');
     init(querySearch ?? "");
@@ -199,21 +192,21 @@ contenedorBuscador.addEventListener("submit", async e => {
     }
 
     if (buscador.value) {
-        if (location.pathname.includes("/catalogo/vehiculos")) {
+        if (location.pathname.includes("/catalogo/refraction")) {
             await handlerBusqueda(buscador?.value);
-            const url = new URL(location.origin + "/catalogo/vehiculos");
+            const url = new URL(location.origin + "/catalogo/refraction");
             url.searchParams.set('search', buscador?.value);
             history.replaceState(null, null, url.toString());
         } else {
-            const url = new URL(location.origin + "/catalogo/vehiculos");
+            const url = new URL(location.origin + "/catalogo/refraction");
             url.searchParams.set('search', buscador?.value);
             location.assign(url.toString());
         }
     } else {
-        if (location.pathname === "/catalogo/vehiculos") {
+        if (location.pathname === "/catalogo/refraction") {
             await init();
         } else {
-            const url = new URL(location.origin + "/catalogo/vehiculos");
+            const url = new URL(location.origin + "/catalogo/refraction");
             history.replaceState(null, null, url.toString());
             await init();
         }
@@ -241,7 +234,7 @@ const ItemBusqueda = (text) => {
 
     item.appendChild(img)
     item.appendChild(p)
-    const url = new URL(location.origin + "/catalogo/vehiculos");
+    const url = new URL(location.origin + "/catalogo/refraction");
 
     url.searchParams.set("search", text)
 
@@ -274,7 +267,7 @@ async function buscar() {
         resultadoBusqueda.innerHTML = null;
         if (buscador?.value?.length > 0) {
             try {
-                const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
+                const response = await fetch(location.origin + `/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
                 if (response.ok) {
                     const data = await response.json();
                     if (!data?.message || data?.message !== "404") {
@@ -298,9 +291,9 @@ async function buscar() {
             }
         } else {
             ocultarBusqueda();
-            const url = new URL(location.origin + "/catalogo/vehiculos");
+            const url = new URL(location.origin + "/catalogo/refraction");
             history.replaceState(null, null, url.toString());
-            if (!location.pathname.includes("/catalogo/vehiculos/results")) {
+            if (!location.pathname.includes("/catalogo/refraction/results")) {
                 await init();
             }
         }

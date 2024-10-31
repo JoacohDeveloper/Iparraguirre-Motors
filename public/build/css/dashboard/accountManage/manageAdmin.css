@@ -163,7 +163,7 @@
     display: flex;
     justify-content: space-around;
 }
-.options-container > button{
+.options-container > .emplyeeCard_options{
     width: 50%;
     font-size: .8rem;
     color: #666;
@@ -178,6 +178,40 @@
         color: #000;
     }
 }
+.options-container > .emplyeeCard_options-disabled {
+    width: 50%;
+    font-size: .8rem;
+    color: #666;
+    border: none;
+    cursor: not-allowed;
+    padding: .5rem;
+    border-top: 1px solid #ccc;
+    transition: background-color .5s ease, color .5s ease;
+}
+
+.options-container > .emplyeeCard_options-disabled:hover {
+    background-color: #dddddd;
+    color: #000;
+}
+
+#disabled-button_myAccount:hover::after,
+#disabled-button_Master:hover::after {
+    position: absolute;
+    background-color: #fff;
+    color: #202020;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+#disabled-button_myAccount:hover::after {
+    content: "No puedes modificar tu propia cuenta.";
+}
+#disabled-button_Master:hover::after {
+    content: "No puedes modificar a un superior.";
+}
+
 
 @media screen and (max-width: 1550px) and (min-width: 769px) {
     .container-divisor{
@@ -251,6 +285,10 @@
             width: 12rem;
             text-align: center;
         }
+    }
+
+    .contenedor-informacion label{
+        text-align: unset;
     }
 }
 

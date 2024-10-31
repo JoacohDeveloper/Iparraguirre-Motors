@@ -1,3 +1,8 @@
+function isMasterAccount(userEmail) {
+    if(userEmail === "iparraguirremotors@contact.shop") return true
+    return false
+}
+
 const Spinner = () => {
 
     const spinnerSquare = document.createElement("div")
@@ -15,7 +20,7 @@ const Spinner = () => {
 
 const cardContainer = document.querySelector(".card-container");
 
-const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLog, isDeleted, imagen, createdAt, updatedAt }) => {
+const Card = ({ slug, fullname, username, email, userType, isFirstLog, isDeleted, imagen, createdAt, updatedAt, wasDisabled, wasMaster }) => {
     const card = document.createElement("div");
     card.id = slug;
 
@@ -45,12 +50,13 @@ const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLo
 
     const emailHTML = document.createElement("p");
     emailHTML.textContent = email ?? "Sin Email";
-
-    let rol = "Sin rol";
-    if(isAdmin) rol = "Empleado"
-    if(isEncargado) rol = "Encargado"
-    if(isFirstLog) rol = "Sin acceso"
-    if(isDeleted) rol = "Dado de baja"
+    
+    let rol;
+    if(userType == "Root") rol = "Empresa";
+    if(userType == "Encargado") rol = "Encargado";
+    if(userType == "Empleado") rol = "Empleado";
+    if(isFirstLog == true) rol = "Sin uso";
+    if(isDeleted == true) rol = "Dado de baja";
 
     const rolHTML = document.createElement("p");
     rolHTML.textContent = rol;
@@ -117,18 +123,10 @@ const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLo
     const btn_changeRol = document.createElement("button");
 
     btn_delete.textContent = "Eliminar"
-    btn_delete.id = slug;
-    btn_delete.addEventListener("click", () => handlerEliminar(email));
-
     btn_active.textContent = "Reactivar"
-    btn_active.id = slug;
-    btn_active.addEventListener("click", () => handlerReactivar(email));
-
     btn_changeRol.textContent = "Cambiar rol"
-    btn_changeRol.id = slug;
-    btn_changeRol.addEventListener("click", () => handlerChangeRol(email));
 
-    if (rol === "Dado de baja"){
+    if (isDeleted == true){
         contenedorOptions.appendChild(btn_active);
     } else {
         contenedorOptions.appendChild(btn_delete);
@@ -136,6 +134,43 @@ const Card = ({ slug, fullname, username, email, isAdmin, isEncargado, isFirstLo
     
     contenedorOptions.appendChild(btn_changeRol);
 
+    if(wasDisabled){
+        btn_delete.setAttribute("disabled", "");
+        btn_active.setAttribute("disabled", "");
+        btn_changeRol.setAttribute("disabled", "");
+
+        btn_delete.id = "disabled-button_myAccount";
+        btn_active.id = "disabled-button_myAccount";
+        btn_changeRol.id = "disabled-button_myAccount";
+
+        btn_changeRol.classList.add("emplyeeCard_options-disabled");
+        btn_active.classList.add("emplyeeCard_options-disabled");
+        btn_delete.classList.add("emplyeeCard_options-disabled");
+    } else if(wasMaster){
+        btn_delete.setAttribute("disabled", "");
+        btn_active.setAttribute("disabled", "");
+        btn_changeRol.setAttribute("disabled", "");
+
+        btn_delete.id = "disabled-button_Master";
+        btn_active.id = "disabled-button_Master";
+        btn_changeRol.id = "disabled-button_Master";
+
+        btn_changeRol.classList.add("emplyeeCard_options-disabled");
+        btn_active.classList.add("emplyeeCard_options-disabled");
+        btn_delete.classList.add("emplyeeCard_options-disabled");
+    } else {
+        btn_changeRol.id = slug;
+        btn_active.id = slug;
+        btn_delete.id = slug;
+        btn_changeRol.classList.add("emplyeeCard_options");
+        btn_active.classList.add("emplyeeCard_options");
+        btn_delete.classList.add("emplyeeCard_options");
+
+        btn_changeRol.addEventListener("click", () => handlerChangeRol(email));
+        btn_active.addEventListener("click", () => handlerReactivar(email));
+        btn_delete.addEventListener("click", () => handlerEliminar(email));
+    }
+        
     card.appendChild(importantData);
     card.appendChild(contenedorInformacion);
     card.appendChild(contenedorOptions);
@@ -166,7 +201,6 @@ async function obtenerUsuarios() {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("userItems")) ?? [];
         const newData = [...oldData, ...data];
-        console.log(data);
 
         const totalAdminHTML = document.querySelector("#p_totalCant");
         const cantMandatedHTML = document.querySelector("#p_cantMandated");
@@ -175,37 +209,41 @@ async function obtenerUsuarios() {
         let totalAdmin = 0, cantEmployee = 0, cantMandated = 0;
 
         data.forEach(async u => {
+            // Corroborar si el usuario es el mismo que la sesión
+            const isCurrentUser = await isMyUser(u.email);
+
+            // Corroborar si el usuario es la cuenta maestra
+            const isMaster = isMasterAccount(u.email);
+
             const customU = {
                 slug: u.slug,
                 fullname: u.full_name,
                 username: u.username,
                 email: u.email,
-                isAdmin: u.isAdmin,
-                isEncargado: u.isEncargado,
+                userType: u.userType,
                 isFirstLog: u.isFirstLog,
                 isDeleted: u.isDeleted,
                 imagen: u.imagen,
                 createdAt: u.createdAt,
-                updatedAt: u.updatedAt
+                updatedAt: u.updatedAt,
+                wasDisabled: isCurrentUser,
+                wasMaster: isMaster
             };
-            if (u.isEncargado) {
+            
+            if (u.userType == "Root" || u.userType == "Encargado") {
                 cantMandated++;
             } else if (!u.isDeleted) {
                 cantEmployee++;
             }
-            if (u.isAdmin) {
+            if (u.userType == "Root" || u.userType == "Encargado" || u.userType == "Empleado") {
                 totalAdmin++;
             }
-
-            // Corroborar si el usuario es el mismo que la sesión
-            const isCurrentUser = await isMyUser(u.email);
-            if (!isCurrentUser){
-                if (cardContainer) cardContainer.appendChild(Card(customU));
-            }
+            totalAdminHTML.textContent = "Cantidad de administradores: " + totalAdmin;
+            cantEmployeeHTML.textContent = "Cantidad de empleados: " + cantEmployee;
+            cantMandatedHTML.textContent = "Cantidad de encargados: " + cantMandated;
+            
+            if (cardContainer) cardContainer.appendChild(Card(customU));
         });
-        totalAdminHTML.textContent = "Cantidad de administradores: " + totalAdmin;
-        cantMandatedHTML.textContent = "Cantidad de encargados: " + cantMandated;
-        cantEmployeeHTML.textContent = "Cantidad de empleados: " + cantEmployee;
     };
     try {
         await cargarUsuarios();
@@ -618,14 +656,7 @@ const ModalRol = (data) => {
     //de "data" que rompian el flujo de datos.
     const userUUID = data['\u0000*\u0000uuid'];
     const userFullname = data['\u0000*\u0000full_name']
-    const userActualRol = data['\u0000*\u0000isEncargado']
-
-    let userRol = "indefinido"
-    if(userActualRol == 1){
-        userRol = "encargado"
-    } else {
-        userRol = "empleado"
-    }
+    const userActualRol = data['\u0000*\u0000userType']
     
     const contenedor = document.createElement("div")
     contenedor.classList.add("modal-container")
@@ -662,19 +693,20 @@ const ModalRol = (data) => {
     const delete_form = InputSelect("Seleccione el rol", "changeRol", ["Empleado", "Encargado"], "selectRol");
 
     const text = document.createElement("p")
-    text.textContent = "Actualmente es " + userRol;
+    text.textContent = "Actualmente es " + userActualRol;
 
     const submitInput = document.createElement("button")
     submitInput.textContent = "Confirmar"
-
+    console.log(userActualRol)
     submitInput.addEventListener("click", async e => {
         const inputSelectRol = document.querySelector("#selectRol");
         if (inputSelectRol.value == "-Seleccione-") {
             addToast([{ title: "Failure", error: "Debes ingresar un rol para poder cambiarlo." }]);
-        } else if(inputSelectRol.value.toLowerCase() == userRol){
-            addToast([{ title: "Failure", error: "Este usuario ya es " + userRol }]);
+        } else if(inputSelectRol.value == userActualRol){
+            addToast([{ title: "Failure", error: "Este usuario ya es " + userActualRol }]);
         } else {
             try {
+                console.log(inputSelectRol.value)
                 const response = await fetch(location.origin + `/dashboard/manageEmployee/forceChangeRol?uuid=${userUUID}&rol=${inputSelectRol.value}`);
                 const data = await response.json();
     

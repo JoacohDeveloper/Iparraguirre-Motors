@@ -2,6 +2,7 @@
     display: flex;
 }
 
+/* Contenedor de Interacciones */
 .interactions-container {
     width: 45%;
     height: 40rem;
@@ -10,26 +11,34 @@
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
-    background-color: #cccccc70;
+    background-color: #fff;
     padding: 3rem 0;
     border-radius: .6rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     overflow-x: hidden;
-    .interactions-message{
-        display: flex;
-        flex-direction: column;
-        gap: .4rem;
-        h4{
-            text-align: center;
-            font-size: 1.2rem;
-        }
-        p{
-            text-align: center;
-            font-size: .95rem;
-        }
-        
-    }
 }
+
+/* Mensaje de Interacciones */
+.interactions-message {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.interactions-message h4 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #b10b0a;
+}
+
+.interactions-message p {
+    text-align: center;
+    font-size: .95rem;
+    color: #666;
+}
+
+/* Contenedor de Tarjetas */
 .interactions-cardContainer {
     display: flex;
     flex-direction: column;
@@ -37,96 +46,117 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #ccc;
+    background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     gap: 1rem;
 }
 
+/* Tarjeta de Interacciones */
 .interactions-card {
     display: flex;
     flex-direction: column;
-    background-color: #ccccccad;
+    background-color: #fff;
     color: #000;
     border-radius: 10px;
     width: 100%;
     height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    .interactions-cardHeader{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 1.75rem;
-        background-color: #fff;
-        border-radius: 10px 10px 0 0;
-        label{
-            display: flex;
-            justify-content: space-between;
-            gap: .22rem;
-            margin-left: .5rem;
-            #txt_ID{
-                font-size: 1rem;
-                font-weight: bold;
-            }
-            #html_ID{
-                font-size: .75rem;
-            }
-        }
-        button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: none;
-            background-color: #b10b0a;
-            cursor: pointer;
-            height: 100%;
-            width: 1.5rem;
-            max-width: 1.5rem;
-            border-radius:  0 10px 0 0;
-        }
-        h4{
-            margin-left: .5rem;
-            font-size: .9rem;
-        }
-    }
-    .interactions-cardMain{
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        margin-block: .5rem;
-        gap: .5rem;
-        label{
-            display: flex;
-            justify-content: space-between;
-            font-size: 1rem;
-            margin-inline: .5rem;
-        }
-    }
-    .interactions-cardFooter{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 1.75rem;
-        background-color: #fff;
-        border-radius: 0 0 10px 10px;
-        button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: none;
-            background-color: #b10b0a;
-            cursor: pointer;
-            height: 100%;
-            width: 7rem;
-            border-radius:  0 0 10px 0;
-        }
-        p{
-            cursor: default;
-            margin-left: .5rem;
-            font-size: .75rem;
-        }
-    }
 }
+
+/* Encabezado de la Tarjeta */
+.interactions-cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    background-color: #b10b0a;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 0 1rem;
+}
+
+.interactions-cardHeader label {
+    display: flex;
+    justify-content: space-between;
+    gap: .22rem;
+    margin-left: .5rem;
+}
+
+.interactions-cardHeader #txt_ID {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.interactions-cardHeader #html_ID {
+    font-size: .75rem;
+}
+
+.interactions-cardHeader button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #b10b0a;
+    color: #fff;
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+}
+
+.interactions-cardHeader h4 {
+    margin-left: .5rem;
+    font-size: 1rem;
+}
+
+/* Contenido Principal de la Tarjeta */
+.interactions-cardMain {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: .5rem;
+    gap: .5rem;
+}
+
+.interactions-cardMain label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin: .5rem;
+}
+
+/* Pie de la Tarjeta */
+.interactions-cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    background-color: #b10b0a;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+    padding: 0 1rem;
+}
+
+.interactions-cardFooter button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #fff;
+    color: #b10b0a;
+    cursor: pointer;
+    height: 2rem;
+    width: 7rem;
+    border-radius: 20px;
+}
+
+.interactions-cardFooter p {
+    cursor: default;
+    margin-left: .5rem;
+    font-size: .75rem;
+}
+
 
 .user-container{
     width: 55%;
@@ -240,6 +270,11 @@
 }
 
 @media screen and (max-width: 1550px) and (min-width: 769px) {
+    .interactions-container{
+        width: 70%;
+        margin: auto;
+        margin-top: 2rem;
+    }
     .container-divisor{
         flex-direction: column;
     }
@@ -267,6 +302,18 @@
 
 
 @media screen and (max-width: 768px) {
+    .interactions-container{
+        width: 95%;
+        margin: auto;
+        margin-top: 1rem;
+    }
+    .interactions-cardHeader > label{
+        flex-direction: column;
+        text-wrap: wrap;
+    }
+    .interactions-cardHeader, .interactions-cardFooter{
+        padding: 0;
+    }
     .container-divisor{
         flex-direction: column;
     }

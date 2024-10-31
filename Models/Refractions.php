@@ -10,6 +10,7 @@ class Refractions extends ActiveRecord
     protected static $tabla = "refractions";
     protected static $columnasdb = [
         "refraction_id",   // Cambiado de "id" a "refraction_id"
+        "origin",          // Origen del producto
         "url_img",         // URL de la imagen
         "alt_img",         // Texto alternativo de la imagen
     ];
@@ -18,6 +19,7 @@ class Refractions extends ActiveRecord
     public
         $product,
         $refraction_id,  // Cambiado de "id" a "refraction_id"
+        $origen,
         $url_img,
         $alt_img;
 
@@ -25,6 +27,7 @@ class Refractions extends ActiveRecord
     {
 
         $this->product = new Product($args);
+        $this->origen = $args["origen"] ?? "";
         $this->product->categoria = "Repuesto";
         $this->refraction_id = $args["refraction_id"] ?? null;
         $this->url_img = $args["url_img"] ?? "";
@@ -157,7 +160,7 @@ class Refractions extends ActiveRecord
         $this->id = $id;
         date_default_timezone_set('America/Montevideo');
         try {
-            $query = "UPDATE Refractions SET
+            $query = "UPDATE " . self::$tabla . " SET
                 nombre = :nombre,
                 descripcion = :descripcion,
                 fabricante = :fabricante,

@@ -602,9 +602,7 @@ header .brgMenu {
 /* toasts */
 
 .toast {
-  /* position: absolute; */
   width: 20rem;
-  /* height: 4rem; */
   border-radius: 12px;
   background: transparent;
   backdrop-filter: blur(15px);
@@ -647,7 +645,7 @@ header .brgMenu {
 .message .text {
   font-size: 16px;
   font-weight: 400;
-  color: #ccc;
+  color: #666;
 }
 
 .message .text.text-1 {
@@ -871,6 +869,21 @@ footer {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+  #icon-facebook{
+    &:hover{
+      filter: brightness(0) saturate(100%) invert(33%) sepia(12%) saturate(2535%) hue-rotate(183deg) brightness(98%) contrast(92%);
+    }
+  }
+  #icon-instagram{
+    &:hover{
+      filter: brightness(0) saturate(100%) invert(33%) sepia(55%) saturate(3701%) hue-rotate(320deg) brightness(90%) contrast(97%);
+    }
+  }
+  #icon-twitter{
+    &:hover{
+      filter: brightness(0) saturate(100%) invert(55%) sepia(75%) saturate(3913%) hue-rotate(181deg) brightness(106%) contrast(90%);
+    }
+  }
 }
 .icon-black {
   display: none;
@@ -1066,6 +1079,9 @@ footer {
   display: none;
 }
 @media (max-width: 768px) {
+  .logo {
+    margin-left: -.75rem;
+  }
   #settings {
     display: inline;
   }

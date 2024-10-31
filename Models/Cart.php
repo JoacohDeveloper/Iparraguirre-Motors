@@ -8,7 +8,7 @@ use PDOException;
 class Cart extends ActiveRecord
 {
 
-    protected static $tabla = "Cart";
+    protected static $tabla = "cart";
     protected static $columnasdb = ["cart_id", "customer_uuid", "item_id", "cantidad", "addedAt"];
 
     protected $cart_id, $customer_uuid, $item_id, $cantidad, $addedAt;

@@ -19,7 +19,7 @@ class Customer extends ActiveRecord
         "phone",
         "password",
         "token",
-        "isAdmin",
+        "userType",
         "isDeleted",
         "verify",
         "titulo_imagen",
@@ -28,7 +28,7 @@ class Customer extends ActiveRecord
         "updatedAt"
     ];
 
-    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $isAdmin, $isDeleted, $verify, $titulo_imagen, $imagen, $createdAt, $updatedAt;
+    protected $uuid, $full_name, $username, $slug, $email, $phone, $password, $re_password, $token, $userType, $isDeleted, $verify, $titulo_imagen, $imagen, $createdAt, $updatedAt;
 
     function __construct($args = [])
     {
@@ -41,7 +41,7 @@ class Customer extends ActiveRecord
         $this->password = $args["password"] ?? "";
         $this->re_password = $args["re_password"] ?? "";
         $this->token = null;
-        $this->isAdmin = 0;
+        $this->userType = $args["userType"] ?? "Cliente";
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->verify = 0;
         $this->titulo_imagen = "imagen default de usuario";
@@ -276,9 +276,9 @@ class Customer extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
-    public function isAdmin()
-    {
-        return boolval($this->isAdmin);
+    public function isAdmin(){
+        if($this->userType == "Empleado" || $this->userType == "Encargado" || $this->userType == "Root") return true;
+        return false;
     }
 
     public function getDeleted()

@@ -16,16 +16,12 @@ const ImageItem = ({ url, alt }) => {
 }
 
 async function loadProduct() {
-
-
-
     const $image = document.querySelector("#image")
     const $title = document.querySelector(".title")
-    const $price = document.querySelector(".price");
+    const contenedorPrecio = document.querySelector(".contenedor-precio");
     const $description = document.querySelector(".description")
 
     const $contenedorImagenes = document.querySelector(".image-items")
-
 
     const urlParams = new URLSearchParams(window.location.search);
     const uuid = urlParams.get('product-id');
@@ -33,21 +29,48 @@ async function loadProduct() {
     const response = await fetch(`${window.location.origin}/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`)
 
     const product = await response.json();
+    
+    $title.textContent = product?.product?.nombre;
 
+    if (product.product.discount) {
+        const precioOriginalHTML = document.createElement("p");
+        const precioFinalHTML = document.createElement("p");
+        const descuentoHTML = document.createElement("div");
+        precioOriginalHTML.id = "precioOriginal";
+        precioFinalHTML.id = "precioFinal";
+        descuentoHTML.id = "descuento";
 
-    $title.textContent = product?.product?.nombre
-    $price.textContent = product?.product.precio.toLocaleString("en-US", {
-        style: 'currency',
-        currency: 'USD'
-    })
+        let precioFinal;
+        if (product.product.discount_type == "Dolares") {
+            precioFinal = product.product.precio - product.product.discount;
+            descuentoHTML.textContent = "-" + product.product.discount + " USD";
+        } else if (product.product.discount_type == "Porcentaje") {
+            let montoDescuento = (product.product.precio * product.product.discount) / 100;
+            precioFinal = product.product.precio - montoDescuento;
+            descuentoHTML.textContent = "-" + product.product.discount + "%";
+        }
+
+        precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        precioOriginalHTML.textContent = `${Number(product.product.precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+
+        const labelDiscount = document.createElement("label");
+        labelDiscount.appendChild(precioOriginalHTML);
+        labelDiscount.appendChild(descuentoHTML);
+
+        contenedorPrecio.appendChild(precioFinalHTML);
+        contenedorPrecio.appendChild(labelDiscount);
+    } else {
+        const precioHTML = document.createElement("p");
+        precioHTML.id = "precio";
+        precioHTML.textContent = `${Number(product.product.precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        contenedorPrecio.appendChild(precioHTML);
+    }
 
     $description.textContent = product?.product?.descripcion
 
     if (product.vehicleImages.length > 0) {
         $image.src = "/build/" + product?.vehicleImages[0]?.url.split("/build/")[1]
         $image.alt = product?.vehicleImages[0]?.alt
-
-
 
         product?.vehicleImages.forEach((image, index) => {
             const url = "/build/" + image?.url.split("/build/")[1]
@@ -57,7 +80,6 @@ async function loadProduct() {
             }
             $contenedorImagenes.appendChild(img)
         })
-
 
         const $elements = $contenedorImagenes.querySelectorAll(".img-item");
 
@@ -80,27 +102,42 @@ async function loadProduct() {
         $image.src = "/build/src/images/vehicles/default.jpg"
     }
 
-    const $basketBtn = document.querySelector("#basket")
+    const optionsContainer = document.querySelector(".add-to-cart-container");
 
-    $basketBtn.addEventListener("click", e => {
+    if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+        const testBtn = document.createElement("button");
+        testBtn.textContent = "Reservar test drive";
+        optionsContainer.appendChild(testBtn);
+        
+        testBtn.addEventListener("click", e => {
+            modalTest();
+            toggleBackground();
+        })
+    } else {
+        const qtyBtn = document.createElement("input");
+        const basketBtn = document.createElement("button");
 
-        const ultimosProductos = JSON.parse(localStorage.getItem("basket")) || []
-        const newProduct = { ...product.product, images: product.vehicleImages || [] }
+        qtyBtn.type = "number";
+        qtyBtn.value = "1";
+        basketBtn.textContent = "Añadir al carrito";
 
-        const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id)
+        optionsContainer.appendChild(qtyBtn);
+        optionsContainer.appendChild(basketBtn);
 
-        if (!yaExiste) {
-            localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]))
-            basketScript()
-        }
-    })
+        basketBtn.addEventListener("click", e => {
+            const ultimosProductos = JSON.parse(localStorage.getItem("basket")) || []
+            const newProduct = { ...product.product, images: product.vehicleImages || [] }
 
+            const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id)
 
+            if (!yaExiste) {
+                localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]))
+                basketScript()
+            }
+        })
+    }
     moveArrows()
 }
-
-
-
 
 
 function moveArrows() {
@@ -135,7 +172,80 @@ function moveArrows() {
     }
 }
 
+const productContainer = document.querySelector(".product-container")
 
+function modalTest(){
+    const testContainer = document.createElement("div"); //Contenedor principal
+    testContainer.classList.add("test-Container");
+    const containerHeader = document.createElement("div"); //Encabezado del contenedor
+    containerHeader.classList.add("test-header")
+    const containerMain = document.createElement("div"); //Resto del contenedor
+    containerMain.classList.add("test-main")
+    const explicationText_Content = document.createElement("div"); //Contenedor con informacion para el cliente
+    explicationText_Content.classList.add("explication-main");
+    const formTest = document.createElement("form"); //Formulario de reserva
+    formTest.classList.add("form-main");
 
+    //Items del header
+    const testTitle = document.createElement("h4");
+    testTitle.textContent = "Reserva de test drive";
+
+    const exitBtn = document.createElement("button");
+    exitBtn.classList.add("test-exit");
+    const exitIcon = document.createElement("img");
+    exitIcon.src = "/build/src/images/cross.svg";
+    exitIcon.alt = "Icono de cierre para el formulario";
+    
+    exitBtn.appendChild(exitIcon);
+    exitBtn.addEventListener("click", e => {
+        e.preventDefault();
+        toggleBackground();
+        if(inputDate) inputDate.remove();
+        if(testContainer) testContainer.remove();
+    })
+    //Implementamos los items del header al header
+    containerHeader.appendChild(testTitle);
+    containerHeader.appendChild(exitBtn);
+
+    //Items del main
+    const explicationText = document.createElement("p");
+    const explicationText_redirect = document.createElement("a");
+    
+    explicationText.textContent = "Las reservas de test drive solo se aceptan si son en los proximos 7 dias. Mandar una reserva no te asegura que sea aceptada, la misma puede ser rechazada. Le recomendamos leer las politicas de los test drive para mas seguridad.";
+    explicationText_redirect.textContent = "Ver politica";
+    explicationText_redirect.href = location.origin + "/";
+
+    explicationText_Content.appendChild(explicationText);
+    explicationText_Content.appendChild(explicationText_redirect);
+
+    const labelDate = document.createElement("label");
+    const textDate = document.createElement("p");
+    const inputDate = document.createElement("input");
+    textDate.textContent = "Fecha de reserva";
+    inputDate.type = "date";
+
+    labelDate.appendChild(textDate);
+    labelDate.appendChild(inputDate);
+
+    const inputSubmit = document.createElement("input");
+    inputSubmit.type = "submit";
+    inputSubmit.textContent = "Reservar"
+
+    formTest.appendChild(labelDate);
+    formTest.appendChild(inputSubmit);
+
+    containerMain.appendChild(explicationText_Content);
+    containerMain.appendChild(formTest);
+
+    testContainer.appendChild(containerHeader);
+    testContainer.appendChild(containerMain);
+
+    productContainer.appendChild(testContainer);
+}
+
+const toggleBackground = () => {
+    productContainer.classList.toggle("fixed")
+    document.body.classList.toggle("blured")
+}
 
 loadProduct()

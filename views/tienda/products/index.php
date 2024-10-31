@@ -19,12 +19,13 @@
 
         <div class="product-information-container">
             <h4 class="title">Lorem ipsum dolor sit amet.</h4>
-            <p class="price">$100.00</p>
+            <div class="contenedor-precio">
+                <!-- Aqui va el contenido de precio, tenga o no descuento -->
+            </div>
             <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore officiis illo nemo voluptatum omnis? Earum perspiciatis doloribus odit...</p>
 
             <div class="add-to-cart-container">
-                <input type="number" value="1" disabled name="qty">
-                <button id="basket">ADD TO CART</button>
+                <!-- Aqui va el boton de TestDrive o agregar al carrito con cantidad -->
             </div>
             <button class="wishlist">
                 <img src="/build/src/images/bookmark.svg" alt="bookmark icon">

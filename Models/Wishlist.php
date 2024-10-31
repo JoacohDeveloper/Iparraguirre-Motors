@@ -5,7 +5,7 @@ use PDOException;
 
 class Wishlist extends ActiveRecord {
 
-    protected static $tabla = "Wishlist";
+    protected static $tabla = "wishlist";
     protected static $columnasdb = ["wish_id", "customer_uuid", "item_id", "addedAt"];
 
     protected $wish_id, $customer_uuid, $item_id, $addedAt;

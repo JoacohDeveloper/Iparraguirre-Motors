@@ -5,16 +5,16 @@
       <h3>Iparraguirre-Motors</h3>
       <div class="social-icons">
         <a href="https://www.facebook.com/">
-            <img src="/build/src/images/footer/facebook-white.png" alt="facebook social-icons" class="icon-white">
-            <img src="/build/src/images/footer/facebook-black.png" alt="facebook social-icons" class="icon-black">
+            <img src="/build/src/images/footer/facebook-white.png" alt="facebook social-icons" class="icon-white" id="icon-facebook">
+            <img src="/build/src/images/footer/facebook-black.png" alt="facebook social-icons" class="icon-black" id="icon-facebook">
         </a>
         <a href="https://www.instagram.com/">
-            <img src="/build/src/images/footer/instagram-white.png" alt="instagram social-icons" class="icon-white">
-            <img src="/build/src/images/footer/instagram-black.png" alt="instagram social-icons" class="icon-black">
+            <img src="/build/src/images/footer/instagram-white.png" alt="instagram social-icons" class="icon-white" id="icon-instagram">
+            <img src="/build/src/images/footer/instagram-black.png" alt="instagram social-icons" class="icon-black" id="icon-instagram">
         </a>
         <a href="https://x.com/">
-            <img src="/build/src/images/footer/twitter-white.png" alt="twitter social-icons" class="icon-white">
-            <img src="/build/src/images/footer/twitter-black.png" alt="twitter social-icons" class="icon-black">
+            <img src="/build/src/images/footer/twitter-white.png" alt="twitter social-icons" class="icon-white" id="icon-twitter">
+            <img src="/build/src/images/footer/twitter-black.png" alt="twitter social-icons" class="icon-black" id="icon-twitter">
         </a>
     </div>
 

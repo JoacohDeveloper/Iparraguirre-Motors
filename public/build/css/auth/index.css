@@ -302,9 +302,14 @@ main{
     margin-bottom: 20px;
   }
 
-  #regForm, #loginForm {
+  #loginForm {
     width: 290px;
     padding: 20px;
     height: 25rem;
+  }
+  #regForm{
+    width: 290px;
+    padding: 20px;
+    height: 30rem;
   }
 }

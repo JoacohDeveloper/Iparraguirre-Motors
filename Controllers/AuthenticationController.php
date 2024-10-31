@@ -100,6 +100,28 @@ abstract class AuthenticationController
             exit;
         }
     }
+    
+    public static function rootRegist() {
+        header('Content-Type: application/json; charset=utf-8');
+        $masterAccount = new User();
+        $result = $masterAccount->masterAccount();
+    
+        if ($result) {
+            $response = ["message" => "succesfuly"];
+            logg("Todo okey");
+            
+            sleep(5);
+            header("Location: /dashboard/login");
+        } else {
+            $response = ["error" => "Ha ocurrido un error"];
+            logg("Ocurrio un error");
+            
+            sleep(5);
+            header("Location: /dashboard/login");
+        }
+        exit;
+    }
+    
 
     public static function recuperar(Router $router)
     {

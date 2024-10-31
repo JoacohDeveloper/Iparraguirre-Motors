@@ -74,20 +74,4 @@ class ProductController
             "scripts" => ["dashboard/index", "dashboard/components/discountsSearch", "dashboard/products/discounts"],
         ]);
     }
-
-
-    public static function vehiclePreview(Router $router){
-        if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
-        $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-
-        $router->render("/dashboard/products/preview", [
-            "title" => "[Nombre] | Iparraguirre Motors",
-            "description" => "Pagina del dashboard de Iparraguirre Motors",
-            "styles" => ["dashboard/index", "dashboard/aside", "dashboard/products/preview"],
-            "scripts" => ["dashboard/index"],
-        ]);
-    }
 }

@@ -14,7 +14,7 @@
             <div class="catalogCard-content">
                 <h3>Autos modificados</h3>
                 <p>Estos vehiculos estan modificados, pueden tener un body kit, motor mejorado o cambiado y interior actualizado.</p>
-                <a href="#" class="btn">Ver Más</a>
+                <a href="/catalogo/vehiculosModificados" class="btn">Ver Más</a>
             </div>
         </div>
         <div class="catalogCard">
@@ -22,7 +22,7 @@
             <div class="catalogCard-content">
                 <h3>Repuestos</h3>
                 <p>Aqui puedes encontrar repuestos clasicos dificiles de conseguir para todo tipo de clasico.</p>
-                <a href="#" class="btn">Ver Más</a>
+                <a href="/catalogo/refraction" class="btn">Ver Más</a>
             </div>
         </div>
     </div>

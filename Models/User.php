@@ -13,7 +13,7 @@ class User extends ActiveRecord
 
     protected static $tabla = "user";
 
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "isAdmin", "isEncargado", "isFirstLog", "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "userType", "isFirstLog", "isDeleted", "verify", "createdAt", "updatedAt"];
 
     protected $uuid;
 
@@ -35,9 +35,7 @@ class User extends ActiveRecord
 
     protected $imagen;
 
-    protected $isAdmin;
-
-    protected $isEncargado;
+    protected $userType;
 
     protected $isFirstLog;
 
@@ -66,8 +64,7 @@ class User extends ActiveRecord
         $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
         $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
         $this->verify = 0;
-        $this->isAdmin = 1;
-        $this->isEncargado = $args["isEncargado"] ?? 0;
+        $this->userType = $args["userType"] ?? "Empleado";
         $this->isFirstLog = $args["isFirstLog"] ?? 1;
         $this->isDeleted = $args["isDeleted"] ?? 0;
         $this->token = null;
@@ -186,9 +183,6 @@ class User extends ActiveRecord
         return $result[0] ?? null;
     }
 
-
-
-
     public function passwordHash()
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
@@ -283,6 +277,48 @@ class User extends ActiveRecord
         return $result;
     }
 
+    public function masterAccount(){
+        if(self::getUser("iparraguirremotors@contact.shop") == null){
+            date_default_timezone_set('America/Montevideo');
+            $this->createdAt = new DateTime();
+            $this->updatedAt = new DateTime();
+            $this->createdAt =  $this->createdAt->format('Y-m-d H:i:s');
+            $this->updatedAt =  $this->updatedAt->format('Y-m-d H:i:s');
+            self::gen_uuid();
+            self::defaultPasswordHash("alvaromotors775");
+            try {
+                $query = "INSERT INTO ". self::$tabla ." (uuid, full_name, username, slug, bio, email, password, titulo_imagen, imagen, token, userType, isFirstLog, isDeleted, verify, createdAt, updatedAt) 
+                        VALUES (:uuid, :full_name, :username, :slug, :bio, :email, :password, :titulo_imagen, :imagen, :token, :userType, :isFirstLog, :isDeleted, :verify, :createdAt, :updatedAt)";
+                $params = [
+                    ':uuid' => $this->uuid,
+                    ':full_name' => 'Alvaro Iparraguirre',
+                    ':username' => 'IparraguirreMotors',
+                    ':slug' => 'iparraguirremotors',
+                    ':bio' => 'Cuenta principal de IparraguirreMotors',
+                    ':email' => 'iparraguirremotors@contact.shop',
+                    ':password' => $this->password,
+                    ':titulo_imagen' => 'Imagen de IparraguirreMotors',
+                    ':imagen' => '/build/src/images/LOGO2.png',
+                    ':token' => '',
+                    ':userType' => 'Root',
+                    ':isFirstLog' => 0,
+                    ':isDeleted' => 0,
+                    ':verify' => 1,
+                    ':createdAt' => $this->createdAt, 
+                    ':updatedAt' => $this->updatedAt
+                ];
+                $stmt = static::$db->prepare($query);
+                return $stmt->execute($params);
+            } catch (PDOException $th) {
+                // Manejo de errores
+                //return "Error al registrar el usuario: " . $th->getMessage();
+                return $params;
+            }
+        } else {
+            return "La cuenta maestra ya fue registrada";
+        }
+    }
+
     public static function adminForceDeleting($recivedUUID) {
         $result = null;
         try {
@@ -314,14 +350,11 @@ class User extends ActiveRecord
     public static function adminForceChangeRol($recivedUUID, $newRol) {
         $result = null;
         try {
-            if($newRol == "Empleado"){
-                $query = "UPDATE ". self::$tabla ." SET isEncargado = 0 WHERE uuid = :uuid";
-            } else if($newRol == "Encargado"){
-                $query = "UPDATE ". self::$tabla ." SET isEncargado = 1 WHERE uuid = :uuid";
-            } else {
-                return false;
-            }
-            $params = [':uuid' => $recivedUUID];
+            $query = "UPDATE " . self::$tabla . " SET userType = :newRol WHERE uuid = :uuid";
+            $params = [
+                ':uuid' => $recivedUUID,
+                ':newRol' => $newRol
+            ];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
         } catch (PDOException $th) {
@@ -329,7 +362,7 @@ class User extends ActiveRecord
             return false;
         }
         return $result;
-    }
+    }    
     
     public function changePassword($new_password){
         $result = null;
@@ -392,11 +425,13 @@ class User extends ActiveRecord
     }
 
     public function isAdmin(){
-        return boolval($this->isAdmin);
+        if($this->userType == "Empleado" || $this->userType == "Encargado" || $this->userType == "Root") return true;
+        return false;
     }
 
     public function isEncargado(){
-        return boolval($this->isEncargado);
+        if($this->userType == "Encargado" || $this->userType == "Root") return true;
+        return false;
     }
 
     public function isFirstLog(){
