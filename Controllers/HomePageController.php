@@ -114,7 +114,14 @@ abstract class HomePageController
                     if ($result) {
                         //Creamos una interaccion para la baja del perfil
                         $interaction = new Interactions();
-                        $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Account deleting", null, null, null, false);
+                        $interactionResponse = $interaction->createInteraction(
+                            $customer->getUUID(), //UUID del interactuador
+                            "Eliminacion de cuenta", //Tipo de interaccion (listado en Model)
+                            null, //Costo de interaccion (Precio en dolares o null)
+                            null, //Nombre del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                            null, //Tipo del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                            true, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
+                        );
 
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
@@ -150,9 +157,16 @@ abstract class HomePageController
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
 
-                        //Creamos una interaccion para notificar la eliminacion del perfil.
+                        //Creamos una interaccion para notificar el cambio de contraseña
                         $interaction = new Interactions();
-                        $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Delete porfile", null, null, null, true);
+                        $interactionResponse = $interaction->createInteraction(
+                            $customer->getUUID(), //UUID del interactuador
+                            "Contraseña cambiada", //Tipo de interaccion (listado en Model)
+                            null, //Costo de interaccion (Precio en dolares o null)
+                            null, //Nombre del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                            null, //Tipo del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                            true, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
+                        );
 
                         echo json_encode(["message" => "successfuly"]);
                     } else {

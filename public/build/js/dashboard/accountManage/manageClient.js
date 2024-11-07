@@ -218,7 +218,7 @@ const interactionsCard = ({ interactionID, interactionOwner, interactionType, in
     labelCost.appendChild(costText);
     labelCost.appendChild(costHTML);
 
-    if(interactionType == "Purasche" || interactionType == "Test Drive"){
+    if(interactionType == "Compra" || interactionType == "Prueba de manejo"){
         var labelProductType = document.createElement("label");
         labelProductType.classList.add("labelProductName");
         const productTypeText = document.createElement("p");

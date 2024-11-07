@@ -37,6 +37,7 @@ use Controllers\RefractionsController;
 use MVC\Router;
 use Controllers\VehicleRestController;
 use Controllers\RefractionsRestController;
+use Models\Customer;
 
 //echo phpinfo();
 
@@ -95,7 +96,7 @@ $router->post("/dashboard/registAdmin/regist", [AuthenticationController::class,
 $router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]);
 $router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]);
 $router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]); 
-$router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]); 
+$router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]);
 
 //Registro para cuenta maestra:
 $router->get("/forceRegistOfMasterAccount", [AuthenticationController::class, "rootRegist"]);
@@ -108,6 +109,8 @@ $router->get("/customer/user-default-image", [CustomerController::class, "elimin
 
 $router->get("/settings", [HomePageController::class, "userSettings"]);
 $router->post("/settings", [HomePageController::class, "userSettings"]);
+$router->get("/settings/getUserTestDrive", [CustomerController::class, "customerTestDrive"]);
+
 $router->get("/logout", [CustomerController::class, "logout"]);
 $router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
 $router->get("/dashboard/noaccess", [DashboardController::class, "noAccess"]);
@@ -157,6 +160,10 @@ $router->get("/catalogo/vehiculos", [TiendaController::class, "vehicles"]);
 $router->get("/catalogo/vehiculosModificados", [TiendaController::class, "customVehicles"]);
 $router->get("/catalogo/refraction", [TiendaController::class, "refraction"]);
 
+$router->post("/catalogo/vehiculos/reserva", [CustomerController::class, "reserveTestDrive"]); 
+
+$router->get("/catalogo/product/view", [TiendaController::class, "view"]);
+
 //Rest Vehicles
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);
@@ -167,9 +174,6 @@ $router->get("/api/v1/refractions", [RefractionsRestController::class, "refracti
 $router->get("/faq", function () {
     header("Location: /faq.html");
 });
-
-
-$router->get("/catalogo/product/view", [TiendaController::class, "view"]);
 
 //Pruebas Randoms
 

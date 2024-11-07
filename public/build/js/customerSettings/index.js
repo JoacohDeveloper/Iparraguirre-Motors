@@ -7,13 +7,7 @@ const buttons = document.querySelectorAll(".button_settings");
 
 buttons.forEach(button => button.addEventListener("click", formMenu))
 
-function toggleBackground() {
-    document.body.classList.toggle("fixed")
-    document.body.classList.toggle("blured")
-}
-
 async function formMenu({ target }) {
-    toggleBackground();
     const settingsContent = document.querySelector(".fit__content");
     settingsContent.classList.add("fixed");
     const container = document.querySelector(".container");
@@ -57,9 +51,6 @@ async function formMenu({ target }) {
         if (e.target === settings_formHTML) removeForm();
     });
 }
-
-
-
 
 
 function setResumeChanges(formdata, imgURL) {
@@ -543,3 +534,84 @@ async function defaultImage(event) {
         }]);
     }
 }
+
+/* Obtener y generar cards para los testDrive en caso de que el usuario tenga alguno */
+
+const cardTestDriveContent = document.querySelector(".cardTestDrive_Container");
+
+const testCard = ({ productID, reservedDate, createdAt }) => {
+    const card = document.createElement("div");
+    card.classList.add("test-drive-card");
+    card.setAttribute("aria-label", productID);
+
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("test-drive-card-content");
+
+    const detailsContainer = document.createElement("div");
+    detailsContainer.classList.add("test-drive-details");
+
+    const productNameHTML = document.createElement("p");
+    productNameHTML.textContent = `Producto: ${productID}`;
+
+    const reservedDateHTML = document.createElement("p");
+    reservedDateHTML.textContent = `Reserva: ${new Date(reservedDate).toLocaleDateString()}`;
+
+    const createdAtHTML = document.createElement("p");
+    createdAtHTML.textContent = `Creado: ${new Date(createdAt).toLocaleDateString()}`;
+
+    detailsContainer.appendChild(productNameHTML);
+    detailsContainer.appendChild(reservedDateHTML);
+    detailsContainer.appendChild(createdAtHTML);
+
+    cardContent.appendChild(detailsContainer);
+
+    card.appendChild(cardContent);
+
+    return card;
+};
+
+async function loadTestDrive() {
+    const cargarTestDrives = async () => {
+        try {
+            const response = await fetch(location.origin + "/settings/getUserTestDrive");
+            const data = await response.json();
+
+            if (data?.errores) {
+                const errors = Object?.values(data?.errores).map(err => {
+                    const error = document.createElement("div");
+                    error.classList.add("error");
+                    error.textContent = err;
+                    return { title: "Failure", error: err };
+                });
+                addToast(errors);
+            } else if (data?.error) {
+                const infoText = document.createElement("p");
+                infoText.id = "exampleTXT_information";
+                infoText.textContent = "No has reservado ningun test drive";
+                if (cardTestDriveContent) cardTestDriveContent.appendChild(infoText);
+            } else if (data?.testDrives && data.testDrives.length > 0) {
+                data.testDrives.forEach(testDrive => {
+                    const customT = {
+                        productID: testDrive.productName,
+                        reservedDate: testDrive.reservedDate,
+                        createdAt: testDrive.createdAt
+                    };
+                    if (cardTestDriveContent) cardTestDriveContent.appendChild(testCard(customT));
+                });
+            }
+        } catch (error) {
+            console.error('Error al obtener los test drives:', error);
+            addToast([{
+                title: "Failure",
+                error: "Ha ocurrido un error al cargar los test drives"
+            }]);
+        }
+    };
+    try {
+        await cargarTestDrives();
+    } catch (error) {
+        console.error('Error general al cargar los test drives:', error);
+    }
+}
+
+loadTestDrive();

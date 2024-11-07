@@ -110,7 +110,7 @@ async function loadProduct() {
         optionsContainer.appendChild(testBtn);
         
         testBtn.addEventListener("click", e => {
-            modalTest();
+            modalTest(product.product.product_id, product.product.nombre, product.year);
             toggleBackground();
         })
     } else {
@@ -174,7 +174,7 @@ function moveArrows() {
 
 const productContainer = document.querySelector(".product-container")
 
-function modalTest(){
+function modalTest(itemID, itemName, itemYear){
     const testContainer = document.createElement("div"); //Contenedor principal
     testContainer.classList.add("test-Container");
     const containerHeader = document.createElement("div"); //Encabezado del contenedor
@@ -199,10 +199,16 @@ function modalTest(){
     exitBtn.appendChild(exitIcon);
     exitBtn.addEventListener("click", e => {
         e.preventDefault();
-        toggleBackground();
-        if(inputDate) inputDate.remove();
-        if(testContainer) testContainer.remove();
-    })
+      
+        testContainer.classList.add('closing');
+      
+        setTimeout(() => {
+          toggleBackground();
+          if (inputDate) inputDate.remove();
+          if (testContainer) testContainer.remove();
+        }, 500);
+    });
+    
     //Implementamos los items del header al header
     containerHeader.appendChild(testTitle);
     containerHeader.appendChild(exitBtn);
@@ -211,7 +217,7 @@ function modalTest(){
     const explicationText = document.createElement("p");
     const explicationText_redirect = document.createElement("a");
     
-    explicationText.textContent = "Las reservas de test drive solo se aceptan si son en los proximos 7 dias. Mandar una reserva no te asegura que sea aceptada, la misma puede ser rechazada. Le recomendamos leer las politicas de los test drive para mas seguridad.";
+    explicationText.textContent = "Las reservas de test drive solo se aceptan si son en los proximos 7 dias. Le recomendamos leer las politicas de las pruebas de manejo para mas informacion.";
     explicationText_redirect.textContent = "Ver politica";
     explicationText_redirect.href = location.origin + "/";
 
@@ -223,6 +229,7 @@ function modalTest(){
     const inputDate = document.createElement("input");
     textDate.textContent = "Fecha de reserva";
     inputDate.type = "date";
+    inputDate.name = "date";
 
     labelDate.appendChild(textDate);
     labelDate.appendChild(inputDate);
@@ -230,6 +237,74 @@ function modalTest(){
     const inputSubmit = document.createElement("input");
     inputSubmit.type = "submit";
     inputSubmit.textContent = "Reservar"
+
+    formTest.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const reservedDate = e.target[0].value;
+        const errores = [];
+
+        if (reservedDate == "") {
+            errores.push("Debes ingresar una fecha para la prueba de manejo");
+        }
+        if (itemID == "") {
+            errores.push("Ocurrio un error con el vehiculo");
+        }
+
+        if (errores.length != 0) {
+            const firstError = errores[0];
+            const error = document.createElement("div");
+            error.classList.add("error");
+            console.log("Hola")
+            error.textContent = firstError;
+            addToast([{ title: "Fail", error: firstError }]);
+        } else {
+            const spinner = document.createElement("div")
+            spinner.classList.add("linear-loading") // o spinner
+            const loaderSection = document.querySelector(".loader")
+            loaderSection?.appendChild(spinner);
+            const form_data = new FormData(e.target);
+            
+            const nameOfProduct = itemName + " " + itemYear;
+            form_data.append('productID', itemID);
+            form_data.append('productName', nameOfProduct);
+            try {
+                const response = await fetch(location.origin + "/catalogo/vehiculos/reserva", {
+                    method: "POST",
+                    body: form_data
+                })
+                const data = await response.json()
+
+                if (data?.errores) {
+                    const errors = Object?.values(data?.errores).map(err => {
+                        const error = document.createElement("div");
+                        error.classList.add("error")
+                        error.textContent = err
+                        return { title: "Failure", error: err }
+                    })
+                    addToast(errors);
+                } else if (data?.message == "successfully") {
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "Se ha registrado la prueba con exito!",
+                        icon: "success"
+                    });
+                    const btn_swal = document.querySelector(".swal2-confirm");
+                    if(btn_swal){
+                        btn_swal.addEventListener("click", () =>{
+                            location.reload();
+                        })
+                    }
+                }
+            } catch (error) {
+                console.log(error)
+                addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+            } finally {
+                const spinner2 = loaderSection?.querySelector(".linear-loading")
+                spinner2?.remove()
+            }
+        }
+    });
 
     formTest.appendChild(labelDate);
     formTest.appendChild(inputSubmit);
@@ -244,7 +319,7 @@ function modalTest(){
 }
 
 const toggleBackground = () => {
-    productContainer.classList.toggle("fixed")
+    document.body.classList.toggle("fixed")
     document.body.classList.toggle("blured")
 }
 

@@ -57,6 +57,8 @@
   #edit-resume,
   #edit-p-information {
     width: 50%;
+    margin: auto;
+    margin-top: 1rem;
     padding: 0.4rem 0;
   }
   .logo img{

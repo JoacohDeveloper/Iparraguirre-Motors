@@ -42,7 +42,7 @@
                 </ul>
             </div>
         </div>
-
+        <?php implementComp("error_toast.php") ?>    
     </div>
 
 </div>

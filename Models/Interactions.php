@@ -46,9 +46,9 @@ class Interactions extends ActiveRecord {
         $this->productName = $nameOfProduct ?? null;
         $this->productType = $typeOfProduct ?? null;
     
-        if ($typeOfProduct == "Vehicle") {
+        if ($typeOfProduct == "Vehiculo") {
             $this->productLink = "/dashboard/products/vehicle?search=" . $nameOfProduct ?? "";
-        } else if ($typeOfProduct == "Refraction") {
+        } else if ($typeOfProduct == "Repuesto") {
             $this->productLink = "/dashboard/products/refraction?search=" . $nameOfProduct ?? "";
         } else {
             $this->productLink = null;
@@ -83,9 +83,9 @@ class Interactions extends ActiveRecord {
     
         try {
             if ($adminType == 1) {
-                $query = "SELECT * FROM ". self::$tabla ." WHERE interactionOwner = :interactionOwner";
+                $query = "SELECT * FROM " . self::$tabla . " WHERE interactionOwner = :interactionOwner ORDER BY interactionDate DESC";
             } else {
-                $query = "SELECT * FROM ". self::$tabla ." WHERE interactionOwner = :interactionOwner AND isPrivate = 0";
+                $query = "SELECT * FROM " . self::$tabla . " WHERE interactionOwner = :interactionOwner AND isPrivate = 0 ORDER BY interactionDate DESC";
             }
     
             $result = Interactions::consultarSQL($query, $params);
@@ -107,6 +107,7 @@ class Interactions extends ActiveRecord {
             return null;
         }
     }
+    
 
     public function delete($id){
         try {
@@ -121,3 +122,23 @@ class Interactions extends ActiveRecord {
         }
     }
 }
+
+
+/*
+
+Lista de interacciones
+
+Publicas:
+    - Inicio de sesion = Inicia sesion en la pagina.
+    - Actualizacion de datos = Modifico la foto de perfil y/o los datos de su cuenta.
+    - Prueba de manejo = Reservo una prueba de manejo.
+    - Compra = Se realizo el pago de un carrito.
+    - FALTAN
+
+Privadas:
+    - Eliminacion de cuenta = El mismo elimino su cuenta.
+    - Contraseña cambiada = Cambio su contraseña.
+    - FALTAN
+
+*/
+

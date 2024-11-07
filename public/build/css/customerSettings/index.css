@@ -563,3 +563,35 @@ nav.aside-nav ul.steps li.selected a {
   display: flex;
   gap: 1rem;
 }
+
+@media screen and (max-width: 768px) {
+  .settings-fit__content_aside{
+    width: 80%;
+    margin-top: 1rem;
+    border: solid 1px #ccc;
+    
+  }
+  .settings-userinfo_aside{
+    display: none;
+  }
+  nav.aside-nav ul.steps li.selected a {
+    border-left: none;
+    border-bottom: 3px solid #b10b0a;
+  }
+  .personal-information__saved-fields_grid{
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .button_settings{
+    padding: 6.75px 11px;
+  }
+  .personal-information__head, .purchase__head, .testdrive__head h5{
+    font-size: 1rem;
+  }
+  .form-container{
+    width: 90%;
+  }
+}
+
+/* Test Drive Cards */

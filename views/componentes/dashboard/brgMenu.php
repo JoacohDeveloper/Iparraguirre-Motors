@@ -38,7 +38,10 @@
 
         if ($isEncargado == true) {
             echo '<li>
-                    <a href="/dashboard/registAdmin">Admin regist</a>
+                    <a href="/dashboard/manageClient">Administrar clientes</a>
+                  </li>
+                  <li>
+                    <a href="/dashboard/manageEmployee">Administrar empleados</a>
                   </li>';
         }
     ?>

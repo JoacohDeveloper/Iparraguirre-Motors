@@ -255,6 +255,32 @@ header {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   overflow: hidden;
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate(-50%, -150%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  0% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -150%);
+    opacity: 0;
+  }
+}
+
+.test-Container.closing {
+  animation: slideUp 0.5s ease-in forwards;
 }
 
 .test-header {
@@ -281,6 +307,7 @@ header {
   img {
       width: 1.5rem;
       height: 1.5rem;
+      filter: invert(1);
   }
 }
 
@@ -345,6 +372,12 @@ header {
   }
 }
 
+.blured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(5px);
+}
 
 @media screen and (max-width: 800px) {
   .product-container {

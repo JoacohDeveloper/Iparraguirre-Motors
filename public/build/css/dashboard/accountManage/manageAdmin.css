@@ -11,6 +11,17 @@
     margin-top: 2rem;
 }
 
+@keyframes slideInFromBottom {
+    0% { 
+        transform: translateY(100%); 
+        opacity: 0; 
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .form-container{
     display: flex;
     flex-direction: column;
@@ -19,6 +30,7 @@
     padding: 3rem 2.5rem;
     border-radius: .6rem;
     gap: 1rem;
+    animation: slideInFromBottom 0.5s ease-out;
     h3{
         text-align: center;
         font-size: 1.5rem;
@@ -92,6 +104,17 @@
     justify-content: center;
 }
 
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .user-card {
     width: 350px;
     border: 1px solid #ccc;
@@ -100,13 +123,15 @@
     box-shadow: 0 4px 8px #0000001a;
     margin: 20px;
     background-color: #ffffff;
-    transition: box-shadow .5s ease,
-        transform .5s ease;
+    transition: box-shadow .5s ease, transform .5s ease;
+    animation: slideInFromRight 0.5s ease-out;
 }
-.user-card:hover{
+
+.user-card:hover {
     box-shadow: 4px 4px 4px #b10b0a;
     transform: scale(1.005);
 }
+
   
 .important-container {
     text-align: center;
@@ -193,25 +218,6 @@
     background-color: #dddddd;
     color: #000;
 }
-
-#disabled-button_myAccount:hover::after,
-#disabled-button_Master:hover::after {
-    position: absolute;
-    background-color: #fff;
-    color: #202020;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    white-space: nowrap;
-}
-#disabled-button_myAccount:hover::after {
-    content: "No puedes modificar tu propia cuenta.";
-}
-#disabled-button_Master:hover::after {
-    content: "No puedes modificar a un superior.";
-}
-
 
 @media screen and (max-width: 1550px) and (min-width: 769px) {
     .container-divisor{

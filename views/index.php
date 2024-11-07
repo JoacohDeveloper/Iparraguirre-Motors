@@ -8,7 +8,7 @@
 
             <h1>Iparraguirre <br> <span>Motors</span></h1>
             <p>Descubre el lujo en Iparraguirre Motors, tu agencia de autos exóticos.<br> Encuentra tu vehículo de ensueño entre nuestra selección exclusiva. <br> ¡Bienvenido a la excelencia automotriz!</p>
-            <a href="/catalogo/vehiculos">Mostrar Catalogo</a>
+            <a href="/catalogo">Mostrar Catalogo</a>
         </div>
         <div class="downside">
             <div class="empty"></div>
@@ -21,7 +21,6 @@
         </div>
     </div>
 
-    
     <div class="content">
 
     <div class="content__title">

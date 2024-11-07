@@ -10,8 +10,8 @@
         <nav class="aside-nav">
             <ul class="steps">
                 <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile"><img src="build/src/images/user.svg" alt="personal information icon">Informacion personal</a></li>
-                <li aria-label="step-2" id="cart"><a href="#cart">Carrito</a></li>
-                <li aria-label="step-3" id="wishlist"><a href="#wishlist">Lista de deseos</a></li>
+                <li aria-label="step-2" id="cart"><a href="#cart"><img src="/build/src/images/cart.svg" alt="">Carrito</a></li>
+                <li aria-label="step-3" id="wishlist"><a href="#wishlist"><img src="/build/src/images/bookmark.svg" alt="">Lista de deseos</a></li>
                 <li aria-label="step-4" id="change-pass"><a href="#changepass"><img src="build/src/images/lock.svg" alt="change password icon">Cambiar contraseña</a></li>
                 <li aria-label="step-5" id="delete-account"><a href="#deleteacount"><img src="build/src/images/alert.svg" alt="delete account icon">Borrar cuenta</a></li>
                 <li><a href="/logout"><img src="build/src/images/exit.svg" alt="log out icon">Cerrar Sesion</a></li>
@@ -91,7 +91,9 @@
                 <h5>Registro de test drive</h5>
             </div>
             <div class="testdrive-information__saved-fields">
-                <p id="exampleTXT_information">No has reservado ningun test drive</p>
+                <div class="cardTestDrive_Container">
+                    <!-- Aqui van las cartas de los testdrive reservados por el cliente o un mensaje por defecto dinamico -->
+                </div>
             </div>
         </div>
         

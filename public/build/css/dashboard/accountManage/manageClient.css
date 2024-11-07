@@ -19,23 +19,46 @@
     overflow-x: hidden;
 }
 
+/* Animación de aparición de las tarjetas */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 /* Mensaje de Interacciones */
 .interactions-message {
     display: flex;
     flex-direction: column;
     gap: .4rem;
+    animation: fadeInText 1s ease-out;
 }
 
 .interactions-message h4 {
     text-align: center;
     font-size: 1.2rem;
     color: #b10b0a;
+    animation: fadeInText 1s ease-out;
 }
 
 .interactions-message p {
     text-align: center;
     font-size: .95rem;
     color: #666;
+    animation: fadeInText 1s ease-out;
 }
 
 /* Contenedor de Tarjetas */
@@ -52,6 +75,12 @@
     gap: 1rem;
 }
 
+.interactions-cardContainer h5 {
+    color: #333;
+    text-align: center;
+    animation: fadeInText 1s ease-out;
+}
+
 /* Tarjeta de Interacciones */
 .interactions-card {
     display: flex;
@@ -62,6 +91,7 @@
     width: 100%;
     height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease-out;
 }
 
 /* Encabezado de la Tarjeta */
@@ -103,6 +133,9 @@
     height: 2rem;
     width: 2rem;
     border-radius: 50%;
+    img {
+        filter: invert(1);
+    }
 }
 
 .interactions-cardHeader h4 {
@@ -123,7 +156,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
-    margin: .5rem;
+    margin: .25rem .35rem;
 }
 
 /* Pie de la Tarjeta */
@@ -146,8 +179,7 @@
     background-color: #fff;
     color: #b10b0a;
     cursor: pointer;
-    height: 2rem;
-    width: 7rem;
+    padding: .225rem .3rem;
     border-radius: 20px;
 }
 
@@ -182,6 +214,17 @@
     justify-content: center;
 }
 
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .user-card {
     width: 350px;
     border: 1px solid #ccc;
@@ -190,13 +233,15 @@
     box-shadow: 0 4px 8px #0000001a;
     margin: 20px;
     background-color: #ffffff;
-    transition: box-shadow .5s ease,
-        transform .5s ease;
+    transition: box-shadow .5s ease, transform .5s ease;
+    animation: slideInFromRight 0.5s ease-out;
 }
-.user-card:hover{
+
+.user-card:hover {
     box-shadow: 4px 4px 4px #b10b0a;
     transform: scale(1.005);
 }
+
   
 .important-container {
     text-align: center;

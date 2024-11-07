@@ -187,30 +187,6 @@ const addToast = (errors) => {
     refreshToasts(newToast)
 }
 
-//Nav dropdown
-const dropdown = document.querySelector('.dropdown');
-const dropdownContent = document.querySelector('.dropdown-content');
-
-if (dropdown) {
-    dropdown.addEventListener('click', function (event) {
-        event.preventDefault();
-        if (dropdownContent.classList.contains('show')) {
-            dropdownContent.classList.remove('show');
-        } else {
-            dropdownContent.classList.add('show');
-        }
-    });
-
-    dropdownContent.addEventListener('click', function (event) {
-        event.stopPropagation();
-    });
-    const dropdownLinks = document.querySelectorAll('.dropdown-content > a');
-    dropdownLinks.forEach(link => {
-        link.style.color = 'black';
-    });
-}
-
-
 
 // BASKET
 
@@ -355,3 +331,5 @@ const $basket = document.querySelector(".basket")
 if ($basket) {
     basketScript();
 }
+
+//Carrito para 

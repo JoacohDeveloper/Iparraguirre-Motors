@@ -132,62 +132,6 @@ header .navegacion ul li .nav-links.actual {
   position: relative;
 }
 
-.navegacion > ul > li > .dropdown-content {
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  margin-top: 0.5rem;
-  z-index: 1;
-  right: 0;
-  background-color: #fff;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  overflow: hidden;
-}
-.dark .navegacion > ul > li > .dropdown-content {
-  box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
-  background-color: #202020;
-}
-.navegacion > ul > li > .dropdown-content > .card__toggle > #themeSwitcher {
-  margin: auto;
-  margin-bottom: 0.4rem;
-  background-color: #ccc;
-}
-.navegacion > ul > li > .dropdown-content.show {
-  display: block;
-  margin-top: 13rem;
-}
-.navegacion > ul > li > .dropdown-content > li {
-  width: 100%;
-}
-.navegacion > ul > li > .dropdown-content > li > a {
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-}
-.navegacion > ul > li > .dropdown-content > li > a:hover {
-  background-color: #ccc;
-}
-.dark .navegacion > ul > li > .dropdown-content > li > a:hover {
-  background-color: #202020;
-}
-.navegacion > ul > li.dropdown {
-  cursor: pointer;
-}
-.navegacion > ul > li > .dropdown-content > li > #logout {
-  border-top-color: #202020;
-  border-top-style: solid;
-  border-top-width: 1px;
-}
-.dark .navegacion > ul > li > .dropdown-content > li > #logout {
-  border-top-color: #ffffff;
-  border-top-style: solid;
-  border-top-width: 1px;
-}
-
 ul li a:hover {
   background: #6e30e900;
 }
@@ -269,6 +213,9 @@ header .brgMenu {
 }
 
 @media screen and (max-width: 768px) {
+  header{
+    backdrop-filter: none;
+  }
   header .navegacion {
     display: none;
   }
@@ -340,7 +287,7 @@ header .brgMenu {
   cursor: pointer;
 
   &:hover {
-    background-color: #202020;
+    background-color: #ccc;
   }
 }
 
@@ -954,7 +901,6 @@ footer {
   .container {
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll !important;
     height: auto !important;
   }
 

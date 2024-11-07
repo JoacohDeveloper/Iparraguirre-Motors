@@ -129,6 +129,16 @@ create table interactions(
 	PRIMARY KEY(interactionID)
 );
 
+create table testdrive(
+	testID int(11) not null auto_increment,
+	userUUID VARCHAR(45) not null,
+	productID VARCHAR(45) not null,
+  productName VARCHAR(255) not null,
+  reservedDate datetime default CURRENT_TIMESTAMP,
+  createdAt datetime default CURRENT_TIMESTAMP,
+	PRIMARY KEY(testID)
+);
+
 -- Production SQL code
 
 CREATE TABLE `customer` (

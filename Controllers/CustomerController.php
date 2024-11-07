@@ -6,6 +6,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Models\Customer;
 use Models\Interactions;
+use Models\Testdrive;
 use MVC\Router;
 
 abstract class CustomerController
@@ -44,7 +45,14 @@ abstract class CustomerController
 
                                 //Creamos una interaccion para notificar el inicio de sesion.
                                 $interaction = new Interactions();
-                                $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Log In", null, null, null, false);
+                                $interactionResponse = $interaction->createInteraction(
+                                    $customer->getUUID(), //UUID del interactuador
+                                    "Inicio de sesion", //Tipo de interaccion (listado en Model)
+                                    null, //Costo de interaccion (Precio en dolares o null)
+                                    null, //Nombre del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                                    null, //Tipo del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                                    false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
+                                );
 
                                 $response = ["message" => "succesfuly", "interaction" => $interactionResponse];
                             } else {
@@ -177,6 +185,14 @@ abstract class CustomerController
                     //Creamos una interaccion para notificar el cambio de datos del perfil
                     $interaction = new Interactions();
                     $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Porfile modification", null, null, null, false);
+                    $interactionResponse = $interaction->createInteraction(
+                        $customer->getUUID(), //UUID del interactuador
+                        "Actualizacion de datos", //Tipo de interaccion (listado en Model)
+                        null, //Costo de interaccion (Precio en dolares o null)
+                        null, //Nombre del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                        null, //Tipo del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                        false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
+                    );
                     
                     echo json_encode(["message" => "successfuly", "file_uploaded" => $res]);
                     exit;
@@ -216,7 +232,14 @@ abstract class CustomerController
 
             //Creamos una interaccion para notificar el cambio imagen del perfil
             $interaction = new Interactions();
-            $interactionResponse = $interaction->createInteraction($customer->getUUID(), "Porfile image modification", null, null, null, false);
+            $interactionResponse = $interaction->createInteraction(
+                $customer->getUUID(), //UUID del interactuador
+                "Actualizacion de datos", //Tipo de interaccion (listado en Model)
+                null, //Costo de interaccion (Precio en dolares o null)
+                null, //Nombre del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                null, //Tipo del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
+            );
 
             echo json_encode(["message" => "successfuly"]);
             exit;
@@ -251,4 +274,66 @@ abstract class CustomerController
         }
         exit;
     }
+
+    public static function reserveTestDrive() {
+        $reserveDate = $_POST["date"];
+        $productID = $_POST["productID"];
+        $productName = $_POST["productName"];
+        
+        $customer = $_SESSION["usuario"]; 
+        $customerUUID = $customer->getUUID();
+        
+        $testDriveData = [
+            "reservedDate" => $reserveDate,
+            "productID" => $productID,
+            "productName" => $productName,
+            "userUUID" => $customerUUID
+        ];
+        
+        $testDrive = new Testdrive($testDriveData);
+        
+        $result = $testDrive->crearTestDrive();
+        
+        if ($result) {
+            //Creamos una interaccion para la reserva de prueba.
+            $interaction = new Interactions();
+            $interactionResponse = $interaction->createInteraction(
+                $customer->getUUID(), //UUID del interactuador
+                "Prueba de manejo", //Tipo de interaccion (listado en Model)
+                null, //Costo de interaccion (Precio en dolares o null)
+                $productName, //Nombre del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                "Vehiculo", //Tipo del producto (Si un producto interviene en la interaccion poner variable, sino null)
+                false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
+            );
+
+            $response = ["message" => "successfully"];
+            echo json_encode($response);
+        } else {
+            $response = ["message" => "Ha ocurrido un error"];
+            echo json_encode($response);
+        }
+        exit;
+    }
+
+    public static function customerTestDrive() {
+        $customer = $_SESSION["usuario"] ?? null;
+        
+        if (!$customer) {
+            $response = ["error" => "No hay sesión activa para el usuario."];
+            echo json_encode($response);
+            exit;
+        }
+        
+        $customerUUID = $customer->getUUID();
+        $testDrives = Testdrive::obtenerTestDrive($customerUUID);
+        
+        if ($testDrives) {
+            $response = ["message" => "successfully", "testDrives" => $testDrives];
+            echo json_encode($response);
+        } else {
+            $response = ["error" => "No se encontraron test drives para este usuario."];
+            echo json_encode($response);
+        }
+        exit;
+    }    
 }
