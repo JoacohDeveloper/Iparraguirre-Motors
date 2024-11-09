@@ -197,6 +197,16 @@ CREATE TABLE `refractions` (
   CONSTRAINT `refractions_ibfk_1` FOREIGN KEY (`refraction_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+CREATE TABLE `testdrive` (
+  `testID` int(11) NOT NULL AUTO_INCREMENT,
+  `userUUID` varchar(45) NOT NULL,
+  `productID` varchar(45) NOT NULL,
+  `productName` varchar(255) NOT NULL,
+  `reservedDate` datetime DEFAULT current_timestamp(),
+  `createdAt` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`testID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
 CREATE TABLE `user` (
   `uuid` varchar(45) NOT NULL,
   `full_name` varchar(65) DEFAULT NULL,
