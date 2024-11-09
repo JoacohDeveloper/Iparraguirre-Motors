@@ -3,7 +3,6 @@ header {
   position: fixed;
   height: 3rem;
   background-color: #fff;
-  border-bottom: unset;
 }
 main {
   margin-top: 3rem;
@@ -165,7 +164,7 @@ main {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #fff;
+    background-color: #ccc;
   }
 }
 .navegacion-dashboard ul li p {
@@ -241,7 +240,7 @@ main {
   gap: 0.4rem;
 }
 .border-top {
-  border-top: 1px solid #fff;
+  border-top: 1px solid #ccc;
 }
 
 .center {

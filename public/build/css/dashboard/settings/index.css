@@ -50,7 +50,7 @@
 
   .dashboard-fit__content_aside {
     border: none;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #ccc;
     margin-bottom: 3rem;
   }
 
@@ -80,7 +80,7 @@
   padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  border-right: 2px solid #fff;
+  border-right: 2px solid #ccc;
   align-items: center;
 }
 
@@ -109,12 +109,12 @@
   font-size: 0.8rem;
 }
 .dashboard-fit__content_aside ul li:hover {
-  background-color: #fff;
+  background-color: #cccccc8e;
 }
 .dashboard-fit__content_aside ul #delete-account {
   margin-top: 3rem;
   &:hover {
-    background-color: transparent;
+    background-color: #cccccc8e;
   }
 }
 .dashboard-fit__content_aside ul #delete-account a {
@@ -122,14 +122,7 @@
 }
 
 .selected {
-  background-color: #fff;
-
-  a {
-    font-weight: bold;
-  }
-}
-.selected {
-  background-color: #fff;
+  background-color: #ccc;
 
   a {
     font-weight: bold;
@@ -137,7 +130,7 @@
 }
 
 .dashboard-fit__content_aside ul #delete-account.selected {
-  background-color: #fff;
+  background-color: #ccc;
   a {
     font-weight: bold;
   }
@@ -163,7 +156,7 @@
   padding: 1rem;
   margin-top: 1.5rem;
   border-radius: 0.4rem;
-  border: 2px solid #fff;
+  border: 2px solid #ccc;
 }
 
 .profile-resume-configuration {
@@ -188,7 +181,7 @@
   border-radius: 50%;
   width: 6rem;
   height: 6rem;
-  border: 1px solid #fff;
+  border: 1px solid #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -259,7 +252,7 @@
 }
 
 .dashboard-fit__content__personal-information {
-  border: 2px solid #fff;
+  border: 2px solid #ccc;
   border-radius: 0.4rem;
   margin-top: 0.4rem;
   padding: 1rem 0;
@@ -394,10 +387,24 @@
   transform: translateY(calc(-100svh - 3rem));
 }
 
+.haeder__settings_forms{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  height: 1rem;
+  img{
+    cursor: pointer;
+    &:hover{
+      border-radius: 1rem;
+      background-color: #ccc;
+    }
+  }
+}
 .form-container > h4 {
   width: 100%;
   text-align: center;
-  padding: 1.2rem 0;
+  padding: .6rem 0 1.2rem 0;
   font-size: 1.2rem;
   border-bottom: 2px solid #fff;
 }
@@ -517,7 +524,7 @@
 
 .form-container > form {
   gap: 1rem;
-  border: 2px solid #fff;
+  border: 2px solid #ccc;
   padding: 1.5rem 4rem;
 }
 

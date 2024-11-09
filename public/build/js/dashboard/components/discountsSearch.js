@@ -1,40 +1,41 @@
-const cardContainer = document.querySelector(".card-container")
+const cardContainer = document.querySelector(".card-container");
 
-const Card = ({ nombre, precio, discount, discount_type, id, images, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, discount_type, id, images, año, modelo, fabricante, createdAt }) => {
 
-    const card = document.createElement("div")
+    const card = document.createElement("div");
     card.id = id;
-    const imageContainer = document.createElement("div")
-    imageContainer.classList.add("image-container")
+    card.classList.add("card");
+    card.setAttribute("aria-label", id);
 
-    const contenedorControllers = document.createElement("div")
-    contenedorControllers.classList.add("contenedor-controllers")
-    const btnDiscount = document.createElement("button")
-    const discountImg = document.createElement("img")
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+
+    const contenedorControllers = document.createElement("div");
+    contenedorControllers.classList.add("contenedor-controllers");
+
+    const btnDiscount = document.createElement("button");
+    const discountImg = document.createElement("img");
     btnDiscount.id = id;
-    discountImg.src = "/build/src/images/plus.svg"
-
-    btnDiscount.appendChild(discountImg)
+    discountImg.src = "/build/src/images/plus.svg";
+    btnDiscount.appendChild(discountImg);
 
     btnDiscount.addEventListener("click", (e) => {
-        handlerAgregarDiscount(e)
-    })
+        handlerAgregarDiscount(e);
+    });
 
-    const btnNoDiscount = document.createElement("button")
-    const noDiscountImg = document.createElement("img")
+    const btnNoDiscount = document.createElement("button");
+    const noDiscountImg = document.createElement("img");
     btnNoDiscount.id = id;
-    noDiscountImg.src = "/build/src/images/trash.svg"
+    noDiscountImg.src = "/build/src/images/trash.svg";
+    btnNoDiscount.appendChild(noDiscountImg);
 
-    btnNoDiscount.appendChild(noDiscountImg)
-    btnNoDiscount.addEventListener("click", handlerEliminarDiscount)
+    btnNoDiscount.addEventListener("click", handlerEliminarDiscount);
 
     if (discount === 0 || discount === null) {
-        contenedorControllers.appendChild(btnDiscount)
+        contenedorControllers.appendChild(btnDiscount);
     } else {
-        contenedorControllers.appendChild(btnNoDiscount)
+        contenedorControllers.appendChild(btnNoDiscount);
     }
-
-    const img = document.createElement("img")
 
     const contenedorInformacion = document.createElement("div");
     contenedorInformacion.classList.add("contenedor-informacion");
@@ -49,10 +50,10 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         precioFinalHTML.classList.add("precioFinal");
 
         let precioFinal;
-        if (discount_type == "Dolares") {
+        if (discount_type === "Dolares") {
             precioFinal = precio - discount;
-        } else if (discount_type == "Porcentaje") {
-            let montoDescuento = (precio * discount) / 100;
+        } else if (discount_type === "Porcentaje") {
+            const montoDescuento = (precio * discount) / 100;
             precioFinal = precio - montoDescuento;
         }
 
@@ -68,59 +69,58 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         contenedorPrecio.appendChild(precioHTML);
     }
 
+    const contenedorNombre = document.createElement("div");
+    contenedorNombre.classList.add("contenedor-datos");
+    const nombreHTML = document.createElement("p");
+    nombreHTML.textContent = nombre ?? "Dodge Charger 69";
+
+    const fabricanteHTML = document.createElement("p");
+    fabricanteHTML.textContent = fabricante ?? "Dodge";
+
+    const modeloHTML = document.createElement("p");
+    modeloHTML.textContent = modelo ?? "Charger";
+
+    const añoHTML = document.createElement("p");
+    añoHTML.textContent = año ?? "1969";
+
+    contenedorNombre.appendChild(nombreHTML);
+    contenedorNombre.appendChild(fabricanteHTML);
+    contenedorNombre.appendChild(modeloHTML);
+    contenedorNombre.appendChild(añoHTML);
+
+    const formattedCreatedAt = formatDate(createdAt);
+    const createdHTML = document.createElement("p");
+    createdHTML.textContent = formattedCreatedAt;
+
+    contenedorPrecio.appendChild(createdHTML);
+
+    contenedorInformacion.appendChild(contenedorNombre);
     contenedorInformacion.appendChild(contenedorPrecio);
 
-    const contenedorNombre = document.createElement("div")
-    contenedorNombre.classList.add("contenedor-datos")
-    const nombreHTML = document.createElement("p")
-    nombreHTML.textContent = nombre ?? "Dodge Charger 69"
-
-    const fabricanteHTML = document.createElement("p")
-    fabricanteHTML.textContent = fabricante ?? "Dodge"
-
-    const modeloHTML = document.createElement("p")
-    modeloHTML.textContent = modelo ?? "Charger"
-
-    const añoHTML = document.createElement("p")
-    añoHTML.textContent = año ?? "1969"
-
-    contenedorNombre.appendChild(nombreHTML)
-    contenedorNombre.appendChild(fabricanteHTML)
-    contenedorNombre.appendChild(modeloHTML)
-    contenedorNombre.appendChild(añoHTML)
-    contenedorInformacion.appendChild(contenedorNombre)
-
-    if (images.length == 0)
-        img.src = "/build/src/images/vehicles/default.jpg";
-    else {
-        img.src = `/build${images[0]?.url.split("/build")[1]}`;
+    if (images.length === 0) {
+        imageContainer.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    } else {
+        imageContainer.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
     }
-    img.alt = nombre;
-    imageContainer.appendChild(img)
 
-    card.classList.add("card")
-    card.setAttribute("aria-label", id)
-
-    card.appendChild(contenedorControllers)
-    card.appendChild(imageContainer)
-
-    card.appendChild(contenedorInformacion)
+    card.appendChild(contenedorControllers);
+    card.appendChild(imageContainer);
+    card.appendChild(contenedorInformacion);
 
     const observer = new IntersectionObserver(items => {
         items.forEach(item => {
             if (item.isIntersecting) {
-                item.target.classList.add("intersecting")
-                observer.unobserve(card)
+                item.target.classList.add("intersecting");
+                observer.unobserve(card);
             }
-        })
-    })
+        });
+    });
 
-    observer.observe(card)
+    observer.observe(card);
 
+    return card;
+};
 
-
-    return card
-}
 
 const Spinner = () => {
 
@@ -166,6 +166,7 @@ async function init(search = null) {
                 fabricante: v.product.fabricante,
                 modelo: v.product.modelo,
                 año: v.product.year,
+                createdAt: v.product.createdAt,
                 images: v.vehicleImages
             }
             if (cardContainer) cardContainer.appendChild(Card(customV))
@@ -302,7 +303,6 @@ if (querySearch) {
     init("")
 }
 
-
 buscador.addEventListener("input", async () => await buscar())
 
 async function buscar() {
@@ -313,7 +313,6 @@ async function buscar() {
 
             try {
                 const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
-
 
                 if (response.ok) {
                     const data = await response.json()
@@ -345,20 +344,15 @@ async function buscar() {
             // history.replaceState(null, null, url.toString());
         }
     }, 300)
-
-
 }
 
 const contenedorInputListado = document.querySelector(".product-search__input")
-
 
 document.addEventListener("click", e => {
 
     if (!contenedorInputListado.contains(e.target))
         ocultarBusqueda()
 })
-
-
 
 buscador.addEventListener("focus", e => {
 
@@ -369,8 +363,14 @@ buscador.addEventListener("focus", e => {
 
 })
 
+// Función para formatear la fecha
+function formatDate(dateString) {
+    const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    const formattedDate = `${timePart} ${day}/${month}/${year}`;
 
-
+    return formattedDate;
+}
 
 function ocultarBusqueda() {
     resultadoBusqueda.classList.add("hidden")

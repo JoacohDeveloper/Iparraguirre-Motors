@@ -97,11 +97,11 @@ nav.aside-nav ul.steps li.selected a {
 }
 
 .fit__content__profile h4 {
-  font-size: 1.5rem;
-  color: #b10b0a;
   border-bottom: 2px solid #ccc;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+}
+.fit__content__profile p {
+  padding-top: 10px;
 }
 
 .button_settings {

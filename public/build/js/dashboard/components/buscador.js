@@ -1,49 +1,46 @@
-const cardContainer = document.querySelector(".card-container")
+const cardContainer = document.querySelector(".card-container");
 
-const Card = ({ nombre, precio, discount, discount_type, id, images, año, modelo, fabricante }) => {
+const Card = ({ nombre, precio, discount, discount_type, id, images, año, modelo, fabricante, createdAt }) => {
 
-    const card = document.createElement("div")
+    const card = document.createElement("div");
     card.id = id;
-    const imageContainer = document.createElement("div")
-    imageContainer.classList.add("image-container")
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
 
-    const contenedorControllers = document.createElement("div")
-    contenedorControllers.classList.add("contenedor-controllers")
+    const contenedorControllers = document.createElement("div");
+    contenedorControllers.classList.add("contenedor-controllers");
 
-    const btnView = document.createElement("button")
-    const btnViewImg = document.createElement("img")
+    const btnView = document.createElement("button");
+    const btnViewImg = document.createElement("img");
     btnView.id = id;
-    btnViewImg.src = "/build/src/images/eye.svg"
+    btnViewImg.src = "/build/src/images/eye.svg";
 
-    const btnModificar = document.createElement("button")
-    const modificarImg = document.createElement("img")
+    const btnModificar = document.createElement("button");
+    const modificarImg = document.createElement("img");
     btnModificar.id = id;
-    modificarImg.src = "/build/src/images/pencil.svg"
+    modificarImg.src = "/build/src/images/pencil.svg";
 
-    const btnEliminar = document.createElement("button")
-    const btnEliminarImg = document.createElement("img")
+    const btnEliminar = document.createElement("button");
+    const btnEliminarImg = document.createElement("img");
     btnEliminar.id = id;
-    btnEliminarImg.src = "/build/src/images/trash.svg"
+    btnEliminarImg.src = "/build/src/images/trash.svg";
 
-    btnEliminar.appendChild(btnEliminarImg)
-    btnModificar.appendChild(modificarImg)
-    btnView.appendChild(btnViewImg)
-
-
-    btnEliminar.addEventListener("click", handlerEliminar)
-
-    btnModificar.addEventListener("click", handlerModificar)
-
-    //btnView.addEventListener("click", handlerPreview)
-
-    contenedorControllers.appendChild(btnView)
+    btnEliminar.appendChild(btnEliminarImg);
+    btnModificar.appendChild(modificarImg);
+    btnView.appendChild(btnViewImg);
 
 
-    contenedorControllers.appendChild(btnModificar)
-    contenedorControllers.appendChild(btnEliminar)
+    btnEliminar.addEventListener("click", handlerEliminar);
 
+    btnModificar.addEventListener("click", handlerModificar);
 
-    const img = document.createElement("img")
+    btnView.addEventListener("click", () => {
+        window.location.href = location.origin + "/catalogo/product/view?product-id=" + id;
+    });
+
+    contenedorControllers.appendChild(btnView);
+    contenedorControllers.appendChild(btnModificar);
+    contenedorControllers.appendChild(btnEliminar);
 
     const contenedorInformacion = document.createElement("div");
     contenedorInformacion.classList.add("contenedor-informacion");
@@ -77,60 +74,60 @@ const Card = ({ nombre, precio, discount, discount_type, id, images, año, model
         contenedorPrecio.appendChild(precioHTML);
     }
 
+    const contenedorNombre = document.createElement("div");
+    contenedorNombre.classList.add("contenedor-datos");
+    const nombreHTML = document.createElement("p");
+    nombreHTML.textContent = nombre ?? "Dodge Charger 69";
+
+    const fabricanteHTML = document.createElement("p");
+    fabricanteHTML.textContent = fabricante ?? "Dodge";
+
+    const modeloHTML = document.createElement("p");
+    modeloHTML.textContent = modelo ?? "Charger";
+
+    const añoHTML = document.createElement("p");
+    añoHTML.textContent = año ?? "1969";
+
+    contenedorNombre.appendChild(nombreHTML);
+    contenedorNombre.appendChild(fabricanteHTML);
+    contenedorNombre.appendChild(modeloHTML);
+    contenedorNombre.appendChild(añoHTML);
+
+    const formattedCreatedAt = formatDate(createdAt);
+
+    const createdHTML = document.createElement("p");
+    createdHTML.textContent = formattedCreatedAt;
+
+    contenedorPrecio.appendChild(createdHTML);
+    
+    contenedorInformacion.appendChild(contenedorNombre);
     contenedorInformacion.appendChild(contenedorPrecio);
 
-    const contenedorNombre = document.createElement("div")
-    contenedorNombre.classList.add("contenedor-datos")
-    const nombreHTML = document.createElement("p")
-    nombreHTML.textContent = nombre ?? "Dodge Charger 69"
+    if (images.length == 0) {
+        imageContainer.style.backgroundImage = "url('/build/src/images/vehicles/default.jpg')";
+    } else {
+        imageContainer.style.backgroundImage = `url('/build${images[0]?.url.split("/build")[1]}')`;
+    }    
 
-    const fabricanteHTML = document.createElement("p")
-    fabricanteHTML.textContent = fabricante ?? "Dodge"
+    card.classList.add("card");
+    card.setAttribute("aria-label", id);
 
-    const modeloHTML = document.createElement("p")
-    modeloHTML.textContent = modelo ?? "Charger"
+    card.appendChild(contenedorControllers);
+    card.appendChild(imageContainer);
 
-    const añoHTML = document.createElement("p")
-    añoHTML.textContent = año ?? "1969"
-
-    contenedorNombre.appendChild(nombreHTML)
-    contenedorNombre.appendChild(fabricanteHTML)
-    contenedorNombre.appendChild(modeloHTML)
-    contenedorNombre.appendChild(añoHTML)
-    contenedorInformacion.appendChild(contenedorNombre)
-
-    if (images.length == 0)
-        img.src = "/build/src/images/vehicles/default.jpg";
-    else {
-        img.src = `/build${images[0]?.url.split("/build")[1]}`;
-    }
-
-
-    img.alt = nombre;
-    imageContainer.appendChild(img)
-
-    card.classList.add("card")
-    card.setAttribute("aria-label", id)
-
-    card.appendChild(contenedorControllers)
-    card.appendChild(imageContainer)
-
-    card.appendChild(contenedorInformacion)
+    card.appendChild(contenedorInformacion);
 
     const observer = new IntersectionObserver(items => {
         items.forEach(item => {
             if (item.isIntersecting) {
-                item.target.classList.add("intersecting")
-                observer.unobserve(card)
+                item.target.classList.add("intersecting");
+                observer.unobserve(card);
             }
         })
     })
+    observer.observe(card);
 
-    observer.observe(card)
-
-
-
-    return card
+    return card;
 }
 
 const Spinner = () => {
@@ -175,6 +172,7 @@ async function init(search = null) {
                 fabricante: v.fabricante,
                 modelo: v.modelo,
                 año: v.year,
+                createdAt: v.product.createdAt,
                 images: v.vehicleImages
             }
             if (cardContainer) cardContainer.appendChild(Card(customV))
@@ -382,11 +380,15 @@ buscador.addEventListener("focus", e => {
 
 })
 
+// Función para formatear la fecha
+function formatDate(dateString) {
+    const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    const formattedDate = `${timePart} ${day}/${month}/${year}`;
 
-
+    return formattedDate;
+}
 
 function ocultarBusqueda() {
     resultadoBusqueda.classList.add("hidden")
 }
-
-

@@ -118,7 +118,7 @@ class Refractions extends ActiveRecord
         if (empty($this->product->peso)) {
             $errors["peso"] = "El campo peso del producto es obligatorio.";
         }
-        if (empty($this->product->origen)) {
+        if (empty($this->origen)) {
             $errors["origen"] = "El campo origen del producto es obligatorio.";
         }
 

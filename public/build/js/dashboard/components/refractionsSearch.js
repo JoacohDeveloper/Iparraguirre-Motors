@@ -1,51 +1,45 @@
-const cardContainer = document.querySelector(".card-container")
+const cardContainer = document.querySelector(".card-container");
 
-const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_image, modelo, fabricante }) => {
-    console.log(nombre)
-    const card = document.createElement("div")
+const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_image, modelo, fabricante, createdAt }) => {
+    const card = document.createElement("div");
     card.id = id;
-    const imageContainer = document.createElement("div")
-    imageContainer.classList.add("image-container")
+    card.classList.add("card");
+    card.setAttribute("aria-label", id);
 
-    const contenedorControllers = document.createElement("div")
-    contenedorControllers.classList.add("contenedor-controllers")
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
 
-    const btnView = document.createElement("button")
-    const btnViewImg = document.createElement("img")
+    const contenedorControllers = document.createElement("div");
+    contenedorControllers.classList.add("contenedor-controllers");
+
+    const btnView = document.createElement("button");
+    const btnViewImg = document.createElement("img");
     btnView.id = id;
-    btnViewImg.src = "/build/src/images/eye.svg"
+    btnViewImg.src = "/build/src/images/eye.svg";
 
-    const btnModificar = document.createElement("button")
-    const modificarImg = document.createElement("img")
+    const btnModificar = document.createElement("button");
+    const modificarImg = document.createElement("img");
     btnModificar.id = id;
-    modificarImg.src = "/build/src/images/pencil.svg"
+    modificarImg.src = "/build/src/images/pencil.svg";
 
-    const btnEliminar = document.createElement("button")
-    const btnEliminarImg = document.createElement("img")
+    const btnEliminar = document.createElement("button");
+    const btnEliminarImg = document.createElement("img");
     btnEliminar.id = id;
-    btnEliminarImg.src = "/build/src/images/trash.svg"
+    btnEliminarImg.src = "/build/src/images/trash.svg";
 
-    btnEliminar.appendChild(btnEliminarImg)
-    btnModificar.appendChild(modificarImg)
-    btnView.appendChild(btnViewImg)
+    btnEliminar.appendChild(btnEliminarImg);
+    btnModificar.appendChild(modificarImg);
+    btnView.appendChild(btnViewImg);
 
+    btnEliminar.addEventListener("click", handlerEliminar);
+    btnModificar.addEventListener("click", handlerModificar);
+    btnView.addEventListener("click", () => {
+        window.location.href = location.origin + "/catalogo/product/view?product-id=" + id;
+    });
 
-    btnEliminar.addEventListener("click", handlerEliminar)
-
-    btnModificar.addEventListener("click", handlerModificar)
-
-    //btnView.addEventListener("click", handlerPreview)
-
-    contenedorControllers.appendChild(btnView)
-
-
-    contenedorControllers.appendChild(btnModificar)
-    contenedorControllers.appendChild(btnEliminar)
-
-
-    const img = document.createElement("img");
-    img.src = url_image && url_image.trim() ? url_image : "/build/src/images/Refractions/default.jpg";
-
+    contenedorControllers.appendChild(btnView);
+    contenedorControllers.appendChild(btnModificar);
+    contenedorControllers.appendChild(btnEliminar);
 
     const contenedorInformacion = document.createElement("div");
     contenedorInformacion.classList.add("contenedor-informacion");
@@ -60,10 +54,10 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
         precioFinalHTML.classList.add("precioFinal");
 
         let precioFinal;
-        if (discount_type == "Dolares") {
+        if (discount_type === "Dolares") {
             precioFinal = precio - discount;
-        } else if (discount_type == "Porcentaje") {
-            let montoDescuento = (precio * discount) / 100;
+        } else if (discount_type === "Porcentaje") {
+            const montoDescuento = (precio * discount) / 100;
             precioFinal = precio - montoDescuento;
         }
 
@@ -79,51 +73,54 @@ const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_imag
         contenedorPrecio.appendChild(precioHTML);
     }
 
+    const contenedorNombre = document.createElement("div");
+    contenedorNombre.classList.add("contenedor-datos");
+    const nombreHTML = document.createElement("p");
+    nombreHTML.textContent = nombre ?? "Nombre";
+
+    const fabricanteHTML = document.createElement("p");
+    fabricanteHTML.textContent = fabricante ?? "Fabricante";
+
+    const modeloHTML = document.createElement("p");
+    modeloHTML.textContent = modelo ?? "Modelo";
+
+    contenedorNombre.appendChild(nombreHTML);
+    contenedorNombre.appendChild(fabricanteHTML);
+    contenedorNombre.appendChild(modeloHTML);
+
+    const formattedCreatedAt = formatDate(createdAt);
+    const createdHTML = document.createElement("p");
+    createdHTML.textContent = formattedCreatedAt;
+    contenedorPrecio.appendChild(createdHTML);
+
+    contenedorInformacion.appendChild(contenedorNombre);
     contenedorInformacion.appendChild(contenedorPrecio);
 
-    const contenedorNombre = document.createElement("div")
-    contenedorNombre.classList.add("contenedor-datos")
-    const nombreHTML = document.createElement("p")
-    nombreHTML.textContent = nombre ?? "Nombre"
+    if (url_image && url_image.trim()) {
+        imageContainer.style.backgroundImage = `url(${url_image})`;
+    } else {
+        imageContainer.style.backgroundImage = "url('/build/src/images/Refractions/default.jpg')";
+    }
 
-    const fabricanteHTML = document.createElement("p")
-    fabricanteHTML.textContent = fabricante ?? "Fabricante"
-
-    const modeloHTML = document.createElement("p")
-    modeloHTML.textContent = modelo ?? "Modelo"
-
-
-    contenedorNombre.appendChild(nombreHTML)
-    contenedorNombre.appendChild(fabricanteHTML)
-    contenedorNombre.appendChild(modeloHTML)
-    contenedorInformacion.appendChild(contenedorNombre)
-
-    img.alt = alt_image;
-    imageContainer.appendChild(img)
-
-    card.classList.add("card")
-    card.setAttribute("aria-label", id)
-
-    card.appendChild(contenedorControllers)
-    card.appendChild(imageContainer)
-
-    card.appendChild(contenedorInformacion)
+    card.appendChild(contenedorControllers);
+    card.appendChild(imageContainer);
+    card.appendChild(contenedorInformacion);
 
     const observer = new IntersectionObserver(items => {
         items.forEach(item => {
             if (item.isIntersecting) {
-                item.target.classList.add("intersecting")
-                observer.unobserve(card)
+                item.target.classList.add("intersecting");
+                observer.unobserve(card);
             }
-        })
-    })
+        });
+    });
 
-    observer.observe(card)
+    observer.observe(card);
+
+    return card;
+};
 
 
-
-    return card
-}
 
 const Spinner = () => {
 
@@ -170,7 +167,8 @@ async function init(search = null) {
                 fabricante: r.product.fabricante,
                 modelo: r.product.modelo,
                 url_image: r.url_img,
-                alt_image: r.alt_img
+                alt_image: r.alt_img,
+                createdAt: r.product.createdAt,
             }
             if (cardContainer) cardContainer.appendChild(Card(customr))
         })
@@ -352,19 +350,13 @@ async function buscar() {
 
 }
 
-
-
-
 const contenedorInputListado = document.querySelector(".product-search__input")
-
 
 document.addEventListener("click", e => {
 
     if (!contenedorInputListado.contains(e.target))
         ocultarBusqueda()
 })
-
-
 
 buscador.addEventListener("focus", e => {
 
@@ -375,8 +367,14 @@ buscador.addEventListener("focus", e => {
 
 })
 
+// Función para formatear la fecha
+function formatDate(dateString) {
+    const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    const formattedDate = `${timePart} ${day}/${month}/${year}`;
 
-
+    return formattedDate;
+}
 
 function ocultarBusqueda() {
     resultadoBusqueda.classList.add("hidden")

@@ -53,14 +53,17 @@ async function formMenu({ target }) {
     }
     const settings_formHTML = document.createElement("section")
     const form_containerHTMl = document.createElement("div")
-    const form_close__settings_formHTML = document.createElement("div")
-    const closeText = document.createElement("p")
-    closeText.textContent = "X";
-    form_close__settings_formHTML.classList.add("close__settings_forms")
+
+    //Contenedores para elementos
+    const formHeader = document.createElement("div");
+    formHeader.classList.add("haeder__settings_forms");
+
+    const form_close__settings_formHTML = document.createElement("img")
+    form_close__settings_formHTML.src = '/build/src/images/cross.svg'
     settings_formHTML.classList.add("settings_forms")
     form_containerHTMl.classList.add("form-container")
-    form_close__settings_formHTML.appendChild(closeText)
-    form_containerHTMl.appendChild(form_close__settings_formHTML)
+    formHeader.appendChild(form_close__settings_formHTML)
+    form_containerHTMl.appendChild(formHeader)
     settings_formHTML.appendChild(form_containerHTMl);
     container.appendChild(settings_formHTML);
 

@@ -278,7 +278,9 @@
             margin: auto;
         }
     }
-
+    .user-card {
+        animation: none;
+    }
     .infoCant-content{
         width: 100%;
         flex-direction: column;
