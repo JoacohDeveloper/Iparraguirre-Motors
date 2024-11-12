@@ -148,6 +148,7 @@
   flex-direction: column;
   color: #000;
   width: 40%;
+  text-align: end;
 }
 
 .contenedor-informacion > .contenedor-precio > .precio,
