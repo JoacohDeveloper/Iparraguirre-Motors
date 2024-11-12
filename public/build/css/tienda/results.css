@@ -52,7 +52,7 @@
 .card_image {
   background-repeat: no-repeat;
   z-index: 999;
-  width: 345px;
+  width: 100%;
   height: 230px;
   background-size:cover;
   background-position: center center;
@@ -65,7 +65,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   font-size: 1rem;
-  height: auto;
+  flex: auto;
   background-color: #ccc;
   color: #000000;
   border-bottom-left-radius: 6px;
