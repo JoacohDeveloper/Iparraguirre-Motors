@@ -1,19 +1,5 @@
-//Prueba de infinite scroll
-
-
-
 const cardContainer = document.querySelector(".card-container")
 
-/*nombre: r.product.nombre,
-                precio: r.product.precio,
-                discount: r.product.discount,
-                discount_type: r.product.discount_type,
-                id: r.refraction_id,
-                fabricante: r.product.fabricante,
-                modelo: r.product.modelo,
-                origen: r.product.origen,
-                url: r.url_img,
-                alt: r.alt_img,*/
 const Card = ({ id, nombre, origen, precio, discount, discount_type, url, alt }) => {
 
     const card = document.createElement("div")
@@ -33,7 +19,7 @@ const Card = ({ id, nombre, origen, precio, discount, discount_type, url, alt })
     if (url == "")
         card_image.style.backgroundImage = "url('/build/src/images/refractions/default.jpg')";
     else {
-        card_image.style.backgroundImage = `url('/build${url}')`;
+        card_image.style.backgroundImage = `url('${url}')`;
     }
 
     const card_info = document.createElement("div");
@@ -74,11 +60,10 @@ const Card = ({ id, nombre, origen, precio, discount, discount_type, url, alt })
         contenedorPrecio.appendChild(precioHTML);
     }
 
-
     card_info.appendChild(text_name)
-    card_info.appendChild(contenedorPrecio);
     card_info.appendChild(text_origen)
-
+    card_info.appendChild(contenedorPrecio);
+    
     card.appendChild(card_image)
     card.appendChild(card_info)
 
@@ -113,7 +98,6 @@ async function init(search = null) {
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data];
         console.log(data);
-        //localStorage.setItem("tiendaItems", JSON.stringify(newData));
 
         data.forEach(r => {
             const customR = {
@@ -124,7 +108,7 @@ async function init(search = null) {
                 id: r.refraction_id,
                 fabricante: r.product.fabricante,
                 modelo: r.product.modelo,
-                origen: r.product.origen,
+                origen: r.origen,
                 url: r.url_img,
                 alt: r.alt_img,
             };

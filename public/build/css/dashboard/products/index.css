@@ -147,6 +147,7 @@
   display: flex;
   flex-direction: column;
   color: #000;
+  width: 40%;
 }
 
 .contenedor-informacion > .contenedor-precio > .precio,

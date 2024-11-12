@@ -16,127 +16,182 @@ const ImageItem = ({ url, alt }) => {
 }
 
 async function loadProduct() {
-    const $image = document.querySelector("#image")
-    const $title = document.querySelector(".title")
+    const $image = document.querySelector("#image");
+    const $title = document.querySelector(".title");
     const contenedorPrecio = document.querySelector(".contenedor-precio");
-    const $description = document.querySelector(".description")
-
-    const $contenedorImagenes = document.querySelector(".image-items")
+    const $description = document.querySelector(".description");
+    const $contenedorImagenes = document.querySelector(".image-items");
 
     const urlParams = new URLSearchParams(window.location.search);
     const uuid = urlParams.get('product-id');
 
-    const response = await fetch(`${window.location.origin}/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`)
+    let response = await fetch(`${window.location.origin}/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`);
+    let product = await response.json();
 
-    const product = await response.json();
-    
-    $title.textContent = product?.product?.nombre;
+    if (!product.product || product.status === 404) {
+        response = await fetch(`${window.location.origin}/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`);
+        product = await response.json();
 
-    if (product.product.discount) {
-        const precioOriginalHTML = document.createElement("p");
-        const precioFinalHTML = document.createElement("p");
-        const descuentoHTML = document.createElement("div");
-        precioOriginalHTML.id = "precioOriginal";
-        precioFinalHTML.id = "precioFinal";
-        descuentoHTML.id = "descuento";
+        if (product[0]?.product) {
+            product = product[0];
+        } else {
+            console.error("Producto no encontrado");
+            return;
+        }
+    }
+    console.log(product)
+    if (product.product) {
+        if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+            $title.textContent = product?.product?.nombre;
+        } else {
+            $title.textContent = product?.tipo_repuesto + " " + product?.product?.fabricante + " " + product?.product?.modelo;
+        }
+        
 
-        let precioFinal;
-        if (product.product.discount_type == "Dolares") {
-            precioFinal = product.product.precio - product.product.discount;
-            descuentoHTML.textContent = "-" + product.product.discount + " USD";
-        } else if (product.product.discount_type == "Porcentaje") {
-            let montoDescuento = (product.product.precio * product.product.discount) / 100;
-            precioFinal = product.product.precio - montoDescuento;
-            descuentoHTML.textContent = "-" + product.product.discount + "%";
+        if (product.product.discount) {
+            const precioOriginalHTML = document.createElement("p");
+            const precioFinalHTML = document.createElement("p");
+            const descuentoHTML = document.createElement("div");
+            precioOriginalHTML.id = "precioOriginal";
+            precioFinalHTML.id = "precioFinal";
+            descuentoHTML.id = "descuento";
+
+            let precioFinal;
+            if (product.product.discount_type == "Dolares") {
+                precioFinal = product.product.precio - product.product.discount;
+                descuentoHTML.textContent = "-" + product.product.discount + " USD";
+            } else if (product.product.discount_type == "Porcentaje") {
+                let montoDescuento = (product.product.precio * product.product.discount) / 100;
+                precioFinal = product.product.precio - montoDescuento;
+                descuentoHTML.textContent = "-" + product.product.discount + "%";
+            }
+
+            precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+            precioOriginalHTML.textContent = `${Number(product.product.precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+
+            const labelDiscount = document.createElement("label");
+            labelDiscount.appendChild(precioOriginalHTML);
+            labelDiscount.appendChild(descuentoHTML);
+
+            contenedorPrecio.appendChild(precioFinalHTML);
+            contenedorPrecio.appendChild(labelDiscount);
+        } else {
+            const precioHTML = document.createElement("p");
+            precioHTML.id = "precio";
+            precioHTML.textContent = `${Number(product.product.precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+            contenedorPrecio.appendChild(precioHTML);
         }
 
-        precioFinalHTML.textContent = `${Number(precioFinal).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-        precioOriginalHTML.textContent = `${Number(product.product.precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
+        $description.textContent = product?.product?.descripcion;
 
-        const labelDiscount = document.createElement("label");
-        labelDiscount.appendChild(precioOriginalHTML);
-        labelDiscount.appendChild(descuentoHTML);
+        if (product.vehicleImages?.length > 0) {
+            $image.src = "/build/" + product?.vehicleImages[0]?.url.split("/build/")[1];
+            $image.alt = product?.vehicleImages[0]?.alt;
 
-        contenedorPrecio.appendChild(precioFinalHTML);
-        contenedorPrecio.appendChild(labelDiscount);
-    } else {
-        const precioHTML = document.createElement("p");
-        precioHTML.id = "precio";
-        precioHTML.textContent = `${Number(product.product.precio).toLocaleString("en-US", { style: "currency", currency: "USD" })}`;
-        contenedorPrecio.appendChild(precioHTML);
-    }
-
-    $description.textContent = product?.product?.descripcion
-
-    if (product.vehicleImages.length > 0) {
-        $image.src = "/build/" + product?.vehicleImages[0]?.url.split("/build/")[1]
-        $image.alt = product?.vehicleImages[0]?.alt
-
-        product?.vehicleImages.forEach((image, index) => {
-            const url = "/build/" + image?.url.split("/build/")[1]
-            const img = ImageItem({ url, alt: image?.alt })
-            if (index == 0) {
-                img.classList.add("selected")
-            }
-            $contenedorImagenes.appendChild(img)
-        })
-
-        const $elements = $contenedorImagenes.querySelectorAll(".img-item");
-
-        $elements.forEach($element => {
-            $element.addEventListener("click", () => {
-                const selected = document.querySelector(".selected")
-
-                if (selected && selected != $element) {
-                    selected.classList.remove("selected")
+            product?.vehicleImages.forEach((image, index) => {
+                const url = "/build/" + image?.url.split("/build/")[1];
+                const img = ImageItem({ url, alt: image?.alt });
+                if (index == 0) {
+                    img.classList.add("selected");
                 }
-                $element.classList.add("selected")
-                const $img = $element.querySelector("img")
-                $image.src = $img.src
-                $image.alt = $img.alt
-            })
-        })
-    } else {
-        const $imageSelector = document.querySelector(".image-selector")
-        $imageSelector.style.display = "none";
-        $image.src = "/build/src/images/vehicles/default.jpg"
-    }
+                $contenedorImagenes.appendChild(img);
+            });
 
-    const optionsContainer = document.querySelector(".add-to-cart-container");
+            const $elements = $contenedorImagenes.querySelectorAll(".img-item");
 
-    if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
-        const testBtn = document.createElement("button");
-        testBtn.textContent = "Reservar test drive";
-        optionsContainer.appendChild(testBtn);
-        
-        testBtn.addEventListener("click", e => {
-            modalTest(product.product.product_id, product.product.nombre, product.year);
-            toggleBackground();
-        })
-    } else {
-        const qtyBtn = document.createElement("input");
-        const basketBtn = document.createElement("button");
+            $elements.forEach($element => {
+                $element.addEventListener("click", () => {
+                    const selected = document.querySelector(".selected");
 
-        qtyBtn.type = "number";
-        qtyBtn.value = "1";
-        basketBtn.textContent = "Añadir al carrito";
-
-        optionsContainer.appendChild(qtyBtn);
-        optionsContainer.appendChild(basketBtn);
-
-        basketBtn.addEventListener("click", e => {
-            const ultimosProductos = JSON.parse(localStorage.getItem("basket")) || []
-            const newProduct = { ...product.product, images: product.vehicleImages || [] }
-
-            const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id)
-
-            if (!yaExiste) {
-                localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]))
-                basketScript()
+                    if (selected && selected != $element) {
+                        selected.classList.remove("selected");
+                    }
+                    $element.classList.add("selected");
+                    const $img = $element.querySelector("img");
+                    $image.src = $img.src;
+                    $image.alt = $img.alt;
+                });
+            });
+        } else {
+            const $imageSelector = document.querySelector(".image-selector");
+            $imageSelector.style.display = "none";
+            if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+                $image.src = "/build/src/images/vehicles/default.jpg";
+            } else {
+                if(product.url_img){
+                    $image.src = product.url_img;
+                } else {
+                    $image.src = "/build/src/images/refractions/default.jpg";
+                }
             }
-        })
+        }
+
+        const optionsContainer = document.querySelector(".add-to-cart-container");
+        const isNotSessionLogged = document.querySelector("#userIsNotLogged");
+
+        if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+            const testBtn = document.createElement("button");
+            testBtn.textContent = "Reservar test drive";
+            optionsContainer.appendChild(testBtn);
+            
+            testBtn.addEventListener("click", e => {
+                if(isNotSessionLogged){
+                    window.location.href = `/auth`;
+                } else {
+                    modalTest(product.product.product_id, product.product.nombre, product.year);
+                    toggleBackground();
+                }
+            });
+        } else {
+            const qtyBtn = document.createElement("input");
+            const basketBtn = document.createElement("button");
+
+            qtyBtn.type = "number";
+            qtyBtn.value = "1";
+            qtyBtn.min = "1";
+            qtyBtn.step = "1";
+            basketBtn.textContent = "Añadir al carrito";
+
+            optionsContainer.appendChild(qtyBtn);
+            optionsContainer.appendChild(basketBtn);
+
+            qtyBtn.addEventListener("input", function() {
+                if (this.value < 1) {
+                    this.value = 1;
+                }
+            });
+            qtyBtn.addEventListener("keydown", function(e) {
+                if (!((e.key >= 0 && e.key <= 9) || e.key === "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+                    e.preventDefault();
+                }
+            });
+            qtyBtn.addEventListener("change", function() {
+                if (this.value < 1) {
+                    this.value = 1;
+                }
+            });
+
+            basketBtn.addEventListener("click", e => {
+                if(isNotSessionLogged){
+                    window.location.href = `/auth`;
+                } else {
+                    const ultimosProductos = JSON.parse(localStorage.getItem("basket")) || [];
+                    const newProduct = { ...product.product, images: product.vehicleImages || [] };
+
+                    const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id);
+
+                    if (!yaExiste) {
+                        localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]));
+                        basketScript();
+                    }
+                }
+            });
+
+        }
+        moveArrows();
+    } else {
+        console.error("Producto no encontrado");
     }
-    moveArrows()
 }
 
 

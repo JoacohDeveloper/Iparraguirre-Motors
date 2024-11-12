@@ -51,7 +51,7 @@ class TiendaController
             $product = Product::get($uuid)[0];
             if (isset($product) && !is_null($product)) {
             } else {
-                header("Location: /catalogo/vehiculos");
+                header("Location: /catalogo");
             }
         }
 

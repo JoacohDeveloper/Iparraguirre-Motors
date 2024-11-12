@@ -159,7 +159,7 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
-        //localStorage.setItem("tiendaItems", JSON.stringify(newData))
+        console.log(data)
 
         data.forEach(v => {
             const customV = {
@@ -348,28 +348,19 @@ async function buscar() {
             }
         } else {
             ocultarBusqueda()
-            // const url = new URL(location.href);
-            // url.searchParams.delete("search")
-            // history.replaceState(null, null, url.toString());
         }
     }, 300)
 
 
 }
 
-
-
-
 const contenedorInputListado = document.querySelector(".product-search__input")
-
 
 document.addEventListener("click", e => {
 
     if (!contenedorInputListado.contains(e.target))
         ocultarBusqueda()
 })
-
-
 
 buscador.addEventListener("focus", e => {
 

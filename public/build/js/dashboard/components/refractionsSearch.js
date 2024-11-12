@@ -1,6 +1,6 @@
 const cardContainer = document.querySelector(".card-container");
 
-const Card = ({ nombre, precio, discount, discount_type, id, url_image, alt_image, modelo, fabricante, createdAt }) => {
+const Card = ({ nombre, precio, discount, discount_type, id, url_image, modelo, fabricante, createdAt }) => {
     const card = document.createElement("div");
     card.id = id;
     card.classList.add("card");
@@ -154,7 +154,6 @@ async function init(search = null) {
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
         console.log(data)
-        //localStorage.setItem("tiendaItems", JSON.stringify(newData))
 
         data.forEach(r => {
             const customr = {
@@ -167,7 +166,6 @@ async function init(search = null) {
                 fabricante: r.product.fabricante,
                 modelo: r.product.modelo,
                 url_image: r.url_img,
-                alt_image: r.alt_img,
                 createdAt: r.product.createdAt,
             }
             if (cardContainer) cardContainer.appendChild(Card(customr))
@@ -341,13 +339,8 @@ async function buscar() {
             }
         } else {
             ocultarBusqueda()
-            // const url = new URL(location.href);
-            // url.searchParams.delete("search")
-            // history.replaceState(null, null, url.toString());
         }
     }, 300)
-
-
 }
 
 const contenedorInputListado = document.querySelector(".product-search__input")

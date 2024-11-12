@@ -59,44 +59,44 @@ create table wishlist(
 );
 
 CREATE TABLE product (
-    product_id VARCHAR(45) not null,
-    nombre VARCHAR(255),
-    descripcion TEXT,
-    categoria VARCHAR(45),
-    precio FLOAT,
-    discount FLOAT,
-    fabricante VARCHAR(255),
-    modelo VARCHAR(255),
-    discount_type VARCHAR(10),
-    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(product_id)
+  product_id VARCHAR(45) not null,
+  nombre VARCHAR(255),
+  descripcion TEXT,
+  categoria VARCHAR(45),
+  precio FLOAT,
+  discount FLOAT,
+  fabricante VARCHAR(255),
+  modelo VARCHAR(255),
+  discount_type VARCHAR(10),
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(product_id)
 );
 
 CREATE TABLE vehicle (
-    vehicle_id VARCHAR(45) NOT NULL,
-    categoria VARCHAR(255),
-    modelo VARCHAR(255),
-    fabricante VARCHAR(255),
-    year VARCHAR(45),
-    color VARCHAR(45),
-    matricula VARCHAR(45),
-    transmision VARCHAR(45),
-    tipo_carroceria VARCHAR(255),
-    frenos_abs TINYINT(1),
-    airbag TINYINT(1),
-    traccion VARCHAR(45),
-    direccion VARCHAR(45),
-    control_estabilidad TINYINT(1),
-    puertas INT,
-    tipo_combustible VARCHAR(45),
-    velocidad_max FLOAT,
-    zero_to_houndred FLOAT,
-    peso FLOAT,
-    kilometros INT,
-    caballos_potencia INT,
-    FOREIGN KEY (vehicle_id) REFERENCES Product(product_id),
-    PRIMARY KEY(vehicle_id)
+  vehicle_id VARCHAR(45) NOT NULL,
+  categoria VARCHAR(255),
+  modelo VARCHAR(255),
+  fabricante VARCHAR(255),
+  year VARCHAR(45),
+  color VARCHAR(45),
+  matricula VARCHAR(45),
+  transmision VARCHAR(45),
+  tipo_carroceria VARCHAR(255),
+  frenos_abs TINYINT(1),
+  airbag TINYINT(1),
+  traccion VARCHAR(45),
+  direccion VARCHAR(45),
+  control_estabilidad TINYINT(1),
+  puertas INT,
+  tipo_combustible VARCHAR(45),
+  velocidad_max FLOAT,
+  zero_to_houndred FLOAT,
+  peso FLOAT,
+  kilometros INT,
+  caballos_potencia INT,
+  FOREIGN KEY (vehicle_id) REFERENCES Product(product_id),
+  PRIMARY KEY(vehicle_id)
 );
 
 create table vehicle_img(
@@ -108,12 +108,15 @@ create table vehicle_img(
 );
 
 CREATE TABLE refractions (
-    refraction_id VARCHAR(45) NOT NULL,
-    origin VARCHAR(255),
-    url_img VARCHAR(255),
-    alt_img VARCHAR(150),
-    FOREIGN KEY (refraction_id) REFERENCES Product(product_id),
-    PRIMARY KEY(refraction_id)
+  refraction_id VARCHAR(45) NOT NULL,
+  tipo VARCHAR(255),
+  origen VARCHAR(255),
+  url_img VARCHAR(255),
+  alt_img VARCHAR(150),
+  peso INT,
+  stock INT,
+  FOREIGN KEY (refraction_id) REFERENCES Product(product_id),
+  PRIMARY KEY(refraction_id)
 );
 
 create table interactions(
@@ -141,6 +144,7 @@ create table testdrive(
 
 -- Production SQL code
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `uuid` varchar(45) NOT NULL,
   `full_name` varchar(65) DEFAULT NULL,
@@ -160,6 +164,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `interactions`;
 CREATE TABLE `interactions` (
   `interactionID` varchar(25) NOT NULL,
   `interactionOwner` varchar(45) NOT NULL,
@@ -173,6 +178,7 @@ CREATE TABLE `interactions` (
   PRIMARY KEY (`interactionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `product_id` varchar(45) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -188,15 +194,20 @@ CREATE TABLE `product` (
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `refractions`;
 CREATE TABLE `refractions` (
   `refraction_id` varchar(45) NOT NULL,
-  `origin` varchar(255) DEFAULT NULL,
+  `tipo_repuesto` varchar(255) DEFAULT NULL,
+  `origen` varchar(255) DEFAULT NULL,
+  `peso` int(11) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
   `url_img` varchar(255) DEFAULT NULL,
   `alt_img` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`refraction_id`),
   CONSTRAINT `refractions_ibfk_1` FOREIGN KEY (`refraction_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `testdrive`;
 CREATE TABLE `testdrive` (
   `testID` int(11) NOT NULL AUTO_INCREMENT,
   `userUUID` varchar(45) NOT NULL,
@@ -205,8 +216,9 @@ CREATE TABLE `testdrive` (
   `reservedDate` datetime DEFAULT current_timestamp(),
   `createdAt` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`testID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `uuid` varchar(45) NOT NULL,
   `full_name` varchar(65) DEFAULT NULL,
@@ -227,6 +239,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `vehicle`;
 CREATE TABLE `vehicle` (
   `vehicle_id` varchar(45) NOT NULL,
   `categoria` varchar(255) DEFAULT NULL,
@@ -253,6 +266,7 @@ CREATE TABLE `vehicle` (
   CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `vehicle_img`;
 CREATE TABLE `vehicle_img` (
   `vehicle_id` varchar(45) NOT NULL,
   `url` varchar(255) NOT NULL,
@@ -261,6 +275,7 @@ CREATE TABLE `vehicle_img` (
   CONSTRAINT `fk_vehicle_id` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+DROP TABLE IF EXISTS `wishlist`;
 CREATE TABLE `wishlist` (
   `wish_id` varchar(40) NOT NULL,
   `user_uuid` varchar(45) DEFAULT NULL,

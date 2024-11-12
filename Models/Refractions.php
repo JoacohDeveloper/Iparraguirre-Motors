@@ -10,7 +10,10 @@ class Refractions extends ActiveRecord
     protected static $tabla = "refractions";
     protected static $columnasdb = [
         "refraction_id",   // Cambiado de "id" a "refraction_id"
-        "origin",          // Origen del producto
+        "tipo_repuesto",    // Tipo del repuesto
+        "origen",          // Origen del producto
+        "peso",            // Peso del paquete
+        "stock",           // Cantidad de stock
         "url_img",         // URL de la imagen
         "alt_img",         // Texto alternativo de la imagen
     ];
@@ -19,16 +22,21 @@ class Refractions extends ActiveRecord
     public
         $product,
         $refraction_id,  // Cambiado de "id" a "refraction_id"
+        $tipo_repuesto,
         $origen,
+        $peso,
+        $stock,
         $url_img,
         $alt_img;
 
     function __construct($args = [])
     {
-
         $this->product = new Product($args);
         $this->origen = $args["origen"] ?? "";
         $this->product->categoria = "Repuesto";
+        $this->tipo_repuesto = $args["tipo_repuesto"] ?? "";
+        $this->peso = $args["peso"] ?? null;
+        $this->stock = $args["stock"] ?? null;
         $this->refraction_id = $args["refraction_id"] ?? null;
         $this->url_img = $args["url_img"] ?? "";
         $this->alt_img = $args["alt_img"] ?? "";
@@ -103,19 +111,25 @@ class Refractions extends ActiveRecord
         if (empty($this->product->nombre)) {
             $errors["nombre"] = "El campo nombre es obligatorio.";
         }
+        if (empty($this->tipo_repuesto)) {
+            $errors["tipo_repuesto"] = "El campo tipo de repuesto es obligatorio.";
+        }
         if (empty($this->product->descripcion)) {
             $errors["descripcion"] = "El campo descripcion es obligatorio.";
         }
         if (empty($this->product->fabricante)) {
             $errors["fabricante"] = "El campo fabricante es obligatorio.";
         }
+        if (empty($this->product->modelo)) {
+            $errors["modelo"] = "El campo modelo es obligatorio.";
+        }
         if (empty($this->product->precio)) {
             $errors["precio"] = "El campo precio es obligatorio.";
         }
-        if (empty($this->product->stock)) {
+        if (empty($this->stock)) {
             $errors["stock"] = "El campo stock del producto es obligatorio.";
         }
-        if (empty($this->product->peso)) {
+        if (empty($this->peso)) {
             $errors["peso"] = "El campo peso del producto es obligatorio.";
         }
         if (empty($this->origen)) {

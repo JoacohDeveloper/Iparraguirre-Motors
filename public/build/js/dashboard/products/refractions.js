@@ -60,7 +60,7 @@ const ModalAgregar = async () => {
     addRefractionForm.classList.add("form_addvehicle");
 
     const inputs = [
-        InputText("text", "Tipo de repuesto", "Tipo de repuesto", "tipo", "", ""),
+        InputText("text", "Tipo de repuesto", "Tipo de repuesto", "tipo_repuesto", "", ""),
         InputText("text", "Fabricante", "Fabricante", "fabricante", "", ""),
         InputText("text", "Modelo", "Modelo", "modelo", "", ""),
         InputText("text", "Origen", "Origen", "origen", "", ""),
@@ -103,7 +103,7 @@ const ModalAgregar = async () => {
             }
         });
 
-        if (object.tipo.length === 0) {
+        if (object.tipo_repuesto.length === 0) {
             error.push({ title: "Failure", error: "El campo tipo de repuesto se encuentra vacío" });
         } else if (object.fabricante.length === 0) {
             error.push({ title: "Failure", error: "El campo fabricante se encuentra vacío" });
@@ -124,7 +124,7 @@ const ModalAgregar = async () => {
         if (error.length !== 0) {
             addToast(error);
         } else {
-            const name = object.tipo + " " + object.fabricante + " " + object.modelo + " " + object.origen;
+            const name = object.tipo_repuesto + " " + object.fabricante + " " + object.modelo + " " + object.origen;
             formdata.append('nombre', name);
             try {
                 const response = await fetch(location.origin + "/dashboard/agregar-repuesto", {
@@ -191,14 +191,14 @@ const ModalModificar = async (data) => {
     addRefractionForm.classList.add("form_addvehicle");
 
     const inputs = [
-        InputText("text", "Tipo de repuesto", "Tipo de repuesto", "tipo", "", data.tipo),
-        InputText("text", "Fabricante", "Fabricante", "fabricante", "", data.fabricante),
-        InputText("text", "Modelo", "Modelo", "modelo", "", data.modelo),
-        InputText("text", "Origen", "Origen", "origen", "", data.origen),
-        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", data.descripcion),
-        InputText("number", "Precio (USD)", "Precio", "precio", "", data.precio),
-        InputText("number", "Stock (Unidad)", "Stock", "stock", "", data.stock),
-        InputText("number", "Peso del paquete (g)", "Peso del paquete (g)", "peso", "", data.peso)
+        InputText("text", "Tipo de repuesto", "Tipo de repuesto", "tipo_repuesto", "", data[0].tipo_repuesto),
+        InputText("text", "Fabricante", "Fabricante", "fabricante", "", data[0].product.fabricante),
+        InputText("text", "Modelo", "Modelo", "modelo", "", data[0].product.modelo),
+        InputText("text", "Origen", "Origen", "origen", "", data[0].origen),
+        TextArea("Descripcion", "Escribe una descripcion sobre el vehiculo", "descripcion", "desc", data[0].product.descripcion),
+        InputText("number", "Precio (USD)", "Precio", "precio", "", data[0].product.precio),
+        InputText("number", "Stock (Unidad)", "Stock", "stock", "", data[0].product.stock),
+        InputText("number", "Peso del paquete (g)", "Peso del paquete (g)", "peso", "", data[0].peso)
     ];
 
     modalHeader.appendChild(divSpacer);
@@ -234,7 +234,7 @@ const ModalModificar = async (data) => {
             }
         });
 
-        if (object.tipo.length === 0) {
+        if (object.tipo_repuesto.length === 0) {
             error.push({ title: "Failure", error: "El campo tipo de repuesto se encuentra vacío" });
         } else if (object.fabricante.length === 0) {
             error.push({ title: "Failure", error: "El campo fabricante se encuentra vacío" });
@@ -255,7 +255,7 @@ const ModalModificar = async (data) => {
         if (error.length !== 0) {
             addToast(error);
         } else {
-            const name = object.tipo + " " + object.fabricante + " " + object.modelo + " " + object.origen;
+            const name = object.tipo_repuesto + " " + object.fabricante + " " + object.modelo + " " + object.origen;
             formdata.append('id', object.id);
             formdata.append('nombre', name);
             try {

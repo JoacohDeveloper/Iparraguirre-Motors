@@ -370,7 +370,6 @@ const ModalAdd = async () => {
                 botonSiguiente.disabled = false;
 
                 const data = await response.json();
-                console.log(data);
 
                 if (data.status === "error") {
                     console.log("Server errors:", data.message);
@@ -476,7 +475,6 @@ const ModalAdd = async () => {
         let errores;
         //verificar si se puede enviar
         if (stepSiguiente == "4") {
-            // console.log("pagina final")
             inputsLabels = [...detailsSectionInputs, ...detailsSectionInputs2,
             ...specsSectionInputs, ...specsSectionInputs2,
             ...perfSectionInputs, ...perfSectionInputs2
@@ -878,10 +876,6 @@ const ModalModificar = async (data) => {
 
     const btnClose = document.createElement("button")
 
-
-
-
-
     const btnImage = document.createElement("img")
     btnImage.src = "/build/src/images/cross.svg"
 
@@ -1092,11 +1086,9 @@ const ModalModificar = async (data) => {
                     method: "POST",
                     body: formdata
                 });
-                console.log([...formdata])
                 botonSiguiente.disabled = false;
 
                 const data = await response.json();
-                console.log(data)
                 if (data?.error) {
 
                     addToast([{ title: "error", error: data?.error }]);
@@ -1189,7 +1181,6 @@ const ModalModificar = async (data) => {
         let errores;
         //verificar si se puede enviar
         if (stepSiguiente == "4") {
-            // console.log("pagina final")
             inputsLabels = [...detailsSectionInputs, ...detailsSectionInputs2,
             ...specsSectionInputs, ...specsSectionInputs2,
             ...perfSectionInputs, ...perfSectionInputs2
@@ -1469,22 +1460,7 @@ const ModalModificar = async (data) => {
     const submitInput = document.createElement("button")
     submitInput.textContent = "Agregar"
 
-    //vehicleform.appendChild(ImageUploader())
-    // vehicleform.appendChild(submitInput)
-
-    // vehicleform.addEventListener("submit", e => {
-    //     e.preventDefault();
-    //     const form_data = new FormData(vehicleform)
-
-    //     console.log([...form_data])
-
-    //     addToast([{ title: "error", error: "Message" }])
-    // })
-
     modalBody.appendChild(vehicleform)
-
-
-
 
     contenedor.appendChild(modal)
 
@@ -1588,7 +1564,6 @@ const handlerEliminar = (e) => {
 
 const handlerModificar = (e) => {
     const vehiculoID = e.currentTarget.id;
-    console.log(vehiculoID)
     toggleBackground();
 
     fetchVehiculoData(vehiculoID)
@@ -1606,7 +1581,7 @@ const fetchVehiculoData = async (vehiculoID) => {
     const formdata = new FormData();
     formdata.append("id", vehiculoID);
     const response = await fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + encodeURIComponent(vehiculoID) + "");
-    console.log(response.url)
+
     if (!response.ok) {
         addToast([{
             title: "Failure",
