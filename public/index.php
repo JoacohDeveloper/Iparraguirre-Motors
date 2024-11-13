@@ -164,6 +164,9 @@ $router->post("/catalogo/vehiculos/reserva", [CustomerController::class, "reserv
 
 $router->get("/catalogo/product/view", [TiendaController::class, "view"]);
 
+$router->get("/checkout/cart", [TiendaController::class, "basket"]);
+
+
 //Rest Vehicles
 
 $router->get("/api/v1/vehicles", [VehicleRestController::class, "vehicles"]);

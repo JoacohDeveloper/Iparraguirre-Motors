@@ -61,4 +61,14 @@ class TiendaController
             "styles" => ["tienda/index", "globals", "tienda/products/index"]
         ]);
     }
+
+    public static function basket(Router $router) {
+
+        $router->render("tienda/basket/index", [
+            "title" => "Iparraguirre Motors | Carrito",
+            "description" => "Iparraguirre basket section",
+            "scripts" => [ "tienda/basket/index"],
+            "styles" => ["globals", "tienda/basket/index"]
+        ]);
+    }
 }

@@ -175,11 +175,13 @@ async function loadProduct() {
                 if(isNotSessionLogged){
                     window.location.href = `/auth`;
                 } else {
-                    const ultimosProductos = JSON.parse(localStorage.getItem("basket")) || [];
-                    const newProduct = { ...product.product, images: product.vehicleImages || [] };
+                    const ultimosProductos = JSON   .parse(localStorage.getItem("basket")) || [];
+                    
+                    const newProduct = { ...product.product, images: [{url:product?.url_img}]};
 
                     const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id);
 
+                    
                     if (!yaExiste) {
                         localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]));
                         basketScript();
