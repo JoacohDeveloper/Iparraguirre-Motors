@@ -589,3 +589,17 @@ async function defaultImage(event) {
         }]);
     }
 }
+
+function togglePassword(button) {
+    const input = button.previousElementSibling;
+    const img = button.querySelector('img');
+    if (input.type === "password") {
+        input.type = "text";
+        img.src = '/build/src/images/closedEye.svg';
+        img.alt = "Ocultar contraseña";
+    } else {
+        input.type = "password";
+        img.src = '/build/src/images/eye.svg';
+        img.alt = "Mostrar contraseña";
+    }
+}

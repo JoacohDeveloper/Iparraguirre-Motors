@@ -12,80 +12,68 @@ body{
 }
 .dark .navegacion ul li a {
   color: #202020;
-&:hover {
-  border: 2px solid #202020;
 }
+.dark .navegacion ul li a:hover {
+  border: 2px solid #202020;
 }
 header {
   position: unset !important;
   background: none;
   border: none;
 }
-.dark header{
+.dark header {
   background: none;
   border: none;
 }
-
 footer{
-    display: none;
+  display: none;
 }
-
-.dark .container{
+.dark .container {
   background: none;
 }
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
 }
-
-main{
+main {
   width: 100%;
   margin: auto;
 }
-
-.contenedor__todo{
+.contenedor__todo {
   width: 100vw;
   max-width: 56em;
   margin: auto;
   position: relative;
 }
-
-.caja__trasera{
+.caja__trasera {
   height: 25em;
   width: 56em;
   padding: 10px 20px;
   display: flex;
   justify-content: center;
-  background-color:  rgba(32, 32, 32, 0.801);
+  background-color: rgba(32, 32, 32, 0.801);
 }
-
-.caja__trasera div{
+.caja__trasera div {
   margin: 100px 40px;
   color: #fff;
   transition: all 500ms;
 }
-
-
 .caja__trasera div p,
-.caja__trasera button{
+.caja__trasera button {
   margin-top: 30px;
 }
-
-.caja__trasera div h3{
+.caja__trasera div h3 {
   font-weight: 400;
   font-size: 26px;
 }
-
-.caja__trasera div p{
+.caja__trasera div p {
   font-size: 16px;
   font-weight: 300;
 }
-
-.caja__trasera button{
+.caja__trasera button {
   padding: 10px 40px;
   border: 2px solid #fff;
   border-radius: .8rem;
@@ -97,15 +85,12 @@ main{
   outline: none;
   transition: all 300ms;
 }
-
-.caja__trasera button:hover{
+.caja__trasera button:hover {
   background: #fff;
   color: rgb(32, 32, 32);
 }
-
 /*Formularios*/
-
-.contenedor__login-register{
+.contenedor__login-register {
   display: flex;
   align-items: center;
   width: 56.8vw;
@@ -116,34 +101,29 @@ main{
   border-radius: .6rem;
   transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
 }
-
-.contenedor__login-register form{
+.contenedor__login-register form {
   width: 100%;
   background: rgb(255, 255, 255);
   position: absolute;
   box-shadow: 6px 10px 24px -1px rgba(0,0,0,0.75);
 }
-
-#regForm{
+#regForm {
   padding: 20px 40px;
   height: 30rem;
   width: 22em;
 }
-
-#loginForm{
+#loginForm {
   padding: 110px 40px;
   height: 30rem;
   width: 25em;
 }
-
-.contenedor__login-register form h2{
+.contenedor__login-register form h2 {
   font-size: 2rem;
   text-align: center;
   color: #b10b0a;
   padding-bottom: 5%;
 }
-
-.contenedor__login-register form input{
+.contenedor__login-register form input {
   width: 100%;
   height: auto;
   padding: 2px;
@@ -154,9 +134,29 @@ main{
   background: rgb(255, 255, 255);
   font-size: 16px;
   outline: none;
+  position: relative;
+}
+.password-container {
+  position: relative;
 }
 
-.contenedor__login-register form .boton{
+.show-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.show-password img {
+  width: 20px;
+  height: 20px;
+}
+
+.contenedor__login-register form .boton {
   padding: 10px 40px;
   border: none;
   border-radius: .8rem;
@@ -167,50 +167,48 @@ main{
   color: rgb(255, 255, 255);
   outline: none;
 }
-.contenedor__login-register form .boton:hover{
+.contenedor__login-register form .boton:hover {
   transition: ease;
   background: #b10b0a;
   color: rgb(255, 255, 255);
   box-shadow: 3px 3px 5px -2px rgba(0,0,0,0.75);
 }
-
-#loginForm{
+#loginForm {
   opacity: 1;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-#regForm{
+#regForm {
   width: 25em;
   display: none;
   flex-direction: column;
   gap: 2rem;
 }
-#p_logIn{
+#p_logIn {
   display: none;
   margin-top: -1.5rem;
   font-size: .6rem;
   align-self: center;
   cursor: pointer;
-  &:hover{
-    text-decoration: underline;
-    font-size: .605rem;
-  }
 }
-#p_signUp{
+#p_logIn:hover {
+  text-decoration: underline;
+  font-size: .605rem;
+}
+#p_signUp {
   display: none;
   margin-top: -1.5rem;
   font-size: .6rem;
   align-self: center;
   cursor: pointer;
-  &:hover{
-    text-decoration: underline;
-    font-size: .605rem;
-  }
 }
-
-@media (max-width: 768px){
-  .contenedor__login-register form{
+#p_signUp:hover {
+  text-decoration: underline;
+  font-size: .605rem;
+}
+@media (max-width: 768px) {
+  .contenedor__login-register form {
     margin-top: 15rem;
     position: unset;
   }
@@ -220,10 +218,10 @@ main{
     inset: 0;
     backdrop-filter: none;
   }
- header .brgMenu {
-  display: none;
-}
-  body{
+  header .brgMenu {
+    display: none;
+  }
+  body {
     height: auto;
     background-image: none;
     backdrop-filter: none !important;
@@ -233,81 +231,70 @@ main{
     width: auto;
     margin: auto;
   }
-
   .contenedor__todo {
     width: 100%;
     margin: auto;
   }
   .caja__trasera {
-   display: none;  
+    display: none;
   }
-
   .caja__trasera div {
     margin: 50px 20px;
   }
-
   .contenedor__login-register {
     flex-direction: column;
     align-items: center;
   }
-
   .contenedor__login-register form {
     width: 100%;
     margin-bottom: 20px;
   }
-
   #regForm, #loginForm {
     width: 380px;
     height: 576px;
     padding: 20px;
   }
-
-  #p_logIn{
+  #p_logIn {
     display: flex;
   }
-  #p_signUp{
+  #p_signUp {
     display: flex;
   }
 }
 
-@media (max-width: 480px){
+@media (max-width: 480px) {
   main {
     height: auto;
     width: auto;
     margin: auto;
   }
-
   .contenedor__todo {
     max-width: 100%;
     z-index: 999;
-
   }
-  .dark .container{
+  .dark .container {
     background: none !important;
   }
-  .container{
+  .container {
     height: 100%;
   }
   .caja__trasera div {
     display: none;
   }
-
   .contenedor__login-register {
     flex-direction: column;
     align-items: center;
   }
-
   .contenedor__login-register form {
     width: 100%;
     margin-bottom: 20px;
   }
-
   #loginForm {
     width: 290px;
     padding: 20px;
     height: 25rem;
   }
-  #regForm{
+  #regForm {
     width: 290px;
     padding: 20px;
     height: 30rem;

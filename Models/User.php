@@ -438,6 +438,10 @@ class User extends ActiveRecord
         return boolval($this->isFirstLog);
     }
 
+    public function getUserType(){
+        return $this->userType;
+    }
+
     public function defaultImage()
     {
         $result = null;

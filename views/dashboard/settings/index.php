@@ -14,7 +14,7 @@
                             <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">My Profile</a></li>
                             <li aria-label="step-2" id="notifications"><a href="#">Notifications</a></li>
                             <li aria-label="step-3" id="change-pass"><a href="#">Change Password</a></li>
-                            <li aria-label="step-4" id="delete-account"><a href="#">Delete Account</a></li>
+                            <li aria-label="step-4" id="delete-account" class="<?php echo $userType?>"><a href="#">Delete Account</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -95,15 +95,30 @@
                     <form class="form_changePassword">
                         <label for="olderPassword">
                             Contraseña actual
-                            <input type="password" name="olderPassword">
+                            <div class="password-container">
+                                <input type="password" name="olderPassword" inputmode="text">
+                                <button type="button" class="show-password" onclick="togglePassword(this)">
+                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                </button>
+                            </div>
                         </label>
                         <label for="password">
                             Nueva contraseña
-                            <input type="password" name="password">
+                            <div class="password-container">
+                                <input type="password" name="password" inputmode="text">
+                                <button type="button" class="show-password" onclick="togglePassword(this)">
+                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                </button>
+                            </div>
                         </label>
                         <label for="repeatPassword">
                             Repetir nueva contraseña
-                            <input type="password" name="repeatPassword">   
+                            <div class="password-container">
+                                <input type="password" name="repeatPassword" inputmode="text">
+                                <button type="button" class="show-password" onclick="togglePassword(this)">
+                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                </button>
+                            </div>
                         </label>
                         <input type="submit" value="Cambiar">
                     </form>
@@ -119,7 +134,12 @@
                         </label>
                         <label for="password">
                             Contraseña
-                            <input type="password" name="Password">
+                            <div class="password-container">
+                                <input type="password" name="Password" inputmode="text">
+                                <button type="button" class="show-password" onclick="togglePassword(this)">
+                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                </button>
+                            </div>
                         </label>
                         <input type="submit" value="Eliminar">
                     </form>

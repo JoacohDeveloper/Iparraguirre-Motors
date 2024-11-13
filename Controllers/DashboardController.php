@@ -251,6 +251,7 @@ abstract class DashboardController
         $lastName = $fullNameExplode[1] ?? "";
         $bio = $usuario->getBio() ?? "";
         $email = $usuario->getEmail();
+        $userType = $usuario->getUserType();
 
         if (!isset($uuid)) {
             echo json_encode(["error" => "Unauthorized"]);
@@ -270,7 +271,8 @@ abstract class DashboardController
             "lastname" => $lastName,
             "email" => $email,
             "imagen" => $imagen,
-            "bio" => $bio
+            "bio" => $bio,
+            "userType" => $userType
         ];
 
         echo json_encode($user);

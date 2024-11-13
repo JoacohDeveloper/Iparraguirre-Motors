@@ -242,6 +242,7 @@ nav.aside-nav ul.steps li.selected a {
 
 /* Delete account Form */
 .fit__content__delelteAcc {
+  display: flex;
   flex-direction: column;
   background-color: #fff;
   padding: 20px;
@@ -286,13 +287,34 @@ nav.aside-nav ul.steps li.selected a {
   flex-direction: column;
 }
 
-.form_deleteAccount input[type="text"],
-.form_deleteAccount input[type="password"] {
+.password-container {
+  position: relative;
+}
+
+.show-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.show-password img {
+  width: 20px;
+  height: 20px;
+}
+
+.form_deleteAccount > label > div > input,
+.form_deleteAccount > label > input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
   margin-top: 5px;
+  width: 100%;
 }
 
 #Delete {
@@ -314,6 +336,7 @@ nav.aside-nav ul.steps li.selected a {
 /* Change password form */
 
 .fit__content__password {
+  display: flex;
   flex-direction: column;
   background-color: #fff;
   padding: 20px;
@@ -346,12 +369,33 @@ nav.aside-nav ul.steps li.selected a {
   flex-direction: column;
 }
 
-.form_changePassword input[type="password"] {
+.password-container {
+  position: relative;
+}
+
+.show-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.show-password img {
+  width: 20px;
+  height: 20px;
+}
+
+.form_changePassword > label > div > input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
   margin-top: 5px;
+  width: 100%;
 }
 
 #Changepw {
@@ -369,6 +413,7 @@ nav.aside-nav ul.steps li.selected a {
 #Changepw:hover {
   background-color: #900d09;
 }
+
 
 /* Modal Container */
 .form-container {

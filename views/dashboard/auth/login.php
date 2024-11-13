@@ -10,12 +10,15 @@
             <div>
                 <label for="email" class="inputs_txt">Email or Username</label>
                 <input class="inputs" id="email" type="text" name="email" placeholder="Usuario o Email">
-                <div class="input-underline"></div>
             </div>
             <div>
                 <label for="password" class="inputs_txt">Password</label>
-                <input class="inputs" id="password" type="password" name="password" placeholder="Password">
-                <div class="input-underline"></div>
+                <div class="password-container">
+                    <input type="password" name="password" class="inputs" inputmode="text">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
             </div>
             <div class="remember">
                 <input id="remember" type="checkbox">
@@ -25,5 +28,4 @@
         </form>
     </section>
     <?php implementComp("error_toast.php") ?>
-
 </div>

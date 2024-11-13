@@ -497,7 +497,6 @@
 }
 
 .edit-resume__banner {
-  /* background-color: #f2f2f2; */
   display: flex;
   width: 100%;
   padding: 0.4rem 0;
@@ -598,52 +597,177 @@ textarea {
   }
 }
 
-/* Delete account Form */
+/* Delete account form */
+.dashboard-fit__content__delelteAcc {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+  color: #202020;
+}
+
 .dashboard-fit__content__delelteAcc > h4 {
   font-size: 2rem;
 }
+
 .dashboard-fit__content__delelteAcc > h6 {
   font-size: 1rem;
   color: #b10b0a;
   margin-top: 1rem;
 }
+
 .dashboard-fit__content__delelteAcc > p {
   font-size: 0.8rem;
   color: #b10b0a;
 }
-.dashboard-fit__content__delelteAcc > .form_deleteAccount {
+
+.form_deleteAccount {
   display: flex;
   flex-direction: column;
-  width: 10rem;
+  align-items: center;
+  width: 100%;
   margin-top: 2rem;
   gap: 1rem;
 }
-.dashboard-fit__content__delelteAcc > .form_deleteAccount > label > input {
+
+.form_deleteAccount > label {
+  font-size: 1rem;
+  color: #202020;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form_deleteAccount > label > .password-container {
+  position: relative;
+}
+
+.form_deleteAccount > label > input,
+.form_deleteAccount > label > .password-container > input {
   background: none;
   border: none;
   padding: 0.3rem 0.2rem;
   margin-top: 0.5rem;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #b10b0a;
   outline: none;
   width: 100%;
 }
-.dashboard-fit__content__delelteAcc > .form_deleteAccount > input {
-  padding: 0.3rem;
+
+.form_deleteAccount > label > .password-container > .show-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: translateY(-3px);
-  }
+  padding: 0;
 }
 
-/* Change password form */
+.form_deleteAccount > label > .password-container > .show-password > img {
+  width: 20px;
+  height: 20px;
+}
 
-.form_changePassword{
-  margin-top: 1rem;
+.form_deleteAccount > input[type="submit"] {
+  padding: 0.3rem;
+  cursor: pointer;
+  background-color: #b10b0a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.form_deleteAccount > input[type="submit"]:hover {
+  transform: translateY(-3px);
+}
+
+
+/* Change password form */
+.dashboard-fit__content__password {
   display: flex;
   flex-direction: column;
-  gap: .8rem;
-  width: 15rem;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+  color: #202020;
+}
+
+.dashboard-fit__content__password > h4 {
+  font-size: 2rem;
+}
+
+.form_changePassword {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.form_changePassword > label {
+  font-size: 1rem;
+  color: #202020;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form_changePassword > label > .password-container {
+  position: relative;
+}
+
+.form_changePassword > label > .password-container > input {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.2rem;
+  margin-top: 0.5rem;
+  border-bottom: 2px solid #b10b0a;
+  outline: none;
+  width: 100%;
+}
+
+.form_changePassword > label > .password-container > .show-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.form_changePassword > label > .password-container > .show-password > img {
+  width: 20px;
+  height: 20px;
+}
+
+.form_changePassword > input[type="submit"] {
+  padding: 0.3rem;
+  cursor: pointer;
+  background-color: #b10b0a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.form_changePassword > input[type="submit"]:hover {
+  transform: translateY(-3px);
 }
 
 /* delete acc step */

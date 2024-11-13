@@ -112,15 +112,30 @@
         <form class="form_changePassword">
             <label for="olderPassword">
                 Contraseña actual
-                <input type="password" name="olderPassword">
+                <div class="password-container">
+                    <input type="password" name="olderPassword" inputmode="text">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
             </label>
             <label for="password">
                 Nueva contraseña
-                <input type="password" name="password">
+                <div class="password-container">
+                    <input type="password" name="password" inputmode="text">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
             </label>
             <label for="repeatPassword">
                 Repetir nueva contraseña
-                <input type="password" name="repeatPassword">   
+                <div class="password-container">
+                    <input type="password" name="repeatPassword" inputmode="text">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
             </label>
             <input id="Changepw" type="submit" value="Cambiar">
         </form>
@@ -137,11 +152,17 @@
             </label>
             <label for="password">
                 Contraseña
-                <input type="password" name="Password">
+                <div class="password-container">
+                    <input type="password" name="Password" inputmode="text">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
             </label>
             <input id="Delete" type="submit" value="Eliminar">
         </form>
     </section>
+
 
     <?php implementComp("error_toast.php")?>
 

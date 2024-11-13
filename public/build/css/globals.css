@@ -889,8 +889,8 @@ footer {
   border-top: 1px solid #666;
 }
 .dark .footer-bottom {
-  color: #ccc;
-  border-top: 1px solid #202020;
+  color: #666;
+  border-top: 1px solid #ccc;
 }
 @media (max-width: 1110px) {
   .footer {

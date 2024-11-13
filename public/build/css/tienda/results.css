@@ -40,11 +40,11 @@
 }
 
 .dark .card {
-  box-shadow: 1px 1px 3px 0px rgba(192, 192, 192, 0.55);
+  box-shadow: 0.5px 0.5px 4px 0px rgba(255,255,255,0.55);
   
   &:hover {
     transition: 0.3s ease;
-    box-shadow: 1px 1px 10px 0px rgba(255, 255, 255, 0.47);
+    box-shadow: 1px 1px 14px 0px rgba(255,255,255,0.47);
     color: #202020;
   }
 }
@@ -74,7 +74,7 @@
 
 .dark .card_info { 
   color: #fff;
-  background-color: #202020;
+  background-color: #000;
 
 }
 .card_info p:nth-child(1){
