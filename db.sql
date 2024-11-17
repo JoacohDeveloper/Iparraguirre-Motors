@@ -41,7 +41,6 @@ create table customer(
 	PRIMARY KEY(uuid)
 );
 
-
 create table cart(
 	user_uuid VARCHAR(45),
 	item_id VARCHAR(65),
@@ -109,7 +108,7 @@ create table vehicle_img(
 
 CREATE TABLE refractions (
   refraction_id VARCHAR(45) NOT NULL,
-  tipo VARCHAR(255),
+  tipo_repuesto VARCHAR(255),
   origen VARCHAR(255),
   url_img VARCHAR(255),
   alt_img VARCHAR(150),
@@ -141,6 +140,7 @@ create table testdrive(
   createdAt datetime default CURRENT_TIMESTAMP,
 	PRIMARY KEY(testID)
 );
+
 
 -- Production SQL code
 
