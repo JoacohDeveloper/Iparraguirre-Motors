@@ -170,7 +170,8 @@ class Refractions extends ActiveRecord
         $stmt->execute();
     }
 
-    public function actualizarRepuesto($id) {
+    public function actualizarRepuesto($id)
+    {
         $this->id = $id;
         date_default_timezone_set('America/Montevideo');
         try {
@@ -209,5 +210,4 @@ class Refractions extends ActiveRecord
             return false;
         }
     }
-    
 }
