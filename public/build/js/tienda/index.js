@@ -124,19 +124,19 @@ async function init(search = null) {
                 km: v.kilometros,
                 images: v.vehicleImages
             };
-            
-            if(urlActual == "/catalogo/vehiculos" || urlActual == "/catalogo/vehiculos.."){
-                if(customV.categoria == "De fabrica"){
+
+            if (urlActual == "/catalogo/vehiculos" || urlActual == "/catalogo/vehiculos..") {
+                if (customV.categoria == "De fabrica") {
                     if (cardContainer) cardContainer.appendChild(Card(customV));
                 }
-            } else if(urlActual === "/catalogo/vehiculosModificados" || urlActual === "/catalogo/vehiculosModificados.."){
-                if(customV.categoria == "Modificados"){
+            } else if (urlActual === "/catalogo/vehiculosModificados" || urlActual === "/catalogo/vehiculosModificados..") {
+                if (customV.categoria == "Modificados") {
                     if (cardContainer) cardContainer.appendChild(Card(customV));
                 }
             } else {
                 console.log("Ha ocurrido un error")
             }
-            
+
         });
 
         if (data.length > 0) {

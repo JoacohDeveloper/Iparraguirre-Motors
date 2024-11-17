@@ -27,26 +27,23 @@ async function loadProduct() {
 
     let response = await fetch(`${window.location.origin}/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`);
     let product = await response.json();
+    console.log(product)
 
-    if (!product.product || product.status === 404) {
+    if (product?.message == "404") {
         response = await fetch(`${window.location.origin}/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`);
+
         product = await response.json();
 
-        if (product[0]?.product) {
-            product = product[0];
-        } else {
-            console.error("Producto no encontrado");
-            return;
-        }
     }
-    console.log(product)
+
+
     if (product.product) {
-        if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+        if (product.product.categoria == "De fabrica" || product.product.categoria == "Modificados") {
             $title.textContent = product?.product?.nombre;
         } else {
             $title.textContent = product?.tipo_repuesto + " " + product?.product?.fabricante + " " + product?.product?.modelo;
         }
-        
+
 
         if (product.product.discount) {
             const precioOriginalHTML = document.createElement("p");
@@ -115,10 +112,10 @@ async function loadProduct() {
         } else {
             const $imageSelector = document.querySelector(".image-selector");
             $imageSelector.style.display = "none";
-            if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+            if (product.product.categoria == "De fabrica" || product.product.categoria == "Modificados") {
                 $image.src = "/build/src/images/vehicles/default.jpg";
             } else {
-                if(product.url_img){
+                if (product.url_img) {
                     $image.src = product.url_img;
                 } else {
                     $image.src = "/build/src/images/refractions/default.jpg";
@@ -129,13 +126,13 @@ async function loadProduct() {
         const optionsContainer = document.querySelector(".add-to-cart-container");
         const isNotSessionLogged = document.querySelector("#userIsNotLogged");
 
-        if(product.product.categoria == "De fabrica" || product.product.categoria == "Modificados"){
+        if (product.product.categoria == "De fabrica" || product.product.categoria == "Modificados") {
             const testBtn = document.createElement("button");
             testBtn.textContent = "Reservar test drive";
             optionsContainer.appendChild(testBtn);
-            
+
             testBtn.addEventListener("click", e => {
-                if(isNotSessionLogged){
+                if (isNotSessionLogged) {
                     window.location.href = `/auth`;
                 } else {
                     modalTest(product.product.product_id, product.product.nombre, product.year);
@@ -155,33 +152,42 @@ async function loadProduct() {
             optionsContainer.appendChild(qtyBtn);
             optionsContainer.appendChild(basketBtn);
 
-            qtyBtn.addEventListener("input", function() {
+            qtyBtn.addEventListener("input", function () {
                 if (this.value < 1) {
                     this.value = 1;
                 }
             });
-            qtyBtn.addEventListener("keydown", function(e) {
+            qtyBtn.addEventListener("keydown", function (e) {
                 if (!((e.key >= 0 && e.key <= 9) || e.key === "Backspace" || e.key === "ArrowLeft" || e.key === "ArrowRight")) {
                     e.preventDefault();
                 }
             });
-            qtyBtn.addEventListener("change", function() {
+            qtyBtn.addEventListener("change", function () {
                 if (this.value < 1) {
                     this.value = 1;
                 }
             });
 
-            basketBtn.addEventListener("click", e => {
-                if(isNotSessionLogged){
+            basketBtn.addEventListener("click", async e => {
+                if (isNotSessionLogged) {
                     window.location.href = `/auth`;
                 } else {
-                    const ultimosProductos = JSON   .parse(localStorage.getItem("basket")) || [];
-                    
-                    const newProduct = { ...product.product, images: [{url:product?.url_img}]};
 
-                    const yaExiste = ultimosProductos.find(product => product.product_id === newProduct.product_id);
+                    const response = await fetch(`${location.origin}/auth/session_user`)
+                    const data = await response.json();
 
-                    
+
+                    const ultimosProductosGenerales = JSON.parse(localStorage.getItem("basket")) || [];
+
+                    const ultimosProductos = [...ultimosProductosGenerales].filter(product => {
+                        return product?.forUser == data?.session_uuid
+                    })
+
+                    const newProduct = { ...product.product, images: [{ url: product?.url_img }], forUser: data?.session_uuid };
+
+                    const yaExiste = ultimosProductos?.find(product => product.product_id === newProduct.product_id);
+
+
                     if (!yaExiste) {
                         localStorage.setItem("basket", JSON.stringify([...ultimosProductos, newProduct]));
                         basketScript();
@@ -231,7 +237,7 @@ function moveArrows() {
 
 const productContainer = document.querySelector(".product-container")
 
-function modalTest(itemID, itemName, itemYear){
+function modalTest(itemID, itemName, itemYear) {
     const testContainer = document.createElement("div"); //Contenedor principal
     testContainer.classList.add("test-Container");
     const containerHeader = document.createElement("div"); //Encabezado del contenedor
@@ -252,20 +258,20 @@ function modalTest(itemID, itemName, itemYear){
     const exitIcon = document.createElement("img");
     exitIcon.src = "/build/src/images/cross.svg";
     exitIcon.alt = "Icono de cierre para el formulario";
-    
+
     exitBtn.appendChild(exitIcon);
     exitBtn.addEventListener("click", e => {
         e.preventDefault();
-      
+
         testContainer.classList.add('closing');
-      
+
         setTimeout(() => {
-          toggleBackground();
-          if (inputDate) inputDate.remove();
-          if (testContainer) testContainer.remove();
+            toggleBackground();
+            if (inputDate) inputDate.remove();
+            if (testContainer) testContainer.remove();
         }, 500);
     });
-    
+
     //Implementamos los items del header al header
     containerHeader.appendChild(testTitle);
     containerHeader.appendChild(exitBtn);
@@ -273,7 +279,7 @@ function modalTest(itemID, itemName, itemYear){
     //Items del main
     const explicationText = document.createElement("p");
     const explicationText_redirect = document.createElement("a");
-    
+
     explicationText.textContent = "Las reservas de test drive solo se aceptan si son en los proximos 7 dias. Le recomendamos leer las politicas de las pruebas de manejo para mas informacion.";
     explicationText_redirect.textContent = "Ver politica";
     explicationText_redirect.href = location.origin + "/";
@@ -321,7 +327,7 @@ function modalTest(itemID, itemName, itemYear){
             const loaderSection = document.querySelector(".loader")
             loaderSection?.appendChild(spinner);
             const form_data = new FormData(e.target);
-            
+
             const nameOfProduct = itemName + " " + itemYear;
             form_data.append('productID', itemID);
             form_data.append('productName', nameOfProduct);
@@ -347,8 +353,8 @@ function modalTest(itemID, itemName, itemYear){
                         icon: "success"
                     });
                     const btn_swal = document.querySelector(".swal2-confirm");
-                    if(btn_swal){
-                        btn_swal.addEventListener("click", () =>{
+                    if (btn_swal) {
+                        btn_swal.addEventListener("click", () => {
                             location.reload();
                         })
                     }

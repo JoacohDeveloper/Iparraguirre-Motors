@@ -65,7 +65,7 @@ formularioRegister.addEventListener("submit", async e => {
     const reg_email = e.target[2].value;
     const reg_phone = e.target[3].value;
     const reg_pass = e.target[4].value;
-    const reg_rePass = e.target[5].value;
+    const reg_rePass = e.target[6].value;
     const errores = [];
 
     const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
@@ -159,57 +159,57 @@ var contenedor_login_register = document.querySelector(".contenedor__login-regis
 var caja_trasera_login = document.querySelector(".caja__trasera-login");
 var caja_trasera_register = document.querySelector(".caja__trasera-register");
 
-    //FUNCIONES
+//FUNCIONES
 
-function anchoPage(){
+function anchoPage() {
 
-    if (window.innerWidth > 850){
+    if (window.innerWidth > 850) {
         caja_trasera_register.style.display = "block";
         caja_trasera_login.style.display = "block";
-    }else{
+    } else {
         caja_trasera_register.style.display = "block";
         caja_trasera_register.style.opacity = "1";
         caja_trasera_login.style.display = "none";
         formularioLogin.style.display = "flex";
         contenedor_login_register.style.left = "0px";
-        formularioRegister.style.display = "none";   
+        formularioRegister.style.display = "none";
     }
 }
 
 anchoPage();
 
 
-    function iniciarSesion(){
-        if (window.innerWidth > 850){
-            formularioLogin.style.display = "flex";
-            contenedor_login_register.style.left = "60px";
-            formularioRegister.style.display = "none";
-            caja_trasera_register.style.opacity = "1";
-            caja_trasera_login.style.opacity = "0";
-        }else{
-            formularioLogin.style.display = "flex";
-            contenedor_login_register.style.left = "0px";
-            formularioRegister.style.display = "none";
-            caja_trasera_register.style.display = "block";
-            caja_trasera_login.style.display = "none";
-        }
+function iniciarSesion() {
+    if (window.innerWidth > 850) {
+        formularioLogin.style.display = "flex";
+        contenedor_login_register.style.left = "60px";
+        formularioRegister.style.display = "none";
+        caja_trasera_register.style.opacity = "1";
+        caja_trasera_login.style.opacity = "0";
+    } else {
+        formularioLogin.style.display = "flex";
+        contenedor_login_register.style.left = "0px";
+        formularioRegister.style.display = "none";
+        caja_trasera_register.style.display = "block";
+        caja_trasera_login.style.display = "none";
     }
+}
 
-    function register(){
-        if (window.innerWidth > 850){
-            formularioRegister.style.display = "flex";
-            contenedor_login_register.style.left = "525px";
-            formularioLogin.style.display = "none";
-            caja_trasera_register.style.opacity = "0";
-            caja_trasera_login.style.opacity = "1";
-        }else{
-            formularioRegister.style.display = "flex";
-            contenedor_login_register.style.left = "0px";
-            formularioLogin.style.display = "none";
-            caja_trasera_register.style.display = "none";
-            caja_trasera_login.style.display = "block";
-            caja_trasera_login.style.opacity = "1";
-        }
+function register() {
+    if (window.innerWidth > 850) {
+        formularioRegister.style.display = "flex";
+        contenedor_login_register.style.left = "525px";
+        formularioLogin.style.display = "none";
+        caja_trasera_register.style.opacity = "0";
+        caja_trasera_login.style.opacity = "1";
+    } else {
+        formularioRegister.style.display = "flex";
+        contenedor_login_register.style.left = "0px";
+        formularioLogin.style.display = "none";
+        caja_trasera_register.style.display = "none";
+        caja_trasera_login.style.display = "block";
+        caja_trasera_login.style.opacity = "1";
+    }
 }
 
 
@@ -219,12 +219,12 @@ const p_signUp = document.querySelector("#p_signUp")
 p_signUp.addEventListener("click", mobileRegister);
 p_logIn.addEventListener("click", mobileIniciarSesion);
 
-function mobileIniciarSesion(){
+function mobileIniciarSesion() {
     formularioLogin.style.display = "flex";
     formularioRegister.style.display = "none";
 }
 
-function mobileRegister(){
+function mobileRegister() {
     formularioLogin.style.display = "none";
     formularioRegister.style.display = "flex";
 }

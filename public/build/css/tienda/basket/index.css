@@ -331,3 +331,12 @@ body {
     max-height: 4rem;
   }
 }
+
+.no-products {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  a {
+    color: #4b4b4b;
+  }
+}

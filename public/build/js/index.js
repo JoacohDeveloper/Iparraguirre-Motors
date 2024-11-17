@@ -245,10 +245,11 @@ const ProductBasket = ({ product }) => {
     // Añadir la imagen del delete al div delete
     divDelete.appendChild(imgDelete);
 
-    divDelete.addEventListener("click", e => {
+    divDelete.addEventListener("click", async e => {
         const products = JSON.parse(localStorage.getItem("basket")) || []
-
-        const existe = products.find(product => product.product_id === product_id)
+        const response = await fetch(`${location.origin}/auth/session_user`)
+        const data = await response.json();
+        const existe = products.find(product => product.product_id === product_id && product.forUser === data?.session_uuid)
 
         if (existe) {
             const newProducts = products.filter(product => product.product_id !== existe?.product_id);
@@ -294,8 +295,16 @@ const ProductBasket = ({ product }) => {
 }
 
 
-function basketScript() {
-    const products = JSON.parse(localStorage.getItem("basket")) || [];
+async function basketScript() {
+    const response = await fetch(`${location.origin}/auth/session_user`)
+    const data = await response.json();
+
+    const productsGeneral = JSON.parse(localStorage.getItem("basket")) || [];
+
+    const products = productsGeneral.filter(product => {
+        return product?.forUser == data?.session_uuid;
+    })
+
     const $basket = document.querySelector(".basket")
 
     const $productContainer = document.querySelector("#basket-products-container")

@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Models\Customer;
 use Models\User;
 use Models\Interactions;
 use MVC\Router;
@@ -65,14 +66,15 @@ abstract class AuthenticationController
         ]);
     }
 
-    public static function adminRegister(){
+    public static function adminRegister()
+    {
         $errores = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header('Content-Type: application/json; charset=utf-8');
-            
+
             $username = $_POST['username'];
             $usuario = new User($_POST);
-            
+
             $defaultPassword = "imotorsadmin" . $username;
             $defaultEmail = $username . "@default.com";
             if (empty($errores)) {
@@ -100,28 +102,29 @@ abstract class AuthenticationController
             exit;
         }
     }
-    
-    public static function rootRegist() {
+
+    public static function rootRegist()
+    {
         header('Content-Type: application/json; charset=utf-8');
         $masterAccount = new User();
         $result = $masterAccount->masterAccount();
-    
+
         if ($result) {
             $response = ["message" => "succesfuly"];
             logg("Todo okey");
-            
+
             sleep(5);
             header("Location: /dashboard/login");
         } else {
             $response = ["error" => "Ha ocurrido un error"];
             logg("Ocurrio un error");
-            
+
             sleep(5);
             header("Location: /dashboard/login");
         }
         exit;
     }
-    
+
 
     public static function recuperar(Router $router)
     {
@@ -203,7 +206,8 @@ abstract class AuthenticationController
         exit;
     }
 
-    public static function modificarUsuarioDefault(){
+    public static function modificarUsuarioDefault()
+    {
         $errores = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = $_SESSION["usuario"] ?? null;
@@ -249,17 +253,18 @@ abstract class AuthenticationController
             $imagen = $usuario->getImagen();
             unlink(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"] . $imagen));
 
-            
+
             $usuario->defaultImage();
             $_SESSION["usuario"] = $usuario;
             echo json_encode(["message" => "successfuly"]);
             exit;
-    }
+        }
         echo json_encode(["message" => "error", "errores" => $errores]);
         exit;
     }
 
-    public static function getAdmins() {
+    public static function getAdmins()
+    {
         $result = User::getAllAdmins();
         if (!empty($result)) {
             echo json_encode($result);
@@ -268,27 +273,27 @@ abstract class AuthenticationController
         }
         exit;
     }
-    
-    public static function getOtherAdmin(Router $router) {
+
+    public static function getOtherAdmin(Router $router)
+    {
         header('Content-Type: application/json; charset=utf-8');
         $email = $_GET["email"];
         $usuario = User::getUser($email);
         $myUser = $_SESSION["usuario"] ?? null;
 
-        if($myUser == $usuario){
+        if ($myUser == $usuario) {
             $response = ["response" => "MyUser"];
             echo json_encode($response);
         } else {
             $usuarioArray = (array) $usuario;
-    
-        if ($usuarioArray) {
-            $response = ["response" => $usuarioArray];
-            echo json_encode($response);
-        } else {
-            $response = ["response" => "error"];
-            echo json_encode($response);
-        }
-        
+
+            if ($usuarioArray) {
+                $response = ["response" => $usuarioArray];
+                echo json_encode($response);
+            } else {
+                $response = ["response" => "error"];
+                echo json_encode($response);
+            }
         }
         exit;
     }
@@ -302,5 +307,23 @@ abstract class AuthenticationController
         } else {
             header("location: /dashboard/login");
         }
+    }
+
+
+    public static function getSessionLoggedUuid()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        $usuario = $_SESSION["usuario"];
+
+        if (!$usuario || !isset($usuario) || is_null($usuario)) {
+            echo json_encode(["message" => "Unauthorized"]);
+        } else {
+            if ($usuario instanceof User) {
+                echo json_encode(["session_uuid" => $usuario->getUUID()]);
+            } else if ($usuario instanceof Customer) {
+                echo json_encode(["session_uuid" => $usuario->getUUID()]);
+            }
+        }
+        exit;
     }
 }

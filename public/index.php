@@ -56,6 +56,10 @@ $router->get("/contact", [InformationController::class, "contactUs"]);
 // $router->post("/faq", [InformationController::class, "preguntasFrecuentes"]);
 // $router->get("/faq", [InformationController::class, "preguntasFrecuentes"]);
 
+//getAuth
+
+$router->get("/auth/session_user", [AuthenticationController::class, "getSessionLoggedUuid"]);
+
 //Customer auth
 $router->get("/auth", [CustomerController::class, "auth"]);
 
@@ -84,18 +88,18 @@ $router->post("/dashboard/verificar", [AuthenticationController::class, "verific
 $router->get("/dashboard/user/getAll", [AuthenticationController::class, "getAdmins"]);
 $router->get("/dashboard/client/getAll", [CustomerController::class, "getClients"]);
 
-$router->get("/dashboard/manageClient", [DashboardController::class, "manageClient"]); 
+$router->get("/dashboard/manageClient", [DashboardController::class, "manageClient"]);
 $router->get("/dashboard/manageClient/getOtherClient", [CustomerController::class, "getOtherClient"]);
 $router->get("/dashboard/manageClient/forceDelete", [DashboardController::class, "forcedClientDeleting"]);
 $router->get("/dashboard/manageClient/forceActive", [DashboardController::class, "forcedClientActive"]);
 $router->get("/dashboard/manageClient/getInteractions", [DashboardController::class, "getInteractionsByUser"]);
 $router->get("/dashboard/manageClient/deleteInteraction", [DashboardController::class, "deleteInteraction"]);
 
-$router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]); 
+$router->get("/dashboard/manageEmployee", [DashboardController::class, "manageAdmin"]);
 $router->post("/dashboard/registAdmin/regist", [AuthenticationController::class, "adminRegister"]);
 $router->get("/dashboard/manageEmployee/getOtherAdmin", [AuthenticationController::class, "getOtherAdmin"]);
 $router->get("/dashboard/manageEmployee/forceDelete", [DashboardController::class, "forcedUserDeleting"]);
-$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]); 
+$router->get("/dashboard/manageEmployee/forceActive", [DashboardController::class, "forcedUserActive"]);
 $router->get("/dashboard/manageEmployee/forceChangeRol", [DashboardController::class, "forcedUserChangeRol"]);
 
 //Registro para cuenta maestra:
@@ -134,8 +138,8 @@ $router->get("/dashboard/discounts/refractions", [ProductController::class, "dis
 $router->get("/dashboard/products/vehicle/preview", [ProductController::class, "vehiclePreview"]);
 
 
-$router->post("/dashboard/agregar-repuesto", [RefractionsController::class, "agregarRepuesto"]); 
-$router->post("/dashboard/modificar-repuesto", [RefractionsController::class, "modificarRepuesto"]); 
+$router->post("/dashboard/agregar-repuesto", [RefractionsController::class, "agregarRepuesto"]);
+$router->post("/dashboard/modificar-repuesto", [RefractionsController::class, "modificarRepuesto"]);
 
 
 //dashboard user settings
@@ -160,7 +164,7 @@ $router->get("/catalogo/vehiculos", [TiendaController::class, "vehicles"]);
 $router->get("/catalogo/vehiculosModificados", [TiendaController::class, "customVehicles"]);
 $router->get("/catalogo/refraction", [TiendaController::class, "refraction"]);
 
-$router->post("/catalogo/vehiculos/reserva", [CustomerController::class, "reserveTestDrive"]); 
+$router->post("/catalogo/vehiculos/reserva", [CustomerController::class, "reserveTestDrive"]);
 
 $router->get("/catalogo/product/view", [TiendaController::class, "view"]);
 

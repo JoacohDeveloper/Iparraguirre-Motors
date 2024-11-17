@@ -184,7 +184,7 @@ class Customer extends ActiveRecord
     {
         $result = null;
         try {
-            $query = "SELECT * FROM ". self::$tabla ." WHERE email = '$dato' or username = '$dato' LIMIT 1";
+            $query = "SELECT * FROM " . self::$tabla . " WHERE email = '$dato' or username = '$dato' LIMIT 1";
             $result = Customer::consultarSQL($query);
         } catch (PDOException $th) {
             logg("[MARIADB] Error al consultar.");
@@ -193,7 +193,8 @@ class Customer extends ActiveRecord
         return $result[0] ?? null;
     }
 
-    public static function getAllCustomers() {
+    public static function getAllCustomers()
+    {
         try {
             $query = "SELECT * FROM " . self::$tabla;
             $stmt = static::$db->prepare($query);
@@ -204,10 +205,11 @@ class Customer extends ActiveRecord
         }
     }
 
-    public static function adminForceDeleting($recivedUUID) {
+    public static function adminForceDeleting($recivedUUID)
+    {
         $result = null;
         try {
-            $query = "UPDATE ". self::$tabla ." SET isDeleted = 1 WHERE uuid = :uuid";
+            $query = "UPDATE " . self::$tabla . " SET isDeleted = 1 WHERE uuid = :uuid";
             $params = [':uuid' => $recivedUUID];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
@@ -218,10 +220,11 @@ class Customer extends ActiveRecord
         return $result;
     }
 
-    public static function adminForceActiving($recivedUUID) {
+    public static function adminForceActiving($recivedUUID)
+    {
         $result = null;
         try {
-            $query = "UPDATE ". self::$tabla ." SET isDeleted = 0 WHERE uuid = :uuid";
+            $query = "UPDATE " . self::$tabla . " SET isDeleted = 0 WHERE uuid = :uuid";
             $params = [':uuid' => $recivedUUID];
             $stmt = static::$db->prepare($query);
             $result = $stmt->execute($params);
@@ -247,7 +250,8 @@ class Customer extends ActiveRecord
         return ["url" => $this->getImagen(), "alt" => $this->getNombreImagen()];
     }
 
-    public function getCreated(){
+    public function getCreated()
+    {
         if ($this->createdAt instanceof \DateTime) {
             return $this->createdAt;
         } else {
@@ -255,7 +259,8 @@ class Customer extends ActiveRecord
         }
     }
 
-    public function getUpdated(){
+    public function getUpdated()
+    {
         if ($this->updatedAt instanceof \DateTime) {
             return $this->updatedAt;
         } else {
@@ -276,8 +281,9 @@ class Customer extends ActiveRecord
         return password_verify($password, $this->password);
     }
 
-    public function isAdmin(){
-        if($this->userType == "Empleado" || $this->userType == "Encargado" || $this->userType == "Root") return true;
+    public function isAdmin()
+    {
+        if ($this->userType == "Empleado" || $this->userType == "Encargado" || $this->userType == "Root") return true;
         return false;
     }
 
@@ -286,11 +292,12 @@ class Customer extends ActiveRecord
         return boolval($this->isDeleted);
     }
 
-    public function defaultImage(){
+    public function defaultImage()
+    {
         $result = null;
         $this->imagen = "\build\src\images\users\default.jpg";
         try {
-            $query = "UPDATE ". self::$tabla ." SET 
+            $query = "UPDATE " . self::$tabla . " SET 
                       imagen = :imagen
                       WHERE uuid = :uuid";
             $params = [
@@ -305,7 +312,8 @@ class Customer extends ActiveRecord
         }
     }
 
-    public function changePassword($new_password){
+    public function changePassword($new_password)
+    {
         $result = null;
         $this->password = password_hash($new_password, PASSWORD_BCRYPT);
         try {
@@ -316,7 +324,8 @@ class Customer extends ActiveRecord
         return $result;
     }
 
-    public function deleteCustomer(){
+    public function deleteCustomer()
+    {
         $result = null;
         try {
             $result = $this->eliminar($this->uuid);
@@ -325,5 +334,4 @@ class Customer extends ActiveRecord
         }
         return $result;
     }
-    
 }

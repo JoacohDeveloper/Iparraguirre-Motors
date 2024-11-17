@@ -21,7 +21,7 @@ abstract class RefractionsRestController
         header('Content-Type: application/json;');
 
         try {
-            $refractionId = isset($_GET["id"]) ? intval($_GET["id"]) : null;
+            $refractionId = isset($_GET["id"]) ? ($_GET["id"]) : null;
             $refractionPage = isset($_GET["page"]) ? intval($_GET["page"]) : null;
             $refractionName = isset($_GET["name"]) ? trim(strtolower($_GET["name"])) : null;
 
