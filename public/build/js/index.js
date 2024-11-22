@@ -152,19 +152,19 @@ const addToast = (errors) => {
 
     errors.forEach(error => {
         const toastHTML = `
-    <div class="toast active">
-        <div class="toast-content">
-            <i class="fas fa-solid fa-check check"></i>
+            <div class="toast active">
+                <div class="toast-content">
+                    <i class="fas fa-solid fa-check check"></i>
 
-            <div class="message">
-                <span class="text text-1">${error.title}</span>
-                <span class="text text-2">${error.error}</span>
-            </div>
-        </div>
-        <button class="fa-solid fa-xmark close">x</button>
+                    <div class="message">
+                        <span class="text text-1">${error.title}</span>
+                        <span class="text text-2">${error.error}</span>
+                    </div>
+                </div>
+                <button class="fa-solid fa-xmark close">x</button>
 
-        <div class="progress active"></div>
-    </div>`
+                <div class="progress active"></div>
+            </div>`
 
         toasts.innerHTML += toastHTML
     })

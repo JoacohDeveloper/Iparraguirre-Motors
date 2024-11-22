@@ -112,15 +112,9 @@ abstract class AuthenticationController
         if ($result) {
             $response = ["message" => "successfully"];
             logg("Todo okey");
-
-            sleep(5);
-            header("Location: /dashboard/login");
         } else {
             $response = ["error" => "Ha ocurrido un error"];
             logg("Ocurrio un error");
-
-            sleep(5);
-            header("Location: /dashboard/login");
         }
         exit;
     }

@@ -117,7 +117,7 @@ $router->get("/settings/getUserTestDrive", [CustomerController::class, "customer
 
 $router->get("/logout", [CustomerController::class, "logout"]);
 $router->get("/dashboard/logout", [AuthenticationController::class, "logout"]);
-$router->get("/dashboard/noaccess", [DashboardController::class, "noAccess"]);
+$router->get("/noaccess", [DashboardController::class, "noAccess"]);
 
 //dashboard 
 

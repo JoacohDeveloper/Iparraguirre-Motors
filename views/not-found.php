@@ -1,7 +1,7 @@
 <div class="contenedor not_found">
     <div>
-        <p>no se encontró una página con esa dirección <span style="color: red;"> <?php echo $_SERVER["PATH_INFO"] ?? "/" ?> </span></p>
         <h2>NOT FOUND</h2>
+        <p>no se encontró una página con esa dirección <span style="color: red;"> <?php echo $_SERVER["PATH_INFO"] ?? "/" ?> </span></p>
     </div>
     <div>
         <a href="#" id="goback">volver atras</a>

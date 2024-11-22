@@ -15,9 +15,7 @@ abstract class DashboardController
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /dashboard/noaccess");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
         $isFirstLog = $user->isFirstLog();
 
         if($isFirstLog){
@@ -40,6 +38,8 @@ abstract class DashboardController
     public static function userSettings(Router $router)
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
+        $user = $_SESSION["usuario"];
+        if (!$user->isAdmin()) header("location: /noaccess");
         $uuid = $_GET["u"];
         $usuario = $_SESSION["usuario"];
         if (!$usuario->isAdmin()) {
@@ -282,12 +282,7 @@ abstract class DashboardController
     public static function manageAdmin(Router $router){
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
-        if(!$user->isEncargado()){
-            header("location: /");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
 
         $router->render("dashboard/accountManage/manageAdmin", [
             "styles" => ["dashboard/index", "dashboard/aside", "dashboard/accountManage/manageAdmin"],
@@ -299,9 +294,7 @@ abstract class DashboardController
     public static function manageClient(Router $router){
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
 
         $router->render("dashboard/accountManage/manageClient", [
             "styles" => ["dashboard/index", "dashboard/aside", "dashboard/accountManage/manageClient"],

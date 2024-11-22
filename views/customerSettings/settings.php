@@ -20,7 +20,7 @@
     </aside>  
 <div class="fit__content">  
     <section class="fit__content__profile settingsStepVisible" aria-step="1" id="#my_profile">
-        <h4>Mi perfil</h4>
+        <h4 id="myProfile-title">Mi perfil</h4>
         <div class="profile__resume">
         <?php
             if ($imagen["url"] != "\build\src\images\users\default.jpg") {
@@ -147,7 +147,7 @@
     <section class="fit__content__delelteAcc" aria-step="5" id="#deleteacount">
         <h4>Eliminar mi cuenta</h4>
         <h6>¿Estas seguro?</h6>
-        <p>Borrar tu cuenta implica perder todos tus datos, y una vez hecho no hay vuelta atras!</p>
+        <p>Borrar tu cuenta implica perder todos tus datos, y una<br>vez hecho no hay vuelta atras!</p>
         <form class="form_deleteAccount">
             <label for="fullname">
                 Nombre completo

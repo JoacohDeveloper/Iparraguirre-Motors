@@ -17,9 +17,7 @@ class ProductController
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
 
         $router->render("/dashboard/products/vehicle", [
             "title" => "Products | Iparraguirre Motors",
@@ -33,9 +31,7 @@ class ProductController
     {
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
 
         $router->render("/dashboard/products/repuestos", [
             "title" => "Products | Iparraguirre Motors",
@@ -48,9 +44,7 @@ class ProductController
     public static function discountForVehicle(Router $router){
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
 
         $router->render("/dashboard/products/discount/vehicle", [
             "title" => "Discounts | Iparraguirre Motors",
@@ -63,9 +57,7 @@ class ProductController
     public static function discountForRefractions(Router $router){
         if (!isset($_SESSION["usuario"])) header("location: /dashboard/login");
         $user = $_SESSION["usuario"];
-        if (!$user->isAdmin()) {
-            header("location: /");
-        }
+        if (!$user->isAdmin()) header("location: /noaccess");
 
         $router->render("/dashboard/products/discount/repuestos", [
             "title" => "Discounts | Iparraguirre Motors",

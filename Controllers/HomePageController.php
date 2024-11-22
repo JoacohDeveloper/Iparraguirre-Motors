@@ -38,7 +38,7 @@ abstract class HomePageController
         $email = $customer->getEmail();
         $createdAt = $customer->getCreated()->format('d-m-Y H:i:s');
         $updatedAt = $customer->getUpdated()->format('d-m-Y H:i:s');
-        if ($updatedAt == $createdAt) $updatedAt = "Never updated";
+        if ($updatedAt == $createdAt) $updatedAt = "Nunca actualizado";
 
         if (!isset($uuid)) {
             header("Location: /");
