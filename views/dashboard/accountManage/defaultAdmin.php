@@ -13,22 +13,28 @@
 
             <form id="newInfo">
                 <h5>Mis datos</h5>
-            <div>
-                <label class="inputs_txt" id="username_txt">Nombre de usuario</label>
-                <input class="inputs" type="text" name="username" placeholder="Username">
-            </div>
-            <div>
-                <label class="inputs_txt">Correo electronico</label>
-                <input class="inputs" type="text" name="email" placeholder="Email">
-            </div>
-            <div>
-                <label class="inputs_txt">Contraseña</label>
-                <input class="inputs" type="password" name="password" placeholder="Password">
-            </div>
-            <div>
-                <label class="inputs_txt" id="repeat-password_txt">Repetir contraseña</label>
-                <input class="inputs" type="password" name="re_password" placeholder="Repetir Password">
-            </div>
+                <div class="form-group">
+                    <label class="inputs_txt" id="username_txt">Nombre de usuario</label>
+                    <input class="inputs" type="text" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label class="inputs_txt">Correo electrónico</label>
+                    <input class="inputs" type="text" name="email" placeholder="Email">
+                </div>
+                <div class="form-group password-group">
+                    <label class="inputs_txt">Contraseña</label>
+                    <input class="inputs" type="password" name="password" placeholder="Password">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
+                <div class="form-group password-group">
+                    <label class="inputs_txt" id="repeat-password_txt">Repetir contraseña</label>
+                    <input class="inputs" type="password" name="re_password" placeholder="Repetir Password">
+                    <button type="button" class="show-password" onclick="togglePassword(this)">
+                        <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
+                    </button>
+                </div>
                 <input id="boton" type="submit" value="Cambiar datos">
             </form>
 

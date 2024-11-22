@@ -6,7 +6,7 @@ newDataForm.addEventListener("submit", async e => {
     const username = e.target[0].value;
     const email = e.target[1].value;
     const pass = e.target[2].value;
-    const rePass = e.target[3].value;
+    const rePass = e.target[4].value;
     const errores = [];
     const usernameRegex = /^[^\s]{5,}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -79,3 +79,17 @@ newDataForm.addEventListener("submit", async e => {
         }
     }
 })
+
+function togglePassword(button) {
+    const input = button.previousElementSibling;
+    const img = button.querySelector('img');
+    if (input.type === "password") {
+        input.type = "text";
+        img.src = '/build/src/images/eye.svg';
+        img.alt = "Ocultar contraseña";
+    } else {
+        input.type = "password";
+        img.src = '/build/src/images/closedEye.svg';
+        img.alt = "Mostrar contraseña";
+    }
+}
