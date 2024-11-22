@@ -4,7 +4,7 @@
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">
-                <h3>Refractions</h3>
+                <h3>Gestion de repuestos</h3>
             </div>
 
             <div class="contenedor-buscador">

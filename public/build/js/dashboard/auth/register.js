@@ -25,7 +25,7 @@ formularioRegister.addEventListener("submit", async e => {
         const error = document.createElement("div");
         error.classList.add("error");
         error.textContent = firstError;
-        addToast([{ title: "Fail", error: firstError }]);
+        addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
@@ -44,10 +44,10 @@ formularioRegister.addEventListener("submit", async e => {
                     const error = document.createElement("div");
                     error.classList.add("error")
                     error.textContent = err
-                    return { title: "Failure", error: err }
+                    return { title: "Error", error: err }
                 })
                 addToast(errors);
-            } else if (data?.message == "succesfuly") {
+            } else if (data?.message == "successfully") {
                 toggleBackground();
                 Swal.fire({
                     title: "Éxito",
@@ -57,7 +57,7 @@ formularioRegister.addEventListener("submit", async e => {
             }
         } catch (error) {
             console.log(error)
-            addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+            addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")
             spinner2?.remove()

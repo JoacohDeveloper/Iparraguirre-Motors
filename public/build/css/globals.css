@@ -832,16 +832,8 @@ footer {
     }
   }
 }
-.icon-black {
-  display: none;
-}
-
-.dark .icon-white {
-  display: none;
-}
-
-.dark .icon-black {
-  display: inline;
+.dark .social-icons {
+  filter: invert(100%);
 }
 
 .payments-icons {

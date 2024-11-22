@@ -21,7 +21,7 @@ formularioLogin.addEventListener("submit", async (e) => {
         const error = document.createElement("div");
         error.classList.add("error");
         error.textContent = firstError;
-        addToast([{ title: "Failure", error: firstError }]);
+        addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
@@ -40,15 +40,15 @@ formularioLogin.addEventListener("submit", async (e) => {
                     const error = document.createElement("div");
                     error.classList.add("error")
                     error.textContent = err
-                    return { title: "Failure", error: err }
+                    return { title: "Error", error: err }
                 })
                 addToast(errors);
-            } else if (data?.message == "succesfuly") {
+            } else if (data?.message == "successfully") {
                 console.log(data)
                 window.location.href = "/"
             }
         } catch (error) {
-            addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+            addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")
             spinner2?.remove()
@@ -70,15 +70,15 @@ formularioRegister.addEventListener("submit", async e => {
 
     const nameRegex = /^[a-zA-Zà-úÀ-Ú]{2,}( [a-zA-Zà-úÀ-Ú]+)+$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const phoneRegex = /^[0-9]{9}$/;
-    const passwordRegex = /^[^\s]{4,}$/;
+    const phoneRegex = /^(\+\d{1,3})?\d{9,15}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[^\s]{6,}$/;
 
     const fields = [
         { value: reg_fullname, regex: nameRegex, error: "Debes ingresar nombre y apellido." },
         { value: reg_username, regex: /.{5,}/, error: "Debes ingresar un usuario mayor a 4 caracteres." },
         { value: reg_email, regex: emailRegex, error: "Formato de email inválido." },
         { value: reg_phone, regex: phoneRegex, error: "Debes ingresar un número de celular válido." },
-        { value: reg_pass, regex: passwordRegex, error: "La contraseña debe tener mínimo 4 caracteres y no contener espacios." }
+        { value: reg_pass, regex: passwordRegex, error: "La contraseña debe tener mínimo 6 caracteres, una mayuscula, un numero y sin espacios." }
     ];
 
     fields.forEach(field => {
@@ -87,23 +87,8 @@ formularioRegister.addEventListener("submit", async e => {
         }
     });
 
-    if (reg_fullname.length <= 2) {
-        errores.push("Debes ingresar tu nombre completo.");
-    }
-    if (reg_username.length == 0) {
-        errores.push("Debes ingresar un usuario.");
-    }
-    if (reg_email.length == 0) {
-        errores.push("Debes ingresar un email.");
-    }
-    if (reg_phone.length == 0) {
-        errores.push("Debes ingresar un número de celular.");
-    }
-    if (reg_pass.length == 0) {
-        errores.push("Debes ingresar una contraseña.");
-    }
-    if (reg_pass != reg_rePass) {
-        errores.push("Las contraseñas no son iguales.");
+    if (reg_pass !== reg_rePass) {
+        errores.push({ title: "Error", error: "La contraseña repetida no coincide" });
     }
 
     if (errores.length != 0) {
@@ -112,7 +97,7 @@ formularioRegister.addEventListener("submit", async e => {
         const error = document.createElement("div");
         error.classList.add("error");
         error.textContent = firstError;
-        addToast([{ title: "Fail", error: firstError }]);
+        addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
@@ -125,22 +110,20 @@ formularioRegister.addEventListener("submit", async e => {
                 body: form_data
             })
             const data = await response.json()
-            console.log(response)
-            console.log(data)
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
                     error.classList.add("error")
                     error.textContent = err
-                    return { title: "Failure", error: err }
+                    return { title: "Error", error: err }
                 })
                 addToast(errors);
-            } else if (data?.message == "succesfuly") {
+            } else if (data?.message == "successfully") {
                 window.location.href = "/"
             }
         } catch (error) {
             console.log(error)
-            addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+            addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")
             spinner2?.remove()
@@ -234,11 +217,11 @@ function togglePassword(button) {
     const img = button.querySelector('img');
     if (input.type === "password") {
         input.type = "text";
-        img.src = '/build/src/images/closedEye.svg';
+        img.src = '/build/src/images/eye.svg';
         img.alt = "Ocultar contraseña";
     } else {
         input.type = "password";
-        img.src = '/build/src/images/eye.svg';
+        img.src = '/build/src/images/closedEye.svg';
         img.alt = "Mostrar contraseña";
     }
 }

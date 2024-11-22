@@ -32,7 +32,7 @@ abstract class AuthenticationController
                             if ($usuario->isAdmin()) {
                                 $_SESSION["usuario"] = $usuario;
                                 $_SESSION["loggedIn"] = true;
-                                $response = ["message" => "succesfuly"];
+                                $response = ["message" => "successfully"];
                             } else {
                                 $errores[] = "Ha ocurrido un error";
                                 $response["errores"] = $errores;
@@ -84,7 +84,7 @@ abstract class AuthenticationController
                     $usuario->defaultEmail($defaultEmail);
                     $usuario->gen_uuid();
                     if ($usuario->crearUsuario()) {
-                        $response = ["message" => "succesfuly"];
+                        $response = ["message" => "successfully"];
                         echo json_encode($response);
                         exit;
                     } else {
@@ -110,7 +110,7 @@ abstract class AuthenticationController
         $result = $masterAccount->masterAccount();
 
         if ($result) {
-            $response = ["message" => "succesfuly"];
+            $response = ["message" => "successfully"];
             logg("Todo okey");
 
             sleep(5);
@@ -222,7 +222,7 @@ abstract class AuthenticationController
                 $resultado = $usuarioDB->actualizarUsuarioDefault($newPassword);
                 if ($resultado) {
                     $_SESSION["usuario"] = $usuarioDB;
-                    echo json_encode(["message" => "successfuly"]);
+                    echo json_encode(["message" => "successfully"]);
                     exit;
                 }
             }
@@ -256,7 +256,7 @@ abstract class AuthenticationController
 
             $usuario->defaultImage();
             $_SESSION["usuario"] = $usuario;
-            echo json_encode(["message" => "successfuly"]);
+            echo json_encode(["message" => "successfully"]);
             exit;
         }
         echo json_encode(["message" => "error", "errores" => $errores]);

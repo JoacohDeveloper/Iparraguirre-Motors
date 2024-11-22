@@ -258,7 +258,7 @@ async function isMyUser(userEmail) {
         const data = await response.json();
 
         if (data.response === "error") {
-            addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+            addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
             return false;
         } else if (data.response === "MyUser") {
             return true;
@@ -267,7 +267,7 @@ async function isMyUser(userEmail) {
         }
     } catch (error) {
         console.error("Error:", error);
-        addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+        addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
         return false;
     }
 }
@@ -307,7 +307,7 @@ formularioRegister.addEventListener("submit", async e => {
         const error = document.createElement("div");
         error.classList.add("error");
         error.textContent = firstError;
-        addToast([{ title: "Fail", error: firstError }]);
+        addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
@@ -326,10 +326,10 @@ formularioRegister.addEventListener("submit", async e => {
                     const error = document.createElement("div");
                     error.classList.add("error")
                     error.textContent = err
-                    return { title: "Failure", error: err }
+                    return { title: "Error", error: err }
                 })
                 addToast(errors);
-            } else if (data?.message == "succesfuly") {
+            } else if (data?.message == "successfully") {
                 toggleBackground();
                 Swal.fire({
                     title: "Éxito",
@@ -348,7 +348,7 @@ formularioRegister.addEventListener("submit", async e => {
             }
         } catch (error) {
             console.log(error)
-            addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+            addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")
             spinner2?.remove()
@@ -363,7 +363,7 @@ async function handlerEliminar(userEmail) {
         
         if (data.response === "error") {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         } else {
@@ -371,9 +371,8 @@ async function handlerEliminar(userEmail) {
             document.body.appendChild(ModalDelete(data.response));
         }
     } catch (error) {
-        console.error("Error:", error);
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }
@@ -445,13 +444,13 @@ const ModalDelete = (data) => {
     submitInput.addEventListener("click", async e => {
         const inputSecuredWord = document.querySelector("#securedWord");
         if (inputSecuredWord.value != "quitar acceso") {
-            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+            addToast([{ title: "Error", error: "Debes ingresar la palabra de seguridad." }]);
         } else {
             try {
                 const response = await fetch(location.origin + `/dashboard/manageEmployee/forceDelete?uuid=${userUUID}`);
                 const data = await response.json();
     
-                if (data.message == "successfuly") {
+                if (data.message == "successfully") {
                     contenedor.remove();
                     Swal.fire({
                         title: "Éxito",
@@ -467,11 +466,11 @@ const ModalDelete = (data) => {
                         });
                     }
                 } else {
-                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
                 }
             } catch (error) {
                 console.error("Error:", error);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error al procesar la solicitud" }]);
             }
         }
     });
@@ -493,7 +492,7 @@ async function handlerReactivar(userEmail) {
         
         if (data.response === "error") {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         } else {
@@ -503,7 +502,7 @@ async function handlerReactivar(userEmail) {
     } catch (error) {
         console.error("Error:", error);
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }
@@ -559,13 +558,13 @@ const ModalReactivar = (data) => {
     submitInput.addEventListener("click", async e => {
         const inputSecuredWord = document.querySelector("#securedWord");
         if (inputSecuredWord.value != "conceder acceso") {
-            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+            addToast([{ title: "Error", error: "Debes ingresar la palabra de seguridad." }]);
         } else {
             try {
                 const response = await fetch(location.origin + `/dashboard/manageEmployee/forceActive?uuid=${userUUID}`);
                 const data = await response.json();
     
-                if (data.message == "successfuly") {
+                if (data.message == "successfully") {
                     contenedor.remove();
                     Swal.fire({
                         title: "Éxito",
@@ -581,11 +580,11 @@ const ModalReactivar = (data) => {
                         });
                     }
                 } else {
-                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
                 }
             } catch (error) {
                 console.error("Error:", error);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error al procesar la solicitud" }]);
             }
         }
     });
@@ -635,7 +634,7 @@ async function handlerChangeRol(userEmail) {
         
         if (data.response === "error") {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         } else {
@@ -645,7 +644,7 @@ async function handlerChangeRol(userEmail) {
     } catch (error) {
         console.error("Error:", error);
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }
@@ -701,16 +700,16 @@ const ModalRol = (data) => {
     submitInput.addEventListener("click", async e => {
         const inputSelectRol = document.querySelector("#selectRol");
         if (inputSelectRol.value == "-Seleccione-") {
-            addToast([{ title: "Failure", error: "Debes ingresar un rol para poder cambiarlo." }]);
+            addToast([{ title: "Error", error: "Debes ingresar un rol para poder cambiarlo." }]);
         } else if(inputSelectRol.value == userActualRol){
-            addToast([{ title: "Failure", error: "Este usuario ya es " + userActualRol }]);
+            addToast([{ title: "Error", error: "Este usuario ya es " + userActualRol }]);
         } else {
             try {
                 console.log(inputSelectRol.value)
                 const response = await fetch(location.origin + `/dashboard/manageEmployee/forceChangeRol?uuid=${userUUID}&rol=${inputSelectRol.value}`);
                 const data = await response.json();
     
-                if (data.message == "successfuly") {
+                if (data.message == "successfully") {
                     contenedor.remove();
                     Swal.fire({
                         title: "Éxito",
@@ -725,11 +724,11 @@ const ModalRol = (data) => {
                         });
                     }
                 } else {
-                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
                 }
             } catch (error) {
                 console.error("Error:", error);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error al procesar la solicitud" }]);
             }
         }
     });

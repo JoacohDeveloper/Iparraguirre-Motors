@@ -296,7 +296,7 @@ async function handlerViewUserInfo(userEmail) {
         const response = await fetch(location.origin + `/dashboard/manageClient/getOtherClient?email=${userEmail}`);
         const data = await response.json();
         if (data.response === "error") {
-            addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+            addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
         } else {
             const dato = data.response;
             interactionsMessageContent.innerHTML= ""; //Limpiamos el contenedor que guarda los mensajes
@@ -327,7 +327,7 @@ async function handlerViewUserInfo(userEmail) {
         }
     } catch (error) {
         console.error("Error:", error);
-        addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+        addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
     }
 }
 
@@ -439,7 +439,7 @@ async function handlerEliminar(userEmail) {
         
         if (data.response === "error") {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         } else {
@@ -449,7 +449,7 @@ async function handlerEliminar(userEmail) {
     } catch (error) {
         console.error("Error:", error);
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }
@@ -521,13 +521,13 @@ const ModalDelete = (data) => {
     submitInput.addEventListener("click", async e => {
         const inputSecuredWord = document.querySelector("#securedWord");
         if (inputSecuredWord.value != "quitar acceso") {
-            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+            addToast([{ title: "Error", error: "Debes ingresar la palabra de seguridad." }]);
         } else {
             try {
                 const response = await fetch(location.origin + `/dashboard/manageClient/forceDelete?uuid=${userUUID}`);
                 const data = await response.json();
     
-                if (data.message == "successfuly") {
+                if (data.message == "successfully") {
                     contenedor.remove();
                     Swal.fire({
                         title: "Éxito",
@@ -543,11 +543,11 @@ const ModalDelete = (data) => {
                         });
                     }
                 } else {
-                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
                 }
             } catch (error) {
                 console.error("Error:", error);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error al procesar la solicitud" }]);
             }
         }
     });
@@ -569,7 +569,7 @@ async function handlerReactivar(userEmail) {
         
         if (data.response === "error") {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         } else {
@@ -579,7 +579,7 @@ async function handlerReactivar(userEmail) {
     } catch (error) {
         console.error("Error:", error);
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }
@@ -635,13 +635,13 @@ const ModalReactivar = (data) => {
     submitInput.addEventListener("click", async e => {
         const inputSecuredWord = document.querySelector("#securedWord");
         if (inputSecuredWord.value != "conceder acceso") {
-            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+            addToast([{ title: "Error", error: "Debes ingresar la palabra de seguridad." }]);
         } else {
             try {
                 const response = await fetch(location.origin + `/dashboard/manageClient/forceActive?uuid=${userUUID}`);
                 const data = await response.json();
     
-                if (data.message == "successfuly") {
+                if (data.message == "successfully") {
                     contenedor.remove();
                     Swal.fire({
                         title: "Éxito",
@@ -657,11 +657,11 @@ const ModalReactivar = (data) => {
                         });
                     }
                 } else {
-                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
                 }
             } catch (error) {
                 console.error("Error:", error);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error al procesar la solicitud" }]);
             }
         }
     });
@@ -726,13 +726,13 @@ const ModalDeleteInteraction = (id) => {
     submitInput.addEventListener("click", async e => {
         const inputSecuredWord = document.querySelector("#securedWord");
         if (inputSecuredWord.value != "eliminar interaccion") {
-            addToast([{ title: "Failure", error: "Debes ingresar la palabra de seguridad." }]);
+            addToast([{ title: "Error", error: "Debes ingresar la palabra de seguridad." }]);
         } else {
             try {
                 const response = await fetch(location.origin + `/dashboard/manageClient/deleteInteraction?id=${id}`);
                 const data = await response.json();
     
-                if (data.message == "succesfully") {
+                if (data.message == "successfully") {
                     contenedor.remove();
                     Swal.fire({
                         title: "Éxito",
@@ -748,11 +748,11 @@ const ModalDeleteInteraction = (id) => {
                         });
                     }
                 } else {
-                    addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
                 }
             } catch (error) {
                 console.error("Error:", error);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error al procesar la solicitud" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error al procesar la solicitud" }]);
             }
         }
     });

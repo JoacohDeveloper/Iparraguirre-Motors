@@ -195,11 +195,25 @@ nav.aside-nav ul.steps li.selected a {
 #exampleTXT_information{
   color: #666;
 }
-.fit__content__personal-information, .fit__content__purchase-information,
-.fit__content__testdrive-information {
+.fit__content-information{
+  display: flex;
+  width: 100%;
+  height: 15rem;
+  justify-content: space-between;
+  margin: auto;
+}
+.fit__content__personal-information{
   background-color: #f7f7f7;
   padding: 20px;
   border-radius: 12px;
+}
+.fit__content__purchase-information,
+.fit__content__testdrive-information {
+  background-color: #f7f7f7;
+  padding: 20px;
+  width: 48%;
+  border-radius: 12px;
+  overflow-y: auto;
 }
 
 .personal-information__head, .purchase__head,
@@ -375,6 +389,7 @@ nav.aside-nav ul.steps li.selected a {
 
 .show-password {
   position: absolute;
+  display: flex;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);

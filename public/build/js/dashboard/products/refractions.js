@@ -104,21 +104,21 @@ const ModalAgregar = async () => {
         });
 
         if (object.tipo_repuesto.length === 0) {
-            error.push({ title: "Failure", error: "El campo tipo de repuesto se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo tipo de repuesto se encuentra vacío" });
         } else if (object.fabricante.length === 0) {
-            error.push({ title: "Failure", error: "El campo fabricante se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo fabricante se encuentra vacío" });
         } else if (object.modelo.length === 0) {
-            error.push({ title: "Failure", error: "El campo modelo se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo modelo se encuentra vacío" });
         } else if (object.origen.length === 0) {
-            error.push({ title: "Failure", error: "El campo origen se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo origen se encuentra vacío" });
         } else if (object.descripcion.length === 0) {
-            error.push({ title: "Failure", error: "El campo descripción se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo descripción se encuentra vacío" });
         } else if (object.precio.length === 0) {
-            error.push({ title: "Failure", error: "El campo precio se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo precio se encuentra vacío" });
         } else if (object.stock.length === 0) {
-            error.push({ title: "Failure", error: "El campo stock se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo stock se encuentra vacío" });
         } else if (object.peso.length === 0) {
-            error.push({ title: "Failure", error: "El campo peso se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo peso se encuentra vacío" });
         }
 
         if (error.length !== 0) {
@@ -134,7 +134,7 @@ const ModalAgregar = async () => {
                 const data = await response.json();
                 if (data?.errores) {
                     const errors = Object.values(data.errores).map(err => {
-                        return { title: "Failure", error: err };
+                        return { title: "Error", error: err };
                     });
                     addToast(errors);
                 } else if (data?.status === "success") {
@@ -152,11 +152,11 @@ const ModalAgregar = async () => {
                         });
                     }
                 } else if (data?.status === "error") {
-                    addToast([{ title: "Failure", error: data.message || "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: data.message || "Ha ocurrido un error" }]);
                 }
             } catch (err) {
                 console.error(err);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
             }
             
         }
@@ -235,21 +235,21 @@ const ModalModificar = async (data) => {
         });
 
         if (object.tipo_repuesto.length === 0) {
-            error.push({ title: "Failure", error: "El campo tipo de repuesto se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo tipo de repuesto se encuentra vacío" });
         } else if (object.fabricante.length === 0) {
-            error.push({ title: "Failure", error: "El campo fabricante se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo fabricante se encuentra vacío" });
         } else if (object.modelo.length === 0) {
-            error.push({ title: "Failure", error: "El campo modelo se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo modelo se encuentra vacío" });
         } else if (object.origen.length === 0) {
-            error.push({ title: "Failure", error: "El campo origen se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo origen se encuentra vacío" });
         } else if (object.descripcion.length === 0) {
-            error.push({ title: "Failure", error: "El campo descripción se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo descripción se encuentra vacío" });
         } else if (object.precio.length === 0) {
-            error.push({ title: "Failure", error: "El campo precio se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo precio se encuentra vacío" });
         } else if (object.stock.length === 0) {
-            error.push({ title: "Failure", error: "El campo stock se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo stock se encuentra vacío" });
         } else if (object.peso.length === 0) {
-            error.push({ title: "Failure", error: "El campo peso se encuentra vacío" });
+            error.push({ title: "Error", error: "El campo peso se encuentra vacío" });
         }
 
         if (error.length !== 0) {
@@ -267,7 +267,7 @@ const ModalModificar = async (data) => {
 
                 if (data?.errores) {
                     const errors = Object.values(data.errores).map(err => {
-                        return { title: "Failure", error: err };
+                        return { title: "Error", error: err };
                     });
                     addToast(errors);
                 } else if (data?.status === "successfuly") {
@@ -285,11 +285,11 @@ const ModalModificar = async (data) => {
                         });
                     }
                 } else if (data?.status === "error") {
-                    addToast([{ title: "Failure", error: data.message || "Ha ocurrido un error" }]);
+                    addToast([{ title: "Error", error: data.message || "Ha ocurrido un error" }]);
                 }
             } catch (err) {
                 console.error(err);
-                addToast([{ title: "Failure", error: "Ha ocurrido un error" }]);
+                addToast([{ title: "Error", error: "Ha ocurrido un error" }]);
             }
 
         }
@@ -328,7 +328,7 @@ const handlerModificar = (e) => {
         })
         .catch(err => {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         });
@@ -339,7 +339,7 @@ const fetchRefractionData = async (refractionID) => {
     const response = await fetch(location.origin + "/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + refractionID);
     if (!response.ok) {
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }

@@ -51,11 +51,11 @@
             </div>
             <div class="personal-information__saved-fields_grid">
                 <div class="saved-fields__field">
-                    <label>Primer nombre</label>
+                    <label>Nombre</label>
                     <p id="firstname__id"><?php echo $firstname; ?></p>
                 </div>
                 <div class="saved-fields__field">
-                    <label>Segundo nombre</label>
+                    <label>Apellido</label>
                     <p id="lastname__id"><?php echo $lastname; ?></p>
                 </div>
                 <div class="saved-fields__field">
@@ -71,31 +71,34 @@
                     <p id="created__id"><?php echo $createdAt; ?></p>
                 </div>
                 <div class="saved-fields__field">
-                    <label>Actualizado el</label>
+                    <label>Ultima actualizacion</label>
                     <p id="updated__id"><?php echo $updatedAt; ?></p>
                 </div>
             </div>
         </div>
 
-        <div class="fit__content__purchase-information">
-            <div class="purchase__head">
-                <h5>Registro de compras</h5>
+        <div class="fit__content-information">
+            <div class="fit__content__purchase-information">
+                <div class="purchase__head">
+                    <h5>Registro de compras</h5>
+                </div>
+                <div class="purchase-information__saved-fields">
+                    <p id="exampleTXT_information">No has realizado ninguna compra</p>
+                </div>
             </div>
-            <div class="purchase-information__saved-fields">
-                <p id="exampleTXT_information">No has realizado ninguna compra</p>
-            </div>
-        </div>
 
-        <div class="fit__content__testdrive-information">
-            <div class="testdrive__head">
-                <h5>Registro de test drive</h5>
-            </div>
-            <div class="testdrive-information__saved-fields">
-                <div class="cardTestDrive_Container">
-                    <!-- Aqui van las cartas de los testdrive reservados por el cliente o un mensaje por defecto dinamico -->
+            <div class="fit__content__testdrive-information">
+                <div class="testdrive__head">
+                    <h5>Registro de test drive</h5>
+                </div>
+                <div class="testdrive-information__saved-fields">
+                    <div class="cardTestDrive_Container">
+                        <!-- Aqui van las cartas de los testdrive reservados por el cliente o un mensaje por defecto dinamico -->
+                    </div>
                 </div>
             </div>
         </div>
+        
         
     </section>
 
@@ -108,14 +111,14 @@
     </section>
 
     <section class="fit__content__password" aria-step="4">
-        <h4>Change Password</h4>
+        <h4>Cambiar contraseña</h4>
         <form class="form_changePassword">
             <label for="olderPassword">
                 Contraseña actual
                 <div class="password-container">
                     <input type="password" name="olderPassword" inputmode="text">
                     <button type="button" class="show-password" onclick="togglePassword(this)">
-                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                        <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                     </button>
                 </div>
             </label>
@@ -124,7 +127,7 @@
                 <div class="password-container">
                     <input type="password" name="password" inputmode="text">
                     <button type="button" class="show-password" onclick="togglePassword(this)">
-                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                        <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                     </button>
                 </div>
             </label>
@@ -133,7 +136,7 @@
                 <div class="password-container">
                     <input type="password" name="repeatPassword" inputmode="text">
                     <button type="button" class="show-password" onclick="togglePassword(this)">
-                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                        <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                     </button>
                 </div>
             </label>
@@ -155,7 +158,7 @@
                 <div class="password-container">
                     <input type="password" name="Password" inputmode="text">
                     <button type="button" class="show-password" onclick="togglePassword(this)">
-                        <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                        <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                     </button>
                 </div>
             </label>

@@ -4,7 +4,7 @@
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">
-                <h3>Dashboard</h3>
+                <h3>Panel de control</h3>
             </div>
 
             <div class="analytics card w-full">

@@ -119,10 +119,10 @@ async function setFormEdit(target, formContainer) {
 
             if (!validExt.includes(fileExt)) {
 
-                addToast([{ title: "Failure", error: "El formato de archivo no es valido" }])
+                addToast([{ title: "Error", error: "El formato de archivo no es valido" }])
                 return;
             } else if (imgFile.size >= MAX_SIZE) {
-                addToast([{ title: "Failure", error: "El archivo es muy grande" }])
+                addToast([{ title: "Error", error: "El archivo es muy grande" }])
                 return;
             }
 
@@ -161,12 +161,12 @@ async function setFormEdit(target, formContainer) {
                     errors.classList.add("toasts")
                     formContainer.appendChild(errors);
                     const errores = Object.entries(data?.errores).map(err => {
-                        return { title: "Failure", error: err[1] }
+                        return { title: "Error", error: err[1] }
                     })
                     addToast(errores);
                 } else if (!data?.file_uploaded) {
-                     addToast([{ title: "Failure", error: "Ocurrió un error al cargar su imagen, intenta de nuevo más tarde." }]);
-                } else if (data?.message == "successfuly") {
+                     addToast([{ title: "Error", error: "Ocurrió un error al cargar su imagen, intenta de nuevo más tarde." }]);
+                } else if (data?.message == "successfully") {
                     const previewImg = document.querySelector("#preview_edit_resume__img")
                     setResumeChanges(formdata, previewImg);
                     document.querySelector(".close__settings_forms")?.click()
@@ -175,7 +175,7 @@ async function setFormEdit(target, formContainer) {
 
             } catch (error) {
                 console.error(error)
-                addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+                addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
             }
 
         })
@@ -375,12 +375,12 @@ async function submitEventHandler(event) {
     //Errores
     if (object.Nombre.length == 0) {
         error.push({
-            title: "Failure",
+            title: "Error",
             error: "El campo nombre se encuentra vacio"
         })
     } else if (object.Password.length == 0) {
         error.push({
-            title: "Failure",
+            title: "Error",
             error: "El campo contraseña se encuentra vacio"
         })
     }
@@ -399,10 +399,10 @@ async function submitEventHandler(event) {
                     const error = document.createElement("div");
                     error.classList.add("error");
                     error.textContent = err;
-                    return { title: "Failure", error: err };
+                    return { title: "Error", error: err };
                 });
                 addToast(errors);
-            } else if (data?.message == "successfuly") {
+            } else if (data?.message == "successfully") {
                 Swal.fire({
                     title: "Éxito",
                     text: "Se ha borrado tu cuenta",
@@ -417,7 +417,7 @@ async function submitEventHandler(event) {
             }
         } catch (err) {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         }
@@ -440,30 +440,30 @@ async function submitEventHandler2(event) {
     const formdata = new FormData(form_changePassword);
     const object = {};
     const errores = [];
-    const passwordRegex = /^[^\s]{4,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[^\s]{6,}$/;
     formdata.forEach((value, key) => {
         object[key] = value;
     });
     
     const fields = [
         { value: object.olderPassword, error: "Debes ingresar la contraseña actual de tu cuenta" },
-        { value: object.password, regex: passwordRegex, error: "La nueva contraseña debe tener mínimo 4 caracteres y no contener espacios." },
+        { value: object.password, regex: passwordRegex, error: "La contraseña debe tener mínimo 6 caracteres, una mayuscula, un numero y sin espacios." },
         { value: object.repeatPassword, error: "Debes repetir la nueva contraseña de tu cuenta" }
     ];
 
     fields.forEach(field => {
         if (field.value.length == 0) {
-            errores.push({ title: "Failure", error: field.error });
+            errores.push({ title: "Error", error: field.error });
         }
     });
 
     if (object.password !== object.repeatPassword) {
-        errores.push({ title: "Failure", error: "La contraseña repetida no coincide" });
+        errores.push({ title: "Error", error: "La contraseña repetida no coincide" });
     }
 
     if (errores.length != 0) {
         const firstError = errores[0];
-        addToast([{ title: "Failure", error: firstError.error }]);
+        addToast([{ title: "Error", error: firstError.error }]);
     } else {
         try {
             const response = await fetch(location.origin + "/customer/user-newPassword", {
@@ -473,9 +473,9 @@ async function submitEventHandler2(event) {
             const data = await response.json();
             if (data?.error) {
                 
-                addToast([{ title: "Failure", error: data.error}]);
+                addToast([{ title: "Error", error: data.error}]);
                 return
-            } else if (data?.message == "successfuly") {
+            } else if (data?.message == "successfully") {
                 Swal.fire({
                     title: "Éxito",
                     text: "Se ha cambiado tu contraseña",
@@ -490,7 +490,7 @@ async function submitEventHandler2(event) {
             }
         } catch (err) {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         }
@@ -511,10 +511,10 @@ async function defaultImage(event) {
                 const error = document.createElement("div");
                 error.classList.add("error");
                 error.textContent = err;
-                return { title: "Failure", error: err };
+                return { title: "Error", error: err };
             });
             addToast(errors);
-        } else if (data?.message == "successfuly") {
+        } else if (data?.message == "successfully") {
             Swal.fire({
                 title: "Éxito",
                 text: "Se ha cambiado foto de perfil",
@@ -529,7 +529,7 @@ async function defaultImage(event) {
         }
     } catch (err) {
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }
@@ -581,7 +581,7 @@ async function loadTestDrive() {
                     const error = document.createElement("div");
                     error.classList.add("error");
                     error.textContent = err;
-                    return { title: "Failure", error: err };
+                    return { title: "Error", error: err };
                 });
                 addToast(errors);
             } else if (data?.error) {
@@ -602,7 +602,7 @@ async function loadTestDrive() {
         } catch (error) {
             console.error('Error al obtener los test drives:', error);
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error al cargar los test drives"
             }]);
         }
@@ -621,11 +621,11 @@ function togglePassword(button) {
     const img = button.querySelector('img');
     if (input.type === "password") {
         input.type = "text";
-        img.src = '/build/src/images/closedEye.svg';
+        img.src = '/build/src/images/eye.svg';
         img.alt = "Ocultar contraseña";
     } else {
         input.type = "password";
-        img.src = '/build/src/images/eye.svg';
+        img.src = '/build/src/images/closedEye.svg';
         img.alt = "Mostrar contraseña";
     }
 }

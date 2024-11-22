@@ -91,7 +91,7 @@ abstract class DashboardController
                     if ($result) {
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
-                        echo json_encode(["message" => "successfuly"]);
+                        echo json_encode(["message" => "successfully"]);
                     } else {
                         echo json_encode(["message" => "Ha ocurrido un error"]);
                     }
@@ -115,7 +115,7 @@ abstract class DashboardController
         if (isset($uuid)) {
             $result = User::adminForceDeleting($uuid);
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
                 exit;
             } else {
                 echo json_encode(["message" => "error"]);
@@ -135,7 +135,7 @@ abstract class DashboardController
         if (isset($uuid)) {
             $result = User::adminForceActiving($uuid);
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
                 exit;
             } else {
                 echo json_encode(["message" => "error"]);
@@ -156,7 +156,7 @@ abstract class DashboardController
         if (isset($uuid)) {
             $result = User::adminForceChangeRol($uuid, $rol);
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
                 exit;
             } else {
                 echo json_encode(["message" => "error"]);
@@ -176,7 +176,7 @@ abstract class DashboardController
         if (isset($uuid)) {
             $result = Customer::adminForceDeleting($uuid);
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
                 exit;
             } else {
                 echo json_encode(["message" => "error"]);
@@ -196,7 +196,7 @@ abstract class DashboardController
         if (isset($uuid)) {
             $result = Customer::adminForceActiving($uuid);
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
                 exit;
             } else {
                 echo json_encode(["message" => "error"]);
@@ -222,7 +222,7 @@ abstract class DashboardController
                     if ($result) {
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
-                        echo json_encode(["message" => "successfuly"]);
+                        echo json_encode(["message" => "successfully"]);
                     } else {
                         echo json_encode(["error" => "Ha ocurrido un error"]);
                     }
@@ -317,9 +317,9 @@ abstract class DashboardController
         $interaction = new Interactions();
         $response = $interaction->getInteraction($userUUID, $isEncargado);
         if($response){
-            echo json_encode(["message" => "succesfully", "interactions" => $response]);
+            echo json_encode(["message" => "successfully", "interactions" => $response]);
         } else if (count($response) == 0){
-            echo json_encode(["message" => "succesfully", "interactions" => null]);
+            echo json_encode(["message" => "successfully", "interactions" => null]);
         } else {
             echo json_encode(["error" => "Ha ocurrido un error"]);
         }
@@ -331,9 +331,9 @@ abstract class DashboardController
         $interaction = new Interactions();
         $response = $interaction->delete($id);
         if($response){
-            echo json_encode(["message" => "succesfully"]);
+            echo json_encode(["message" => "successfully"]);
         } else if (count($response) == 0){
-            echo json_encode(["message" => "succesfully"]);
+            echo json_encode(["message" => "successfully"]);
         } else {
             echo json_encode(["error" => "Ha ocurrido un error"]);
         }

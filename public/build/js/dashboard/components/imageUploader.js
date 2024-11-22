@@ -86,7 +86,7 @@ async function ImageUploader(images = null) {
         } catch (error) {
             addToast([
                 {
-                    title: "origen de datos",
+                    title: "Error",
                     error: `imagen "${error?.message}" no valida`,
                 },
             ]);
@@ -149,7 +149,7 @@ async function ImageUploader(images = null) {
             }
         } catch (error) {
             addToast([
-                { title: "repetido", error: `imagen "${error.message}" ya existe` },
+                { title: "Error", error: `imagen "${error.message}" ya existe` },
             ]);
             return;
         }

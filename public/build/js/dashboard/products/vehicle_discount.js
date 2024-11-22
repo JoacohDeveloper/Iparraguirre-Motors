@@ -138,22 +138,22 @@ const ModalAddDiscount = (data) => {
 
         fields.forEach(field => {
             if (!field.regex.test(field.value)) {
-                errores.push({ title: "Failure", error: field.error });
+                errores.push({ title: "Error", error: field.error });
             }
         });
 
         if (parseFloat(object.descuento) < 0) {
-            errores.push({ title: "Failure", error: "Solo se aceptan valores numéricos positivos" });
+            errores.push({ title: "Error", error: "Solo se aceptan valores numéricos positivos" });
         }
         if (object.type === "Dolares" && parseFloat(object.descuento) > data.precio) {
-            errores.push({ title: "Failure", error: "El descuento en dólares no puede ser mayor al precio del producto" });
+            errores.push({ title: "Error", error: "El descuento en dólares no puede ser mayor al precio del producto" });
         }
         if (object.type === "Porcentaje" && (parseFloat(object.descuento) < 1 || parseFloat(object.descuento) > 100)) {
-            errores.push({ title: "Failure", error: "El descuento en porcentaje debe estar entre 1 y 100" });
+            errores.push({ title: "Error", error: "El descuento en porcentaje debe estar entre 1 y 100" });
         }
         if (errores.length != 0) {
             const firstError = errores[0]; // Tomamos el primer error
-            addToast([{ title: "Failure", error: firstError.error }]); // Mostramos solo el primer error
+            addToast([{ title: "Error", error: firstError.error }]); // Mostramos solo el primer error
         } else {
             formdata.append('vehicle_id', data.vehicle_id);
             console.log([...formdata])
@@ -168,10 +168,10 @@ const ModalAddDiscount = (data) => {
                         const error = document.createElement("div");
                         error.classList.add("error");
                         error.textContent = err;
-                        return { title: "Failure", error: err };
+                        return { title: "Error", error: err };
                     });
                     addToast(errors);
-                } else if (data?.message == "successfuly") {
+                } else if (data?.message == "successfully") {
                     toggleBackground();
                     contenedor.remove();
                     Swal.fire({
@@ -188,7 +188,7 @@ const ModalAddDiscount = (data) => {
                 } else if (data?.error) {
                     document.body.classList.add("fixed")
                     addToast([{
-                        title: "Failure",
+                        title: "Error",
                         error: "Ha ocurrido un error"
                     }]);
                 }
@@ -196,7 +196,7 @@ const ModalAddDiscount = (data) => {
                 console.log(err);
                 document.body.classList.add("fixed")
                 addToast([{
-                    title: "Failure",
+                    title: "Error",
                     error: "Ha ocurrido un error"
                 }]);
             }
@@ -277,12 +277,12 @@ const ModalRemoveDiscount = (data) => {
 
         if (object.secureword.length == 0) {
             error.push({
-                title: "Failure",
+                title: "Error",
                 error: "Debes ingresar la palabra de seguridad"
             })
         } else if (object.secureword != "eliminar descuento") {
             error.push({
-                title: "Failure",
+                title: "Error",
                 error: "La palabra de seguridad es incorrecta"
             })
         }
@@ -302,10 +302,10 @@ const ModalRemoveDiscount = (data) => {
                         const error = document.createElement("div");
                         error.classList.add("error");
                         error.textContent = err;
-                        return { title: "Failure", error: err };
+                        return { title: "Error", error: err };
                     });
                     addToast(errors);
-                } else if (data?.message == "successfuly") {
+                } else if (data?.message == "successfully") {
                     toggleBackground();
                     contenedor.remove();
                     Swal.fire({
@@ -321,14 +321,14 @@ const ModalRemoveDiscount = (data) => {
                     }
                 } else if (data?.error) {
                     addToast([{
-                        title: "Failure",
+                        title: "Error",
                         error: "Ha ocurrido un error"
                     }]);
                 }
             } catch (err) {
                 console.log(err);
                 addToast([{
-                    title: "Failure",
+                    title: "Error",
                     error: "Ha ocurrido un error"
                 }]);
             }
@@ -361,7 +361,7 @@ const handlerAgregarDiscount = (e) => {
         })
         .catch(err => {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         });
@@ -377,7 +377,7 @@ const handlerEliminarDiscount = (e) => {
         })
         .catch(err => {
             addToast([{
-                title: "Failure",
+                title: "Error",
                 error: "Ha ocurrido un error"
             }]);
         });
@@ -389,7 +389,7 @@ const fetchVehiculoData = async (vehiculoID) => {
     const response = await fetch(location.origin + "/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=" + encodeURIComponent(vehiculoID) + "");
     if (!response.ok) {
         addToast([{
-            title: "Failure",
+            title: "Error",
             error: "Ha ocurrido un error"
         }]);
     }

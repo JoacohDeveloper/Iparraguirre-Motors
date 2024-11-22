@@ -108,9 +108,7 @@ class VehiclesController
 
         if (empty($errores)) {
             $success = $vehicle->actualizarVehicle($_POST["id"]);
-            //logg($success);
             if ($success) {
-
                 if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['name'][0]) && $_FILES['imagen']['error'][0] === UPLOAD_ERR_OK) {
                     $totalFiles = count($_FILES['imagen']['name']);
                     for ($i = 0; $i < $totalFiles; $i++) {
@@ -147,7 +145,7 @@ class VehiclesController
                     }
                 }
 
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
             } else {
                 echo json_encode(["error" => "Ha ocurrido un error"]);
             }
@@ -165,7 +163,7 @@ class VehiclesController
         if (empty($errores)) {
             $result = $vehicle->addDiscountVehicle();
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
             } else {
                 echo json_encode(["error" => "Ha ocurrido un error"]);
             }
@@ -183,7 +181,7 @@ class VehiclesController
         if (empty($errores)) {
             $result = $vehicle->removeDiscountVehicle();
             if ($result) {
-                echo json_encode(["message" => "successfuly"]);
+                echo json_encode(["message" => "successfully"]);
             } else {
                 echo json_encode(["error" => "Ha ocurrido un error"]);
             }

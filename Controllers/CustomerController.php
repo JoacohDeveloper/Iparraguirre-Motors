@@ -54,7 +54,7 @@ abstract class CustomerController
                                     false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
                                 );
 
-                                $response = ["message" => "succesfuly", "interaction" => $interactionResponse];
+                                $response = ["message" => "successfully", "interaction" => $interactionResponse];
                             } else {
                                 $errores[] = "Ha ocurrido un error";
                                 $response["errores"] = $errores;
@@ -96,7 +96,7 @@ abstract class CustomerController
                     if ($customer->crearCustomer()) {
                         $_SESSION["usuario"] = $customer;
                         $_SESSION["loggedIn"] = true;
-                        $response = ["message" => "succesfuly"];
+                        $response = ["message" => "successfully"];
                     } else {
                         $errores["register"] = "Error al registrar usuario, intenta de nuevo más tarde.";
                         $response["errores"] = $errores;
@@ -194,7 +194,7 @@ abstract class CustomerController
                         false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
                     );
                     
-                    echo json_encode(["message" => "successfuly", "file_uploaded" => $res]);
+                    echo json_encode(["message" => "successfully", "file_uploaded" => $res]);
                     exit;
                 }
             }
@@ -241,7 +241,7 @@ abstract class CustomerController
                 false, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
             );
 
-            echo json_encode(["message" => "successfuly"]);
+            echo json_encode(["message" => "successfully"]);
             exit;
     }
         echo json_encode(["message" => "error", "errores" => $errores]);

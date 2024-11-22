@@ -125,7 +125,7 @@ abstract class HomePageController
 
                         $_SESSION["loggedIn"] = null;
                         $_SESSION["usuario"] = null;
-                        echo json_encode(["message" => "successfuly"]);
+                        echo json_encode(["message" => "successfully"]);
                     } else {
                         echo json_encode(["message" => "Ha ocurrido un error"]);
                     }
@@ -168,7 +168,7 @@ abstract class HomePageController
                             true, //true si la interaccion es privada (solo vista por encargados) o false si no lo es (vista por cualquier empleado)
                         );
 
-                        echo json_encode(["message" => "successfuly"]);
+                        echo json_encode(["message" => "successfully"]);
                     } else {
                         echo json_encode(["error" => "Ha ocurrido un error"]);
                     }

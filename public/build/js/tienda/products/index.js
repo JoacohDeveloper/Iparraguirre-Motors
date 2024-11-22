@@ -306,9 +306,20 @@ function modalTest(itemID, itemName, itemYear) {
 
         const reservedDate = e.target[0].value;
         const errores = [];
+        const today = new Date();
+        const selectedDate =
+        new Date(reservedDate);
+        const maxDate = new Date();
+        maxDate.setDate(today.getDate() + 7);
 
         if (reservedDate == "") {
             errores.push("Debes ingresar una fecha para la prueba de manejo");
+        }
+        if (selectedDate < today) {
+            errores.push("La fecha de reserva no puede ser en el pasado");
+        }
+        if (selectedDate > maxDate) {
+            errores.push("Las reservas de test drive solo se realizan en los proximos 7 dias");
         }
         if (itemID == "") {
             errores.push("Ocurrio un error con el vehiculo");
@@ -320,7 +331,7 @@ function modalTest(itemID, itemName, itemYear) {
             error.classList.add("error");
             console.log("Hola")
             error.textContent = firstError;
-            addToast([{ title: "Fail", error: firstError }]);
+            addToast([{ title: "Error", error: firstError }]);
         } else {
             const spinner = document.createElement("div")
             spinner.classList.add("linear-loading") // o spinner
@@ -343,7 +354,7 @@ function modalTest(itemID, itemName, itemYear) {
                         const error = document.createElement("div");
                         error.classList.add("error")
                         error.textContent = err
-                        return { title: "Failure", error: err }
+                        return { title: "Error", error: err }
                     })
                     addToast(errors);
                 } else if (data?.message == "successfully") {
@@ -361,7 +372,7 @@ function modalTest(itemID, itemName, itemYear) {
                 }
             } catch (error) {
                 console.log(error)
-                addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+                addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
             } finally {
                 const spinner2 = loaderSection?.querySelector(".linear-loading")
                 spinner2?.remove()

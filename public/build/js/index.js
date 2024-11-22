@@ -122,18 +122,6 @@ function themeTogglerEvent(el) {
 
 const refreshToasts = (newToast) => {
     const toastAll = document.querySelectorAll(".toast")
-    // const toast = toastAll[toastAll.length - 1]
-
-    // console.log(toast)
-    // const progress = toast.querySelector(".progress")
-
-    // setTimeout(() => {
-    //     toast.remove();
-    // }, 5000);
-
-    // setTimeout(() => {
-    //     progress.remove();
-    // }, 5300);
 
     toastAll.forEach(toast => {
 

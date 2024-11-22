@@ -660,6 +660,7 @@ textarea {
 
 .form_deleteAccount > label > .password-container > .show-password {
   position: absolute;
+  display: flex;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
@@ -741,6 +742,7 @@ textarea {
 
 .form_changePassword > label > .password-container > .show-password {
   position: absolute;
+  display: flex;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);

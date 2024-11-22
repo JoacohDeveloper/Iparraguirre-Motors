@@ -4,20 +4,20 @@
         <div class="contenedor__todo">
             <div class="caja__trasera">
                 <div class="caja__trasera-login">
-                    <h3>Have an account?</h3>
+                    <h3>Tienes una cuenta?</h3>
                     <p>Presiona el boton de abajo para ingresar</p>
                     <button id="btn__iniciar-sesion">Log In</button>
                 </div>
                 <div class="caja__trasera-register">
-                    <h3>Do not have an account?</h3>
+                    <h3>No tienes una cuenta?</h3>
                     <p>Presiona el boton de abajo para registrarte</p>
                     <button id="btn__registrarse">Sign Up</button>
                 </div>
             </div>
             <div class="contenedor__login-register">
                 <form method="POST" action="/auth/login" id="loginForm">
-                    <h2>Log In</h2>
-                    <input type="text" name="email" placeholder="User o Email">
+                    <h2>Inicio de sesion</h2>
+                    <input type="text" name="email" placeholder="Correo o usuario">
                     <div class="password-container">
                         <input type="password" name="password" placeholder="Password">
                         <button type="button" class="show-password" onclick="togglePassword(this)">
@@ -28,21 +28,21 @@
                     <p id="p_signUp">¿No tienes una cuenta? Registrate</p>
                 </form>
                 <form method="POST" action="/auth/register" id="regForm">
-                    <h2>Sign Up</h2>
-                    <input type="text" name="full_name" placeholder="Full Name">
-                    <input type="text" name="username" placeholder="User">
-                    <input type="text" name="email" placeholder="Email">
-                    <input type="text" name="phone" placeholder="Phone">
+                    <h2>Registro</h2>
+                    <input type="text" name="full_name" placeholder="Nombre completo">
+                    <input type="text" name="username" placeholder="Nombre de usuario">
+                    <input type="text" name="email" placeholder="Correo electronico">
+                    <input type="text" name="phone" placeholder="Numero de telefono">
                     <div class="password-container">
-                        <input type="password" name="password" placeholder="Password" inputmode="text">
+                        <input type="password" name="password" placeholder="Contraseña" inputmode="text">
                         <button type="button" class="show-password" onclick="togglePassword(this)">
-                            <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                            <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                         </button>
                     </div>
                     <div class="password-container">
-                        <input type="password" name="re_password" placeholder="Repeat Password" inputmode="text">
+                        <input type="password" name="re_password" placeholder="Repetir contraseña" inputmode="text">
                         <button type="button" class="show-password" onclick="togglePassword(this)">
-                            <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                            <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                         </button>
                     </div>
                     <input class="boton" type="submit" value="Registrar">

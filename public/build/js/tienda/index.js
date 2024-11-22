@@ -225,7 +225,7 @@ async function handlerBusqueda(search) {
     const resultados = cardContainer?.querySelector(".card")
     if (!resultados) {
         const nfound = document.createElement("p")
-        nfound.textContent = "Not found"
+        nfound.textContent = "Sin resultado"
         if (cardContainer) cardContainer.appendChild(nfound)
     }
 }

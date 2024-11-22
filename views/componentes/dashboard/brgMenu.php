@@ -1,33 +1,33 @@
 <ul class="dashboard-brgMenu-ul">
     <li>
-        <a href="/dashboard">Home</a>
+        <a href="/dashboard">Inicio</a>
     </li>
     <li>
-        <a class="toggle-dropdown">Product Management</a>
+        <a class="toggle-dropdown">Gestion de productos</a>
         <ul class="productmanagment-dropdown">
-            <li><a href="/dashboard/products/vehicle">Vehicles</a></li>
-            <li><a href="/dashboard/products/refraction">Refractions</a></li>
+            <li><a href="/dashboard/products/vehicle">Vehiculos</a></li>
+            <li><a href="/dashboard/products/refraction">Repuestos</a></li>
         </ul>
     </li>
     <li>
-        <a class="toggle-dropdown">Discounts</a>
+        <a class="toggle-dropdown">Gestion de descuentos</a>
         <ul class="discounts-dropdown">
-            <li><a href="/dashboard/products/vehicle">Vehicles</a></li>
-            <li><a href="/dashboard/products/refraction">Refractions</a></li>
+            <li><a href="/dashboard/discounts/vehicle">Vehiculos</a></li>
+            <li><a href="/dashboard/discounts/refractions">Repuestos</a></li>
         </ul>
     </li>
     <li>
-        <a href="/dashboard/orders">Orders</a>
+        <a href="/dashboard/orders">Ordenes</a>
     </li>
     <li>
-        <a href="/dashboard/feedback">Feedback</a>
+        <a href="/dashboard/feedback">Reseñas</a>
     </li>
     <li>
-        <a class="toggle-dropdown">Analytics</a>
+        <a class="toggle-dropdown">Graficas</a>
         <ul class="analytics-dropdown">
-            <li><a href="/dashboard/analytics/client">Client</a></li>
-            <li><a href="/dashboard/analytics/sells">Sells</a></li>
-            <li><a href="/dashboard/analytics/products">Products</a></li>
+            <li><a href="/dashboard/analytics/client">Clientes</a></li>
+            <li><a href="/dashboard/analytics/sells">Ventas</a></li>
+            <li><a href="/dashboard/analytics/products">Productos</a></li>
         </ul>
     </li>
     <?php
@@ -38,17 +38,17 @@
 
         if ($isEncargado == true) {
             echo '<li>
-                    <a href="/dashboard/manageClient">Administrar clientes</a>
+                    <a href="/dashboard/manageClient">Gestionar clientes</a>
                   </li>
                   <li>
-                    <a href="/dashboard/manageEmployee">Administrar empleados</a>
+                    <a href="/dashboard/manageEmployee">Gestionar empleados</a>
                   </li>';
         }
     ?>
     <li>
-        <a href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">Settings</a>
+        <a href="/dashboard/user-settings?u=<?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->getUUID() : "" ?>">Configuracion</a>
     </li>
     <li>
-        <a href="/dashboard/logout">Log out</a>
+        <a href="/dashboard/logout">Cerrar sesion</a>
     </li>
 </ul>

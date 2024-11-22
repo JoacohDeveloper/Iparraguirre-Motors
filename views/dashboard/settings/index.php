@@ -4,24 +4,24 @@
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">
-                <h3>Account Settings</h3>
+                <h3>Configuracion de cuenta</h3>
             </div>
 
             <div class="dashboard-fit__content">
                 <aside class="dashboard-fit__content_aside">
                     <nav>
                         <ul class="steps">
-                            <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">My Profile</a></li>
-                            <li aria-label="step-2" id="notifications"><a href="#">Notifications</a></li>
-                            <li aria-label="step-3" id="change-pass"><a href="#">Change Password</a></li>
-                            <li aria-label="step-4" id="delete-account" class="<?php echo $userType?>"><a href="#">Delete Account</a></li>
+                            <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">Mi perfil</a></li>
+                            <li aria-label="step-2" id="notifications"><a href="#">Notificaciones</a></li>
+                            <li aria-label="step-3" id="change-pass"><a href="#">Cambiar contraseña</a></li>
+                            <li aria-label="step-4" id="delete-account" class="<?php echo $userType?>"><a href="#">Eliminar cuenta</a></li>
                         </ul>
                     </nav>
                 </aside>
                 <section class="dashboard-fit__content__profile settingsStepVisible" aria-step="1" id="my_profile">
-                    <h4>My Profile</h4>
+                    <h4>Mi perfil</h4>
                     <button class="button_settings profile-resume-configuration__edit" id="edit-resume">
-                        <p>Edit profile</p>
+                        <p>Editar perfil</p>
                         <img src="/build/src/images/pencil.svg" alt="edit profile resume">
                     </button>
                     <div class="dashboard-profile__resume">
@@ -37,7 +37,7 @@
                         <?php
                         if ($imagen["url"] != "\build\src\images\users\default.jpg") {
                             echo '<button class="delete-picture-configuration__edit" id="delete-image">
-                                    <p>Delete profile picture</p>
+                                    <p>Eliminar imagen de perfil</p>
                                     <img src="/build/src/images/trash.svg" alt="delete profile picture">
                                 </button>';
                         }
@@ -45,39 +45,39 @@
                     </div>
                     <div class="dashboard-fit__content__personal-information">
                         <div class="personal-information__head">
-                            <h5>Personal Information</h5>
+                            <h5>Informacion personal</h5>
                         </div>
                         <div class="personal-information__saved-fields_grid">
                             <div class="saved-fields__field">
-                                <label>First Name</label>
+                                <label>Nombre</label>
                                 <p id="firstname__id"><?php echo $firstname; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Last Name</label>
+                                <label>Apellido</label>
                                 <p id="lastname__id"><?php echo $lastname; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Email address</label>
+                                <label>Correo electronico</label>
                                 <p id="email__id"><?php echo $email; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Username</label>
+                                <label>Nombre de usuario</label>
                                 <p id="username__id"><?php echo $username; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Registered on</label>
+                                <label>Registrado el</label>
                                 <p id="created__id"><?php echo $createdAt; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Updated on</label>
+                                <label>Ultima actualizacion</label>
                                 <p id="updated__id"><?php echo $updatedAt; ?></p>
                             </div>
                             <div class="saved-fields__field">
-                                <label>Bio</label>
+                                <label>Acerca de mi</label>
                                 <p id="bio__id">
                                     <?php
                                     if ($bio == "" || $bio == null) {
-                                        echo "My name is " . htmlspecialchars($firstname);
+                                        echo "Hola, soy " . htmlspecialchars($firstname);
                                     } else {
                                         echo htmlspecialchars($bio);
                                     }
@@ -88,17 +88,17 @@
                     </div>
                 </section>
                 <section class="dashboard-fit__content__notifications" aria-step="2">
-                    <h4>Notifications</h4>
+                    <h4>Notificaciones</h4>
                 </section>
                 <section class="dashboard-fit__content__password" aria-step="3">
-                    <h4>Change Password</h4>
+                    <h4>Cambiar contraseña</h4>
                     <form class="form_changePassword">
                         <label for="olderPassword">
                             Contraseña actual
                             <div class="password-container">
                                 <input type="password" name="olderPassword" inputmode="text">
                                 <button type="button" class="show-password" onclick="togglePassword(this)">
-                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                    <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                                 </button>
                             </div>
                         </label>
@@ -107,7 +107,7 @@
                             <div class="password-container">
                                 <input type="password" name="password" inputmode="text">
                                 <button type="button" class="show-password" onclick="togglePassword(this)">
-                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                    <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                                 </button>
                             </div>
                         </label>
@@ -116,7 +116,7 @@
                             <div class="password-container">
                                 <input type="password" name="repeatPassword" inputmode="text">
                                 <button type="button" class="show-password" onclick="togglePassword(this)">
-                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                    <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                                 </button>
                             </div>
                         </label>
@@ -137,7 +137,7 @@
                             <div class="password-container">
                                 <input type="password" name="Password" inputmode="text">
                                 <button type="button" class="show-password" onclick="togglePassword(this)">
-                                    <img src="/build/src/images/eye.svg" alt="Mostrar contraseña">
+                                    <img src="/build/src/images/closedEye.svg" alt="Mostrar contraseña">
                                 </button>
                             </div>
                         </label>

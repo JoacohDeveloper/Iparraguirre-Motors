@@ -10,12 +10,12 @@ newDataForm.addEventListener("submit", async e => {
     const errores = [];
     const usernameRegex = /^[^\s]{5,}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const passwordRegex = /^[^\s]{4,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[^\s]{6,}$/;
 
     const fields = [
         { value: username, regex: usernameRegex, error: "Debes ingresar un usuario mayor a 4 caracteres y sin espacios." },
         { value: email, regex: emailRegex, error: "Formato de email inválido." },
-        { value: pass, regex: passwordRegex, error: "La contraseña debe tener mínimo 4 caracteres y no contener espacios." }
+        { value: pass, regex: passwordRegex, error: "La contraseña debe tener mínimo 6 caracteres, una mayuscula, un numero y sin espacios." }
     ];
 
     fields.forEach(field => {
@@ -32,7 +32,7 @@ newDataForm.addEventListener("submit", async e => {
         const error = document.createElement("div");
         error.classList.add("error");
         error.textContent = firstError;
-        addToast([{ title: "Fail", error: firstError }]);
+        addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
         spinner.classList.add("linear-loading") // o spinner
@@ -54,10 +54,10 @@ newDataForm.addEventListener("submit", async e => {
                     const error = document.createElement("div");
                     error.classList.add("error")
                     error.textContent = err
-                    return { title: "Failure", error: err }
+                    return { title: "Error", error: err }
                 })
                 addToast(errors);
-            } else if (data?.message == "successfuly") {
+            } else if (data?.message == "successfully") {
                 Swal.fire({
                     title: "Éxito",
                     text: "Se han actualizado tus datos",
@@ -72,7 +72,7 @@ newDataForm.addEventListener("submit", async e => {
             }
         } catch (error) {
             console.log(error)
-            addToast([{ title: "Failure", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
+            addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")
             spinner2?.remove()
