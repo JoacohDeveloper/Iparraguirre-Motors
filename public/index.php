@@ -178,9 +178,7 @@ $router->get("/api/v1/refractions", [RefractionsRestController::class, "refracti
 
 //faq
 
-$router->get("/faq", function () {
-    header("Location: /faq.html");
-});
+$router->get("/faq", [InformationController::class, "preguntasFrecuentes"]);
 
 //Pruebas Randoms
 

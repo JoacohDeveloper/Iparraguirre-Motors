@@ -1,5 +1,5 @@
-header {
-  position: relative;
+.fit__content__myCart{
+  flex-direction: column;
 }
 
 .basket-title {
@@ -11,16 +11,9 @@ header {
   width: 100%;
 }
 
-.container {
-  flex-direction: column;
-}
-
 .basket-container {
   display: flex;
-  padding-left: 4rem;
-  padding-right: 4rem;
   justify-content: space-between;
-  padding-bottom: 4rem;
   overflow-y: auto;
   position: relative;
   gap: 2rem;
@@ -151,7 +144,6 @@ header {
   padding: 0.8rem;
   border-radius: 0.8rem;
   max-width: fit-content;
-  /* border: 1px solid #8e8e8e;    */
 }
 
 @media screen and (max-width: 900px) {
@@ -183,7 +175,7 @@ header {
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1200px) {
   .basket-container {
     flex-direction: column;
 
@@ -194,20 +186,22 @@ header {
     .totalPrice-checkout {
       width: 100%;
       position: fixed;
-      /* background-color: #202020; */
       backdrop-filter: blur(30px);
       background: transparent;
       background: #f2f2f2;
       bottom: 1rem;
-      left: 0;
       right: 0;
-
       top: unset;
       height: auto;
       padding: 0.5rem 2rem;
       margin: auto;
       width: 85%;
     }
+  }
+}
+@media screen and (max-width: 768px) {
+  .basket-container > .totalPrice-checkout {
+    left: 0;
   }
 }
 
@@ -312,19 +306,9 @@ body {
 }
 
 @media screen and (min-width: 900px) {
-  /* .hidden {
-    display: flex;
-  } */
-
   .totalPrice-checkout {
     justify-content: center;
   }
-
-  /* .checkout-total {
-    img {
-      display: none;
-    }
-  } */
 
   .subtotal {
     overflow-y: auto;

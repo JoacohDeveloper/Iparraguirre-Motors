@@ -4,7 +4,7 @@
     <div class="dashboard-content">
         <div class="dashboard-fit">
             <div class="dashboard-title">
-                <h3>Configuracion de cuenta</h3>
+                <h3 class="accountType" id="<?php echo $userType?>">Configuracion de cuenta</h3>
             </div>
 
             <div class="dashboard-fit__content">
@@ -14,7 +14,7 @@
                             <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile">Mi perfil</a></li>
                             <li aria-label="step-2" id="notifications"><a href="#">Notificaciones</a></li>
                             <li aria-label="step-3" id="change-pass"><a href="#">Cambiar contraseña</a></li>
-                            <li aria-label="step-4" id="delete-account" class="<?php echo $userType?>"><a href="#">Eliminar cuenta</a></li>
+                            <li aria-label="step-4" id="delete-account"><a href="#">Eliminar cuenta</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -120,7 +120,7 @@
                                 </button>
                             </div>
                         </label>
-                        <input type="submit" value="Cambiar">
+                        <input type="submit" value="Cambiar" id="form_changePassword-submitButton">
                     </form>
                 </section>
                 <section class="dashboard-fit__content__delelteAcc" aria-step="4">
@@ -141,7 +141,7 @@
                                 </button>
                             </div>
                         </label>
-                        <input type="submit" value="Eliminar">
+                        <input type="submit" value="Eliminar" id="form_deleteAccount-submitButton">
                     </form>
                 </section>
             </div>

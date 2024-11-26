@@ -347,7 +347,7 @@ function setSettingSection(step) {
 
 
 /* Admin settings li selected */
-const menuItems = document.querySelectorAll("#profile, #cart, #wishlist, #change-pass, #delete-account");
+const menuItems = document.querySelectorAll("#profile, #cart, #wishlist, #change-pass, #delete-account, #log-out");
 menuItems.forEach(item => {
     item.addEventListener("click", (event) => {
         menuItems.forEach(el => el.classList.remove("selected"));
@@ -629,3 +629,8 @@ function togglePassword(button) {
         img.alt = "Mostrar contraseña";
     }
 }
+
+const btnLogOut = document.querySelector("#btnLogOut");
+btnLogOut.addEventListener("click", (e) => {
+    location.href = location.origin + "/logout"
+});

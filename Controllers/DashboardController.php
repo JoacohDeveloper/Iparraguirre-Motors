@@ -53,6 +53,7 @@ abstract class DashboardController
         $lastName = $fullNameExplode[1] ?? "";
         $email = $usuario->getEmail();
         $bio = $usuario->getBio() ?? "";
+        $userType = $usuario->getUserType();
         $createdAt = $usuario->getCreated()->format('d-m-Y H:i:s');
         $updatedAt = $usuario->getUpdated()->format('d-m-Y H:i:s');
         if ($updatedAt == $createdAt) $updatedAt = "Never updated";
@@ -75,6 +76,7 @@ abstract class DashboardController
             "bio" => $bio,
             "createdAt" => $createdAt,
             "updatedAt" => $updatedAt,
+            "userType" => $userType,
             "title" => "Iparraguirre Motors | Settings",
             "description" => "User settings page for admins in Iparraguirre Motors"
         ]);
@@ -251,7 +253,6 @@ abstract class DashboardController
         $lastName = $fullNameExplode[1] ?? "";
         $bio = $usuario->getBio() ?? "";
         $email = $usuario->getEmail();
-        $userType = $usuario->getUserType();
 
         if (!isset($uuid)) {
             echo json_encode(["error" => "Unauthorized"]);
@@ -271,8 +272,7 @@ abstract class DashboardController
             "lastname" => $lastName,
             "email" => $email,
             "imagen" => $imagen,
-            "bio" => $bio,
-            "userType" => $userType
+            "bio" => $bio
         ];
 
         echo json_encode($user);

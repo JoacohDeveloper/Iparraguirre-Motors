@@ -10,11 +10,11 @@
         <nav class="aside-nav">
             <ul class="steps">
                 <li aria-label="step-1" id="profile" class="selected"><a href="#my_profile"><img src="build/src/images/user.svg" alt="personal information icon">Informacion personal</a></li>
-                <li aria-label="step-2" id="cart"><a href="#cart"><img src="/build/src/images/cart.svg" alt="">Carrito</a></li>
+                <li aria-label="step-2" id="cart"><a href="#mycart"><img src="/build/src/images/cart.svg" alt="">Carrito</a></li>
                 <li aria-label="step-3" id="wishlist"><a href="#wishlist"><img src="/build/src/images/bookmark.svg" alt="">Lista de deseos</a></li>
                 <li aria-label="step-4" id="change-pass"><a href="#changepass"><img src="build/src/images/lock.svg" alt="change password icon">Cambiar contraseña</a></li>
                 <li aria-label="step-5" id="delete-account"><a href="#deleteacount"><img src="build/src/images/alert.svg" alt="delete account icon">Borrar cuenta</a></li>
-                <li><a href="/logout"><img src="build/src/images/exit.svg" alt="log out icon">Cerrar Sesion</a></li>
+                <li aria-label="step-6" id="log-out"><a href="#logout"><img src="build/src/images/exit.svg" alt="log out icon">Cerrar Sesion</a></li>
             </ul>
         </nav>
     </aside>  
@@ -103,7 +103,31 @@
     </section>
 
     <section class="fit__content__myCart" aria-step="2" id="#mycart">
-     <h4>Carrito de compras</h4>
+    <div class="basket-title">
+        <h4>Productos del Carrito</h4>
+        </div>
+        <div class="basket-container">
+            <div class="cart-content">
+                <p>
+                    Productos
+                </p>
+                <div class="cart-items">
+                </div>
+            </div>
+            <div class="totalPrice-checkout">
+                <p class="checkout-title">Checkout</p>
+                <div class="products-total">
+                    <div class="checkout-total">
+                        <p>Total: <span class="total-pricing">U$S 78.00</span></p>
+                        <img src="/build/src/images/chevronDown.svg" alt="down arrow image">
+                    </div>
+                    <div class="subtotal hidden">
+                    </div>
+                </div>
+                <button class="checkout-buy">Comprar</button>
+                <p class="shipping">costos de envios calculados</p>
+            </div>
+        </div>
     </section>
 
     <section class="fit__content__wishlist" aria-step="3" id="#wishlist">
@@ -166,6 +190,11 @@
         </form>
     </section>
 
+    <section class="fit__content__logOut" aria-step="6" id="#logout">
+        <h4>Cerrar sesion</h4>
+        <p>Presiona el boton de abajo para cerrar la sesion de tu cuenta</p>
+        <button id="btnLogOut">Salir</button>
+    </section>
 
     <?php implementComp("error_toast.php")?>
 

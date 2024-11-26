@@ -1,3 +1,6 @@
+//El titulo con class "accountType" contiene el $accountType del SESSION como ID.
+const accountType = document.querySelector(".accountType").id;
+console.log(accountType);
 
 localStorage.removeItem("edit-resume")
 
@@ -412,7 +415,13 @@ document.querySelector('input[name="Password"]').setAttribute('autocomplete', 'n
 
 const form_deleteAccount = document.querySelector(".form_deleteAccount");
 
-form_deleteAccount.addEventListener("submit", submitEventHandler)
+if(accountType == "Root"){
+    const deleteAccount_SubmitButton = document.querySelector("#form_deleteAccount-submitButton");
+    deleteAccount_SubmitButton.style.cursor = "not-allowed"
+    deleteAccount_SubmitButton.setAttribute("disabled", "");
+} else {
+    form_deleteAccount.addEventListener("submit", submitEventHandler);
+}
 
 async function submitEventHandler(event) {
     event.preventDefault()
@@ -484,7 +493,13 @@ document.querySelector('input[name="repeatPassword"]').setAttribute('autocomplet
 
 const form_changePassword = document.querySelector(".form_changePassword");
 
-form_changePassword.addEventListener("submit", submitEventHandler2);
+if(accountType == "Root"){
+    const changePassword_SubmitButton = document.querySelector("#form_changePassword-submitButton");
+    changePassword_SubmitButton.style.cursor = "not-allowed"
+    changePassword_SubmitButton.setAttribute("disabled", "");
+} else {
+    form_changePassword.addEventListener("submit", submitEventHandler2);
+}
 
 async function submitEventHandler2(event) {
     event.preventDefault();

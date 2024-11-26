@@ -4,25 +4,14 @@ namespace Controllers;
 
 use MVC\Router;
 
+class InformationController{
 
-class InformationController
-{
-
-    public static function contactUs(Router $router)
-    {
-        $router->render("information/contact", [
-            "title" => "Iparraguirre Motors | Contactanos",
-            "styles" => ["information/contactUs"],
-            "description" => "Informacion de contacto de Iparraguirre-Motors"
+    public static function preguntasFrecuentes(Router $router){
+        $router->render("faq/index", [
+            "title" => "Iparraguirre Motors | Preguntas frecuentes",
+            "styles" => ["faq/index", "globals"],
+            "scripts" => ["faq/index", "/index"],
+            "description" => "Preguntas frecuentes de Iparraguirre-Motors"
         ]);
     }
-
-    // public static function preguntasFrecuentes(Router $router){
-    //     $router->render("information/faq", [
-    //         "title" => "Iparraguirre Motors | Preguntas frecuentes",
-    //         "styles" => ["information/faq", "globals"],
-    //         "scripts" => ["faq/index", "/index"],
-    //         "description" => "Preguntas frecuentes de Iparraguirre-Motors"
-    //     ]);
-    // }
 }

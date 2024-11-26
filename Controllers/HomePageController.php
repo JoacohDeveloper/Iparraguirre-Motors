@@ -47,8 +47,8 @@ abstract class HomePageController
         } else if ($uuid != $customer->getUUID()) header("Location: /");
 
         $router->render("/customerSettings/settings", [
-            "styles" => ["customerSettings/index", "globals"],
-            "scripts" => ["index", "customerSettings/index"],
+            "styles" => ["customerSettings/index", "globals", "tienda/basket/index"],
+            "scripts" => ["index", "customerSettings/index", "tienda/basket/index"],
             "username" => $customer->getUsername(),
             "fullname" => $fullName,
             "firstname" => $firstName,

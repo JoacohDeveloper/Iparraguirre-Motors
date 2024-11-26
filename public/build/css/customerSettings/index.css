@@ -263,16 +263,16 @@ nav.aside-nav ul.steps li.selected a {
 .cardTestDrive_Container{
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: .5rem;
 }
 .test-drive-details{
   display: flex;
   flex-direction: column;
   background-color: #ccc;
   padding: .5rem 1rem;
-  border-radius: 1rem;
+  border-radius: .4rem;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-  gap: .25rem;
+  gap: .1rem;
   transition: box-shadow .3s ease-in;
   p{
     padding-top: 0;
@@ -462,6 +462,45 @@ nav.aside-nav ul.steps li.selected a {
   background-color: #900d09;
 }
 
+/* fit__content__logOut */
+.fit__content__logOut{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+  color: #202020;
+}
+.fit__content__logOut > h4{
+  font-size: 1.5rem;
+  color: #b10b0a;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.fit__content__logOut > p {
+  font-size: 1rem;
+  color: #666666;
+  text-align: center;
+}
+.fit__content__logOut > button {
+  padding: 10px 15px;
+  background-color: #b10b0a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  max-width: 200px;
+  align-self: center;
+  margin-top: 15px;
+  &:hover{
+    background-color: #900d09;
+  }
+}
 
 /* Modal Container */
 .form-container {
@@ -655,6 +694,7 @@ nav.aside-nav ul.steps li.selected a {
 .fit__content > .settingsStepVisible {
   display: flex;
   gap: 1rem;
+  margin-inline: 2.5rem;
 }
 
 @media screen and (max-width: 768px) {
