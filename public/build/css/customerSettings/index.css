@@ -694,7 +694,6 @@ nav.aside-nav ul.steps li.selected a {
 .fit__content > .settingsStepVisible {
   display: flex;
   gap: 1rem;
-  margin-inline: 2.5rem;
 }
 
 @media screen and (max-width: 768px) {

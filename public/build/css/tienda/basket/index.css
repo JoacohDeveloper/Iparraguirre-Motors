@@ -224,14 +224,6 @@
   }
 }
 
-footer {
-  display: none;
-}
-
-body {
-  overflow: hidden;
-}
-
 .cart-items {
   .cart-item:last-of-type {
     padding-bottom: 25rem;
