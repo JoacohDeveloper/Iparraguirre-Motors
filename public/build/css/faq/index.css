@@ -200,23 +200,35 @@ header {
 .contactUs_form-container > form{
     display: flex;
     flex-direction: column;
-    margin: 1rem auto 0 auto;
+    margin: 2rem auto 0 auto;
     width: 100%;
     gap: .5rem;
+    padding-inline: 1rem;
     label{
         display: flex;
         flex-direction: column;
         width: 100%;
         gap: .15rem;
     }
+    input[type="text"]{
+        width: 100%;
+        padding: .2rem 0;
+    }
     textarea{
         width: 100%;
         resize: none;
     }
-    input{
+    p{
+        font-size: .8rem;
+        margin: 1rem auto .5rem auto;
+        color: #202020;
+        border-bottom: 1px solid #666;
+        cursor: default;
+    }
+    input[type="submit"]{
         width: 60%;
         padding: .5rem .75rem;
-        margin: 0 auto;
+        margin: 1rem auto .5rem auto;
         background-color: #fff;
         border: 1px solid #666;
         border-radius: .45rem;
@@ -266,6 +278,11 @@ header {
             color: #fff;
             border: 1px solid #202020;
         }
+    }
+    form > label > input{
+        background-color: #202020;
+        color: #fff;
+        border: 1px solid #202020;
     }
     form > input{
         color: #fff;

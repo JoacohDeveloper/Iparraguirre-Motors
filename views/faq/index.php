@@ -73,10 +73,23 @@
       </p>
 
       <form class="contactUs_form">
+        <label for="fullname">
+        Nombre completo
+          <input type="text" name="email" placeholder="Correo electrónico" value="<?php echo $email ?? ''; ?>" <?php echo !empty($email) ? 'disabled' : ''; ?>></input>
+        </label>
+        <label for="email">
+        Correo electronico
+          <input type="text" name="fullname" placeholder="Nombre completo" value="<?php echo $fullname ?? ''; ?>" <?php echo !empty($fullname) ? 'disabled' : ''; ?>></input>
+        </label>
+        <label for="phone">
+        Numero de telefono
+        <input type="text" name="phone" placeholder="Número de teléfono" value="<?php echo $phone ?? ''; ?>" <?php echo !empty($phone) ? 'disabled' : ''; ?>></input>
+        </label>
         <label for="textarea">
-        Escribe tu duda
+          Escribe tu consulta
           <textarea name="textarea" placeholder="Escribe aqui..."></textarea>
         </label>
+        <?php if(!empty($fullname)) echo '<p>Los datos del formulario fueron autocompletados en base a los datos de tu cuenta</p>';?>
         <input type="submit" value="Enviar">
       </form>
     </div>
@@ -86,7 +99,7 @@
       <p>
         Nos ubicamos en Ave.Rosevelt, 20100 Punta del Este, Departamento de Maldonado
       </p>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3270.5479880872676!2d-54.936152060680506!3d-34.94287162031236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sAutomotora!5e0!3m2!1ses-419!2suy!4v1732567674301!5m2!1ses-419!2suy" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3270.5479880872676!2d-54.936152060680506!3d-34.94287162031236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sAutomotora!5e0!3m2!1ses-419!2suy!4v1732567674301!5m2!1ses-419!2suy" height="<?php echo !empty($fullname) ? '425px' : '375px'; ?>" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </div>
