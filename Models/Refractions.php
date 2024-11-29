@@ -8,26 +8,9 @@ use PDO;
 class Refractions extends ActiveRecord
 {
     protected static $tabla = "refractions";
-    protected static $columnasdb = [
-        "refraction_id",   // Cambiado de "id" a "refraction_id"
-        "tipo_repuesto",    // Tipo del repuesto
-        "origen",          // Origen del producto
-        "peso",            // Peso del paquete
-        "stock",           // Cantidad de stock
-        "url_img",         // URL de la imagen
-        "alt_img",         // Texto alternativo de la imagen
-    ];
+    protected static $columnasdb = [ "refraction_id", "tipo_repuesto", "origen", "peso", "stock", "url_img", "alt_img" ];
 
-
-    public
-        $product,
-        $refraction_id,  // Cambiado de "id" a "refraction_id"
-        $tipo_repuesto,
-        $origen,
-        $peso,
-        $stock,
-        $url_img,
-        $alt_img;
+    public $product, $refraction_id, $tipo_repuesto, $origen, $peso, $stock, $url_img, $alt_img;
 
     function __construct($args = [])
     {
@@ -41,9 +24,6 @@ class Refractions extends ActiveRecord
         $this->url_img = $args["url_img"] ?? "";
         $this->alt_img = $args["alt_img"] ?? "";
     }
-
-
-
 
     public static function getAllRefractions()
     {

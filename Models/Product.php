@@ -10,34 +10,9 @@ class Product extends ActiveRecord
 
     protected static $tabla = "product";
 
-    protected static $columnasdb = [
-        "product_id",      // ID del producto
-        "nombre",          // Nombre del producto
-        "descripcion",     // Descripción del producto
-        "categoria",
-        "precio",
-        "modelo",
-        "fabricante",          // Precio del producto
-        "discount",        // Descuento aplicado
-        "discount_type",   // Tipo de descuento
-        "createdAt",       // Fecha de creación
-        "updatedAt"        // Fecha de actualización
-    ];
+    protected static $columnasdb = [ "product_id", "nombre", "descripcion", "categoria", "precio", "modelo", "fabricante", "discount", "discount_type", "createdAt", "updatedAt" ];
 
-    public $product_id;         // ID del producto
-    public $nombre;             // Nombre del producto
-    public $descripcion;        // Descripción del producto
-    public $categoria;          // Categoría del producto
-    public $modelo;             // Modelo del producto
-    public $fabricante;         // Fabricante del producto
-    public $precio;             // Precio del producto
-    public $discount;           // Descuento aplicado
-    public $discount_type;      // Tipo de descuento (porcentaje, cantidad fija, etc.)
-    public $stock;              // Cantidad en stock
-    public $peso;               // Peso del producto
-    public $createdAt;          // Fecha de creación del registro
-    public $updatedAt;          // Fecha de última actualización del registro
-
+    public $product_id, $nombre, $descripcion, $categoria, $modelo, $fabricante, $precio, $discount, $discount_type, $stock, $peso, $createdAt, $updatedAt;
 
     public function __construct($args = [])
     {
@@ -54,8 +29,7 @@ class Product extends ActiveRecord
         $this->categoria = $args["categoria"] ?? "";
         $this->modelo = $args["modelo"] ?? "";
         $this->fabricante = $args["fabricante"] ?? "";
-        $this->peso = $args["peso"] ?? 0.0; // Default a 0.0
-
+        $this->peso = $args["peso"] ?? 0.0;
         $this->nombre = $this->fabricante . " " . $this->modelo;
     }
 

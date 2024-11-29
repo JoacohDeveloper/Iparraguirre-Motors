@@ -119,22 +119,6 @@ abstract class AuthenticationController
         exit;
     }
 
-
-    public static function recuperar(Router $router)
-    {
-        //acá el usuario recupera su cuenta en caso de olvidar contraseña.
-
-        $router->render("auth/recuperar");
-    }
-
-    public static function verificar(Router $router)
-    {
-        //acá verificamos el correo electronico del usuario
-
-        $router->render("auth/verificar");
-    }
-
-
     public static function modificarUsuario()
     {
         $errores = [];
@@ -167,9 +151,7 @@ abstract class AuthenticationController
 
             $errores = $usuarioDB->validate();
 
-
             if (empty($errores)) {
-                //no hay errores del servidor
                 $resultado = $usuarioDB->actualizarUsuario();
                 if ($resultado) {
 

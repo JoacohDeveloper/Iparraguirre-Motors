@@ -1,9 +1,4 @@
 <?php
-/*
-* author Joaquín Álvarez
-* created on 29-07-2024-00h-31m
-* github: https://github.com/JoacohDeveloper
-*/
 
 namespace Controllers\Products;
 

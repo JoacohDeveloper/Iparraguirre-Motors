@@ -1,7 +1,3 @@
-//Prueba de infinite scroll
-
-
-
 const cardContainer = document.querySelector(".card-container")
 
 const Card = ({ id, nombre, año, precio, discount, discount_type, km, images }) => {
@@ -105,8 +101,6 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data];
-        console.log(data);
-        //localStorage.setItem("tiendaItems", JSON.stringify(newData));
 
         const urlActual = location.pathname + location.search + location.hash;
         data.forEach(v => {
@@ -134,9 +128,8 @@ async function init(search = null) {
                     if (cardContainer) cardContainer.appendChild(Card(customV));
                 }
             } else {
-                console.log("Ha ocurrido un error")
+                alert("Ha ocurrido un error");
             }
-
         });
 
         if (data.length > 0) {
@@ -167,13 +160,6 @@ async function init(search = null) {
     if (lastEl) observer.observe(lastEl);
 }
 
-
-
-
-
-
-
-
 // Buscador
 
 const data = ["Ferrari Vehicle", "Porsche Vehicle", "Bugatti Vehicle", "Ford Vehicle"]
@@ -181,7 +167,6 @@ const data = ["Ferrari Vehicle", "Porsche Vehicle", "Bugatti Vehicle", "Ford Veh
 const buscador = document.querySelector("#id_product-search__input")
 const resultadoBusqueda = document.querySelector(".result-list")
 const contenedorBuscador = document.querySelector(".search__input")
-
 
 
 if (location.pathname.includes("/catalogo/vehiculos")) {
@@ -256,15 +241,7 @@ const ItemBusqueda = (text) => {
 }
 let timer;
 
-
-
-if (true) {
-    // buscador.value = querySearch
-}
-
-
 buscador.addEventListener("input", async () => {
-    console.log("s")
     await buscar()
 })
 

@@ -98,8 +98,6 @@ class ActiveRecord
         // Resultado de la consulta
         $resultado = self::$db->query($query);
 
-        // logg($resultado);
-
         return [
             'resultado' =>  $resultado
         ];
@@ -120,11 +118,10 @@ class ActiveRecord
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .=  join(', ', $valores);
         $query .= " WHERE uuid = '$uuid'";
-        //$query .= " LIMIT 1";
 
         // Actualizar BD
         $resultado = self::$db->query($query);
-        // $resultado = $query;
+
         return [
             'resultado' =>  $resultado
         ];
@@ -149,11 +146,10 @@ class ActiveRecord
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .=  "isDeleted = 1";
         $query .= " WHERE uuid = '$uuid'";
-        //$query .= " LIMIT 1";
 
         // Actualizar BD
         $resultado = self::$db->query($query);
-        // $resultado = $query;
+
         return [
             'resultado' =>  $resultado
         ];

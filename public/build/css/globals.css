@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 :root {
-  /* variables */
   --red-color: #b10b0a;
 }
 
@@ -245,8 +244,6 @@ header .brgMenu {
   right: 0;
   border-left: 1px solid #202020;
   background-color: #fff;
-  /* background: linear-gradient(to bottom, #202020, #fff); */
-  /* transition: ; */
   transform: translateX(0);
   opacity: 1;
   transition: transform 0.6s ease, visibility 0.5s ease, opacity 0.5s ease;
@@ -263,7 +260,6 @@ header .brgMenu {
   visibility: hidden;
   opacity: 0;
   transform: translateX(100%);
-  /* right: -75%; */
 }
 
 .mobile-menu-header {
@@ -667,16 +663,12 @@ header .brgMenu {
 
 .toasts {
   position: fixed;
-  /* position: absolute; */
   display: flex;
   flex-direction: column-reverse;
-  /* top: 0; */
   right: 0;
   gap: 0.2rem;
-  /* left: 0; */
   z-index: 1000;
   bottom: 1rem;
-  /* width: %; */
   height: calc(100svh - 3rem);
   margin-top: 4rem;
 }
@@ -693,16 +685,12 @@ header .brgMenu {
   }
 
   .toasts {
-    /* position: fixed; */
     position: absolute;
     display: flex;
     flex-direction: column-reverse;
     top: 0;
     right: 0;
     left: 0;
-    /* z-index: 1000; */
-    /* bottom: 1rem; */
-    /* width: %; */
     bottom: unset;
     height: auto;
     margin-top: 4rem;
@@ -1062,7 +1050,6 @@ footer {
     position: absolute;
     overflow-y: auto;
     display: flex;
-    /* align-items: center; */
     flex-direction: column;
     opacity: 0;
     gap: 0.5rem;
@@ -1076,10 +1063,7 @@ footer {
     ::-webkit-scrollbar {
       display: none;
     }
-
-    scrollbar-width: none; /* Oculta la scrollbar */
-
-    /* border-radius: 0.3rem; */
+    scrollbar-width: none;
     border: 1px solid #ccc;
     -webkit-transform: scaleY(0.4);
     transform: scaleY(0.4);

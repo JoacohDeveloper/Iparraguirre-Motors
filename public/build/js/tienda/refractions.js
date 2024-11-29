@@ -97,7 +97,6 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data];
-        console.log(data);
 
         data.forEach(r => {
             const customR = {
@@ -143,13 +142,6 @@ async function init(search = null) {
 
     if (lastEl) observer.observe(lastEl);
 }
-
-
-
-
-
-
-
 
 // Buscador
 
@@ -233,15 +225,7 @@ const ItemBusqueda = (text) => {
 }
 let timer;
 
-
-
-if (true) {
-    // buscador.value = querySearch
-}
-
-
 buscador.addEventListener("input", async () => {
-    console.log("s")
     await buscar()
 })
 

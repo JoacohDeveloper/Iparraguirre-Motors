@@ -1,3 +1,0 @@
-<div>
-    recuperar cuenta
-</div>

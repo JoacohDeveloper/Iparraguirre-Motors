@@ -1,4 +1,3 @@
-/*Este es el css del register y login de los clientes*/
 body{  
   position: fixed;
   background-image: url("/build/src/images/fondo.webp");
@@ -89,6 +88,7 @@ main {
   background: #fff;
   color: rgb(32, 32, 32);
 }
+
 /*Formularios*/
 .contenedor__login-register {
   display: flex;

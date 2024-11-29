@@ -158,9 +158,7 @@ abstract class CustomerController
 
             $errores = $customerDB->validate();
 
-
             if (empty($errores)) {
-                //no hay errores del servidor
                 $resultado = $customerDB->actualizarUsuario();
                 if ($resultado) {
 

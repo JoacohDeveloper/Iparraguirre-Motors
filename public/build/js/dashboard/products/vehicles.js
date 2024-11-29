@@ -372,13 +372,7 @@ const ModalAdd = async () => {
                 const data = await response.json();
 
                 if (data.status === "error") {
-                    console.log("Server errors:", data.message);
                     const errors = data.detalles || [data.message];
-
-                    errors.forEach(err => {
-                        console.log("Error:", err);
-                    });
-
                     const errorElements = errors.map(err => {
                         const error = document.createElement("div");
                         error.classList.add("error");
@@ -413,14 +407,6 @@ const ModalAdd = async () => {
 
         }
     }
-
-    vehicleform.addEventListener("submit", async e => {
-        //El metodo para mostrar el usuario (error.push) va a ser cambiado, por lo tanto 
-        //este metodo de corroboracion de errores no funciona pero tampoco tira error
-        e.preventDefault()
-
-    })
-
 
     function cambiarSeccion(stepActual, stepSiguiente) {
 
@@ -570,7 +556,7 @@ const ModalAdd = async () => {
     modalBody.classList.add("modal-body")
 
 
-    //---------------------- TABS
+    // TABS
     const tabsBtns = document.createElement("div")
     tabsBtns.classList.add("tabs-container")
 
@@ -605,14 +591,10 @@ const ModalAdd = async () => {
     tabsBtns.appendChild(tabButton3)
     tabsBtns.appendChild(tabButton4)
 
-
-
     modalBody.appendChild(tabsBtns)
 
-    //---------------------------------
 
-
-    //--------------------DETAILS-----------------
+    // DETAILS
     const detailsSection = document.createElement("section")
 
     const detailsSectionTitle = document.createElement("p")
@@ -632,7 +614,6 @@ const ModalAdd = async () => {
 
     detailsSectionInputs.forEach(input => detailsSectionLabels.appendChild(input))
     detailsSectionInputs2.forEach(input => detailsSectionLabels2.appendChild(input))
-    //---------------------------------------------------------------------------
 
     const specSectionLabelContainer = document.createElement("article")
     const specSectionLabels = document.createElement("div")
@@ -650,7 +631,7 @@ const ModalAdd = async () => {
     specsSectionInputs2.forEach(input => specSectionLabels2.appendChild(input))
 
     specSection.setAttribute("aria-step", "2")
-    //------------------------------------
+
     const perfSection = document.createElement("section")
 
     const perfSectionTitle = document.createElement("p")
@@ -754,22 +735,7 @@ const ModalAdd = async () => {
     const submitInput = document.createElement("button")
     submitInput.textContent = "Agregar"
 
-    //vehicleform.appendChild(ImageUploader())
-    // vehicleform.appendChild(submitInput)
-
-    // vehicleform.addEventListener("submit", e => {
-    //     e.preventDefault();
-    //     const form_data = new FormData(vehicleform)
-
-    //     console.log([...form_data])
-
-    //     addToast([{ title: "error", error: "Message" }])
-    // })
-
     modalBody.appendChild(vehicleform)
-
-
-
 
     contenedor.appendChild(modal)
 
@@ -777,7 +743,6 @@ const ModalAdd = async () => {
     modal.appendChild(modalBody)
 
     modal.appendChild(modalFooter)
-
 
     botonVolver.addEventListener("click", e => {
 
@@ -794,9 +759,6 @@ const ModalAdd = async () => {
             tabsBtns.querySelector(`[aria-label='step-${stepSiguiente}']`).click()
 
         }
-
-
-
     })
 
     botonSiguiente.addEventListener("click", e => {
@@ -814,7 +776,6 @@ const ModalAdd = async () => {
 
         }
     })
-
 
     modalFooter.appendChild(botonVolver)
     modalFooter.appendChild(botonSiguiente)
@@ -936,8 +897,6 @@ const ModalModificar = async (data) => {
         InputText("number", "Kilometraje del vehiculo", "Kilometraje del vehiculo", "kilometros", "", data.kilometros),
         InputText("number", "Caballos de fuerza", "Caballos de fuerza", "caballos_fuerza", "", data.caballos_potencia)
     ]
-
-
 
 
     //cambio de seccion
@@ -1120,14 +1079,6 @@ const ModalModificar = async (data) => {
         }
     }
 
-    vehicleform.addEventListener("submit", async e => {
-        //El metodo para mostrar el usuario (error.push) va a ser cambiado, por lo tanto 
-        //este metodo de corroboracion de errores no funciona pero tampoco tira error
-        e.preventDefault()
-
-    })
-
-
     function cambiarSeccion(stepActual, stepSiguiente) {
 
         function validar(inputs) {
@@ -1276,7 +1227,7 @@ const ModalModificar = async (data) => {
     modalBody.classList.add("modal-body")
 
 
-    //---------------------- TABS
+    // TABS
     const tabsBtns = document.createElement("div")
     tabsBtns.classList.add("tabs-container")
 
@@ -1315,10 +1266,9 @@ const ModalModificar = async (data) => {
 
     modalBody.appendChild(tabsBtns)
 
-    //---------------------------------
 
 
-    //--------------------DETAILS-----------------
+    // DETAILS
     const detailsSection = document.createElement("section")
 
     const detailsSectionTitle = document.createElement("p")
@@ -1338,7 +1288,6 @@ const ModalModificar = async (data) => {
 
     detailsSectionInputs.forEach(input => detailsSectionLabels.appendChild(input))
     detailsSectionInputs2.forEach(input => detailsSectionLabels2.appendChild(input))
-    //---------------------------------------------------------------------------
 
     const specSectionLabelContainer = document.createElement("article")
     const specSectionLabels = document.createElement("div")
@@ -1356,7 +1305,6 @@ const ModalModificar = async (data) => {
     specsSectionInputs2.forEach(input => specSectionLabels2.appendChild(input))
 
     specSection.setAttribute("aria-step", "2")
-    //------------------------------------
     const perfSection = document.createElement("section")
 
     const perfSectionTitle = document.createElement("p")

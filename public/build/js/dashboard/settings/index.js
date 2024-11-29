@@ -1,6 +1,5 @@
 //El titulo con class "accountType" contiene el $accountType del SESSION como ID.
 const accountType = document.querySelector(".accountType").id;
-console.log(accountType);
 
 localStorage.removeItem("edit-resume")
 
@@ -338,7 +337,6 @@ async function setFormEdit(target, formContainer) {
 
             summaryTextArea.name = "bio"
             summaryTextArea.id = "bio"
-            console.log(data)
             summaryTextArea.placeholder = "Escribe aqui tu biografia"
             summaryTextArea.textContent = data.bio;
 
@@ -360,26 +358,17 @@ async function setFormEdit(target, formContainer) {
 
             formHTML.appendChild(submitBTN)
 
-
-
-
         } else {
-            //personal information
             headingTitle.textContent = "Personal Information";
         }
-
-
-
     } catch (error) {
-        console.log(error)
+        alert("Ha ocurrido un error");
     }
-
 }
 
 const steps = document.querySelector(".steps")
 steps.addEventListener("click", e => {
     if (e.target.parentElement?.ariaLabel) {
-        //console.log(e.target?.parentElement?.ariaLabel)
         localStorage.setItem("step", JSON.stringify(e.target?.parentElement?.ariaLabel ?? "step-1"))
         const step = e.target?.parentElement?.ariaLabel.split("-")[1];
         setSettingSection(step)
@@ -431,7 +420,7 @@ async function submitEventHandler(event) {
     formdata.forEach((value, key) => {
         object[key] = value
     });
-    console.log(object)
+
     //Errores
     if (object.Nombre.length == 0) {
         error.push({
@@ -575,7 +564,7 @@ async function defaultImage(event) {
     try {
         const response = await fetch(location.origin + "/dashboard/user-default-image");
         const data = await response.json();
-        console.log(data)
+
         if (data?.errores) {
             const errors = Object?.values(data?.errores).map(err => {
                 const error = document.createElement("div");

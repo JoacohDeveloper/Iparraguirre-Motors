@@ -64,7 +64,6 @@ const InputSelect = (label, name, values, id, selectedValue) => {
 
 
 const ModalAddDiscount = (data) => {
-    console.log(data)
     const contenedor = document.createElement("div")
     document.body.classList.add("fixed")
 
@@ -95,9 +94,7 @@ const ModalAddDiscount = (data) => {
     modalAddDiscount.classList.add("form_addvehicle")
     const inputs = [
         InputSelect("Tipo de descuento", "discount_type", ["Dolares", "Porcentaje"], ""),
-        InputText("text", "Descuento", "Descuento", "discount", "descuento", "")//,
-        // InputText("date", "¿Cuando inicia?", "startDate",),
-        // InputText("date", "¿Cuando finaliza?", "endDate",)
+        InputText("text", "Descuento", "Descuento", "discount", "descuento", "")
     ];
 
     modalHeader.appendChild(divSpacer)
@@ -156,7 +153,6 @@ const ModalAddDiscount = (data) => {
             addToast([{ title: "Error", error: firstError.error }]); // Mostramos solo el primer error
         } else {
             formdata.append('vehicle_id', data.vehicle_id);
-            console.log([...formdata])
             try {
                 const response = await fetch(location.origin + "/dashboard/discount-vehiculo", {
                     method: "POST",
@@ -193,7 +189,6 @@ const ModalAddDiscount = (data) => {
                     }]);
                 }
             } catch (err) {
-                console.log(err);
                 document.body.classList.add("fixed")
                 addToast([{
                     title: "Error",
@@ -326,7 +321,6 @@ const ModalRemoveDiscount = (data) => {
                     }]);
                 }
             } catch (err) {
-                console.log(err);
                 addToast([{
                     title: "Error",
                     error: "Ha ocurrido un error"

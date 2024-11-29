@@ -24,7 +24,7 @@ formularioLogin.addEventListener("submit", async (e) => {
         addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
-        spinner.classList.add("linear-loading") // o spinner
+        spinner.classList.add("linear-loading")
         const loaderSection = document.querySelector(".loader")
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
@@ -34,7 +34,7 @@ formularioLogin.addEventListener("submit", async (e) => {
                 body: form_data
             })
             const data = await response.json()
-            console.log(data)
+
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -44,8 +44,7 @@ formularioLogin.addEventListener("submit", async (e) => {
                 })
                 addToast(errors);
             } else if (data?.message == "successfully") {
-                console.log(data)
-                window.location.href = "/"
+                history.back();
             }
         } catch (error) {
             addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
@@ -100,7 +99,7 @@ formularioRegister.addEventListener("submit", async e => {
         addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
-        spinner.classList.add("linear-loading") // o spinner
+        spinner.classList.add("linear-loading")
         const loaderSection = document.querySelector(".loader")
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
@@ -119,10 +118,9 @@ formularioRegister.addEventListener("submit", async e => {
                 })
                 addToast(errors);
             } else if (data?.message == "successfully") {
-                window.location.href = "/"
+                history.back();
             }
         } catch (error) {
-            console.log(error)
             addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")

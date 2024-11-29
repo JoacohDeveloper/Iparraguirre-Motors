@@ -310,7 +310,7 @@ formularioRegister.addEventListener("submit", async e => {
         addToast([{ title: "Error", error: firstError }]);
     } else {
         const spinner = document.createElement("div")
-        spinner.classList.add("linear-loading") // o spinner
+        spinner.classList.add("linear-loading")
         const loaderSection = document.querySelector(".loader")
         loaderSection?.appendChild(spinner);
         const form_data = new FormData(e.target);
@@ -320,7 +320,6 @@ formularioRegister.addEventListener("submit", async e => {
                 body: form_data
             })
             const data = await response.json()
-            console.log(data)
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -347,7 +346,6 @@ formularioRegister.addEventListener("submit", async e => {
                 }
             }
         } catch (error) {
-            console.log(error)
             addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")
@@ -696,7 +694,6 @@ const ModalRol = (data) => {
 
     const submitInput = document.createElement("button")
     submitInput.textContent = "Confirmar"
-    console.log(userActualRol)
     submitInput.addEventListener("click", async e => {
         const inputSelectRol = document.querySelector("#selectRol");
         if (inputSelectRol.value == "-Seleccione-") {
@@ -705,7 +702,6 @@ const ModalRol = (data) => {
             addToast([{ title: "Error", error: "Este usuario ya es " + userActualRol }]);
         } else {
             try {
-                console.log(inputSelectRol.value)
                 const response = await fetch(location.origin + `/dashboard/manageEmployee/forceChangeRol?uuid=${userUUID}&rol=${inputSelectRol.value}`);
                 const data = await response.json();
     

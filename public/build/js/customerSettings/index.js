@@ -89,16 +89,12 @@ async function setFormEdit(target, formContainer) {
     formContainer.appendChild(headingTitle);
     const formHTML = document.createElement("form")
     formHTML.enctype = "multipart/form-data";
-    // el usuario que esta en la pagina
     const urlParams = new URLSearchParams(window.location.search);
     const uuid = urlParams.get('u');
-    console.log(uuid)
 
     try {
         const response = await fetch(location.origin + `/customer/user-settings/usuario?u=${uuid}`);
-
         const data = await response.json();
-        console.log(data)
         if (data?.error) throw new Error(data?.error)
 
         formContainer.appendChild(formHTML)
@@ -152,9 +148,7 @@ async function setFormEdit(target, formContainer) {
                     method: "POST",
                     body: formdata
                 })
-
                 const data = await response.json()
-                console.log(data)
 
                 if (data?.message && data?.message == "error") {
                     const errors = document.createElement("div")
@@ -317,7 +311,7 @@ async function setFormEdit(target, formContainer) {
             headingTitle.textContent = "Personal Information";
         }
     } catch (error) {
-        console.log(error)
+        alert("Ha ocurrido un error")
     }
 
 }
@@ -325,7 +319,6 @@ async function setFormEdit(target, formContainer) {
 const steps = document.querySelector(".steps")
 steps.addEventListener("click", e => {
     if (e.target.parentElement?.ariaLabel) {
-        //console.log(e.target?.parentElement?.ariaLabel)
         localStorage.setItem("step", JSON.stringify(e.target?.parentElement?.ariaLabel ?? "step-1"))
         const step = e.target?.parentElement?.ariaLabel.split("-")[1];
         setSettingSection(step)
@@ -371,8 +364,7 @@ async function submitEventHandler(event) {
     formdata.forEach((value, key) => {
         object[key] = value
     });
-    console.log(object)
-    //Errores
+
     if (object.Nombre.length == 0) {
         error.push({
             title: "Error",
@@ -505,7 +497,6 @@ async function defaultImage(event) {
     try {
         const response = await fetch(location.origin + "/customer/user-default-image");
         const data = await response.json();
-        console.log(data)
         if (data?.errores) {
             const errors = Object?.values(data?.errores).map(err => {
                 const error = document.createElement("div");

@@ -343,7 +343,6 @@ async function obtenerUsuarios() {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("userItems")) ?? [];
         const newData = [...oldData, ...data];
-        console.log(data);
 
         const totalCustomerHTML = document.querySelector("#p_totalCant");
 
@@ -389,7 +388,6 @@ async function getInteractions(userUUID) {
             if (interactionCardContent) interactionCardContent.appendChild(emptyInteractionsHTML);
         } else {
             data.interactions.forEach( i => {
-                console.log(i)
                 const customI = {
                     interactionID: i.interactionID,
                     interactionOwner: i.interactionOwner,

@@ -4,15 +4,6 @@
         <button>
             <img src="/build/src/images/glass.svg" alt="magnifying glass icon">
         </button>
-        <!-- <label for="order-by" class="order-by">
-            "Ordenar por"
-            <select id="order" name="order-by">
-                <option value="order-recent" selected>Agregados recientemente</option>
-                <option value="order-older">Mas antiguos</option>
-                <option value="order-expensive">Mayor precio</option>
-                <option value="order-cheap">Menor precio</option>
-            </select>
-        </label> -->
     </form>
     <div class="result-list hidden">
     </div>

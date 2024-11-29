@@ -7,13 +7,6 @@
                 <h3>Gestion de descuentos para repuestos</h3>
             </div>
 
-            <!-- <div class="contenedor-buscador">
-                <div class="contenido-buscador">
-                    <label for="id_product-search__input">Buscar</label>
-                    <?php //implementComp("dashboard/buscadorProductos.php") ?>
-                </div>
-            </div> -->
-
         </div>
 
         <div class="products-managment">

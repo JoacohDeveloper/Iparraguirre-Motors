@@ -10,52 +10,11 @@ use DateTime;
 class Vehicle extends ActiveRecord
 {
     protected static $tabla = "vehicle";
-    protected static $columnasdb = [
-        "vehicle_id",
-        "categoria",
-        "modelo",
-        "fabricante",
-        "year",
-        "color",
-        "matricula",
-        "transmision",
-        "tipo_carroceria",
-        "frenos_abs",
-        "airbag",
-        "traccion",
-        "direccion",
-        "control_estabilidad",
-        "puertas",
-        "tipo_combustible",
-        "velocidad_max",
-        "zero_to_houndred",
-        "peso",
-        "kilometros",
-        "caballos_potencia"
-    ];
+    protected static $columnasdb = [ "vehicle_id", "categoria", "modelo", "fabricante", "year", "color", "matricula", "transmision", "tipo_carroceria", "frenos_abs",
+        "airbag", "traccion", "direccion", "control_estabilidad", "puertas", "tipo_combustible", "velocidad_max", "zero_to_houndred", "peso", "kilometros", "caballos_potencia" ];
 
-    public $product;
-    public $vehicle_id;
-    public $categoria;
-    public $modelo;
-    public $fabricante;
-    public $year;
-    public $color;
-    public $matricula;
-    public $transmision;
-    public $tipo_carroceria;
-    public $frenos_abs;
-    public $airbag;
-    public $traccion;
-    public $direccion;
-    public $control_estabilidad;
-    public $puertas;
-    public $tipo_combustible;
-    public $velocidad_max;
-    public $zero_to_houndred;
-    public $peso;
-    public $kilometros;
-    public $caballos_potencia;
+    public $product, $vehicle_id, $categoria, $modelo, $fabricante, $year, $color, $matricula, $transmision, $tipo_carroceria, $frenos_abs, $airbag,
+        $traccion, $direccion, $control_estabilidad, $puertas, $tipo_combustible, $velocidad_max, $zero_to_houndred, $peso, $kilometros, $caballos_potencia;
 
     public function __construct($args = [])
     {
@@ -71,18 +30,18 @@ class Vehicle extends ActiveRecord
         $this->matricula = $args["matricula"] ?? "";
         $this->transmision = $args["tipo_transmision"] ?? "";
         $this->tipo_carroceria = $args["tipo_carroceria"] ?? "";
-        $this->frenos_abs = $args["frenos_abs"] ?? 0; // 0 o 1
-        $this->airbag = $args["airbag"] ?? 0; // 0 o 1
+        $this->frenos_abs = $args["frenos_abs"] ?? 0;
+        $this->airbag = $args["airbag"] ?? 0;
         $this->traccion = $args["traccion"] ?? "";
         $this->direccion = $args["direccion"] ?? "";
-        $this->control_estabilidad = $args["control_estabilidad"] ?? 0; // 0 o 1
+        $this->control_estabilidad = $args["control_estabilidad"] ?? 0;
         $this->puertas = $args["puertas"] ?? 0;
         $this->tipo_combustible = $args["tipo_combustible"] ?? "";
-        $this->velocidad_max = $args["velocidad_max"] ?? 0.0; // Default a 0.0
-        $this->zero_to_houndred = $args["zero_to_houndred"] ?? 0.0; // Default a 0.0
-        $this->peso = $args["peso"] ?? 0.0; // Default a 0.0
-        $this->kilometros = $args["kilometros"] ?? 0; // Default a 0
-        $this->caballos_potencia = $args["caballos_fuerza"] ?? 0; // Default a 0
+        $this->velocidad_max = $args["velocidad_max"] ?? 0.0;
+        $this->zero_to_houndred = $args["zero_to_houndred"] ?? 0.0;
+        $this->peso = $args["peso"] ?? 0.0;
+        $this->kilometros = $args["kilometros"] ?? 0;
+        $this->caballos_potencia = $args["caballos_fuerza"] ?? 0;
     }
     public $vehicleImages = [];
 
@@ -175,9 +134,6 @@ class Vehicle extends ActiveRecord
     {
         $errors = [];
 
-        // if (empty($this->product->nombre)) {
-        //     $errors["nombre"] = "El campo nombre es obligatorio.";
-        // }
         if ($this->categoria == "") {
             $errors["categoria"] = "El campo categoria es obligatorio.";
         }
@@ -343,14 +299,10 @@ class Vehicle extends ActiveRecord
                 ':descripcion' => $this->product->descripcion,
                 ':precio' => $this->product->precio,
                 ':updatedAt' => $this->product->updatedAt,
-                ':product_id' => $id // Asegúrate de que esta propiedad exista
+                ':product_id' => $id
             ];
-            // logg($paramsProduct);
             $stmt = static::$db->prepare($queryProduct);
             $success = $stmt->execute($paramsProduct);
-
-            // logg("no llegue aca");
-
 
             $queryVehicle = "UPDATE vehicle SET
             categoria = :categoria,
@@ -398,15 +350,8 @@ class Vehicle extends ActiveRecord
                 ':peso' => $this->peso,
                 ':kilometros' => $this->kilometros,
                 ':caballos_potencia' => $this->caballos_potencia,
-                // Actualiza a la fecha actual
-                ':vehicle_id' => $this->vehicle_id // Asegúrate de que esta propiedad exista
+                ':vehicle_id' => $this->vehicle_id
             ];
-
-            // logg($paramsVehicle);
-
-
-
-
 
             $stmt3 = static::$db->prepare($queryVehicle);
             $stmt3->execute($paramsVehicle);

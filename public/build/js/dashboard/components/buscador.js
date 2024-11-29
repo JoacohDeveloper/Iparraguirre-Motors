@@ -159,7 +159,6 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
-        console.log(data)
 
         data.forEach(v => {
             const customV = {
@@ -212,15 +211,7 @@ async function init(search = null) {
         observer.observe(lastEl)
 }
 
-
-
-
-
-
-
 // Buscador
-
-
 const buscador = document.querySelector("#id_product-search__input")
 const resultadoBusqueda = document.querySelector(".result-list")
 const contenedorBuscador = document.querySelector(".search__input")
@@ -228,16 +219,12 @@ const contenedorBuscador = document.querySelector(".search__input")
 contenedorBuscador.addEventListener("submit", async e => {
     e.preventDefault()
     ocultarBusqueda()
-
     if (cardContainer) {
         cardContainer.innerHTML = null
     }
 
-
     if (buscador.value) {
-
         if (location.pathname.includes("/dashboard/products/vehicle")) {
-
             await handlerBusqueda(buscador?.value)
             const url = new URL(location.origin + "/dashboard/products/vehicle");
             url.searchParams.set('search', buscador?.value);
@@ -251,17 +238,13 @@ contenedorBuscador.addEventListener("submit", async e => {
     } else {
         const url = new URL(location.origin + "/dashboard/products/vehicle");
         history.replaceState(null, null, url.toString());
-
         await init()
     }
-
-
 })
 
 async function cargarDefault() {
     await init()
 }
-
 
 async function handlerBusqueda(search) {
     await init(search)
@@ -304,11 +287,9 @@ const querySearch = urlParams.get('search');
 if (querySearch) {
     buscador.value = querySearch
     handlerBusqueda(querySearch)
-
 } else {
     init("")
 }
-
 
 buscador.addEventListener("input", async () => await buscar())
 
@@ -320,9 +301,6 @@ async function buscar() {
 
             try {
                 const response = await fetch(location.origin + `/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&name=${buscador.value}`)
-
-                console.log(response)
-
                 if (response.ok) {
                     const data = await response.json()
                     if (!data?.message || data?.message !== "404") {
@@ -350,8 +328,6 @@ async function buscar() {
             ocultarBusqueda()
         }
     }, 300)
-
-
 }
 
 const contenedorInputListado = document.querySelector(".product-search__input")
@@ -363,12 +339,8 @@ document.addEventListener("click", e => {
 })
 
 buscador.addEventListener("focus", e => {
-
     const items = document.querySelectorAll(".search-item")
-
-    if (items.length > 0)
-        resultadoBusqueda.classList.remove("hidden")
-
+    if (items.length > 0) resultadoBusqueda.classList.remove("hidden")
 })
 
 // Función para formatear la fecha

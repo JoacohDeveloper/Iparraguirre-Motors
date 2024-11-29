@@ -10,21 +10,17 @@ checkoutBtn.addEventListener("click", () => {
 })
 
 function createSubtotalItem({ quantity, title, price }) {
-    // Crear el contenedor principal
     const subtotalItem = document.createElement('div');
     subtotalItem.classList.add('subtotal-item');
 
-    // Crear la cantidad
     const qtyElement = document.createElement('p');
     qtyElement.classList.add('qty');
     qtyElement.innerHTML = `x <span>${quantity}</span>`;
 
-    // Crear el título del producto
     const titleElement = document.createElement('p');
     titleElement.classList.add('prod-title');
     titleElement.textContent = title;
 
-    // Crear el precio del producto
     const priceElement = document.createElement('p');
     priceElement.classList.add('prod-price');
     priceElement.innerHTML = `${(Number(price * quantity)).toLocaleString("es-UY", {
@@ -32,7 +28,6 @@ function createSubtotalItem({ quantity, title, price }) {
         style: "currency"
     })}`;
 
-    // Ensamblar los elementos en el contenedor principal
     subtotalItem.appendChild(qtyElement);
     subtotalItem.appendChild(titleElement);
     subtotalItem.appendChild(priceElement);
@@ -52,11 +47,9 @@ function createCartItem({
     onRemove
 }) {
 
-    // Crear contenedor principal
     const cartItem = document.createElement('div');
     cartItem.classList.add('cart-item');
 
-    // Crear sección de imagen
     const itemImage = document.createElement('div');
     itemImage.classList.add('item-image');
     const img = document.createElement('img');
@@ -64,7 +57,6 @@ function createCartItem({
     img.alt = '';
     itemImage.appendChild(img);
 
-    // Crear sección de información
     const itemInformation = document.createElement('div');
     itemInformation.classList.add('item-information');
 
@@ -99,7 +91,6 @@ function createCartItem({
     itemInformation.appendChild(itemInformationText);
     itemInformation.appendChild(itemActions);
 
-    // Crear sección de precio
     const itemPrice = document.createElement('div');
     itemPrice.classList.add('item-price');
 
@@ -160,7 +151,6 @@ function createCartItem({
     itemPrice.appendChild(itemQty);
     itemPrice.appendChild(itemValue);
 
-    // Ensamblar el componente
     cartItem.appendChild(itemImage);
     cartItem.appendChild(itemInformation);
     cartItem.appendChild(itemPrice);

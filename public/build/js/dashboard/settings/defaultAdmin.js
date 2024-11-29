@@ -47,8 +47,6 @@ newDataForm.addEventListener("submit", async e => {
             })
             const data = await response.json()
 
-            console.log(data)
-
             if (data?.errores) {
                 const errors = Object?.values(data?.errores).map(err => {
                     const error = document.createElement("div");
@@ -71,7 +69,6 @@ newDataForm.addEventListener("submit", async e => {
                 }
             }
         } catch (error) {
-            console.log(error)
             addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
         } finally {
             const spinner2 = loaderSection?.querySelector(".linear-loading")

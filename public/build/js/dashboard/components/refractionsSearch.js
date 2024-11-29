@@ -153,7 +153,6 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
-        console.log(data)
 
         data.forEach(r => {
             const customr = {

@@ -5,49 +5,17 @@ namespace Models;
 use DateTime;
 use PDOException;
 use PDO;
-//Este es un modelo que hereda a ActiveRecord dentro de este modelo se especifica el nombre de la tabla SQL y las columnas. Es importante que cuando agreguemos datos a columnasdb al momento de hacer una operacion de Active Record se utilicen todos los campos, sin haber ningun dato vacío.
-
 
 class User extends ActiveRecord
 {
 
     protected static $tabla = "user";
 
-    protected static $columnasdb = ["uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token", "userType", "isFirstLog", "isDeleted", "verify", "createdAt", "updatedAt"];
+    protected static $columnasdb = [ "uuid", "full_name", "username", "slug", "bio", "email", "password", "titulo_imagen", "imagen", "token",
+        "userType", "isFirstLog", "isDeleted", "verify", "createdAt", "updatedAt" ];
 
-    protected $uuid;
-
-    protected $full_name;
-
-    protected $username;
-
-    protected $bio;
-
-    protected $email;
-
-    protected $token;
-
-    protected $password;
-
-    protected $re_password;
-
-    protected $titulo_imagen;
-
-    protected $imagen;
-
-    protected $userType;
-
-    protected $isFirstLog;
-
-    protected $isDeleted;
-
-    protected $createdAt;
-
-    protected $updatedAt;
-
-    protected $verify;
-
-    protected $slug;
+    protected $uuid, $full_namel, $username, $bio, $email, $token, $password, $re_password, $titulo_imagen, $imagen,
+        $userType, $isFirstLog, $isDeleted, $createdAt, $updatedAt, $verify, $slug;
 
     function __construct($args = [])
     {

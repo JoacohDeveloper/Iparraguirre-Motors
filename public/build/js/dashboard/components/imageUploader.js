@@ -96,7 +96,6 @@ async function ImageUploader(images = null) {
 
     let container = new DataTransfer();
     if (images && images.length > 0) {
-        console.log(images)
         try {
             const response = await Promise.all(images.map(async (image) => {
                 const uri = "/build" + image.url.split("build")[1]

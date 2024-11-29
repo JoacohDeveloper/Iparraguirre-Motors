@@ -95,7 +95,6 @@ header {
 
 .banner-content {
   padding-left: 2rem;
-  /* height: 100%; */
   margin-bottom: 5rem;
   color: #fff;
   display: flex;
@@ -175,14 +174,12 @@ header {
   transition: box-shadow 0.3s ease, border 0.3s ease, transform 0.3s ease;
   &:hover {
     border: 2px solid rgba(255, 255, 255, 0.578);
-    /* box-shadow: 0 0 16px #ff0000; */
     transform: translateY(-3px);
   }
 }
 
 header {
   color: #202020;
-  /* background-color: rgba(0, 0, 0, 0.6); */
   backdrop-filter: none;
   border-bottom: unset;
   position: absolute;
@@ -217,7 +214,6 @@ header {
 .downside {
   display: flex;
   position: absolute;
-  /* z-index: 300; */
   bottom: 2rem;
   width: 100%;
   align-items: center;
@@ -355,7 +351,6 @@ main {
     background: linear-gradient(to top, #ccc, #fff);
     left: 0;
     top: 0;
-    /* bottom: 50%; */
     right: 0;
     height: 50%;
   }
@@ -374,7 +369,6 @@ main {
     background: linear-gradient(to top, #ccc, #fff);
     left: 0;
     top: 0;
-    /* bottom: 50%; */
     right: 0;
     height: 50%;
   }
@@ -524,41 +518,6 @@ main {
     display: none;
   }
 }
-/*
-.slidermarcas{
-  user-select: none;
-  width: 75vw;
-  margin: auto;
-  overflow: hidden;
-}
-.slidermarcas .slider-track {
-  user-select: none;
-  display: flex;
- animation: scroll 45s  linear infinite;
- width: calc(200px * 38)
-}
-.slidermarcas .slide {
-  width: 200px;
-}
-.slidermarcas .slide img{
-  user-select: none;
-  width: 200px;
-}
-@keyframes scroll {
-  0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-  100% {
-    -webkit-transform: translateX(calc(-200px * 19));
-    transform: translateX(calc(-200px * 19));
-  }
-}
-@media screen and (max-width: 765px) {
-  .slidermarcas {
-    display: none;
-  }
-}*/
 
 .slider{
   width: 80%;
@@ -720,11 +679,7 @@ main {
   color: #ffffff;
 }
 
-.slider{ /* Display none de mientras que no tenemos las fotos optimizadas del slider */
+/* Display none de mientras que no tenemos las fotos optimizadas del slider */
+.slider{
   display: none;
 }
-/*@media screen and (max-width: 768px){
-    .slider{
-        display: none;
-    }
-}*/

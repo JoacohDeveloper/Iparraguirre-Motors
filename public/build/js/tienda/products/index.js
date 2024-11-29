@@ -27,7 +27,6 @@ async function loadProduct() {
 
     let response = await fetch(`${window.location.origin}/api/v1/vehicles?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`);
     let product = await response.json();
-    console.log(product)
 
     if (product?.message == "404") {
         response = await fetch(`${window.location.origin}/api/v1/refractions?token=9fd4e0080bc6edc9f3c3853b5b1b6ecf&id=${uuid}`);
@@ -329,12 +328,11 @@ function modalTest(itemID, itemName, itemYear) {
             const firstError = errores[0];
             const error = document.createElement("div");
             error.classList.add("error");
-            console.log("Hola")
             error.textContent = firstError;
             addToast([{ title: "Error", error: firstError }]);
         } else {
             const spinner = document.createElement("div")
-            spinner.classList.add("linear-loading") // o spinner
+            spinner.classList.add("linear-loading")
             const loaderSection = document.querySelector(".loader")
             loaderSection?.appendChild(spinner);
             const form_data = new FormData(e.target);
@@ -371,7 +369,6 @@ function modalTest(itemID, itemName, itemYear) {
                     }
                 }
             } catch (error) {
-                console.log(error)
                 addToast([{ title: "Error", error: "Ocurrió un error, intenta de nuevo más tarde." }]);
             } finally {
                 const spinner2 = loaderSection?.querySelector(".linear-loading")

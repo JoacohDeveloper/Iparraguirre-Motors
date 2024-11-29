@@ -10,14 +10,12 @@ header {
   min-height: 100dvh;
   padding-bottom: 4rem;
   margin-top: 1rem;
-  /* flex-wrap: wrap; */
 }
 
 .product-image-container {
   width: 100%;
   margin-top: 1rem;
   display: flex;
-  /* padding-left: 1rem; */
   align-items: center;
   flex-direction: column;
 
@@ -164,7 +162,6 @@ header {
   height: 100%;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   overflow: hidden;
   padding: 1rem 0;
   width: 20rem;

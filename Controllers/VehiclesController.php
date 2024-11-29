@@ -15,10 +15,7 @@ class VehiclesController
     {
         $errores = [];
         header('Content-Type: application/json; charset=utf-8');
-
         $vehicle = new vehicle($_POST);
-
-        // logg($_POST);
         $errores = $vehicle->validate();
 
         if (empty($errores)) {
@@ -26,7 +23,6 @@ class VehiclesController
 
             if ($result) {
                 // Procedo a crear las imágenes de ese vehículo
-                //logg($result);
                 $imagenes = [];
 
                 // Verifica si 'imagen' existe en $_FILES

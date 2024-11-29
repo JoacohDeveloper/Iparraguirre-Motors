@@ -150,8 +150,6 @@ async function init(search = null) {
         const data = await response.json();
         const oldData = JSON.parse(localStorage.getItem("tiendaItems")) ?? [];
         const newData = [...oldData, ...data]
-        console.log(data)
-        //localStorage.setItem("tiendaItems", JSON.stringify(newData))
 
         data.forEach(v => {
             const customV = {
@@ -159,8 +157,6 @@ async function init(search = null) {
                 precio: v.product.precio,
                 discount: v.product.discount,
                 discount_type: v.product.discount_type,
-                // discount_start: v.discount_start,
-                // discount_end: v.discount_end,
                 id: v.vehicle_id,
                 imageUrl: v.imagen,
                 fabricante: v.product.fabricante,
@@ -205,12 +201,6 @@ async function init(search = null) {
     if (lastEl)
         observer.observe(lastEl)
 }
-
-
-
-
-
-
 
 // Buscador
 

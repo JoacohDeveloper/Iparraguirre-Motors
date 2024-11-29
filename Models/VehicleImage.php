@@ -8,11 +8,9 @@ class VehicleImage extends ActiveRecord
 
     protected static $tabla = "vehicle_img";
 
-    protected static $columnasdb = ["vehicle_id", "url", "alt"];
+    protected static $columnasdb = [ "vehicle_id", "url", "alt" ];
 
-    public $vehicle_id;
-    public $url;
-    public $alt;
+    public $vehicle_id, $url, $alt;
 
     public function __construct(
         $vehicle_id,
@@ -23,7 +21,6 @@ class VehicleImage extends ActiveRecord
         $this->url = $url;
         $this->alt = $alt;
     }
-
 
     public function create()
     {
